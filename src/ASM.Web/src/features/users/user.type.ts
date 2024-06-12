@@ -1,5 +1,11 @@
 import { FilterParams, PagedInfo } from "@/types/api"
 
+export type UpdatePasswordRequest = {
+  id: string
+  oldPassword: string
+  newPassword: string
+}
+
 // Response
 
 export type User = {
@@ -21,10 +27,22 @@ export type ListUsers = {
   pagedInfo: PagedInfo
 }
 
-// Request
+// Requests
 
 export type UserFilter = FilterParams & {
   roleType?: RoleType
+}
+export type UpdateUserRequest = CreateUserRequest & {
+  id: string
+}
+
+export type CreateUserRequest = {
+  firstName: string
+  lastName: string
+  joinedDate: string
+  dob: string
+  roleType: RoleType
+  gender: Gender
 }
 
 // Additional types

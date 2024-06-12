@@ -16,6 +16,7 @@ import { Route as rootRoute } from "./routes/__root"
 import { Route as AuthenticatedImport } from "./routes/_authenticated"
 import { Route as AuthenticatedUserIdImport } from "./routes/_authenticated/user/$id"
 import { Route as IndexImport } from "./routes/index"
+import { Route as UserNewImport } from "./routes/user/new"
 
 // Create Virtual Routes
 
@@ -35,6 +36,11 @@ const AuthenticatedRoute = AuthenticatedImport.update({
 
 const IndexRoute = IndexImport.update({
   path: "/",
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UserNewRoute = UserNewImport.update({
+  path: "/user/new",
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -79,6 +85,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
     }
+    "/user/new": {
+      id: "/user/new"
+      path: "/user/new"
+      fullPath: "/user/new"
+      preLoaderRoute: typeof UserNewImport
+      parentRoute: typeof rootRoute
+    }
     "/_authenticated/user/$id": {
       id: "/_authenticated/user/$id"
       path: "/user/$id"
@@ -112,6 +125,7 @@ export const routeTree = rootRoute.addChildren({
     AuthenticatedHomeIndexLazyRoute,
     AuthenticatedUserIndexLazyRoute,
   }),
+  UserNewRoute,
 })
 
 /* prettier-ignore-end */
@@ -123,7 +137,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_authenticated"
+        "/_authenticated",
+        "/user/new"
       ]
     },
     "/": {
@@ -136,6 +151,9 @@ export const routeTree = rootRoute.addChildren({
         "/_authenticated/home/",
         "/_authenticated/user/"
       ]
+    },
+    "/user/new": {
+      "filePath": "user/new.tsx"
     },
     "/_authenticated/user/$id": {
       "filePath": "_authenticated/user/$id.tsx",

@@ -33,8 +33,8 @@ public class ListStaffHandlerTests
         {
             return staffs.Count(x => x.FirstName == search);
         }
-        return roleType.HasValue 
-            ? staffs.Count(x => x.RoleType == roleType) 
+        return roleType.HasValue
+            ? staffs.Count(x => x.RoleType == roleType)
             : staffs.Count;
     }
 

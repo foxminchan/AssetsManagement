@@ -1,6 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using ASM.Application.Common.SeedWorks;
 using ASM.Application.Domain.IdentityAggregate.Enums;
+using ASM.Application.Domain.IdentityAggregate.Events;
 
 namespace ASM.Application.Domain.IdentityAggregate;
 
@@ -61,5 +62,12 @@ public sealed class Staff : EntityBase, ISoftDelete, IAggregateRoot
         Gender = Guard.Against.EnumOutOfRange(gender);
         RoleType = Guard.Against.EnumOutOfRange(roleType);
         Location = Guard.Against.EnumOutOfRange(location);
+    }
+
+    public void CreateStaffAccount(string firstName, string lastName, RoleType roleType, DateOnly dob,
+        string location, Guid staffId)
+    {
+        var createdStaffEvent = new CreatedStaffEvent(firstName, lastName, roleType, dob, location, staffId);
+        RegisterDomainEvent(createdStaffEvent);
     }
 }

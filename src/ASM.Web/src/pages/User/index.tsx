@@ -1,14 +1,17 @@
 import { useContext, useEffect, useState } from "react"
+import { userAtoms } from "@/libs/jotai/userAtoms"
 import FilterInput from "@components/fields/filter-input"
 import SearchInput from "@components/fields/search-input"
 import UserInfoModal from "@components/modals/user-info-modal"
 import UserTable from "@components/tables/user/table"
+import useGetUser from "@features/users/useGetUser"
 import useListUsers from "@features/users/useListUsers"
 import { RoleType } from "@features/users/user.type"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
 import { Button, Grid, Typography } from "@mui/material"
 import { useNavigate, useSearch } from "@tanstack/react-router"
+import { useAtomValue } from "jotai"
 
 const breadcrumbItems = [
   {
@@ -41,8 +44,12 @@ export default function Users() {
     search: (params as { search?: string }).search ?? undefined,
   }
 
-  const { data, isLoading } = useListUsers(queryParameters)
+  const { data, isLoading: listLoading } = useListUsers(queryParameters)
   const [selectedType, setSelectedType] = useState<string | string[]>("")
+
+  const userId = useAtomValue(userAtoms)
+  const { data: user, isLoading: userLoading } =
+    userId !== "" ? useGetUser(userId) : { data: undefined, isLoading: false }
 
   useEffect(() => {
     context?.setBreadcrumbs(breadcrumbItems)
@@ -76,15 +83,23 @@ export default function Users() {
           <Button
             variant="contained"
             color="error"
-            onClick={() => navigate({ to: "/user" })}
+            onClick={() => navigate({ to: "/user/new" })}
           >
             Create User
           </Button>
         </Grid>
       </Grid>
       <UserTable
-        data={data?.users || []}
-        isLoading={isLoading}
+        data={
+          user && queryParameters.pageIndex === 1
+            ? [
+                user,
+                ...(data?.users.filter((x) => x.id !== user.id).slice(0, -1) ||
+                  []),
+              ]
+            : [...(data?.users || [])]
+        }
+        isLoading={listLoading && userLoading}
         pageCount={data?.pagedInfo.totalPages ?? 0}
         setSelectedUserId={setSelectedUserId}
         setOpen={setOpen}

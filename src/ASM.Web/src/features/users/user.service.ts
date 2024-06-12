@@ -1,7 +1,7 @@
 import { buildQueryString } from "@libs/helpers/query.helper"
 import HttpService from "@libs/services/http.service"
 
-import { ListUsers, User, UserFilter } from "./user.type"
+import { CreateUserRequest, ListUsers, User, UserFilter } from "./user.type"
 
 class UserService extends HttpService {
   constructor() {
@@ -14,6 +14,10 @@ class UserService extends HttpService {
 
   getUser(id: string): Promise<User> {
     return this.get(`/users/${id}`)
+  }
+
+  addUser(data: CreateUserRequest): Promise<string> {
+    return this.post("/users", data)
   }
 }
 
