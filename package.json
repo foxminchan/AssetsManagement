@@ -1,0 +1,16 @@
+{
+  "name": "assets-management",
+  "version": "1.0.0",
+  "description": "A project developed by a rookie transitioning to an engineer at NashTech",
+  "repository": {
+    "type": "git",
+    "url": "https://rookies2021group2team1@dev.azure.com/rookies2021group2team1/2024Batch7Net3/_git/2024Batch7Net3"
+  },
+  "author": "NashTech",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "husky": "^9.0.11"
+  }
+}

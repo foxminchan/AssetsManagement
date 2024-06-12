@@ -131,6 +131,7 @@ _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
 
+>>>>>>> e2909c6 (feat: init structure project)
 # TeamCity is a build add-in
 _TeamCity*
 
@@ -316,6 +317,7 @@ __pycache__/
 *.pyc
 
 # Cake - Uncomment if you are using it
+>>>>>>> e2909c6 (feat: init structure project)
 # tools/**
 # !tools/packages.config
 
@@ -349,6 +351,7 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
+>>>>>>> e2909c6 (feat: init structure project)
 # BeatPulse healthcheck temp database
 healthchecksdb
 

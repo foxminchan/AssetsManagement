@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "NashTech@2024"
+    ports:
+      - 1433:1433
+    volumes:
+      - mnt/db:/var/opt/mssql
+
+networks:
+  bridge-network:
+    driver: bridge
