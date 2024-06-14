@@ -10,6 +10,8 @@ services:
       SA_PASSWORD: "NashTech@2024"
     ports:
       - 1433:1433
+    networks:
+      - bridge-network
     volumes:
       - mnt/db:/var/opt/mssql
 
