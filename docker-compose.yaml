@@ -3,17 +3,21 @@ version: "3.9"
 services:
   db:
     container_name: db
+    hostname: db
     image: mcr.microsoft.com/mssql/server:2022-latest
     restart: always
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "NashTech@2024"
+      MSSQL_SA_PASSWORD: "NashTech@2024"
+      MSSQL_DATA_DIR: /var/opt/mssql/data
+      MSSQL_PID: "Developer"
+      MSSQL_TCP_PORT: 1433
     ports:
       - 1433:1433
     networks:
       - bridge-network
     volumes:
-      - mnt/db:/var/opt/mssql
+      - ./mnt/db/data:/var/opt/mssql/data
 
 networks:
   bridge-network:

@@ -1,6 +1,6 @@
 ﻿using ASM.Application.Common.SeedWorks;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ASM.Application.Infrastructure.Persistence.Configurations;
 
@@ -9,6 +9,8 @@ public abstract class BaseConfiguration<TEntity> : IEntityTypeConfiguration<TEnt
 {
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
+        builder.HasKey(e => e.Id);
+
         builder.Property(e => e.CreatedDate)
             .HasDefaultValue(DateTime.UtcNow);
 

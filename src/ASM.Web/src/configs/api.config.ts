@@ -19,7 +19,7 @@ const axiosConfigs: { [key: string]: AxiosRequestConfig } = {
 }
 
 const getAxiosConfig = (): AxiosRequestConfig => {
-  const nodeEnv: string | undefined = import.meta.env.NODE_ENV
+  const nodeEnv: string | undefined = import.meta.env.MODE
   return axiosConfigs[nodeEnv as keyof typeof axiosConfigs]
 }
 

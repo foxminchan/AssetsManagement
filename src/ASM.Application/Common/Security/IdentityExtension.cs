@@ -11,21 +11,17 @@ public static class IdentityExtension
 {
     public static IHostApplicationBuilder AddIdentityService(this IHostApplicationBuilder builder)
     {
-        builder.Services
-            .AddAuthentication()
-            .AddCookie(IdentityConstants.ApplicationScheme);
-
-        builder.Services
-            .AddAuthorizationBuilder()
+        builder.Services.AddAuthorizationBuilder()
             .AddPolicy(AuthRole.Admin, policy =>
                 policy.RequireAuthenticatedUser()
                     .RequireRole(AuthRole.Admin))
             .AddPolicy(AuthRole.User, policy =>
                 policy.RequireAuthenticatedUser());
 
-        builder.Services.AddIdentityCore<ApplicationUser>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddApiEndpoints();
+        builder.Services
+            .AddIdentityApiEndpoints<ApplicationUser>(options => options.Password.RequireUppercase = false)
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
         return builder;
     }

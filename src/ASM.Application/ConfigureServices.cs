@@ -55,7 +55,12 @@ public static class ConfigureServices
         builder.Services.AddDbContextPool<ApplicationDbContext>((sp, options) =>
         {
             options.UseSqlServer(connectionString,
-                    sqlOptions => sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
+                    sqlOptions =>
+                    {
+                        sqlOptions.UseCompatibilityLevel(160);
+                        sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(30), null);
+                        sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                    })
                 .UseExceptionProcessor()
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
@@ -70,6 +75,7 @@ public static class ConfigureServices
 
         builder.Services.AddScoped<IDatabaseFacade>(p => p.GetRequiredService<ApplicationDbContext>());
         builder.Services.AddScoped<IDomainEventContext>(p => p.GetRequiredService<ApplicationDbContext>());
+        builder.Services.AddScoped<ApplicationDbContextInitializer>();
         builder.Services.AddScoped(typeof(IReadRepository<>), typeof(Repository<>));
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 

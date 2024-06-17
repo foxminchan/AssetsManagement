@@ -1,8 +1,15 @@
-import { useState } from "react"
 import logo from "@assets/logo.svg"
 
+import { useAuth } from "@/hooks/useAuth"
+
 export default function Home() {
-  const [count, setCount] = useState(0)
+  const auth = useAuth()
+
+  const handleLogout = () => {
+    auth.signOut()
+    window.location.reload()
+  }
+
   return (
     <div className="mx-auto max-w-screen-md p-4 text-center">
       <div className="flex items-center justify-center">
@@ -19,9 +26,9 @@ export default function Home() {
       <div className="card p-8">
         <button
           className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-          onClick={() => setCount((count) => count + 1)}
+          onClick={() => handleLogout()}
         >
-          count is {count}
+          Log out
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR

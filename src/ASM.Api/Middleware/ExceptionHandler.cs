@@ -80,11 +80,10 @@ public sealed class ExceptionHandler(ILogger<ExceptionHandler> logger) : IExcept
     {
         ProblemDetails details = new()
         {
-            Status = StatusCodes.Status500InternalServerError,
             Type = exception.GetType().Name,
-            Title = "An error occurred while processing your request",
-            Detail = exception.Message,
-            Instance = $"{httpContext.Request.Method}{httpContext.Request.Path}"
+            Title = "InternalServerError",
+            Status = StatusCodes.Status500InternalServerError,
+            Detail = exception.Message
         };
 
         httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;

@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASM.Application.Infrastructure.Persistence;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : IdentityDbContext<ApplicationUser>(options), IDatabaseFacade, IDomainEventContext
 {
+    public DbSet<Staff> Staffs => Set<Staff>();
+
     public IEnumerable<EventBase> GetDomainEvents()
     {
         var domainEntities = ChangeTracker
@@ -28,6 +30,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 }

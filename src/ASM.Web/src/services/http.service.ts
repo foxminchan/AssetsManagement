@@ -1,7 +1,7 @@
+import axiosConfig from "@/configs/api.config"
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
+import Cookies from "js-cookie"
 import _omitBy from "lodash/omitBy"
-
-import axiosConfig from "../configs/api.config"
 
 export default class HttpService {
   private instance: AxiosInstance
@@ -17,6 +17,10 @@ export default class HttpService {
   private setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
     axiosInstance.interceptors.request.use(
       async (config) => {
+        const token = Cookies.get(".AspNetCore.Identity.Token")
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`
+        }
         return config
       },
       (error) => {
@@ -26,10 +30,12 @@ export default class HttpService {
     )
     axiosInstance.interceptors.response.use(
       async (response) => {
+        console.log(`[response] [${JSON.stringify(response)}]`)
         return response.data
       },
-      (error) => {
-        return Promise.reject(new Error(error))
+      (error: AppAxiosError) => {
+        console.error(`${error.response?.data.detail}`)
+        return Promise.reject(error)
       }
     )
     return axiosInstance

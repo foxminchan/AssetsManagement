@@ -1,14 +1,16 @@
 import { fileURLToPath } from "url"
 import { TanStackRouterVite } from "@tanstack/router-vite-plugin"
+import basicSsl from "@vitejs/plugin-basic-ssl"
 import react from "@vitejs/plugin-react-swc"
 import { defineConfig } from "vite"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), TanStackRouterVite()],
+  plugins: [react(), TanStackRouterVite(), basicSsl()],
   server: {
     host: true,
     strictPort: true,
+    port: 3000,
   },
   resolve: {
     alias: [
@@ -45,6 +47,18 @@ export default defineConfig({
       {
         find: "@utils",
         replacement: fileURLToPath(new URL("./src/utils", import.meta.url)),
+      },
+      {
+        find: "@styles",
+        replacement: fileURLToPath(new URL("./src/styles", import.meta.url)),
+      },
+      {
+        find: "@types",
+        replacement: fileURLToPath(new URL("./src/types", import.meta.url)),
+      },
+      {
+        find: "@helpers",
+        replacement: fileURLToPath(new URL("./src/helpers", import.meta.url)),
       },
     ],
   },
