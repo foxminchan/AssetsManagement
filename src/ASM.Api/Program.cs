@@ -35,18 +35,23 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseReDoc();
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
     app.UseExceptionHandler();
-    await app.InitializeDatabaseAsync();
+    app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
 }
 else
 {
-    app.UseExceptionHandler("/error");
     app.UseHsts();
+    app.UseExceptionHandler("/error");
+    app.MapGet("/", () => Results.Redirect("/api-docs")).ExcludeFromDescription();
 }
+
+await app.InitializeDatabaseAsync();
 
 app.MapEndpoints();
 
