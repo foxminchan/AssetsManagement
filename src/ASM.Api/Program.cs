@@ -6,9 +6,6 @@ using ASM.Application.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var appSettings = new AppSettings();
-builder.Configuration.Bind(appSettings);
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -25,7 +22,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAll", policyBuilder =>
     {
         policyBuilder
-            .WithOrigins(appSettings.CorsSettings.AllowedOrigins)
+            .AllowAnyOrigin()
             .SetIsOriginAllowedToAllowWildcardSubdomains()
             .AllowAnyMethod()
             .AllowAnyHeader()

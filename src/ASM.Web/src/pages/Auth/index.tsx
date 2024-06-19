@@ -46,7 +46,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isSuccess) {
-      auth.signIn(data.accessToken, data.expiresIn)
+      auth.signIn(data.accessToken)
       window.location.reload()
     }
   }, [isSuccess, isError, error])

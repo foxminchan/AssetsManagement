@@ -7,9 +7,6 @@ export const Route = createFileRoute("/login")({
     if (isLogged()) {
       throw redirect({
         to: "/",
-        search: {
-          redirect: location.href,
-        },
       })
     }
   },
