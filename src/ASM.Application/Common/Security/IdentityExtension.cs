@@ -19,7 +19,12 @@ public static class IdentityExtension
                 policy.RequireAuthenticatedUser());
 
         builder.Services
-            .AddIdentityApiEndpoints<ApplicationUser>(options => options.Password.RequireUppercase = false)
+            .AddIdentityApiEndpoints<ApplicationUser>(options =>
+            {
+                options.Password.RequireUppercase = false;
+                options.Lockout.MaxFailedAccessAttempts = int.MaxValue;
+
+            })
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 

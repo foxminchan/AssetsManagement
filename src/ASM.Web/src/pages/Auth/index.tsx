@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import useLogin from "@/features/auth/useLogin"
 import logo from "@assets/logo.svg"
 import Box from "@mui/material/Box"
@@ -9,8 +9,10 @@ import TextField from "@mui/material/TextField"
 import Typography from "@mui/material/Typography"
 import { useForm } from "@tanstack/react-form"
 import { match } from "ts-pattern"
-
 import { useAuth } from "@/hooks/useAuth"
+import { IconButton, InputAdornment } from "@mui/material"
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 type FormValues = {
   username: string
@@ -20,7 +22,12 @@ type FormValues = {
 export default function Login() {
   const auth = useAuth()
   const { mutate: login, isSuccess, error, isError, data } = useLogin()
+  const [modify, setModify] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const { Field, Subscribe, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       username: "",
@@ -36,6 +43,7 @@ export default function Login() {
   })
 
   const getErrorMessage = (error: AppAxiosError) => {
+
     return match(error)
       .with(
         { response: { data: { detail: "LockedOut" } } },
@@ -47,7 +55,9 @@ export default function Login() {
   useEffect(() => {
     if (isSuccess) {
       auth.signIn(data.accessToken)
-      window.location.reload()
+      window.location.href = "/"
+    } else {
+      setModify('InError');
     }
   }, [isSuccess, isError, error])
 
@@ -80,30 +90,50 @@ export default function Login() {
                 fullWidth
                 id="username"
                 defaultValue={state.value}
-                onChange={(e) => handleChange(e.target.value)}
+                onChange={(e) => {
+                  handleChange(e.target.value);
+                  setModify('');
+                }}
                 onBlur={handleBlur}
                 label="Username"
                 autoComplete="username"
                 autoFocus
+
               />
             )}
           </Field>
           <Field name="password">
             {({ state, handleChange, handleBlur }) => (
-              <TextField
-                margin="normal"
-                fullWidth
-                id="password"
-                defaultValue={state.value}
-                onChange={(e) => handleChange(e.target.value)}
-                onBlur={handleBlur}
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-              />
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  id="password"
+                  defaultValue={state.value}
+                  onChange={(e) => {
+                    handleChange(e.target.value);
+                    setModify('');
+                  }}
+                  onBlur={handleBlur}
+                  label="Password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
+
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                        >
+                          {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
             )}
           </Field>
-          {error && (
+          {error && modify && (
             <Typography variant="body2" color="error" align="center">
               {getErrorMessage(error)}
             </Typography>
