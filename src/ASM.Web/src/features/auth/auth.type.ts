@@ -1,4 +1,4 @@
-import { atomWithStorage } from "jotai/utils"
+import { atom } from "jotai"
 
 export type LoginRequest = {
   email: string
@@ -12,20 +12,26 @@ export type LoginResponse = {
   refreshToken: string
 }
 
+export enum AccountStatus {
+  FirstTime = "FirstTime",
+  Active = "Active",
+  Deactivated = "Deactivated",
+  None = "",
+}
+
 export type AuthUser = {
   id: string
-  accountStatus: string
+  accountStatus: AccountStatus
   claims: Claim[]
 }
 
 const initialUser: AuthUser = {
   id: "",
-  accountStatus: "",
+  accountStatus: AccountStatus.None,
   claims: [],
 }
 
-export const userInfo = atomWithStorage<AuthUser | null>(
-  "user-info",
+export const userInfo = atom<AuthUser | null>(
   initialUser
 )
 

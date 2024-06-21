@@ -1,6 +1,7 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { BreadcrumbsContext } from "@/context/BreadcrumbsContext"
-import { userInfo } from "@/features/auth/auth.type"
+import authService from "@/features/auth/auth.service"
+import { AccountStatus, userInfo } from "@/features/auth/auth.type"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import { Menu, MenuItem } from "@mui/material"
@@ -14,18 +15,43 @@ import { useAtom } from "jotai"
 import { BreadcrumbItem } from "@/types/data"
 import { useAuth } from "@/hooks/useAuth"
 
+import ChangePasswordModal from "../modals/change-password-modal"
 import ConfirmModal from "../modals/confirm-modal"
 
 export default function NavBar() {
   const context = useContext(BreadcrumbsContext)
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null)
-  const [isOpen, setIsOpen] = useState(false)
+  const [openLogoutConfirmModal, setOpenLogoutConfirmModal] = useState(false)
+  const [openChangePasswordModal, setOpenChangePasswordModal] = useState(false)
   const auth = useAuth()
   const [value, setValue] = useAtom(userInfo)
   const open = Boolean(anchorElement)
-  const handleClick = (isOpen: boolean) => {
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (auth.isLogged()) {
+        try {
+          const userData = await authService.getUser()
+          setValue(userData)
+          if (userData.accountStatus == AccountStatus.FirstTime) {
+            setOpenChangePasswordModal(true)
+          }
+        } catch (error) {
+          console.error("Failed to fetch user data:", error)
+          setValue(null)
+        }
+      }
+    }
+
+    fetchUserData()
+  }, [])
+
+  const handleClick = (
+    setter: React.Dispatch<React.SetStateAction<boolean>>,
+    open: boolean
+  ) => {
     handleClose()
-    setIsOpen(isOpen)
+    setter(open)
   }
 
   const handleLogout = () => {
@@ -84,8 +110,16 @@ export default function NavBar() {
               classes={{ paper: "rounded-lg shadow-lg" }}
             >
               <MenuItem
+                id="btn-change-password"
+                onClick={() => handleClick(setOpenChangePasswordModal, true)}
+                className="hover:bg-red-100"
+              >
+                Change Password
+              </MenuItem>
+
+              <MenuItem
                 id="btn-logout"
-                onClick={() => handleClick(true)}
+                onClick={() => handleClick(setOpenLogoutConfirmModal, true)}
                 className="hover:bg-red-100"
               >
                 Log Out
@@ -96,13 +130,19 @@ export default function NavBar() {
           <p>Log in</p>
         )}
         <ConfirmModal
-          open={isOpen}
+          open={openLogoutConfirmModal}
           message="Do you want to log out?"
           title="Are you sure?"
           buttonOkLabel="Log out"
           buttonCloseLabel="Cancel"
           onOk={() => handleLogout()}
-          onClose={() => handleClick(false)}
+          onClose={() => handleClick(setOpenLogoutConfirmModal, false)}
+        />
+        <ChangePasswordModal
+          open={openChangePasswordModal}
+          onClose={() => handleClick(setOpenChangePasswordModal, false)}
+          user={value}
+          FirstTime={value?.accountStatus === AccountStatus.FirstTime}
         />
       </Toolbar>
     </AppBar>

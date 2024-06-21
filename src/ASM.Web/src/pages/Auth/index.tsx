@@ -52,7 +52,7 @@ export default function Login() {
         { response: { data: { detail: "LockedOut" } } },
         () => "Your account has been disabled."
       )
-      .otherwise(() => "Invalid user name or password.")
+      .otherwise(() => "Username or password is incorrect. Please try again.")
   }
 
   useEffect(() => {

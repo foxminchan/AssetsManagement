@@ -1,5 +1,6 @@
 import axiosConfig from "@/configs/api.config"
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios"
+import { redirect } from "@tanstack/react-router"
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, HttpStatusCode } from "axios"
 import _omitBy from "lodash/omitBy"
 
 export default class HttpService {
@@ -33,6 +34,14 @@ export default class HttpService {
         return response.data
       },
       (error: AppAxiosError) => {
+        if(error.response?.status === HttpStatusCode.Unauthorized) {
+          localStorage.removeItem(".AspNetCore.Identity.Token")
+          throw redirect({
+            to: "/login",
+          })
+        } else if (error.response?.status === HttpStatusCode.ServiceUnavailable) {
+          alert("There has been an error processing your request");
+        }
         console.error(`${error.response?.data.detail}`)
         return Promise.reject(error)
       }

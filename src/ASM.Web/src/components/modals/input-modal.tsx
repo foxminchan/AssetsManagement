@@ -15,6 +15,8 @@ type InputModalProps = {
   onClose?: () => void
   buttonOkLabel?: string
   buttonCloseLabel?: string
+  buttonOkDisabled?: boolean
+  buttonCloseShow?: boolean
   children?: React.ReactNode
 }
 
@@ -26,6 +28,8 @@ export default function InputModal({
   message,
   buttonOkLabel,
   buttonCloseLabel,
+  buttonOkDisabled,
+  buttonCloseShow = true,
   children,
 }: Readonly<InputModalProps>) {
   return (
@@ -61,18 +65,21 @@ export default function InputModal({
           onClick={() => onOk?.()}
           className="!bg-red-500 !text-white"
           variant="contained"
+          disabled={buttonOkDisabled ?? false}
         >
           {buttonOkLabel ?? "Save changes"}
         </Button>
 
-        <Button
-          id="btn-input-modal-cancel"
-          onClick={() => onClose?.()}
-          variant="outlined"
-          className="!border-gray-400 !text-gray-400"
-        >
-          {buttonCloseLabel ?? "Cancel"}
-        </Button>
+        {buttonCloseShow && (
+          <Button
+            id="btn-input-modal-cancel"
+            onClick={() => onClose?.()}
+            variant="outlined"
+            className="!border-gray-400 !text-gray-400"
+          >
+            {buttonCloseLabel ?? "Cancel"}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   )
