@@ -1,3 +1,5 @@
+import { atomWithStorage } from "jotai/utils"
+
 export type LoginRequest = {
   email: string
   password: string
@@ -15,6 +17,17 @@ export type AuthUser = {
   accountStatus: string
   claims: Claim[]
 }
+
+const initialUser: AuthUser = {
+  id: "",
+  accountStatus: "",
+  claims: [],
+}
+
+export const userInfo = atomWithStorage<AuthUser | null>(
+  "user-info",
+  initialUser
+)
 
 export type Claim = {
   type: string

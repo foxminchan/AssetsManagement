@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import authService from "@/features/auth/auth.service"
+import { userInfo } from "@/features/auth/auth.type"
 import useLogin from "@/features/auth/useLogin"
 import logo from "@assets/logo.svg"
 import VisibilityIcon from "@mui/icons-material/Visibility"
@@ -11,6 +13,7 @@ import CssBaseline from "@mui/material/CssBaseline"
 import TextField from "@mui/material/TextField"
 import Typography from "@mui/material/Typography"
 import { useForm } from "@tanstack/react-form"
+import { useAtom } from "jotai"
 import { match } from "ts-pattern"
 
 import { useAuth } from "@/hooks/useAuth"
@@ -19,8 +22,8 @@ type FormValues = {
   username: string
   password: string
 }
-
 export default function Login() {
+  const [value, setValue] = useAtom(userInfo)
   const auth = useAuth()
   const { mutate: login, isSuccess, error, isError, data } = useLogin()
   const [modify, setModify] = useState("")
@@ -55,12 +58,21 @@ export default function Login() {
   useEffect(() => {
     if (isSuccess) {
       auth.signIn(data.accessToken)
-      window.location.href = "/"
+      handleSuccess().then(() => (window.location.href = "/"))
     } else {
       setModify("InError")
     }
   }, [isSuccess, isError, error])
 
+  const handleSuccess = async () => {
+    try {
+      const userData = await authService.getUser()
+      setValue(userData)
+      console.log(value)
+    } catch (error) {
+      console.error("Error during sign-in:", error)
+    }
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

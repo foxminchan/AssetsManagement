@@ -1,14 +1,24 @@
+import { useContext, useEffect, useState } from "react"
+import { BreadcrumbsContext } from "@/context/BreadcrumbsContext"
 import logo from "@assets/logo.svg"
 
-import { useAuth } from "@/hooks/useAuth"
+import { BreadcrumbItem } from "@/types/data"
+import AlertModal from "@/components/modals/alert-modal"
+
+const breadcrumb: BreadcrumbItem[] = [
+  {
+    label: "Home",
+    to: "/",
+  },
+]
 
 export default function Home() {
-  const auth = useAuth()
+  const [open, setOpen] = useState(false)
+  const context = useContext(BreadcrumbsContext)
 
-  const handleLogout = () => {
-    auth.signOut()
-    window.location.reload()
-  }
+  useEffect(() => {
+    context?.setBreadcrumbs(breadcrumb)
+  }, [])
 
   return (
     <div className="mx-auto max-w-screen-md p-4 text-center">
@@ -26,9 +36,9 @@ export default function Home() {
       <div className="card p-8">
         <button
           className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-          onClick={() => handleLogout()}
+          onClick={() => setOpen(true)}
         >
-          Log out
+          Open modal
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
@@ -37,6 +47,11 @@ export default function Home() {
       <p className="read-the-docs text-gray-500">
         Click on the Vite and React logos to learn more
       </p>
+      <AlertModal
+        open={open}
+        message="This is alert modal"
+        onClose={() => setOpen(false)}
+      ></AlertModal>
     </div>
   )
 }
