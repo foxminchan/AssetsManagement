@@ -7,4 +7,4 @@ type ApiDataError = {
   detail?: string
 }
 
-type AppAxiosError = import("axios").AxiosError<ApiDataError, any>
+type AppAxiosError = import("axios").AxiosError<ApiDataError, unknown>

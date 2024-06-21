@@ -3,13 +3,14 @@
  * @param options - The object containing parameters for the query string.
  * @returns The query string (e.g., "key1=value1&key2=value2").
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function buildQueryString(options?: Record<string, any>): string {
   if (!options) {
     return ""
   }
 
   return Object.entries(options)
-    .filter(([, value]) => !!value)
+    .filter(([, value]) => value !== undefined && value !== null)
     .map(
       ([key, value]) =>
         `${encodeURIComponent(key)}=${encodeURIComponent(value)}`

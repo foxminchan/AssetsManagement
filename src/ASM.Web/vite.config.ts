@@ -60,6 +60,10 @@ export default defineConfig({
         find: "@helpers",
         replacement: fileURLToPath(new URL("./src/helpers", import.meta.url)),
       },
+      {
+        find: "@contexts",
+        replacement: fileURLToPath(new URL("./src/contexts", import.meta.url)),
+      },
     ],
   },
 })

@@ -1,3 +1,4 @@
+import { BreadcrumbsProvider } from "@contexts/BreadcrumbsContext"
 import { useAuth } from "@hooks/useAuth"
 import { createTheme, ThemeProvider } from "@mui/material"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -23,7 +24,9 @@ export default function App({ router }: Readonly<AppProps>) {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={defaultTheme}>
         <JotaiProvider>
-          <RouterProvider router={router} context={{ authentication }} />
+          <BreadcrumbsProvider>
+            <RouterProvider router={router} context={{ authentication }} />
+          </BreadcrumbsProvider>
         </JotaiProvider>
       </ThemeProvider>
     </QueryClientProvider>
