@@ -2,10 +2,10 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query"
 
 import authService from "./auth.service"
 
-export default function useGetUser() {
+export default function useGetMe() {
   return useQuery({
-    queryKey: ["user"],
-    queryFn: () => authService.getUser(),
+    queryKey: ["me"],
+    queryFn: () => authService.getMe(),
     placeholderData: keepPreviousData,
   })
 }

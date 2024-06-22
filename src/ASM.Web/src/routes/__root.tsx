@@ -1,8 +1,7 @@
+import { AuthContext } from "@/libs/hooks/useAuth"
+import NotFound from "@components/error/not-found"
+import MainLayout from "@components/layouts/main-layout"
 import { createRootRouteWithContext } from "@tanstack/react-router"
-
-import { AuthContext } from "@/hooks/useAuth"
-import NotFound from "@/components/error/not-found"
-import MainLayout from "@/components/layouts/main-layout"
 
 type RouterContext = {
   authentication: AuthContext

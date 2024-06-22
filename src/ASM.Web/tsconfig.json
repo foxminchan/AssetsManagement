@@ -26,15 +26,11 @@
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@contexts/*": ["src/contexts/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@pages/*": ["src/pages/*"],
-      "@services/*": ["src/services/*"],
       "@features/*": ["src/features/*"],
-      "@utils/*": ["src/utils/*"],
+      "@libs/*": ["src/libs/*"],
+      "@pages/*": ["src/pages/*"],
       "@styles/*": ["src/styles/*"],
-      "@types/*": ["src/types/*"],
-      "@helpers/*": ["src/helpers/*"]
+      "@types/*": ["src/types/*"]
     }
   },
   "include": ["src"],

@@ -1,4 +1,5 @@
-﻿using ASM.Application.Common.SeedWorks;
+﻿using System.Text.Json.Serialization;
+using ASM.Application.Common.SeedWorks;
 using ASM.Application.Domain.IdentityAggregate.Enums;
 using Microsoft.AspNetCore.Identity;
 
@@ -8,7 +9,7 @@ public sealed class ApplicationUser : IdentityUser, IAggregateRoot
 {
     public AccountStatus AccountStatus { get; set; }
     public Guid? StaffId { get; set; }
-    public Staff? Staff { get; set; }
+    [JsonIgnore] public Staff? Staff { get; set; }
 
     public static string GenerateUserName(string firstName, string lastName, List<ApplicationUser> users)
     {

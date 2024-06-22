@@ -1,4 +1,4 @@
-import { menu } from "@/constant/menu"
+import { menu } from "@libs/constants/menu"
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import ListItemButton from "@mui/material/ListItemButton"

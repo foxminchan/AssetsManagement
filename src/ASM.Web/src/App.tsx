@@ -1,5 +1,5 @@
-import { BreadcrumbsProvider } from "@contexts/BreadcrumbsContext"
-import { useAuth } from "@hooks/useAuth"
+import { BreadcrumbsProvider } from "@libs/contexts/BreadcrumbsContext"
+import { useAuth } from "@libs/hooks/useAuth"
 import { createTheme, ThemeProvider } from "@mui/material"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { createRouter, RouterProvider } from "@tanstack/react-router"

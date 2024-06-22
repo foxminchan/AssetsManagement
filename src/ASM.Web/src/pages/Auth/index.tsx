@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import authService from "@/features/auth/auth.service"
-import { userInfo } from "@/features/auth/auth.type"
-import useLogin from "@/features/auth/useLogin"
 import logo from "@assets/logo.svg"
+import authService from "@features/auth/auth.service"
+import { userInfo } from "@features/auth/auth.type"
+import useLogin from "@features/auth/useLogin"
+import { useAuth } from "@libs/hooks/useAuth"
+import { useShowHint } from "@libs/hooks/useShowHint"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import { IconButton, InputAdornment } from "@mui/material"
@@ -16,22 +18,17 @@ import { useForm } from "@tanstack/react-form"
 import { useAtom } from "jotai"
 import { match } from "ts-pattern"
 
-import { useAuth } from "@/hooks/useAuth"
-
 type FormValues = {
   username: string
   password: string
 }
 export default function Login() {
-  const [value, setValue] = useAtom(userInfo)
   const auth = useAuth()
+  const [value, setValue] = useAtom(userInfo)
   const { mutate: login, isSuccess, error, isError, data } = useLogin()
   const [modify, setModify] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword)
-  }
+  const showPasswordHint = useShowHint(setShowPassword)
   const { Field, Subscribe, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       username: "",
@@ -50,9 +47,19 @@ export default function Login() {
     return match(error)
       .with(
         { response: { data: { detail: "LockedOut" } } },
-        () => "Your account has been disabled."
+        () => "Your account has been disabled"
       )
-      .otherwise(() => "Username or password is incorrect. Please try again.")
+      .otherwise(() => "Username or password is incorrect. Please try again")
+  }
+
+  const handleSuccess = async () => {
+    try {
+      const userData = await authService.getMe()
+      setValue(userData)
+      console.log(value)
+    } catch (error) {
+      console.error("Error during sign-in:", error)
+    }
   }
 
   useEffect(() => {
@@ -63,16 +70,6 @@ export default function Login() {
       setModify("InError")
     }
   }, [isSuccess, isError, error])
-
-  const handleSuccess = async () => {
-    try {
-      const userData = await authService.getUser()
-      setValue(userData)
-      console.log(value)
-    } catch (error) {
-      console.error("Error during sign-in:", error)
-    }
-  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -133,7 +130,9 @@ export default function Login() {
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
+                        onMouseDown={showPasswordHint.onMouseDown}
+                        onMouseUp={() => showPasswordHint.onMouseUp()}
+                        onMouseLeave={() => showPasswordHint.onMouseLeave()}
                       >
                         {showPassword ? (
                           <VisibilityIcon />

@@ -39,13 +39,11 @@ export default function ConfirmModal({
       >
         {title ?? "Are you sure?"}
       </DialogTitle>
-
       <DialogContent id="confirm-dialog-message" dividers>
         <Typography className="break-words break-all text-gray-700">
           {message}
         </Typography>
       </DialogContent>
-
       <DialogActions>
         <Button
           id="btn-confirm-dialog-ok"
@@ -55,7 +53,6 @@ export default function ConfirmModal({
         >
           {buttonOkLabel ?? "Save changes"}
         </Button>
-
         <Button
           id="btn-confirm-dialog-close"
           onClick={() => onClose?.()}

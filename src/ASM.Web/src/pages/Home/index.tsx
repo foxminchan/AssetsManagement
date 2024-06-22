@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react"
-import { BreadcrumbsContext } from "@/context/BreadcrumbsContext"
+import { BreadcrumbsContext } from "@/libs/contexts/BreadcrumbsContext"
 import logo from "@assets/logo.svg"
+import AlertModal from "@components/modals/alert-modal"
 
 import { BreadcrumbItem } from "@/types/data"
-import AlertModal from "@/components/modals/alert-modal"
 
 const breadcrumb: BreadcrumbItem[] = [
   {

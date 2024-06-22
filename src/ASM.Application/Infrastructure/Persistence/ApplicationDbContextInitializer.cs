@@ -108,7 +108,7 @@ public sealed class ApplicationDbContextInitializer(
 
             ApplicationUser applicationUser = new()
             {
-                UserName = userName, 
+                UserName = userName,
                 AccountStatus = AccountStatus.FirstTime,
                 StaffId = user.Id
             };

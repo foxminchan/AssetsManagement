@@ -3,7 +3,7 @@ import { MenuItem } from "@/types/data"
 export const menu: MenuItem[] = [
   {
     label: "Home",
-    to: "/",
+    to: "/home",
   },
   {
     label: "Manage User",

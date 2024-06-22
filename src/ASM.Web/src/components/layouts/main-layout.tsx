@@ -1,11 +1,10 @@
+import NavBar from "@components/layouts/nav-bar"
+import SideBar from "@components/layouts/side-bar"
+import { useAuth } from "@libs/hooks/useAuth"
 import { CssBaseline } from "@mui/material"
 import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
 import { Outlet } from "@tanstack/react-router"
-
-import { useAuth } from "@/hooks/useAuth"
-import NavBar from "@/components/layouts/nav-bar"
-import SideBar from "@/components/layouts/side-bar"
 
 export default function MainLayout() {
   const auth = useAuth()

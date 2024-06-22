@@ -1,4 +1,6 @@
+import React from "react"
 import CloseIcon from "@mui/icons-material/Close"
+import Container from "@mui/material/Container"
 import Dialog from "@mui/material/Dialog"
 import DialogContent from "@mui/material/DialogContent"
 import DialogTitle from "@mui/material/DialogTitle"
@@ -10,6 +12,7 @@ type MessageModalProps = {
   title?: string
   onClose?: () => void
   message: string
+  children?: React.ReactNode
 }
 
 export default function MessageModal({
@@ -17,12 +20,13 @@ export default function MessageModal({
   title,
   message,
   onClose,
+  children,
 }: Readonly<MessageModalProps>) {
   return (
     <Dialog
       open={open}
       className="relative"
-      maxWidth="xs"
+      maxWidth="sm"
       fullWidth
       aria-labelledby="message-dialog-title"
       aria-describedby="message-dialog-description"
@@ -52,6 +56,7 @@ export default function MessageModal({
         >
           {message}
         </Typography>
+        <Container className="mt-3">{children}</Container>
       </DialogContent>
     </Dialog>
   )

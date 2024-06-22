@@ -33,7 +33,11 @@ public sealed class Staff : EntityBase, ISoftDelete, IAggregateRoot
     public RoleType RoleType { get; set; }
     public Location Location { get; set; }
     public bool IsDeleted { get; set; }
-    public ICollection<ApplicationUser>?  Users { get; set; } = [];
+    public ICollection<ApplicationUser>? Users { get; set; } = [];
+
+    public string FullName => $"{FirstName} {LastName}";
+
+    public string? UserName => Users?.First().UserName;
 
     public static string GenerateStaffCode(List<Staff> staffs)
     {

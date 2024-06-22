@@ -5,7 +5,7 @@ export const Route = createFileRoute("/_authenticated")({
     const { isLogged } = context.authentication
     if (!isLogged()) {
       throw redirect({
-        to: "/login",
+        to: "/",
       })
     }
   },

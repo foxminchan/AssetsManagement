@@ -1,6 +1,11 @@
-import HttpService from "@/services/http.service"
+import HttpService from "@libs/services/http.service"
 
-import { AuthUser, LoginRequest, LoginResponse } from "./auth.type"
+import {
+  AuthUser,
+  LoginRequest,
+  LoginResponse,
+  UpdatePasswordRequest,
+} from "./auth.type"
 
 class AuthService extends HttpService {
   constructor() {
@@ -11,8 +16,12 @@ class AuthService extends HttpService {
     return this.post("/login", data)
   }
 
-  getUser(): Promise<AuthUser> {
+  getMe(): Promise<AuthUser> {
     return this.get("/me")
+  }
+
+  updatePassword(data: UpdatePasswordRequest): Promise<void> {
+    return this.patch("/updatePassword", data)
   }
 }
 

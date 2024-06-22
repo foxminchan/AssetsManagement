@@ -31,11 +31,15 @@ const initialUser: AuthUser = {
   claims: [],
 }
 
-export const userInfo = atom<AuthUser | null>(
-  initialUser
-)
+export const userInfo = atom<AuthUser | null>(initialUser)
 
 export type Claim = {
   type: string
   value: string
+}
+
+export type UpdatePasswordRequest = {
+  id: string
+  oldPassword: string
+  newPassword: string
 }

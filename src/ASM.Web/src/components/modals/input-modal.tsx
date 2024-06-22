@@ -47,7 +47,6 @@ export default function InputModal({
       >
         {title ?? "Input modal"}
       </DialogTitle>
-
       <DialogContent dividers>
         {message && (
           <Container>
@@ -58,7 +57,6 @@ export default function InputModal({
         )}
         <Container className="mt-3">{children}</Container>
       </DialogContent>
-
       <DialogActions>
         <Button
           id="btn-input-modal-save"
@@ -69,7 +67,6 @@ export default function InputModal({
         >
           {buttonOkLabel ?? "Save changes"}
         </Button>
-
         {buttonCloseShow && (
           <Button
             id="btn-input-modal-cancel"

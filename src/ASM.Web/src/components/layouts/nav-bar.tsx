@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react"
-import { BreadcrumbsContext } from "@/context/BreadcrumbsContext"
-import authService from "@/features/auth/auth.service"
-import { AccountStatus, userInfo } from "@/features/auth/auth.type"
+import { AccountStatus, userInfo } from "@features/auth/auth.type"
+import useGetMe from "@features/auth/useGetMe"
+import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
+import { useAuth } from "@libs/hooks/useAuth"
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import NavigateNextIcon from "@mui/icons-material/NavigateNext"
 import { Menu, MenuItem } from "@mui/material"
@@ -13,7 +14,6 @@ import Toolbar from "@mui/material/Toolbar"
 import { useAtom } from "jotai"
 
 import { BreadcrumbItem } from "@/types/data"
-import { useAuth } from "@/hooks/useAuth"
 
 import ChangePasswordModal from "../modals/change-password-modal"
 import ConfirmModal from "../modals/confirm-modal"
@@ -26,25 +26,22 @@ export default function NavBar() {
   const auth = useAuth()
   const [value, setValue] = useAtom(userInfo)
   const open = Boolean(anchorElement)
+  const { data } = useGetMe()
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      if (auth.isLogged()) {
-        try {
-          const userData = await authService.getUser()
-          setValue(userData)
-          if (userData.accountStatus == AccountStatus.FirstTime) {
-            setOpenChangePasswordModal(true)
-          }
-        } catch (error) {
-          console.error("Failed to fetch user data:", error)
-          setValue(null)
+    if (data && auth.isLogged()) {
+      try {
+        const userInfo = data
+        setValue(userInfo)
+        if (userInfo.accountStatus == AccountStatus.FirstTime) {
+          setOpenChangePasswordModal(true)
         }
+      } catch (error) {
+        console.error("Failed to fetch user data:", error)
+        setValue(null)
       }
     }
-
-    fetchUserData()
-  }, [])
+  }, [data])
 
   const handleClick = (
     setter: React.Dispatch<React.SetStateAction<boolean>>,
@@ -99,8 +96,8 @@ export default function NavBar() {
               endIcon={<KeyboardArrowDownIcon />}
               className="!bg-red-600 text-white transition duration-300 hover:bg-red-700"
             >
-              {value.claims?.find((x) => x.type == "UserName")?.value ||
-                "No Claim"}
+              {value.claims?.find((x) => x.type == "UserName")?.value ??
+                "Loading"}
             </Button>
             <Menu
               id="menu-profile"
@@ -116,7 +113,6 @@ export default function NavBar() {
               >
                 Change Password
               </MenuItem>
-
               <MenuItem
                 id="btn-logout"
                 onClick={() => handleClick(setOpenLogoutConfirmModal, true)}
@@ -127,7 +123,9 @@ export default function NavBar() {
             </Menu>
           </div>
         ) : (
-          <p>Log in</p>
+          <Link href="/" underline="hover" color="inherit">
+            Login
+          </Link>
         )}
         <ConfirmModal
           open={openLogoutConfirmModal}

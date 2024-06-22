@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { AccountStatus, AuthUser } from "@/features/auth/auth.type"
-import { passwordSchema, passwordValidator } from "@/features/users/user.schema"
-import useUpdatePassword from "@/features/users/useUpdatePassword"
+import { passwordSchema, passwordValidator } from "@features/auth/auth.schema"
+import { AccountStatus, AuthUser } from "@features/auth/auth.type"
+import useUpdatePassword from "@features/auth/useUpdatePassword"
+import { useShowHint } from "@libs/hooks/useShowHint"
 import Visibility from "@mui/icons-material/Visibility"
 import VisibilityOff from "@mui/icons-material/VisibilityOff"
 import { FormHelperText } from "@mui/material"
@@ -10,8 +11,6 @@ import InputAdornment from "@mui/material/InputAdornment"
 import TextField from "@mui/material/TextField"
 import { useForm } from "@tanstack/react-form"
 import { z } from "zod"
-
-import { useShowHint } from "@/hooks/useShowHint"
 
 import AlertModal from "./alert-modal"
 import InputModal from "./input-modal"
@@ -29,6 +28,13 @@ export default function ChangePasswordModal({
   user,
   FirstTime,
 }: Readonly<ChangePasswordModalProps>) {
+  const [showOldPassword, setShowOldPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [canSubmit, setCanSubmit] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [oldPasswordError, setOldPasswordError] = useState(false)
+  const showOldPasswordHint = useShowHint(setShowOldPassword)
+  const showNewPasswordHint = useShowHint(setShowNewPassword)
   const {
     mutate: updatePassword,
     isSuccess,
@@ -70,24 +76,17 @@ export default function ChangePasswordModal({
   }, [isSuccess, isError, error])
 
   const getErrorMessage = (_error: AppAxiosError, identifier: string) => {
-    var error = JSON.parse(JSON.stringify(_error.response?.data))
-    var errors = error.value
+    let error = JSON.parse(JSON.stringify(_error.response?.data))
+    let errors = error.value
     if (errors) {
-      for (let i = 0; i < errors.length; i++) {
-        const _error = errors[i]
+      for (const element of errors) {
+        const _error = element
         if (_error.identifier === identifier) {
           return _error.errorMessage
         }
       }
     }
   }
-
-  const [showOldPassword, setShowOldPassword] = useState(false)
-  const [showNewPassword, setShowNewPassword] = useState(false)
-
-  const [canSubmit, setCanSubmit] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [oldPasswordError, setOldPasswordError] = useState(false)
 
   const handleFormChange = () => {
     const oldPassword = getFieldValue("oldPassword")
@@ -155,14 +154,10 @@ export default function ChangePasswordModal({
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          onMouseDown={
-                            useShowHint(setShowOldPassword).onMouseDown
-                          }
-                          onMouseUp={() =>
-                            useShowHint(setShowOldPassword).onMouseUp()
-                          }
+                          onMouseDown={showOldPasswordHint.onMouseDown}
+                          onMouseUp={() => showOldPasswordHint.onMouseUp()}
                           onMouseLeave={() =>
-                            useShowHint(setShowOldPassword).onMouseLeave()
+                            showOldPasswordHint.onMouseLeave()
                           }
                         >
                           {showOldPassword ? <VisibilityOff /> : <Visibility />}
@@ -186,7 +181,7 @@ export default function ChangePasswordModal({
               onChange: passwordSchema.shape.newPassword.refine(
                 (newPassword) => newPassword !== getFieldValue("oldPassword"),
                 {
-                  message: "New password must not be the same as old password.",
+                  message: "New password must not be the same as old password",
                 }
               ),
               onChangeAsyncDebounceMs: 500,
@@ -209,14 +204,10 @@ export default function ChangePasswordModal({
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          onMouseDown={() =>
-                            useShowHint(setShowNewPassword).onMouseDown()
-                          }
-                          onMouseUp={() =>
-                            useShowHint(setShowNewPassword).onMouseUp()
-                          }
+                          onMouseDown={() => showNewPasswordHint.onMouseDown()}
+                          onMouseUp={() => showNewPasswordHint.onMouseUp()}
                           onMouseLeave={() =>
-                            useShowHint(setShowNewPassword).onMouseLeave()
+                            showNewPasswordHint.onMouseLeave()
                           }
                         >
                           {showNewPassword ? <VisibilityOff /> : <Visibility />}

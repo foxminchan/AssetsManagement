@@ -41,7 +41,6 @@ export default function AlertModal({
           {message}
         </Typography>
       </DialogContent>
-
       <DialogActions>
         <Button
           id="btn-confirm-dialog-close"

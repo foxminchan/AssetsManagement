@@ -2,14 +2,14 @@ trigger:
   - main
 
 pool:
-  vmImage: windows-latest
+  vmImage: "ubuntu-latest"
 
 variables:
   solution: "./AssetManagement.sln"
   reactAppPath: "./src/ASM.Web"
   buildPlatform: "Any CPU"
   buildConfiguration: "Release"
-  vmImageName: "windows-latest"
+  vmImageName: "ubuntu-latest"
 
 stages:
   - stage: CI
