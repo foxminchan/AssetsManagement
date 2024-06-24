@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Security.Claims;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
+using ASM.Application.Domain.Shared;
 using ASM.Application.Features.Staffs.Create;
 using ASM.UnitTests.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Moq;
 
 namespace ASM.UnitTests.UseCases.Staffs;
@@ -34,20 +29,23 @@ public sealed class CreateStaffHandlerTests
     {
         // Arrange
         var cancellationToken = CancellationToken.None;
-        var request = new CreateStaffCommand("Tran",
-                                             "Khoi",
-                                             new DateOnly(2003, 09, 05),
-                                             new DateOnly(2024, 06, 20),
-                                             Gender.Male,
-                                             RoleType.Staff);
-        var response = new Staff("Tran",
-                                 "Khoi",
-                                 new DateOnly(2003, 09, 05),
-                                 new DateOnly(2024, 06, 20),
-                                 Gender.Male,
-                                 "SD0004",
-                                 RoleType.Staff,
-                                 Location.HoChiMinh);
+        var request = new CreateStaffCommand(
+            "Tran",
+            "Khoi",
+            new(2003, 09, 05),
+            new(2024, 06, 20),
+            Gender.Male,
+            RoleType.Staff);
+
+        var response = new Staff(
+            "Tran",
+            "Khoi",
+            new(2003, 09, 05),
+            new(2024, 06, 20),
+            Gender.Male,
+            "SD0004",
+            RoleType.Staff,
+            Location.HoChiMinh);
 
         var claims = new List<Claim> { new(nameof(Location), nameof(Location.HoChiMinh)) };
         var identity = new ClaimsIdentity(claims);
@@ -74,20 +72,22 @@ public sealed class CreateStaffHandlerTests
     {
         // Arrange
         var cancellationToken = CancellationToken.None;
-        var request = new CreateStaffCommand("Tran",
-                                             "Khoi",
-                                             new DateOnly(2003, 09, 05),
-                                             new DateOnly(2024, 06, 20),
-                                             Gender.Male,
-                                             RoleType.Staff);
-        var response = new Staff("Tran",
-                                 "Khoi",
-                                 new DateOnly(2003, 09, 05),
-                                 new DateOnly(2024, 06, 20),
-                                 Gender.Male,
-                                 "SD0004",
-                                 RoleType.Staff,
-                                 Location.HoChiMinh);
+        var request = new CreateStaffCommand(
+            "Tran",
+            "Khoi",
+            new(2003, 09, 05),
+            new(2024, 06, 20),
+            Gender.Male,
+            RoleType.Staff);
+        var response = new Staff(
+            "Tran",
+            "Khoi",
+            new(2003, 09, 05),
+            new(2024, 06, 20),
+            Gender.Male,
+            "SD0004",
+            RoleType.Staff,
+            Location.HoChiMinh);
 
         _httpContextAccessor.Setup(x => x.HttpContext).Returns(new DefaultHttpContext());
 
@@ -109,20 +109,22 @@ public sealed class CreateStaffHandlerTests
     {
         // Arrange
         var cancellationToken = CancellationToken.None;
-        var request = new CreateStaffCommand("Tran",
-                                             "Khoi",
-                                             new DateOnly(2003, 09, 05),
-                                             new DateOnly(2024, 06, 20),
-                                             Gender.Male,
-                                             RoleType.Staff);
+        var request = new CreateStaffCommand(
+            "Tran",
+            "Khoi",
+            new(2003, 09, 05),
+            new(2024, 06, 20),
+            Gender.Male,
+            RoleType.Staff);
+
         var response = new Staff("Tran",
-                                 "Khoi",
-                                 new DateOnly(2003, 09, 05),
-                                 new DateOnly(2024, 06, 20),
-                                 Gender.Male,
-                                 "SD0004",
-                                 RoleType.Staff,
-                                 Location.HoChiMinh);
+            "Khoi",
+            new(2003, 09, 05),
+            new(2024, 06, 20),
+            Gender.Male,
+            "SD0004",
+            RoleType.Staff,
+            Location.HoChiMinh);
 
         var claims = new List<Claim> { new(nameof(AccountStatus), nameof(AccountStatus.Active)) };
         var identity = new ClaimsIdentity(claims);

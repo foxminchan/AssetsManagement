@@ -4,7 +4,7 @@ using ASM.Application.Domain.IdentityAggregate.Enums;
 
 namespace ASM.Application.Domain.IdentityAggregate.Events;
 
-public sealed class CreatedStaffEvent(
+public sealed class StaffCreatedEvent(
     string firstName,
     string lastName,
     RoleType roleType,

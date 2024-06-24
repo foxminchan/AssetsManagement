@@ -1,16 +1,21 @@
 ﻿using System.Collections.Immutable;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Common.SeedWorks;
+using ASM.Application.Domain.AssetAggregate;
+using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.IdentityAggregate;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASM.Application.Infrastructure.Persistence;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : IdentityDbContext<ApplicationUser>(options), IDatabaseFacade, IDomainEventContext
 {
     public DbSet<Staff> Staffs => Set<Staff>();
+    public DbSet<Category> Categories => Set<Category>();
+    public DbSet<Asset> Assets => Set<Asset>();
+    public DbSet<Assignment> Assignments => Set<Assignment>();
 
     public IEnumerable<EventBase> GetDomainEvents()
     {

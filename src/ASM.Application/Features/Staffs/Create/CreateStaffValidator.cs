@@ -1,5 +1,4 @@
-﻿using ASM.Application.Features.Staffs.Create;
-using ASM.Application.Infrastructure.Persistence;
+﻿using ASM.Application.Infrastructure.Persistence;
 using FluentValidation;
 
 namespace ASM.Application.Features.Staffs.Create;
@@ -23,7 +22,7 @@ public sealed class CreateStaffValidator : AbstractValidator<CreateStaffRequest>
 
         RuleFor(x => x.JoinedDate)
             .NotEmpty().WithMessage("Join day is required")
-            .Must(x => x.DayOfWeek == DayOfWeek.Saturday || x.DayOfWeek == DayOfWeek.Sunday)
+            .Must(x => x.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday)
             .WithMessage("Joined date is Saturday or Sunday. Please select a different date")
             .GreaterThan(x => x.Dob)
             .WithMessage("Joined date must be later than Date of Birth. Please select a different date");

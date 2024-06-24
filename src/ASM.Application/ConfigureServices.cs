@@ -49,6 +49,7 @@ public static class ConfigureServices
         Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
 
         builder.Services.AddSingleton<AuditableEntityInterceptor>();
+        builder.Services.AddSingleton<TrackableEntityInterceptor>();
 
         builder.Services.AddDbContextPool<ApplicationDbContext>((sp, options) =>
         {
@@ -63,6 +64,7 @@ public static class ConfigureServices
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             options.AddInterceptors(sp.GetRequiredService<AuditableEntityInterceptor>());
+            options.AddInterceptors(sp.GetRequiredService<TrackableEntityInterceptor>());
 
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == Environments.Development)
                 options

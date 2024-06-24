@@ -304,7 +304,7 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
           <Button
             id="btn-edit-user-close"
             variant="outlined"
-            className="!border-gray-400 !text-gray-400"
+            className="!border-black-400 !text-gray-400"
           >
             Close
           </Button>

@@ -15,15 +15,12 @@ public sealed class UpdatePasswordHandler(UserManager<ApplicationUser> userManag
     public async Task<Result> Handle(UpdatePasswordCommand request, CancellationToken cancellationToken)
     {
         var user = await userManager.FindByIdAsync(request.Id.ToString());
-        Guard.Against.NotFound(request.Id, user);
 
-        var claims = await userManager.GetClaimsAsync(user);
+        Guard.Against.NotFound(request.Id, user);
 
         if (user.AccountStatus == AccountStatus.FirstTime)
         {
             user.AccountStatus = AccountStatus.Active;
-
-            await userManager.RemoveClaimAsync(user, claims.First(c => c.Type == "Status"));
 
             await userManager.AddClaimAsync(user, new("Status", nameof(AccountStatus.Active)));
         }

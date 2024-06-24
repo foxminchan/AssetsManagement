@@ -1,10 +1,12 @@
-﻿using ASM.Application.Common.SeedWorks;
+﻿using System.Security.Claims;
+using ASM.Application.Common.SeedWorks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace ASM.Application.Infrastructure.Persistence.Interceptors;
 
-public sealed class AuditableEntityInterceptor : SaveChangesInterceptor
+public sealed class TrackableEntityInterceptor(IHttpContextAccessor accessor) : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(
         DbContextEventData eventData,
@@ -23,18 +25,22 @@ public sealed class AuditableEntityInterceptor : SaveChangesInterceptor
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 
-    public static void UpdateEntities(DbContext? context)
+    public void UpdateEntities(DbContext? context)
     {
         if (context is null) return;
 
-        foreach (var entry in context.ChangeTracker.Entries<EntityBase>())
+        var userId = accessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (userId is null) return;
+
+        foreach (var entry in context.ChangeTracker.Entries<TrackableEntityBase>())
         {
             if (entry.State is not (EntityState.Added or EntityState.Modified) && !entry.HasChangedOwnedEntities())
                 continue;
 
-            if (entry.State == EntityState.Added) entry.Entity.CreatedDate = DateTime.UtcNow;
+            if (entry.State == EntityState.Added) entry.Entity.CreatedBy = Guid.Parse(userId);
 
-            entry.Entity.UpdateDate = DateTime.UtcNow;
+            entry.Entity.UpdatedBy = Guid.Parse(userId);
         }
     }
 }

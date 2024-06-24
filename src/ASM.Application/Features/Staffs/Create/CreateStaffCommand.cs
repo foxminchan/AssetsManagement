@@ -3,6 +3,7 @@ using Ardalis.Result;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
+using ASM.Application.Domain.Shared;
 using Microsoft.AspNetCore.Http;
 
 namespace ASM.Application.Features.Staffs.Create;

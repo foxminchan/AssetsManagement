@@ -3,16 +3,17 @@ using ASM.Application.Common.Constants;
 using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
 using ASM.Application.Domain.IdentityAggregate.Events;
+using ASM.Application.Domain.Shared;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASM.Application.Features.Staffs.EventHandlers;
 
-public sealed class CreatedStaffHandler(UserManager<ApplicationUser> userManager)
-    : INotificationHandler<CreatedStaffEvent>
+public sealed class StaffCreatedHandler(UserManager<ApplicationUser> userManager)
+    : INotificationHandler<StaffCreatedEvent>
 {
-    public async Task Handle(CreatedStaffEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(StaffCreatedEvent notification, CancellationToken cancellationToken)
     {
         var appUsers = await userManager.Users.ToListAsync(cancellationToken);
         var userName = ApplicationUser.GenerateUserName(notification.FirstName, notification.LastName, appUsers);

@@ -16,7 +16,6 @@ import { Route as rootRoute } from "./routes/__root"
 import { Route as AuthenticatedImport } from "./routes/_authenticated"
 import { Route as AuthenticatedUserIdImport } from "./routes/_authenticated/user/$id"
 import { Route as IndexImport } from "./routes/index"
-import { Route as UserNewImport } from "./routes/user/new"
 
 // Create Virtual Routes
 
@@ -25,6 +24,9 @@ const AuthenticatedUserIndexLazyImport = createFileRoute(
 )()
 const AuthenticatedHomeIndexLazyImport = createFileRoute(
   "/_authenticated/home/"
+)()
+const AuthenticatedUserNewIndexLazyImport = createFileRoute(
+  "/_authenticated/user/new/"
 )()
 
 // Create/Update Routes
@@ -36,11 +38,6 @@ const AuthenticatedRoute = AuthenticatedImport.update({
 
 const IndexRoute = IndexImport.update({
   path: "/",
-  getParentRoute: () => rootRoute,
-} as any)
-
-const UserNewRoute = UserNewImport.update({
-  path: "/user/new",
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,6 +64,14 @@ const AuthenticatedUserIdRoute = AuthenticatedUserIdImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedUserNewIndexLazyRoute =
+  AuthenticatedUserNewIndexLazyImport.update({
+    path: "/user/new/",
+    getParentRoute: () => AuthenticatedRoute,
+  } as any).lazy(() =>
+    import("./routes/_authenticated/user/new/index.lazy").then((d) => d.Route)
+  )
+
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
@@ -83,13 +88,6 @@ declare module "@tanstack/react-router" {
       path: ""
       fullPath: ""
       preLoaderRoute: typeof AuthenticatedImport
-      parentRoute: typeof rootRoute
-    }
-    "/user/new": {
-      id: "/user/new"
-      path: "/user/new"
-      fullPath: "/user/new"
-      preLoaderRoute: typeof UserNewImport
       parentRoute: typeof rootRoute
     }
     "/_authenticated/user/$id": {
@@ -113,6 +111,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedUserIndexLazyImport
       parentRoute: typeof AuthenticatedImport
     }
+    "/_authenticated/user/new/": {
+      id: "/_authenticated/user/new/"
+      path: "/user/new"
+      fullPath: "/user/new"
+      preLoaderRoute: typeof AuthenticatedUserNewIndexLazyImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
@@ -124,8 +129,8 @@ export const routeTree = rootRoute.addChildren({
     AuthenticatedUserIdRoute,
     AuthenticatedHomeIndexLazyRoute,
     AuthenticatedUserIndexLazyRoute,
+    AuthenticatedUserNewIndexLazyRoute,
   }),
-  UserNewRoute,
 })
 
 /* prettier-ignore-end */
@@ -137,8 +142,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/_authenticated",
-        "/user/new"
+        "/_authenticated"
       ]
     },
     "/": {
@@ -149,11 +153,9 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/_authenticated/user/$id",
         "/_authenticated/home/",
-        "/_authenticated/user/"
+        "/_authenticated/user/",
+        "/_authenticated/user/new/"
       ]
-    },
-    "/user/new": {
-      "filePath": "user/new.tsx"
     },
     "/_authenticated/user/$id": {
       "filePath": "_authenticated/user/$id.tsx",
@@ -165,6 +167,10 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_authenticated/user/": {
       "filePath": "_authenticated/user/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/user/new/": {
+      "filePath": "_authenticated/user/new/index.lazy.tsx",
       "parent": "/_authenticated"
     }
   }

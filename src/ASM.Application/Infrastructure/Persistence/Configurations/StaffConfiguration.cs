@@ -48,5 +48,20 @@ public sealed class StaffConfiguration : BaseConfiguration<Staff>
             .WithOne(x => x.Staff)
             .HasForeignKey(x => x.StaffId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(x => x.Assignments)
+            .WithOne(x => x.Staff)
+            .HasForeignKey(x => x.StaffId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(x => x.Assignments)
+            .WithOne(x => x.Staff)
+            .HasForeignKey(x => x.CreatedBy)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasMany(x => x.Assignments)
+            .WithOne(x => x.Staff)
+            .HasForeignKey(x => x.UpdatedBy)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

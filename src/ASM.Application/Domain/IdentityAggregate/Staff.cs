@@ -1,7 +1,9 @@
 ﻿using Ardalis.GuardClauses;
 using ASM.Application.Common.SeedWorks;
+using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
 using ASM.Application.Domain.IdentityAggregate.Events;
+using ASM.Application.Domain.Shared;
 
 namespace ASM.Application.Domain.IdentityAggregate;
 
@@ -35,6 +37,7 @@ public sealed class Staff : EntityBase, ISoftDelete, IAggregateRoot
     public Location Location { get; set; }
     public bool IsDeleted { get; set; }
     public ICollection<ApplicationUser>? Users { get; set; } = [];
+    public ICollection<Assignment>? Assignments { get; set; } = [];
 
     public string FullName => $"{FirstName} {LastName}";
 
@@ -67,7 +70,7 @@ public sealed class Staff : EntityBase, ISoftDelete, IAggregateRoot
     public void CreateStaffAccount(string firstName, string lastName, RoleType roleType, DateOnly dob,
         string location, Guid staffId)
     {
-        var createdStaffEvent = new CreatedStaffEvent(firstName, lastName, roleType, dob, location, staffId);
+        var createdStaffEvent = new StaffCreatedEvent(firstName, lastName, roleType, dob, location, staffId);
         RegisterDomainEvent(createdStaffEvent);
     }
 }

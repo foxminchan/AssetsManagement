@@ -3,6 +3,7 @@ using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
 using ASM.Application.Domain.IdentityAggregate.Specifications;
+using ASM.Application.Domain.Shared;
 using ASM.Application.Features.Staffs.List;
 using ASM.UnitTests.Builder;
 using Microsoft.AspNetCore.Http;

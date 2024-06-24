@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ASM.Application.Domain.IdentityAggregate.Enums;
+namespace ASM.Application.Domain.Shared;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Location : byte

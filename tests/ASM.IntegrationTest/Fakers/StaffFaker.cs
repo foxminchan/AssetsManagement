@@ -1,5 +1,6 @@
 ﻿using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
+using ASM.Application.Domain.Shared;
 using Bogus;
 
 namespace ASM.IntegrationTest.Fakers;
