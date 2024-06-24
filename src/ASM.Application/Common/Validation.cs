@@ -12,15 +12,4 @@ public static class Validation
         var failures = validationResult.Errors;
         if (failures.Count != 0) throw new ValidationException(failures);
     }
-
-    public static IHostApplicationBuilder AddValidator(this IHostApplicationBuilder builder)
-    {
-        builder.Services.Scan(scan => scan
-            .FromAssemblies(AssemblyReference.Assembly)
-            .AddClasses(c => c.AssignableTo(typeof(IValidator<>)))
-            .AsImplementedInterfaces()
-            .WithTransientLifetime());
-
-        return builder;
-    }
 }

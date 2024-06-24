@@ -32,7 +32,8 @@ export default function ChangePasswordModal({
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [canSubmit, setCanSubmit] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [oldPasswordError, setOldPasswordError] = useState(false)
+  const [showOldPasswordError, setShowOldPasswordError] = useState(false)
+  const [showNewPasswordError, setShowNewPasswordError] = useState(false)
   const showOldPasswordHint = useShowHint(setShowOldPassword)
   const showNewPasswordHint = useShowHint(setShowNewPassword)
   const {
@@ -59,7 +60,7 @@ export default function ChangePasswordModal({
         newPassword: value.newPassword,
       })
       setIsSubmitting(true)
-      setOldPasswordError(false)
+      setShowOldPasswordError(false)
     },
   })
 
@@ -71,7 +72,7 @@ export default function ChangePasswordModal({
     }
     if (isError) {
       setIsSubmitting(false)
-      setOldPasswordError(true)
+      setShowOldPasswordError(true)
     }
   }, [isSuccess, isError, error])
 
@@ -98,7 +99,7 @@ export default function ChangePasswordModal({
     onClose?.()
     reset()
     setCanSubmit(false)
-    setOldPasswordError(false)
+    setShowOldPasswordError(false)
   }
 
   const closeAlertModal = () => {
@@ -113,7 +114,10 @@ export default function ChangePasswordModal({
       <InputModal
         open={open}
         onClose={closeInputModal}
-        onOk={handleSubmit}
+        onOk={() => {
+          setShowNewPasswordError(true)
+          handleSubmit()
+        }}
         title="Change Password"
         buttonOkLabel="Save"
         buttonOkDisabled={!canSubmit || isSubmitting}
@@ -136,13 +140,13 @@ export default function ChangePasswordModal({
             {({ state, handleChange, handleBlur }) => (
               <div>
                 <TextField
-                  error={oldPasswordError}
+                  error={showOldPasswordError}
                   margin="normal"
                   fullWidth
                   id="old-password"
                   defaultValue={state.value}
                   onChange={(e) => {
-                    setOldPasswordError(false)
+                    setShowOldPasswordError(false)
                     handleChange(e.target.value)
                   }}
                   onBlur={handleBlur}
@@ -155,10 +159,8 @@ export default function ChangePasswordModal({
                         <IconButton
                           aria-label="toggle password visibility"
                           onMouseDown={showOldPasswordHint.onMouseDown}
-                          onMouseUp={() => showOldPasswordHint.onMouseUp()}
-                          onMouseLeave={() =>
-                            showOldPasswordHint.onMouseLeave()
-                          }
+                          onMouseUp={showOldPasswordHint.onMouseUp}
+                          onMouseLeave={showOldPasswordHint.onMouseLeave}
                         >
                           {showOldPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
@@ -167,7 +169,7 @@ export default function ChangePasswordModal({
                   }}
                 />
                 <FormHelperText className="px-2 !text-red-500">
-                  {oldPasswordError &&
+                  {showOldPasswordError &&
                     error &&
                     getErrorMessage(error, "OldPassword")}
                 </FormHelperText>
@@ -194,7 +196,10 @@ export default function ChangePasswordModal({
                   fullWidth
                   id="new-password"
                   defaultValue={state.value}
-                  onChange={(e) => handleChange(e.target.value)}
+                  onChange={(e) => {
+                    setShowNewPasswordError(false)
+                    handleChange(e.target.value)
+                  }}
                   onBlur={handleBlur}
                   label="New Password"
                   type={showNewPassword ? "text" : "password"}
@@ -204,11 +209,9 @@ export default function ChangePasswordModal({
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="toggle password visibility"
-                          onMouseDown={() => showNewPasswordHint.onMouseDown()}
-                          onMouseUp={() => showNewPasswordHint.onMouseUp()}
-                          onMouseLeave={() =>
-                            showNewPasswordHint.onMouseLeave()
-                          }
+                          onMouseDown={showNewPasswordHint.onMouseDown}
+                          onMouseUp={showNewPasswordHint.onMouseUp}
+                          onMouseLeave={showNewPasswordHint.onMouseLeave}
                         >
                           {showNewPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
@@ -217,7 +220,7 @@ export default function ChangePasswordModal({
                   }}
                 />
                 <FormHelperText className="px-2 !text-red-500">
-                  {state.meta.errors}
+                  {showNewPasswordError && state.meta.errors}
                 </FormHelperText>
               </div>
             )}

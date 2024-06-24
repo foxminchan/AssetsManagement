@@ -21,8 +21,6 @@ public static class ConfigureServices
 {
     public static IHostApplicationBuilder AddApplication(this IHostApplicationBuilder builder)
     {
-        builder.AddValidator();
-
         builder.AddIdentityService();
 
         builder.AddEndpoints(typeof(AssemblyReference));

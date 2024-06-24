@@ -61,7 +61,7 @@ export default function InputModal({
         <Button
           id="btn-input-modal-save"
           onClick={() => onOk?.()}
-          className="!bg-red-500 !text-white"
+          className="disabled:!hover:bg-red-800 !bg-red-500 !text-white disabled:!bg-red-700 disabled:!text-gray-300"
           variant="contained"
           disabled={buttonOkDisabled ?? false}
         >
