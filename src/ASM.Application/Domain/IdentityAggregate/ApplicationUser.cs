@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using ASM.Application.Common.SeedWorks;
 using ASM.Application.Domain.IdentityAggregate.Enums;
+using ASM.Application.Features.Staffs.EventHandlers;
 using Microsoft.AspNetCore.Identity;
 
 namespace ASM.Application.Domain.IdentityAggregate;
@@ -33,4 +34,6 @@ public sealed class ApplicationUser : IdentityUser, IAggregateRoot
 
     public static string GeneratePassword(string userName, DateOnly dob)
         => $"{userName}@{dob.Day:D2}{dob.Month:D2}{dob.Year}";
+
+    public void SetStaffID(Guid? staffId) => StaffId = staffId;
 }

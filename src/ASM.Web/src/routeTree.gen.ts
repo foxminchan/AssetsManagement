@@ -15,6 +15,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { Route as rootRoute } from "./routes/__root"
 import { Route as AuthenticatedImport } from "./routes/_authenticated"
 import { Route as AuthenticatedUserIdImport } from "./routes/_authenticated/user/$id"
+import { Route as AuthenticatedUserNewImport } from "./routes/_authenticated/user/new"
 import { Route as IndexImport } from "./routes/index"
 
 // Create Virtual Routes
@@ -59,6 +60,11 @@ const AuthenticatedHomeIndexLazyRoute = AuthenticatedHomeIndexLazyImport.update(
   import("./routes/_authenticated/home/index.lazy").then((d) => d.Route)
 )
 
+const AuthenticatedUserNewRoute = AuthenticatedUserNewImport.update({
+  path: "/user/new",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
 const AuthenticatedUserIdRoute = AuthenticatedUserIdImport.update({
   path: "/user/$id",
   getParentRoute: () => AuthenticatedRoute,
@@ -97,6 +103,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedUserIdImport
       parentRoute: typeof AuthenticatedImport
     }
+    "/_authenticated/user/new": {
+      id: "/_authenticated/user/new"
+      path: "/user/new"
+      fullPath: "/user/new"
+      preLoaderRoute: typeof AuthenticatedUserNewImport
+      parentRoute: typeof AuthenticatedImport
+    }
     "/_authenticated/home/": {
       id: "/_authenticated/home/"
       path: "/home"
@@ -127,6 +140,7 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AuthenticatedRoute: AuthenticatedRoute.addChildren({
     AuthenticatedUserIdRoute,
+    AuthenticatedUserNewRoute,
     AuthenticatedHomeIndexLazyRoute,
     AuthenticatedUserIndexLazyRoute,
     AuthenticatedUserNewIndexLazyRoute,
@@ -152,6 +166,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_authenticated.tsx",
       "children": [
         "/_authenticated/user/$id",
+        "/_authenticated/user/new",
         "/_authenticated/home/",
         "/_authenticated/user/",
         "/_authenticated/user/new/"
@@ -159,6 +174,10 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_authenticated/user/$id": {
       "filePath": "_authenticated/user/$id.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/user/new": {
+      "filePath": "_authenticated/user/new.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/home/": {

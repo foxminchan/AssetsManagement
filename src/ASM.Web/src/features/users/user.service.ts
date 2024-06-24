@@ -19,6 +19,10 @@ class UserService extends HttpService {
   addUser(data: CreateUserRequest): Promise<string> {
     return this.post("/users", data)
   }
+
+  deleteUser(id: string): Promise<void> {
+    return this.delete(`/users/${id}`)
+  }
 }
 
 export default new UserService()

@@ -1,4 +1,5 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.Text.Json.Serialization;
+using Ardalis.GuardClauses;
 using ASM.Application.Common.SeedWorks;
 using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
@@ -40,7 +41,6 @@ public sealed class Staff : EntityBase, ISoftDelete, IAggregateRoot
     public ICollection<Assignment>? Assignments { get; set; } = [];
 
     public string FullName => $"{FirstName} {LastName}";
-
     public string? UserName => Users?.First().UserName;
 
     public static string GenerateStaffCode(List<Staff> staffs)
@@ -73,4 +73,13 @@ public sealed class Staff : EntityBase, ISoftDelete, IAggregateRoot
         var createdStaffEvent = new StaffCreatedEvent(firstName, lastName, roleType, dob, location, staffId);
         RegisterDomainEvent(createdStaffEvent);
     }
+
+    public void Delete() => IsDeleted = true;
+
+    public void UpdateClaim(ApplicationUser user)
+    {
+        var staffDeletedEvent = new StaffDeletedEvent(user);
+        RegisterDomainEvent(staffDeletedEvent);
+    }
+
 }

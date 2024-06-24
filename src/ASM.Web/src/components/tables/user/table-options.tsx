@@ -70,9 +70,11 @@ export default function TableOptions({
       },
     },
     muiTableBodyRowProps: ({ row }) => ({
-      onClick: () => {
-        setOpen(true)
-        setSelectedUserId(row.original.id)
+      onClick: (event: React.MouseEvent<HTMLTableRowElement>) => {
+        if (!(event.target instanceof HTMLButtonElement)) {
+          setOpen(true)
+          setSelectedUserId(row.original.id)
+        }
       },
       sx: {
         cursor: "pointer",
