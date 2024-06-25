@@ -1,4 +1,5 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.Security.Claims;
+using Ardalis.GuardClauses;
 using Ardalis.Result;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.IdentityAggregate;
@@ -16,11 +17,15 @@ public sealed class UpdatePasswordHandler(UserManager<ApplicationUser> userManag
     {
         var user = await userManager.FindByIdAsync(request.Id.ToString());
 
+        var claimsTest = new Claim("Status", nameof(AccountStatus.FirstTime));
+
         Guard.Against.NotFound(request.Id, user);
 
         if (user.AccountStatus == AccountStatus.FirstTime)
         {
             user.AccountStatus = AccountStatus.Active;
+            
+            await userManager.RemoveClaimAsync(user, claimsTest);
 
             await userManager.AddClaimAsync(user, new("Status", nameof(AccountStatus.Active)));
         }

@@ -81,6 +81,7 @@ export default function Users() {
         </Grid>
         <Grid item xs className="!flex !justify-end">
           <Button
+            id="btn-create-user"
             variant="contained"
             color="error"
             onClick={() => navigate({ to: "/user/new" })}

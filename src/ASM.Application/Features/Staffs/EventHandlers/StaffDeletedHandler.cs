@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ASM.Application.Features.Staffs.EventHandlers;
 
-public sealed class DeleteStaffHandler(UserManager<ApplicationUser> userManager)
+public sealed class StaffDeletedHandler(UserManager<ApplicationUser> userManager)
     : INotificationHandler<StaffDeletedEvent>
 {
     public async Task Handle(StaffDeletedEvent notification, CancellationToken cancellationToken)

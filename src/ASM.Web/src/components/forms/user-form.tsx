@@ -27,7 +27,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { useForm } from "@tanstack/react-form"
 import { Link, useNavigate } from "@tanstack/react-router"
 import { zodValidator } from "@tanstack/zod-form-adapter"
-import { format } from "date-fns"
+import { differenceInYears, format } from "date-fns"
 import { useSetAtom } from "jotai"
 import { z } from "zod"
 
@@ -79,7 +79,7 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
     }) => {
       const formattedValue = {
         ...value,
-        dob: format(value.dob, "yyyy-MM-dd"),
+        dob: format(value.dob ?? new Date(), "yyyy-MM-dd"),
         joinedDate: format(value.joinedDate ?? new Date(), "yyyy-MM-dd"),
       }
       if (!isEditing) {
@@ -157,7 +157,20 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
       </FormControl>
       <FormControl>
         <FormLabel>Date of Birth:</FormLabel>
-        <Field name="dob" validators={{ onChange: userSchema.shape.dob }}>
+        <Field
+          name="dob"
+          validators={{
+            onChangeListenTo: ["joinedDate"],
+            onChange: userSchema.shape.dob.refine(
+              (data) =>
+                !data ||
+                !getFieldValue("joinedDate") ||
+                differenceInYears(getFieldValue("joinedDate") as Date, data) >=
+                  18,
+              "User is under 18. Please select a different date"
+            ),
+          }}
+        >
           {({ handleChange, state }) => (
             <>
               <DatePicker
@@ -166,6 +179,7 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
                 onChange={(value) => {
                   value && handleChange(value)
                 }}
+                format="dd/MM/yyyy"
                 slotProps={{
                   textField: {
                     size: "small",
@@ -236,7 +250,9 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
             onChangeListenTo: ["dob"],
             onChange: userSchema.shape.joinedDate.refine(
               (data) =>
-                !data || !getFieldValue("dob") || data > getFieldValue("dob"),
+                !data ||
+                !getFieldValue("dob") ||
+                data > (getFieldValue("dob") as Date),
               "Joined date is not later than Date of Birth. Please select a different date"
             ),
           }}
@@ -247,6 +263,7 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
                 name="joinedDate"
                 maxDate={today}
                 onChange={(value) => value && handleChange(value)}
+                format="dd/MM/yyyy"
                 slotProps={{
                   textField: {
                     size: "small",
