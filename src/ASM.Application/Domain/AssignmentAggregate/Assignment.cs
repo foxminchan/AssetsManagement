@@ -1,4 +1,5 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Ardalis.GuardClauses;
 using ASM.Application.Common.SeedWorks;
 using ASM.Application.Domain.AssetAggregate;
 using ASM.Application.Domain.AssignmentAggregate.Enums;
@@ -28,6 +29,9 @@ public sealed class Assignment : TrackableEntityBase, IAggregateRoot
     public string? Note { get; set; }
     public Guid? AssetId { get; set; }
     public Asset? Asset { get; set; }
-    public Guid? StaffId { get; set; }
+    public Guid StaffId { get; set; }
     public Staff? Staff { get; set; }
+
+    [NotMapped] public string? AssignedBy { get; set; }
+    [NotMapped] public string? AssignedTo { get; set; }
 }

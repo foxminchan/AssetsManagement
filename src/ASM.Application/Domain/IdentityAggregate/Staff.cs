@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using Ardalis.GuardClauses;
+﻿using Ardalis.GuardClauses;
 using ASM.Application.Common.SeedWorks;
 using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;

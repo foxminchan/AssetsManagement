@@ -2,6 +2,6 @@
 
 public abstract class TrackableEntityBase : EntityBase
 {
-    public Guid? CreatedBy { get; set; }
-    public Guid? UpdatedBy { get; set; }
+    public Guid CreatedBy { get; set; }
+    public Guid UpdatedBy { get; set; }
 }

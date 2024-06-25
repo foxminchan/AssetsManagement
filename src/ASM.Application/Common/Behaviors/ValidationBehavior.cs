@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,7 +42,8 @@ public sealed class ValidationBehavior<TRequest, TResponse>(
 
         logger.LogInformation(
             "[{Behavior}] handled response={Response} with content={ResponseData}",
-            behavior, typeof(TResponse).FullName, JsonSerializer.Serialize(response));
+            behavior, typeof(TResponse).FullName, JsonSerializer.Serialize(response,
+                new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.IgnoreCycles }));
 
         return response;
     }

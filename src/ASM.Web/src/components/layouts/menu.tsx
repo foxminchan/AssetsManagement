@@ -26,8 +26,6 @@ const isAdmin = (
 export default function Menu() {
   const [value] = useAtom(userInfo)
 
-  console.log(value)
-
   const admin = isAdmin(value?.claims)
 
   return (

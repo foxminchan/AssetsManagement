@@ -1,4 +1,4 @@
-import { userAtoms } from "@libs/jotai/userAtoms"
+import { useContext, useEffect, useState } from "react"
 import FilterInput from "@components/fields/filter-input"
 import SearchInput from "@components/fields/search-input"
 import UserInfoModal from "@components/modals/user-info-modal"
@@ -8,10 +8,10 @@ import useListUsers from "@features/users/useListUsers"
 import { RoleType } from "@features/users/user.type"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
+import { userAtoms } from "@libs/jotai/userAtoms"
 import { Button, Grid, Typography } from "@mui/material"
 import { useNavigate, useSearch } from "@tanstack/react-router"
 import { useAtomValue } from "jotai"
-import { useContext, useEffect, useState } from "react"
 
 const breadcrumbItems = [
   {

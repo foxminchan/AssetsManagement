@@ -1,11 +1,5 @@
 import { FilterParams, PagedInfo } from "@/types/api"
 
-export type UpdatePasswordRequest = {
-  id: string
-  oldPassword: string
-  newPassword: string
-}
-
 // Response
 
 export type User = {

@@ -15,3 +15,8 @@ export type FilterParams = BasePaging & {
   orderBy?: string
   search?: string
 }
+
+export type OrderParams = Omit<
+  FilterParams,
+  "pageIndex" | "pageSize" | "search"
+>
