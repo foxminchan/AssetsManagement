@@ -1,6 +1,6 @@
-export const useShowHint = (
-  setter: React.Dispatch<React.SetStateAction<boolean>>
-) => {
+import { Dispatch, SetStateAction } from "react"
+
+export const useShowHint = (setter: Dispatch<SetStateAction<boolean>>) => {
   const handleMouseDown = () => {
     setter(true)
   }

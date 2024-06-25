@@ -57,7 +57,7 @@ export default function ConfirmModal({
           id="btn-confirm-dialog-close"
           onClick={() => onClose?.()}
           variant="outlined"
-          className="!border-gray-400 !text-gray-400"
+          className="!border-black !text-black"
         >
           {buttonCloseLabel ?? "Close"}
         </Button>

@@ -7,3 +7,7 @@ export type RouteItem = {
   label: string
   to: string
 }
+
+export type BaseEntity = {
+  id: string
+}

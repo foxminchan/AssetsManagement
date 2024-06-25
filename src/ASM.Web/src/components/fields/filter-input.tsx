@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import FilterAltIcon from "@mui/icons-material/FilterAlt"
 import {
   Checkbox,
@@ -10,49 +9,54 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material"
-import { useRouter, useSearch } from "@tanstack/react-router"
 
 type Props = {
   values: string[]
   label?: string
-  isMultiple: boolean
-  selectedType: string | string[]
-  setSelectedType: (value: string | string[]) => void
+  multiple: boolean
+  selected: string | string[]
+  setSelected: (value: string | string[]) => void
 }
 
 export default function FilterInput({
-  values: types,
+  values,
   label,
-  selectedType,
-  isMultiple,
-  setSelectedType,
+  multiple,
+  selected,
+  setSelected,
 }: Readonly<Props>) {
-  const router = useRouter()
-  const params = useSearch({ strict: false })
+  const handleChange = (event: SelectChangeEvent<typeof selected>) => {
+    const {
+      target: { value },
+    } = event
 
-  useEffect(() => {
-    ;(async () =>
-      await router.navigate({
-        search: {
-          ...params,
-          roleType: selectedType,
-        },
-      }))()
-  }, [selectedType])
-
-  const handleChange = (event: SelectChangeEvent<typeof selectedType>) => {
-    setSelectedType(event.target.value)
+    if (multiple) {
+      if (Array.isArray(value) && value.at(-1) === "All") {
+        setSelected(["All"])
+      } else if (Array.isArray(value) && value.at(0) === "All") {
+        setSelected(value.slice(1))
+      } else {
+        setSelected(typeof value === "string" ? value.split(",") : value)
+      }
+    } else {
+      setSelected(value)
+    }
   }
 
   return (
-    <FormControl sx={{ width: 150 }}>
-      {label && <InputLabel id="label-chk-type">{label}</InputLabel>}
+    <FormControl className="w-full">
+      {label && (
+        <InputLabel id="label-chk-type" size="small">
+          {label}
+        </InputLabel>
+      )}
       <Select
+        label={label}
         fullWidth
         size="small"
         id="chk-type"
         labelId="label-chk-type"
-        multiline={isMultiple}
+        multiple={multiple}
         input={
           <OutlinedInput
             label={label ?? undefined}
@@ -64,14 +68,18 @@ export default function FilterInput({
           />
         }
         IconComponent={() => null}
-        value={selectedType}
+        value={selected}
         onChange={handleChange}
-        renderValue={(selected) => selected}
+        renderValue={(selected) =>
+          Array.isArray(selected) ? selected.join(", ") : selected
+        }
       >
-        {types.map((type) => (
-          <MenuItem key={type} value={type}>
-            <Checkbox checked={type === selectedType} />
-            <ListItemText primary={type} />
+        {values.map((value) => (
+          <MenuItem key={value} value={value}>
+            <Checkbox
+              checked={selected !== undefined && selected.indexOf(value) !== -1}
+            />
+            <ListItemText primary={value} />
           </MenuItem>
         ))}
       </Select>

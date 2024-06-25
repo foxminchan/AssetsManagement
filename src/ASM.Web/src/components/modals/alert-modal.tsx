@@ -46,7 +46,7 @@ export default function AlertModal({
           id="btn-confirm-dialog-close"
           onClick={() => onClose?.()}
           variant="outlined"
-          className="!border-gray-400 !text-gray-400"
+          className="!border-black !text-black"
         >
           Close
         </Button>

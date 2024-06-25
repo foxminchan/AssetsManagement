@@ -1,24 +1,26 @@
 import { FC, useState } from "react"
 import useDeleteUser from "@/features/users/useDeleteUser"
+import ConfirmModal from "@components/modals/confirm-modal"
 import { RoleType, User } from "@features/users/user.type"
 import EditIcon from "@mui/icons-material/Edit"
 import HighlightOffIcon from "@mui/icons-material/HighlightOff"
 import { IconButton } from "@mui/material"
 import { useNavigate } from "@tanstack/react-router"
 
-import ConfirmModal from "@/components/modals/confirm-modal"
+import { BaseEntity } from "@/types/data"
 
-type CellActionProps = {
-  data: User
+type UserRowActionProps = {
+  data: BaseEntity
 }
 
-export const CellAction: FC<CellActionProps> = ({ data }) => {
+export const UserRowAction: FC<UserRowActionProps> = ({ data }) => {
   const navigate = useNavigate({ from: "/user/$id" })
   const [openDisableConfirmMod, setOpenDisableConfirmMod] = useState(false)
   const { mutate: deleteUser } = useDeleteUser()
   const handleDisableUser = (id: string) =>
     Promise.resolve(deleteUser(id)).then(() => (window.location.href = "/user"))
 
+  const userData = data as User
   return (
     <>
       <IconButton
@@ -26,7 +28,7 @@ export const CellAction: FC<CellActionProps> = ({ data }) => {
         size="small"
         color="error"
         id="btn-edit"
-        disabled={data.roleType === RoleType.Admin}
+        disabled={userData.roleType === RoleType.Admin}
         onClick={() => navigate({ to: "/user/$id", params: { id: data.id } })}
       >
         <EditIcon />
@@ -36,7 +38,7 @@ export const CellAction: FC<CellActionProps> = ({ data }) => {
         size="small"
         color="error"
         id="btn-delete"
-        disabled={data.roleType === RoleType.Admin}
+        disabled={userData.roleType === RoleType.Admin}
         onClick={(event) => {
           event.stopPropagation()
           setOpenDisableConfirmMod(!openDisableConfirmMod)

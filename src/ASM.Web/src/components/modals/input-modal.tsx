@@ -72,7 +72,7 @@ export default function InputModal({
             id="btn-input-modal-cancel"
             onClick={() => onClose?.()}
             variant="outlined"
-            className="!border-gray-400 !text-gray-400"
+            className="!border-black !text-black"
           >
             {buttonCloseLabel ?? "Cancel"}
           </Button>

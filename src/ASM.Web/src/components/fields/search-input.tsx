@@ -1,35 +1,30 @@
+import { Dispatch, SetStateAction } from "react"
 import SearchIcon from "@mui/icons-material/Search"
 import { IconButton, InputAdornment, OutlinedInput } from "@mui/material"
-import { useRouter, useSearch } from "@tanstack/react-router"
 
-export default function SearchInput() {
-  const router = useRouter()
-  const params = useSearch({ strict: false })
+type SearchInputProps = {
+  keyword: string
+  setKeyword: Dispatch<SetStateAction<string>>
+  onClick: React.MouseEventHandler<HTMLButtonElement>
+}
 
-  const handleOnClick = async (keyword: string) => {
-    await router.navigate({
-      search: {
-        ...params,
-        search: keyword,
-      },
-    })
-  }
-
+export default function SearchInput({
+  keyword,
+  setKeyword,
+  onClick,
+}: Readonly<SearchInputProps>) {
   return (
     <OutlinedInput
       id="txt-search"
       size="small"
+      value={keyword}
+      onChange={(e) => setKeyword(e.target.value)}
       endAdornment={
         <InputAdornment position="end">
           <IconButton
             id="btn-search"
             aria-label="toggle password visibility"
-            onClick={() =>
-              handleOnClick(
-                (document.getElementById("txt-search") as HTMLInputElement)
-                  .value
-              )
-            }
+            onClick={onClick}
             edge="end"
           >
             <SearchIcon />

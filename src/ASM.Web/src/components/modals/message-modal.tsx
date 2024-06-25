@@ -43,7 +43,7 @@ export default function MessageModal({
             position: "absolute",
             right: 8,
             top: 8,
-            color: (theme) => theme.palette.grey[500],
+            color: (theme) => theme.palette.common.black,
           }}
         >
           <CloseIcon />

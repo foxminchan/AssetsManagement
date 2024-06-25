@@ -1,34 +1,35 @@
 import { useMemo } from "react"
-import { User } from "@features/users/user.type"
 import { format } from "date-fns"
 import { MRT_ColumnDef } from "material-react-table"
 
-export default function Columns() {
-  return useMemo<MRT_ColumnDef<User>[]>(
+import { BaseEntity } from "@/types/data"
+
+export default function UserColumns() {
+  return useMemo<MRT_ColumnDef<BaseEntity>[]>(
     () => [
       {
-        id: "staffCode",
+        id: "StaffCode",
         accessorKey: "staffCode",
         header: "Staff Code",
         enableSorting: true,
         size: 120,
       },
       {
-        id: "fullName",
+        id: "FullName",
         accessorKey: "fullName",
         header: "Full Name",
         enableSorting: true,
-        size: 120,
+        minSize: 120,
       },
       {
-        id: "userName",
+        id: "UserName",
         accessorKey: "userName",
         header: "Username",
         enableSorting: true,
         size: 120,
       },
       {
-        id: "joinedDate",
+        id: "JoinedDate",
         accessorKey: "joinedDate",
         header: "Joined Date",
         enableSorting: true,
@@ -38,7 +39,7 @@ export default function Columns() {
         },
       },
       {
-        id: "roleType",
+        id: "RoleType",
         accessorKey: "roleType",
         header: "Type",
         size: 90,

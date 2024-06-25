@@ -1,9 +1,9 @@
 import { FilterParams, PagedInfo } from "@/types/api"
+import { BaseEntity } from "@/types/data"
 
 // Response
 
-export type User = {
-  id: string
+export type User = BaseEntity & {
   firstName: string
   lastName: string
   fullName: string

@@ -1,11 +1,10 @@
+import UserForm from "@components/forms/user-form"
 import useGetUser from "@features/users/useGetUser"
 import { UpdateUserRequest } from "@features/users/user.type"
 import Container from "@mui/material/Container"
 import Typography from "@mui/material/Typography"
 import { useParams } from "@tanstack/react-router"
 import { format } from "date-fns"
-
-import UserForm from "@/components/forms/user-form"
 
 export default function EditUser() {
   const params = useParams({ from: "/_authenticated/user/$id" })

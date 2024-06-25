@@ -10,16 +10,22 @@ import MessageModal from "./message-modal"
 type Props = {
   id: string
   open: boolean
+  title?: string
   onClose: () => void
 }
 
-export default function UserInfoModal({ id, onClose, open }: Readonly<Props>) {
+export default function UserInfoModal({
+  id,
+  onClose,
+  open,
+  title,
+}: Readonly<Props>) {
   const user = useGetUser(id)
 
   if (!user?.data) return null
 
   return (
-    <MessageModal open={open} onClose={onClose} message="">
+    <MessageModal open={open} onClose={onClose} message="" title={title}>
       <CssBaseline />
       <Grid container>
         <Container className="!flex flex-col">
