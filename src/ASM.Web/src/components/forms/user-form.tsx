@@ -1,13 +1,13 @@
 import { useEffect } from "react"
-import useAddUser from "@/features/users/useAddUser"
+import { userAtoms } from "@/libs/jotai/userAtoms"
+import useAddUser from "@features/users/useAddUser"
+import { userSchema } from "@features/users/user.schema"
 import {
   CreateUserRequest,
   Gender,
   RoleType,
   UpdateUserRequest,
-} from "@/features/users/user.type"
-import { userAtoms } from "@/libs/jotai/userAtoms"
-import { userSchema } from "@features/users/user.schema"
+} from "@features/users/user.type"
 import { genderOptions, roleTypeOptions } from "@libs/constants/options"
 import {
   Button,

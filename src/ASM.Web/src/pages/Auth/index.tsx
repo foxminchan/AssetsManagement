@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
+import { userInfo } from "@/libs/jotai/userInfoAtom"
 import logo from "@assets/logo.svg"
 import authService from "@features/auth/auth.service"
-import { userInfo } from "@features/auth/auth.type"
 import useLogin from "@features/auth/useLogin"
 import { useAuth } from "@libs/hooks/useAuth"
 import { useShowHint } from "@libs/hooks/useShowHint"

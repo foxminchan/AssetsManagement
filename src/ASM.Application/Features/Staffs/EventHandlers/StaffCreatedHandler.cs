@@ -43,7 +43,7 @@ public sealed class StaffCreatedHandler(UserManager<ApplicationUser> userManager
 
         await userManager.AddClaimsAsync(user,
         [
-            new("Role", role),
+            new(nameof(AuthRole), role),
             new(nameof(Location), notification.Location),
             new("Status", nameof(AccountStatus.FirstTime)),
             new(nameof(ApplicationUser.UserName), userName)

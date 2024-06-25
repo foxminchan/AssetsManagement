@@ -1,5 +1,3 @@
-import { atom } from "jotai"
-
 export type LoginRequest = {
   email: string
   password: string
@@ -24,14 +22,6 @@ export type AuthUser = {
   accountStatus: AccountStatus
   claims: Claim[]
 }
-
-const initialUser: AuthUser = {
-  id: "",
-  accountStatus: AccountStatus.None,
-  claims: [],
-}
-
-export const userInfo = atom<AuthUser | null>(initialUser)
 
 export type Claim = {
   type: string
