@@ -9,7 +9,7 @@ public sealed class AssetFilterSpec : Specification<Asset>
 {
     public AssetFilterSpec(
         Location location,
-        Guid? categoryId,
+        string[]? categories,
         State[]? state,
         int pageIndex,
         int pageSize,
@@ -19,7 +19,7 @@ public sealed class AssetFilterSpec : Specification<Asset>
     {
         Query.Where(x => x.Location == location);
 
-        if (categoryId.HasValue) Query.Where(x => x.CategoryId == categoryId);
+        if (categories?.Length != 0) Query.Where(x => categories!.Contains(x.Category!.Name));
 
         if (state!.Length != 0) Query.Where(x => state.Contains(x.State));
 

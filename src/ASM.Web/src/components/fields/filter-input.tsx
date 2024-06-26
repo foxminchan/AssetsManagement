@@ -36,7 +36,7 @@ export default function FilterInput({
       } else if (Array.isArray(value) && value.at(0) === "All") {
         setSelected(value.slice(1))
       } else {
-        setSelected(typeof value === "string" ? value.split(",") : value)
+        setSelected(value.length !== 0 ? value : ["All"])
       }
     } else {
       setSelected(value)
@@ -44,7 +44,7 @@ export default function FilterInput({
   }
 
   return (
-    <FormControl className="w-full">
+    <FormControl className="w-full max-w-40">
       {label && (
         <InputLabel id="label-chk-type" size="small">
           {label}
@@ -52,15 +52,17 @@ export default function FilterInput({
       )}
       <Select
         label={label}
-        fullWidth
         size="small"
+        fullWidth
         id="chk-type"
         labelId="label-chk-type"
+        displayEmpty={true}
         multiple={multiple}
         input={
           <OutlinedInput
             label={label ?? undefined}
             id="txt-filter"
+            size="small"
             endAdornment={<FilterAltIcon />}
             inputProps={{
               "aria-label": "weight",

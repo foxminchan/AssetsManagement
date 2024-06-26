@@ -12,11 +12,14 @@ public sealed class AssignmentFilterSpec : Specification<Assignment>
         int pageSize,
         string? orderBy,
         bool isDescending,
-        string? search)
+        string? search,
+        Guid? assetId)
     {
         if (state.HasValue) Query.Where(x => x.State == state);
 
         if (assignedDate.HasValue) Query.Where(x => x.AssignedDate == assignedDate);
+
+        if (assetId.HasValue) Query.Where(x => x.AssetId == assetId);
 
         if (!string.IsNullOrWhiteSpace(search))
             Query.Where(x =>

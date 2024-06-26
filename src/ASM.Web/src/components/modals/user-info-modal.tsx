@@ -1,6 +1,6 @@
 import useGetUser from "@features/users/useGetUser"
 import { Location } from "@features/users/user.type"
-import { userfieldLabels, userFieldOrder } from "@libs/constants/field"
+import { userFieldLabels, userFieldOrder } from "@libs/constants/field"
 import {
   CircularProgress,
   Container,
@@ -61,7 +61,7 @@ export default function UserInfoModal({
               return (
                 <Grid container key={key} rowSpacing={3}>
                   <Grid xs={4} item>
-                    {userfieldLabels[key]}
+                    {userFieldLabels[key]}
                   </Grid>
                   <Grid xs item>
                     <Typography>{String(formattedValue)}</Typography>

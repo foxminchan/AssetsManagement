@@ -1,20 +1,43 @@
 import { FilterParams, PagedInfo } from "@/types/api"
 
+// Response
+
+export type Asset = {
+  id: string
+  assetCode: string
+  name: string
+  specification: string
+  category: string
+  categoryId: string
+  state: string
+  installDate: Date
+  location: Location
+}
+
 export type ListAssets = {
   assets: Asset[]
   pagedInfo: PagedInfo
 }
 
-export type Asset = {
-  id: string
-  name: string
-  assetCode: string
-  specification: string
-  category: string
-  installDate: string
-  state: string
-  location: string
-  categoryId: string
+// Requests
+
+export type AssetFilter = FilterParams & {
+  state?: AssetState[]
+  categories?: string[]
 }
 
-export type AssetFilter = FilterParams
+// Additional types
+
+export enum Location {
+  HoChiMinh = "HoChiMinh",
+  DaNang = "DaNang",
+  Hanoi = "Hanoi",
+}
+
+export enum AssetState {
+  Available = "Available",
+  Assigned = "Assigned",
+  NotAvailable = "NotAvailable",
+  WaitingForRecycling = "WaitingForRecycling",
+  Recycled = "Recycled",
+}

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { AssetState } from "@features/assets/asset.type"
 import useListAsset from "@features/assets/useListAsset"
 import useListUsers from "@features/users/useListUsers"
 import { RoleType } from "@features/users/user.type"
@@ -52,7 +53,7 @@ export default function AssignmentForm() {
     isDescending:
       (assetParams as { isDescending?: boolean }).isDescending ?? false,
     search: (assetParams as { search?: string }).search ?? undefined,
-    state: "Available",
+    state: [AssetState.Available],
   }
   const { data: assetData, isLoading: listAssetLoading } =
     useListAsset(queryAssetParameters)

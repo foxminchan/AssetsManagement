@@ -4,7 +4,7 @@ using ASM.Application.Domain.AssetAggregate;
 using ASM.Application.Features.Categories.Create;
 using Moq;
 
-namespace ASM.UnitTests.UseCases.Assets;
+namespace ASM.UnitTests.UseCases.Categories;
 
 public class CreateCategoryHandlerTest
 {

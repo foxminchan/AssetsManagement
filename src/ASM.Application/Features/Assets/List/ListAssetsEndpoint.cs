@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Routing;
 namespace ASM.Application.Features.Assets.List;
 
 public sealed record ListAssetRequest(
-    Guid? CategoryId,
+    string[]? Categories,
     State[]? State,
     int PageIndex,
     int PageSize,
@@ -28,24 +28,24 @@ public sealed class ListAssetsEndpoint(ISender sender) : IEndpoint<Ok<ListAssetR
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/assets", async (
-                    Guid? categoryId = null,
+                    string[]? categories = null,
                     State[]? state = null,
                     int pageIndex = 1,
                     int pageSize = 20,
                     string? orderBy = nameof(Asset.AssetCode),
                     bool isDescending = false,
                     string? search = null) =>
-                await HandleAsync(new(categoryId, state, pageIndex, pageSize, orderBy, isDescending, search)))
+                await HandleAsync(new(categories, state, pageIndex, pageSize, orderBy, isDescending, search)))
             .Produces<Ok<ListAssetResponse>>()
             .WithTags(nameof(Asset))
             .WithName("List Assets")
-            .RequireAuthorization(AuthRole.User);
+            .RequireAuthorization(AuthRole.Admin);
 
     public async Task<Ok<ListAssetResponse>> HandleAsync(ListAssetRequest request,
         CancellationToken cancellationToken = default)
     {
         ListAssetsQuery query = new(
-            request.CategoryId,
+            request.Categories,
             request.State,
             request.PageIndex,
             request.PageSize,

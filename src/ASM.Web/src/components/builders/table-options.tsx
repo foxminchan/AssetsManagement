@@ -10,17 +10,19 @@ import {
 import { BaseEntity } from "@/types/data"
 
 export type TableOptionsProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: MRT_ColumnDef<BaseEntity, any>[]
   data: BaseEntity[]
   disablePagination?: boolean
+  disableSorting?: boolean
   isLoading: boolean
-  pageCount: number
-  setOpen: Dispatch<SetStateAction<boolean>>
-  setSelectedEntityId: Dispatch<SetStateAction<string>>
-  pagination: MRT_PaginationState
-  setPagination: Dispatch<SetStateAction<MRT_PaginationState>>
-  sorting: MRT_SortingState
-  setSorting: Dispatch<SetStateAction<MRT_SortingState>>
+  pageCount?: number
+  setOpen?: Dispatch<SetStateAction<boolean>>
+  setSelectedEntityId?: Dispatch<SetStateAction<string>>
+  pagination?: MRT_PaginationState
+  setPagination?: Dispatch<SetStateAction<MRT_PaginationState>>
+  sorting?: MRT_SortingState
+  setSorting?: Dispatch<SetStateAction<MRT_SortingState>>
   actionState?: number
   renderRowActions?: (params: BaseEntity) => React.ReactNode
 }
@@ -29,6 +31,7 @@ export default function TableOptions({
   columns,
   data,
   disablePagination = false,
+  disableSorting = false,
   isLoading,
   pageCount,
   setOpen,
@@ -44,6 +47,7 @@ export default function TableOptions({
     columns: columns,
     data,
     layoutMode: "grid",
+    enableSorting: !disableSorting,
     enablePagination: !disablePagination,
     enableBottomToolbar: !disablePagination,
     enableTopToolbar: false,
@@ -57,8 +61,8 @@ export default function TableOptions({
       shape: "rounded",
       showRowsPerPage: false,
       renderItem: (item) => {
-        if (item.type === "page") {
-          if (item.selected) {
+        if (item?.type === "page") {
+          if (item?.selected) {
             return (
               <PaginationItem
                 {...item}
@@ -76,15 +80,18 @@ export default function TableOptions({
             )
           }
         }
-        return (
-          <PaginationItem
-            {...item}
-            className="!text-red-500 disabled:!text-red-700"
-          />
-        )
+        if (item?.type === "previous" || item?.type === "next") {
+          return (
+            <PaginationItem
+              {...item}
+              className="!text-red-500 disabled:!text-red-700"
+              variant="outlined"
+            />
+          )
+        }
       },
     },
-    rowCount: pagination.pageSize,
+    rowCount: pagination?.pageSize ?? 20,
     pageCount: pageCount,
     positionActionsColumn: "last",
     manualPagination: true,
@@ -108,8 +115,8 @@ export default function TableOptions({
     muiTableBodyRowProps: ({ row }) => ({
       onClick: (event: React.MouseEvent<HTMLTableRowElement>) => {
         if (!(event.target instanceof HTMLButtonElement)) {
-          setOpen(true)
-          setSelectedEntityId(row.original.id)
+          setOpen?.(true)
+          setSelectedEntityId?.(row.original.id)
         }
       },
       sx: {

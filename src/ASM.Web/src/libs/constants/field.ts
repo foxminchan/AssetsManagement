@@ -1,3 +1,4 @@
+import { Asset } from "@features/assets/asset.type"
 import { Assignment } from "@features/assignments/assignment.type"
 import { User } from "@features/users/user.type"
 
@@ -14,7 +15,7 @@ export const userFieldOrder: (keyof User)[] = [
   "location",
 ]
 
-export const userfieldLabels: Record<keyof User, string> = {
+export const userFieldLabels: Record<keyof User, string> = {
   id: "ID",
   staffCode: "Staff Code",
   fullName: "Full Name",
@@ -53,4 +54,25 @@ export const assignmentFieldLabels: Record<keyof Assignment, string> = {
   assignedDate: "Assigned Date",
   state: "State",
   note: "Note",
+}
+export const assetFieldOrder: (keyof Asset)[] = [
+  "assetCode",
+  "name",
+  "category",
+  "installDate",
+  "state",
+  "location",
+  "specification",
+]
+
+export const assetFieldLabels: Record<keyof Asset, string> = {
+  id: "ID",
+  assetCode: "Asset Code",
+  name: "Asset Name",
+  category: "Category",
+  installDate: "Installed Date",
+  state: "state",
+  location: "Location",
+  specification: "Specification",
+  categoryId: "",
 }

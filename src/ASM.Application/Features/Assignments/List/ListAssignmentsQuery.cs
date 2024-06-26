@@ -15,7 +15,8 @@ public sealed record ListAssignmentsQuery(
     int PageSize,
     string? OrderBy,
     bool IsDescending,
-    string? Search) : IQuery<PagedResult<IEnumerable<Assignment>>>;
+    string? Search,
+    Guid? AssetId) : IQuery<PagedResult<IEnumerable<Assignment>>>;
 
 public sealed class ListAssignmentsHandler(
     IReadRepository<Assignment> assignmentRepository,
@@ -32,7 +33,8 @@ public sealed class ListAssignmentsHandler(
             request.PageSize,
             request.OrderBy,
             request.IsDescending,
-            request.Search);
+            request.Search,
+            request.AssetId);
 
         var assignments = await assignmentRepository.ListAsync(spec, cancellationToken);
         var staffIds = assignments.Select(a => a.StaffId).Concat(assignments.Select(a => a.UpdatedBy)).Distinct();

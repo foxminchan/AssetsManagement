@@ -24,6 +24,7 @@ public sealed class GetStaffHandlerTests
         _httpContextAccessorMock = new();
         _handler = new(_repositoryMock.Object, _httpContextAccessorMock.Object);
     }
+    
     private void SetUpHttpContext()
     {
         var claims = new List<Claim> { new(nameof(Location), nameof(Location.HoChiMinh)) };

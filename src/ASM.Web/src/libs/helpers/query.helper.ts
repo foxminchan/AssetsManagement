@@ -11,9 +11,14 @@ export function buildQueryString(options?: Record<string, any>): string {
 
   return Object.entries(options)
     .filter(([, value]) => value !== undefined && value !== null)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+    .map(([key, value]) =>
+      key === "state" || key === "categories"
+        ? (value as string[])
+            .map(
+              (item) => `${encodeURIComponent(key)}=${encodeURIComponent(item)}`
+            )
+            .join("&")
+        : `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
     )
     .join("&")
 }

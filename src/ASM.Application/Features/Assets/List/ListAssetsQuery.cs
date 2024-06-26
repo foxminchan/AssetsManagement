@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 namespace ASM.Application.Features.Assets.List;
 
 public sealed record ListAssetsQuery(
-    Guid? CategoryId,
+    string[]? Categories,
     State[]? State,
     int PageIndex,
     int PageSize,
@@ -33,7 +33,7 @@ public sealed class ListAssetsHandler(
 
         AssetFilterSpec spec = new(
             Enum.Parse<Location>(location),
-            request.CategoryId,
+            request.Categories,
             request.State,
             request.PageIndex,
             request.PageSize,

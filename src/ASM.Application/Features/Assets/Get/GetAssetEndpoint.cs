@@ -19,7 +19,7 @@ public sealed class GetAssetEndpoint(ISender sender) : IEndpoint<Ok<AssetDto>, G
             .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Asset))
             .WithName("Get Asset")
-            .RequireAuthorization(AuthRole.User);
+            .RequireAuthorization(AuthRole.Admin);
 
     public async Task<Ok<AssetDto>> HandleAsync(GetAssetRequest request, CancellationToken cancellationToken = default)
     {
