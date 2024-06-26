@@ -50,4 +50,13 @@ public sealed class Asset : EntityBase, IAggregateRoot
 
         return assetCode;
     }
+
+    public void Update(string? name, string? specification, DateOnly installedDate, State state)
+    {
+        Name = Guard.Against.NullOrEmpty(name);
+        Specification = specification;
+        InstallDate = Guard.Against.NullOrOutOfRange(installedDate, nameof(installedDate),
+            DateOnly.FromDateTime(DateTime.Now), DateOnly.MaxValue);
+        State = state;
+    }
 }
