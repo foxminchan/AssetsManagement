@@ -180,20 +180,7 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
       </FormControl>
       <FormControl>
         <FormLabel>Date of Birth:</FormLabel>
-        <Field
-          name="dob"
-          validators={{
-            onChangeListenTo: ["joinedDate"],
-            onChange: userSchema.shape.dob.refine(
-              (data) =>
-                !data ||
-                !getFieldValue("joinedDate") ||
-                differenceInYears(getFieldValue("joinedDate") as Date, data) >=
-                  18,
-              "User is under 18. Please select a different date"
-            ),
-          }}
-        >
+        <Field name="dob" validators={{ onChange: userSchema.shape.dob }}>
           {({ handleChange, state }) => (
             <>
               <DatePicker
@@ -275,13 +262,25 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
           name="joinedDate"
           validators={{
             onChangeListenTo: ["dob"],
-            onChange: userSchema.shape.joinedDate.refine(
-              (data) =>
-                !data ||
-                !getFieldValue("dob") ||
-                data > new Date(getFieldValue("dob") as string),
-              "Joined date is not later than Date of Birth. Please select a different date"
-            ),
+            onChange: userSchema.shape.joinedDate
+              .refine(
+                (data) =>
+                  !data ||
+                  !getFieldValue("dob") ||
+                  data >= new Date(getFieldValue("dob") as string),
+                "Joined date is not later than Date of Birth. Please select a different date"
+              )
+              .refine(
+                (data) =>
+                  !data ||
+                  !getFieldValue("dob") ||
+                  differenceInYears(
+                    data,
+                    new Date(getFieldValue("dob") as string)
+                  ) >= 18 ||
+                  data < new Date(getFieldValue("dob") as string),
+                "User is under 18 when joined. Please select a different date"
+              ),
           }}
         >
           {({ handleChange, state }) => (
