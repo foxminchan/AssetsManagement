@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react"
-import { userAtoms } from "@/libs/jotai/userAtoms"
+import { userAtoms } from "@libs/jotai/userAtoms"
 import FilterInput from "@components/fields/filter-input"
 import SearchInput from "@components/fields/search-input"
 import UserInfoModal from "@components/modals/user-info-modal"
@@ -12,6 +11,7 @@ import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
 import { Button, Grid, Typography } from "@mui/material"
 import { useNavigate, useSearch } from "@tanstack/react-router"
 import { useAtomValue } from "jotai"
+import { useContext, useEffect, useState } from "react"
 
 const breadcrumbItems = [
   {
@@ -48,8 +48,7 @@ export default function Users() {
   const [selectedType, setSelectedType] = useState<string | string[]>("")
 
   const userId = useAtomValue(userAtoms)
-  const { data: user, isLoading: userLoading } =
-    userId !== "" ? useGetUser(userId) : { data: undefined, isLoading: false }
+  const { data: user, isLoading: userLoading } = useGetUser(userId)
 
   useEffect(() => {
     context?.setBreadcrumbs(breadcrumbItems)
@@ -93,11 +92,7 @@ export default function Users() {
       <UserTable
         data={
           user && queryParameters.pageIndex === 1
-            ? [
-                user,
-                ...(data?.users.filter((x) => x.id !== user.id).slice(0, -1) ||
-                  []),
-              ]
+            ? [user, ...(data?.users.filter((x) => x.id !== user.id) || [])]
             : [...(data?.users || [])]
         }
         isLoading={listLoading && userLoading}

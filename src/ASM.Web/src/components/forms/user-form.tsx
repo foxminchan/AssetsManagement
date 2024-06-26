@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import { userAtoms } from "@/libs/jotai/userAtoms"
 import useAddUser from "@features/users/useAddUser"
 import { userSchema } from "@features/users/user.schema"
 import {
@@ -8,7 +7,9 @@ import {
   RoleType,
   UpdateUserRequest,
 } from "@features/users/user.type"
+import useUpdateUser from "@features/users/useUpdateUser"
 import { genderOptions, roleTypeOptions } from "@libs/constants/options"
+import { userAtoms } from "@libs/jotai/userAtoms"
 import {
   Button,
   CircularProgress,
@@ -25,7 +26,7 @@ import {
 } from "@mui/material"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { useForm } from "@tanstack/react-form"
-import { Link, useNavigate } from "@tanstack/react-router"
+import { Link, useNavigate, useParams } from "@tanstack/react-router"
 import { zodValidator } from "@tanstack/zod-form-adapter"
 import { differenceInYears, format } from "date-fns"
 import { useSetAtom } from "jotai"
@@ -42,6 +43,9 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
   const today = new Date(Date.now())
   const isEditing = !!initialData
   const setUserId = useSetAtom(userAtoms)
+  const params = isEditing
+    ? useParams({ from: "/_authenticated/user/$id" })
+    : null
 
   const defaultValues =
     initialData ??
@@ -57,6 +61,12 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
     isPending: addUserPending,
   } = useAddUser()
 
+  const {
+    mutate: updateUser,
+    isSuccess: updateUserSuccess,
+    isPending: updateUserPending,
+  } = useUpdateUser()
+
   const navigate = useNavigate({ from: "/user/new" })
 
   useEffect(() => {
@@ -65,6 +75,13 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
       setUserId(createdUserId)
     }
   }, [addUserSuccess])
+
+  useEffect(() => {
+    if (updateUserSuccess) {
+      navigate({ from: "/user/$id", to: "/user" })
+      params && setUserId(params.id)
+    }
+  }, [updateUserSuccess])
 
   const { Field, Subscribe, handleSubmit, getFieldValue } = useForm({
     defaultValues,
@@ -86,6 +103,12 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
         addUser({
           ...formattedValue,
         } satisfies CreateUserRequest)
+      } else {
+        params &&
+          updateUser({
+            id: params.id,
+            ...formattedValue,
+          } satisfies UpdateUserRequest)
       }
     },
   })
@@ -176,6 +199,7 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
               <DatePicker
                 name="dob"
                 maxDate={today}
+                defaultValue={new Date(state.value as string)}
                 onChange={(value) => {
                   value && handleChange(value)
                 }}
@@ -187,6 +211,9 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
                     disabled: true,
                     color: state.meta.errors.length != 0 ? "error" : "primary",
                     focused: state.meta.errors.length != 0,
+                  },
+                  openPickerButton: {
+                    id: "btn-date-of-birth",
                   },
                 }}
                 sx={{
@@ -252,7 +279,7 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
               (data) =>
                 !data ||
                 !getFieldValue("dob") ||
-                data > (getFieldValue("dob") as Date),
+                data > new Date(getFieldValue("dob") as string),
               "Joined date is not later than Date of Birth. Please select a different date"
             ),
           }}
@@ -262,6 +289,7 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
               <DatePicker
                 name="joinedDate"
                 maxDate={today}
+                defaultValue={new Date(state.value as string)}
                 onChange={(value) => value && handleChange(value)}
                 format="dd/MM/yyyy"
                 slotProps={{
@@ -271,6 +299,9 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
                     disabled: true,
                     color: state.meta.errors ? "error" : "primary",
                     focused: state.meta.errors.length != 0,
+                  },
+                  openPickerButton: {
+                    id: "btn-joined-date",
                   },
                 }}
                 sx={{
@@ -317,7 +348,7 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
         </Field>
       </FormControl>
       <Container className="mt-6 !flex flex-row-reverse gap-10">
-        <Link to="/">
+        <Link to="/user">
           <Button
             id="btn-edit-user-close"
             variant="outlined"
@@ -343,7 +374,11 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
                 !(values as CreateUserRequest).gender
               }
             >
-              {addUserPending ? <CircularProgress size={25} /> : "Save"}
+              {addUserPending || updateUserPending ? (
+                <CircularProgress size={25} />
+              ) : (
+                "Save"
+              )}
             </Button>
           )}
         </Subscribe>

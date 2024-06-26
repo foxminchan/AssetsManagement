@@ -26,11 +26,11 @@ export default function UserInfoModal({ id, onClose, open }: Readonly<Props>) {
           {fieldOrder.map((key) => {
             if (key === "id") return null
 
-            const value = user.data[key]
+            const value = user.data?.[key]
 
             const formattedValue = match(key)
               .with("dob", "joinedDate", () =>
-                format(new Date(value), "dd/MM/yyyy")
+                format(new Date(value || ""), "dd/MM/yyyy")
               )
               .with("location", () =>
                 match(value)

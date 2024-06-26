@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react"
-import { BreadcrumbsContext } from "@/libs/contexts/BreadcrumbsContext"
+import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
 import logo from "@assets/logo.svg"
 import AlertModal from "@components/modals/alert-modal"
 
-import { BreadcrumbItem } from "@/types/data"
+import { RouteItem } from "@/types/data"
 
-const breadcrumb: BreadcrumbItem[] = [
+const breadcrumb: RouteItem[] = [
   {
     label: "Home",
     to: "/",

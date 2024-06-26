@@ -14,7 +14,7 @@ import Link from "@mui/material/Link"
 import Toolbar from "@mui/material/Toolbar"
 import { useAtom } from "jotai"
 
-import { BreadcrumbItem } from "@/types/data"
+import { RouteItem } from "@/types/data"
 
 import ChangePasswordModal from "../modals/change-password-modal"
 import ConfirmModal from "../modals/confirm-modal"
@@ -75,7 +75,7 @@ export default function NavBar() {
           className="!text-white"
           sx={{ flexGrow: 1 }}
         >
-          {context?.breadcrumbs?.map((item: BreadcrumbItem) => {
+          {context?.breadcrumbs?.map((item: RouteItem) => {
             return (
               <Link underline="hover" key="1" color="inherit" href={item.to}>
                 {item.label}

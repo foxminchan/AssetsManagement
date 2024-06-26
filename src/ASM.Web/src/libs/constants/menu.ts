@@ -1,6 +1,6 @@
-import { MenuItem } from "@/types/data"
+import { RouteItem } from "@/types/data"
 
-export const menu: MenuItem[] = [
+export const menu: RouteItem[] = [
   {
     label: "Home",
     to: "/home",

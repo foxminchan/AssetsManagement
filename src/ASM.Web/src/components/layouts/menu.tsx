@@ -10,7 +10,7 @@ import { Link } from "@tanstack/react-router"
 import { useAtom } from "jotai"
 import { match } from "ts-pattern"
 
-import { MenuItem } from "@/types/data"
+import { RouteItem } from "@/types/data"
 
 const activeProps = {
   className: "!text-white !bg-red-500",
@@ -35,7 +35,7 @@ export default function Menu() {
       <List>
         {match(admin)
           .with(true, () =>
-            menu.map((item: MenuItem) => (
+            menu.map((item: RouteItem) => (
               <ListItem key={item.label} disablePadding>
                 <Link
                   className="w-full text-black"

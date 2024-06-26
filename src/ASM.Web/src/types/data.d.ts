@@ -1,14 +1,9 @@
-export type MenuItem = {
-  label: string
-  to: string
-}
-
-export type BreadcrumbItem = {
-  label: string
-  to: string
-}
-
 export type OptionItem<T> = {
   label: string
   value: T
+}
+
+export type RouteItem = {
+  label: string
+  to: string
 }

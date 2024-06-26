@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useMemo, useState } from "react"
 
-import { BreadcrumbItem } from "@/types/data"
+import { RouteItem } from "@/types/data"
 
 export const BreadcrumbsContext = createContext<BreadcrumbsContextProps | null>(
   null
@@ -11,12 +11,12 @@ type BreadcrumbsProviderProps = {
 }
 
 type BreadcrumbsContextProps = {
-  breadcrumbs: BreadcrumbItem[]
-  setBreadcrumbs: React.Dispatch<React.SetStateAction<BreadcrumbItem[]>>
+  breadcrumbs: RouteItem[]
+  setBreadcrumbs: React.Dispatch<React.SetStateAction<RouteItem[]>>
 }
 
 export const BreadcrumbsProvider = ({ children }: BreadcrumbsProviderProps) => {
-  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([
+  const [breadcrumbs, setBreadcrumbs] = useState<RouteItem[]>([
     { label: "Home", to: "/" },
   ])
 

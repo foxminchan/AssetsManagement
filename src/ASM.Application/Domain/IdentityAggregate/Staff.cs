@@ -57,14 +57,12 @@ public sealed class Staff : EntityBase, ISoftDelete, IAggregateRoot
         return staffCode;
     }
 
-    public void Update(DateOnly dob, DateOnly joinedDate, Gender gender, RoleType roleType,
-        Location location)
+    public void Update(DateOnly dob, DateOnly joinedDate, Gender gender, RoleType roleType)
     {
         Dob = dob;
         JoinedDate = joinedDate;
         Gender = Guard.Against.EnumOutOfRange(gender);
         RoleType = Guard.Against.EnumOutOfRange(roleType);
-        Location = Guard.Against.EnumOutOfRange(location);
     }
 
     public void CreateStaffAccount(string firstName, string lastName, RoleType roleType, DateOnly dob,
