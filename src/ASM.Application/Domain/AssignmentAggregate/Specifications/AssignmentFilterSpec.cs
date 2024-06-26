@@ -22,7 +22,7 @@ public sealed class AssignmentFilterSpec : Specification<Assignment>
             Query.Where(x =>
                 x.Asset!.AssetCode!.Contains(search) ||
                 x.Asset.Name!.Contains(search) ||
-                x.AssignedTo!.Contains(search));
+                x.Staff!.Users!.First().UserName!.Contains(search));
 
         Query
             .ApplyOrdering(orderBy, isDescending)

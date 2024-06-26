@@ -3,7 +3,11 @@ import HttpService from "@libs/services/http.service"
 
 import { OrderParams } from "@/types/api"
 
-import { Assignment } from "./assignment.type"
+import {
+  Assignment,
+  AssignmentFilter,
+  ListAssignments,
+} from "./assignment.type"
 
 class AssignmentService extends HttpService {
   constructor() {
@@ -12,6 +16,17 @@ class AssignmentService extends HttpService {
 
   listOwnAssignments(options?: Partial<OrderParams>): Promise<Assignment[]> {
     return this.get(`/assignments/own?${buildQueryString(options)}`)
+  }
+
+  listAssignments(
+    options?: Partial<AssignmentFilter>
+  ): Promise<ListAssignments> {
+    return this.get(`/assignments?${buildQueryString(options)}`)
+  }
+
+  getUser(id: string): Promise<Assignment | null> {
+    if (id) return this.get(`/assignments/${id}`)
+    else return null as never
   }
 
   getOwnAssignment(id: string): Promise<Assignment> {

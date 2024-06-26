@@ -1,5 +1,5 @@
 import React from "react"
-import { Grid, Typography } from "@mui/material"
+import { Grid, TableContainer, Typography } from "@mui/material"
 
 import Table, { TableProps } from "../builders/table"
 
@@ -67,7 +67,9 @@ export default function DataGrid({
           ))}
         </Grid>
       </Grid>
-      <Table {...tableProps} />
+      <TableContainer style={{ overflowX: "auto" }}>
+        <Table {...tableProps} />
+      </TableContainer>
     </>
   )
 }

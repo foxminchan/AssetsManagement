@@ -1,4 +1,7 @@
+import { FilterParams, PagedInfo } from "@/types/api"
 import { BaseEntity } from "@/types/data"
+
+// Response
 
 export type Assignment = BaseEntity & {
   no: number
@@ -12,6 +15,19 @@ export type Assignment = BaseEntity & {
   state: State
   note: string
 }
+
+export type ListAssignments = {
+  assignments: Assignment[]
+  pagedInfo: PagedInfo
+}
+
+// Requests
+
+export type AssignmentFilter = FilterParams & {
+  state?: State
+}
+
+// Additional types
 
 export enum State {
   WaitingForAcceptance = "WaitingForAcceptance",

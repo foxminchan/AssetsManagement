@@ -17,7 +17,7 @@ export default function MainLayout() {
           <Grid item xs={3}>
             <SideBar />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={9}>
             <Container className="my-20">
               <Outlet />
             </Container>
