@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using ASM.Application.Common.SeedWorks;
+using ASM.Application.Domain.IdentityAggregate;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -33,14 +34,19 @@ public sealed class TrackableEntityInterceptor(IHttpContextAccessor accessor) : 
 
         if (userId is null) return;
 
+        var staffId = context.Set<Staff>()
+            .Where(staff => staff.Users!.Any(user => user.Id == userId))
+            .Select(staff => staff.Id)
+            .First();
+
         foreach (var entry in context.ChangeTracker.Entries<TrackableEntityBase>())
         {
             if (entry.State is not (EntityState.Added or EntityState.Modified) && !entry.HasChangedOwnedEntities())
                 continue;
 
-            if (entry.State == EntityState.Added) entry.Entity.CreatedBy = Guid.Parse(userId);
+            if (entry.State == EntityState.Added) entry.Entity.CreatedBy = staffId;
 
-            entry.Entity.UpdatedBy = Guid.Parse(userId);
+            entry.Entity.UpdatedBy = staffId;
         }
     }
 }
