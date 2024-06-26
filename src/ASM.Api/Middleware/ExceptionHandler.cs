@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Ardalis.Result;
+using EntityFramework.Exceptions.Common;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,10 @@ public sealed class ExceptionHandler(ILogger<ExceptionHandler> logger) : IExcept
 
             case NotFoundException notFoundException:
                 await HandleNotFoundException(httpContext, notFoundException, cancellationToken);
+                break;
+
+            case UniqueConstraintException uniqueConstraintException:
+                await HandleUniqueConstraintException(httpContext, uniqueConstraintException, cancellationToken);
                 break;
 
             default:
@@ -68,6 +73,27 @@ public sealed class ExceptionHandler(ILogger<ExceptionHandler> logger) : IExcept
         httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
 
         await httpContext.Response.WriteAsJsonAsync(TypedResults.NotFound(notFoundErrorModel.Errors),
+            cancellationToken);
+
+        return true;
+    }
+
+    private static async ValueTask<bool> HandleUniqueConstraintException(
+        HttpContext httpContext,
+        UniqueConstraintException uniqueConstraintException,
+        CancellationToken cancellationToken)
+    {
+        var uniqueConstraintErrorModel = Result.Invalid(
+            new ValidationError(
+                uniqueConstraintException.ConstraintName,
+                uniqueConstraintException.Message,
+                StatusCodes.Status409Conflict.ToString(),
+                ValidationSeverity.Info
+            ));
+
+        httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
+
+        await httpContext.Response.WriteAsJsonAsync(TypedResults.Conflict(uniqueConstraintErrorModel.ValidationErrors),
             cancellationToken);
 
         return true;
