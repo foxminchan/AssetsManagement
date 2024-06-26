@@ -1,5 +1,4 @@
-import { FC, useState } from "react"
-import ConfirmModal from "@components/modals/confirm-modal"
+import { FC } from "react"
 import { Asset, AssetState } from "@features/assets/asset.type"
 import EditIcon from "@mui/icons-material/Edit"
 import HighlightOffIcon from "@mui/icons-material/HighlightOff"
@@ -9,10 +8,10 @@ import { BaseEntity } from "@/types/data"
 
 type AssetRowActionProps = {
   data: BaseEntity
+  setOpen: (id: string) => void
 }
 
-export const AssetRowAction: FC<AssetRowActionProps> = ({ data }) => {
-  const [openDisableConfirmMod, setOpenDisableConfirmMod] = useState(false)
+export const AssetRowAction: FC<AssetRowActionProps> = ({ data, setOpen }) => {
   const assetData = data as Asset
 
   return (
@@ -34,19 +33,11 @@ export const AssetRowAction: FC<AssetRowActionProps> = ({ data }) => {
         disabled={assetData.state === AssetState.Assigned}
         onClick={(event) => {
           event.stopPropagation()
-          setOpenDisableConfirmMod(!openDisableConfirmMod)
+          setOpen(assetData.id)
         }}
       >
         <HighlightOffIcon />
       </IconButton>
-      <ConfirmModal
-        open={openDisableConfirmMod}
-        message="Do you want to disable this user?"
-        title="Are you sure?"
-        buttonOkLabel="Disable"
-        buttonCloseLabel="Cancel"
-        onClose={() => setOpenDisableConfirmMod(false)}
-      />
     </>
   )
 }

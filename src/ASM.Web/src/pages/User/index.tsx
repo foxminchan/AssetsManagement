@@ -23,7 +23,7 @@ const breadcrumbItems = [
   },
 ]
 
-const types = ["All", RoleType.Admin, RoleType.Staff]
+const states = ["All", RoleType.Admin, RoleType.Staff]
 
 export default function Users() {
   const navigate = useNavigate({ from: "/user" })
@@ -42,7 +42,7 @@ export default function Users() {
     orderBy: (params as { orderBy?: string }).orderBy ?? "StaffCode",
     isDescending: (params as { isDescending?: boolean }).isDescending ?? false,
     roleType:
-      (params as { roleType?: RoleType }).roleType === types[0]
+      (params as { roleType?: RoleType }).roleType === states[0]
         ? undefined
         : (params as { roleType?: RoleType }).roleType,
     search: (params as { search?: string }).search ?? undefined,
@@ -132,7 +132,7 @@ export default function Users() {
             id: "filterInput",
             component: (
               <FilterInput
-                values={types}
+                values={states}
                 label="Type"
                 multiple={false}
                 selected={selectedType}

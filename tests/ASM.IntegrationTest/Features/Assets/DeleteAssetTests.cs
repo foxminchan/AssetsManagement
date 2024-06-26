@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using ASM.Application.Domain.AssetAggregate;
 using ASM.Application.Domain.AssetAggregate.Enums;
 using ASM.Application.Domain.Shared;
 using ASM.IntegrationTest.Extensions;

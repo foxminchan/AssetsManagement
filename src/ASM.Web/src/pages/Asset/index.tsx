@@ -3,16 +3,20 @@ import DataGrid from "@components/data/data-grid"
 import FilterInput from "@components/fields/filter-input"
 import SearchInput from "@components/fields/search-input"
 import AssetInfoModal from "@components/modals/asset-info-modal"
+import ConfirmModal from "@components/modals/confirm-modal"
+import MessageModal from "@components/modals/message-modal"
 import AssetColumns from "@components/tables/asset/columns"
 import { AssetRowAction } from "@components/tables/asset/row-action"
 import { AssetState } from "@features/assets/asset.type"
+import useDeleteAsset from "@features/assets/useDeleteAsset"
 import useListAssets from "@features/assets/useListAssets"
 import { Category } from "@features/categories/categories.type"
 import useListCategories from "@features/categories/useListCategories"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
+import { Typography } from "@mui/material"
 import Button from "@mui/material/Button"
-import { useRouter, useSearch } from "@tanstack/react-router"
+import { Link, useRouter, useSearch } from "@tanstack/react-router"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
 
 const breadcrumbItems = [
@@ -79,7 +83,11 @@ export default function Assets() {
   )
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
 
-  const { data, isLoading: listLoading } = useListAssets(queryParameters)
+  const {
+    data,
+    isLoading: listLoading,
+    refetch,
+  } = useListAssets(queryParameters)
 
   if (
     data &&
@@ -92,6 +100,9 @@ export default function Assets() {
       pageSize: DEFAULT_PAGE_SIZE,
     })
   }
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
+  const [deleteErrorModalOpen, setDeleteErrorModalOpen] =
+    useState<boolean>(false)
 
   const resetPagination = () => {
     setPagination({
@@ -145,6 +156,23 @@ export default function Assets() {
   useEffect(() => {
     context?.setBreadcrumbs(breadcrumbItems)
   }, [])
+
+  const handleModalOpen = (id: string) => {
+    setSelectedAssetId(id)
+    setDeleteModalOpen(true)
+  }
+
+  const {
+    mutate: deleteAsset,
+    isSuccess: isDeleteAssetSuccess,
+    isError: isDeleteAssetError,
+  } = useDeleteAsset()
+
+  useEffect(() => {
+    if (isDeleteAssetSuccess) refetch()
+    else if (isDeleteAssetError) setDeleteErrorModalOpen(true)
+    setDeleteModalOpen(false)
+  }, [isDeleteAssetSuccess, isDeleteAssetError])
 
   return (
     <>
@@ -217,7 +245,11 @@ export default function Assets() {
             sorting: sorting,
             setSorting: setSorting,
             renderRowActions: (user) => (
-              <AssetRowAction key={user.id} data={user} />
+              <AssetRowAction
+                key={user.id}
+                data={user}
+                setOpen={handleModalOpen}
+              />
             ),
           },
         }}
@@ -230,6 +262,36 @@ export default function Assets() {
           title={"Detailed Asset Information"}
         />
       )}
+      <ConfirmModal
+        open={deleteModalOpen}
+        message="Do you want to delete this asset?"
+        title="Are you sure?"
+        buttonOkLabel="Delete"
+        buttonCloseLabel="Cancel"
+        onOk={() => deleteAsset(selectedAssetId)}
+        onClose={() => setDeleteModalOpen(false)}
+      />
+      <MessageModal
+        message=""
+        title="Cannot Delete Asset"
+        open={deleteErrorModalOpen}
+        onClose={() => setDeleteErrorModalOpen(false)}
+      >
+        <Typography>
+          Cannot delete the asset because it belongs to one or more historical
+          assignments.
+        </Typography>
+        <Typography>
+          If the asset is not able to be used anymore, please update its state
+          in{" "}
+          <Link
+            className="!text-blue-600 !underline"
+            to={`/asset/edit/${selectedAssetId}`}
+          >
+            Edit Asset page
+          </Link>
+        </Typography>
+      </MessageModal>
     </>
   )
 }
