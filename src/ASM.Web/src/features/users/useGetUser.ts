@@ -7,5 +7,6 @@ export default function useGetUser(id: string) {
     queryKey: ["user", id],
     queryFn: () => userService.getUser(id),
     placeholderData: keepPreviousData,
+    retry: 1,
   })
 }

@@ -370,7 +370,9 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
                 !(values as CreateUserRequest).joinedDate ||
                 !(values as CreateUserRequest).dob ||
                 !(values as CreateUserRequest).roleType ||
-                !(values as CreateUserRequest).gender
+                !(values as CreateUserRequest).gender ||
+                addUserPending ||
+                updateUserPending
               }
             >
               {addUserPending || updateUserPending ? (

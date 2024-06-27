@@ -27,5 +27,6 @@ public sealed class StaffFilterSpec : Specification<Staff>
             .ApplyPaging(pageIndex, pageSize);
     }
 
-    public StaffFilterSpec(Guid id) => Query.Where(x => x.Id == id && !x.IsDeleted);
+    public StaffFilterSpec(Guid id, Location location)
+        => Query.Where(x => x.Id == id && x.Location == location && !x.IsDeleted);
 }

@@ -74,8 +74,7 @@ export default function Users() {
   }
 
   const userId = useAtomValue(userAtoms)
-  const { data: user, isLoading: userLoading } =
-    userId !== "" ? useGetUser(userId) : { data: undefined, isLoading: false }
+  const { data: user, isLoading: userLoading } = useGetUser(userId)
 
   const resetPagination = () => {
     setPagination({
@@ -172,12 +171,7 @@ export default function Users() {
             columns: UserColumns(),
             data:
               user && queryParameters.pageIndex === 1
-                ? [
-                    user,
-                    ...(data?.users
-                      .filter((x) => x.id !== user.id)
-                      .slice(0, -1) || []),
-                  ]
+                ? [user, ...(data?.users.filter((x) => x.id !== user.id) || [])]
                 : [...(data?.users || [])],
             isLoading: listLoading || userLoading,
             pageCount: data?.pagedInfo.totalPages ?? 0,
