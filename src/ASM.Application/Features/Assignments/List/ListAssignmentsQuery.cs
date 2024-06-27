@@ -17,7 +17,7 @@ public sealed record ListAssignmentsQuery(
     string? Search) : IQuery<PagedResult<IEnumerable<Assignment>>>;
 
 public sealed class ListAssignmentsHandler(
-    IReadRepository<Assignment> assignmentRepository, 
+    IReadRepository<Assignment> assignmentRepository,
     IReadRepository<Staff> staffRepository)
     : IQueryHandler<ListAssignmentsQuery, PagedResult<IEnumerable<Assignment>>>
 {

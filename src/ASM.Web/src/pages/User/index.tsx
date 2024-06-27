@@ -39,7 +39,7 @@ export default function Users() {
     pageIndex:
       (params as { pageIndex?: number }).pageIndex ?? DEFAULT_PAGE_INDEX,
     pageSize: DEFAULT_PAGE_SIZE,
-    orderBy: (params as { orderBy?: string }).orderBy ?? "staffCode",
+    orderBy: (params as { orderBy?: string }).orderBy ?? "StaffCode",
     isDescending: (params as { isDescending?: boolean }).isDescending ?? false,
     roleType:
       (params as { roleType?: RoleType }).roleType === types[0]

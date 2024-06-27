@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.AssignmentAggregate;
-using ASM.Application.Domain.AssignmentAggregate.Enums;
 using ASM.Application.Domain.AssignmentAggregate.Specifications;
 using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Features.Assignments.ListOwn;
@@ -43,24 +42,28 @@ public sealed class ListOwnAssignmentsHandlerTest
         var staffId = Guid.NewGuid();
         var user = new ApplicationUser
         {
-            Id = userId, 
+            Id = userId,
             StaffId = staffId
         };
 
         var assignedTo = new Staff
         {
-            Id = staffId, 
+            Id = staffId,
             Users = [new()
             {
                 Id = userId,
                 UserName = "nhannx"
             }]
         };
-        var updatedBy = new Staff { Id = Guid.NewGuid(), Users = [new()
+        var updatedBy = new Staff
         {
-            Id = Guid.NewGuid().ToString(),
-            UserName = "dientm"
-        }] };
+            Id = Guid.NewGuid(),
+            Users = [new()
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = "dientm"
+            }]
+        };
 
         var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(
         [

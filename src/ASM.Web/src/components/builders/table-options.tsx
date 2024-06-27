@@ -21,6 +21,7 @@ export type TableOptionsProps = {
   setPagination: Dispatch<SetStateAction<MRT_PaginationState>>
   sorting: MRT_SortingState
   setSorting: Dispatch<SetStateAction<MRT_SortingState>>
+  actionState?: number
   renderRowActions?: (params: BaseEntity) => React.ReactNode
 }
 
@@ -36,6 +37,7 @@ export default function TableOptions({
   setPagination,
   sorting,
   setSorting,
+  actionState,
   renderRowActions,
 }: Readonly<TableOptionsProps>) {
   return useMaterialReactTable({
@@ -100,6 +102,7 @@ export default function TableOptions({
     displayColumnDefOptions: {
       "mrt-row-actions": {
         header: undefined,
+        size: actionState,
       },
     },
     muiTableBodyRowProps: ({ row }) => ({

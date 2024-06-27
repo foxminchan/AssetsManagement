@@ -24,7 +24,7 @@ public sealed class UpdatePasswordHandler(UserManager<ApplicationUser> userManag
         if (user.AccountStatus == AccountStatus.FirstTime)
         {
             user.AccountStatus = AccountStatus.Active;
-            
+
             await userManager.RemoveClaimAsync(user, claimsTest);
 
             await userManager.AddClaimAsync(user, new("Status", nameof(AccountStatus.Active)));

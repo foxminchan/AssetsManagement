@@ -23,6 +23,9 @@ public static class AssignmentExpression
             nameof(Assignment.AssignedDate) => isDescending
                 ? builder.OrderByDescending(x => x.AssignedDate)
                 : builder.OrderBy(x => x.AssignedDate),
+            nameof(Assignment.Asset.Category) => isDescending
+                ? builder.OrderByDescending(x => x.Asset!.Category!.Name)
+                : builder.OrderBy(x => x.Asset!.Category!.Name),
             nameof(Assignment.State) => isDescending
                 ? builder.OrderByDescending(x => x.State)
                 : builder.OrderBy(x => x.State),

@@ -1,15 +1,16 @@
-export type Assignment = {
-  No: number
-  Id: string
-  AssetCode: string
-  AssetName: string
-  Specification: string
-  Category: string
-  AssignedTo: string
-  AssignedBy: string
-  AssignedDate: Date
-  State: State
-  Note: string
+import { BaseEntity } from "@/types/data"
+
+export type Assignment = BaseEntity & {
+  no: number
+  assetCode: string
+  assetName: string
+  specification: string
+  category: string
+  assignedTo: string
+  assignedBy: string
+  assignedDate: Date
+  state: State
+  note: string
 }
 
 export enum State {
