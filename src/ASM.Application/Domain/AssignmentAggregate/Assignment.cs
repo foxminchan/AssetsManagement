@@ -32,6 +32,8 @@ public sealed class Assignment : TrackableEntityBase, IAggregateRoot
     public Guid StaffId { get; set; }
     public Staff? Staff { get; set; }
 
+    public void UpdateState(State state) => State = Guard.Against.EnumOutOfRange(state);
+
     [NotMapped] public string? AssignedBy { get; set; }
     [NotMapped] public string? AssignedTo { get; set; }
 }

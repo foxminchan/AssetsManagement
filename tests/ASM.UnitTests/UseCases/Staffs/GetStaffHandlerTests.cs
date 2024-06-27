@@ -52,7 +52,7 @@ public sealed class GetStaffHandlerTests
         };
 
         SetUpHttpContext();
-        
+
         var query = new GetStaffQuery(staffId);
 
         _repositoryMock.Setup(r => r.FirstOrDefaultAsync(It.IsAny<StaffFilterSpec>(), It.IsAny<CancellationToken>()))
