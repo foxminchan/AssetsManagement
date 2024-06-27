@@ -1,33 +1,31 @@
-﻿using System.Security.Claims;
-using Ardalis.GuardClauses;
+﻿using Ardalis.GuardClauses;
 using Ardalis.Result;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
+using ASM.Application.Domain.IdentityAggregate.Events;
 using Microsoft.AspNetCore.Identity;
 
 namespace ASM.Application.Features.Users.UpdatePassword;
 
 public sealed record UpdatePasswordCommand(Guid Id, string OldPassword, string NewPassword) : ICommand<Result>;
 
-public sealed class UpdatePasswordHandler(UserManager<ApplicationUser> userManager)
+public sealed class UpdatePasswordHandler(UserManager<ApplicationUser> userManager, IRepository<Staff> repository)
     : ICommandHandler<UpdatePasswordCommand, Result>
 {
     public async Task<Result> Handle(UpdatePasswordCommand request, CancellationToken cancellationToken)
     {
         var user = await userManager.FindByIdAsync(request.Id.ToString());
 
-        var claimsTest = new Claim("Status", nameof(AccountStatus.FirstTime));
-
         Guard.Against.NotFound(request.Id, user);
 
         if (user.AccountStatus == AccountStatus.FirstTime)
         {
             user.AccountStatus = AccountStatus.Active;
-
-            await userManager.RemoveClaimAsync(user, claimsTest);
-
-            await userManager.AddClaimAsync(user, new("Status", nameof(AccountStatus.Active)));
+            var staffId = user.StaffId;
+            Guard.Against.Null(staffId);
+            var staff = await repository.GetByIdAsync((Guid)staffId, cancellationToken);
+            staff?.UpdateClaim(new PasswordUpdatedEvent(user));
         }
 
         await userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);

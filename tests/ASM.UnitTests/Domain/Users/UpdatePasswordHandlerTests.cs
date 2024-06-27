@@ -1,5 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Ardalis.Result;
+using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
 using ASM.Application.Features.Users.UpdatePassword;
@@ -12,12 +13,14 @@ public sealed class UpdatePasswordHandlerTests
 {
     private readonly UpdatePasswordHandler handler;
     private readonly Mock<UserManager<ApplicationUser>> userManager;
+    private readonly Mock<IRepository<Staff>> repository;
 
     public UpdatePasswordHandlerTests()
     {
         var store = new Mock<IUserStore<ApplicationUser>>();
         userManager = new Mock<UserManager<ApplicationUser>>(store.Object, null, null, null, null, null, null, null, null);
-        handler = new(userManager.Object);
+        repository = new Mock<IRepository<Staff>>();
+        handler = new(userManager.Object, repository.Object);
     }
 
     private static string TestPassword = "TestPassword";
@@ -25,7 +28,7 @@ public sealed class UpdatePasswordHandlerTests
 
     private static ApplicationUser SetupUserManagerWithTestUser(Mock<UserManager<ApplicationUser>> userManager, AccountStatus accountStatus)
     {
-        ApplicationUser testUser = new() { UserName = "test", AccountStatus = accountStatus };
+        ApplicationUser testUser = new() { UserName = "test", AccountStatus = accountStatus, StaffId = Guid.Empty };
         userManager.Setup(um => um.CreateAsync(testUser, TestPassword));
         userManager.Setup(um => um.FindByIdAsync(It.IsAny<string>()))
             .ReturnsAsync(testUser);

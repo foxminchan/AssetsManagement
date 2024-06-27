@@ -4,13 +4,14 @@ using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
 using ASM.Application.Domain.IdentityAggregate.Events;
 using ASM.Application.Domain.Shared;
+using ASM.Application.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASM.Application.Features.Staffs.EventHandlers;
 
-public sealed class StaffCreatedHandler(UserManager<ApplicationUser> userManager)
+public sealed class StaffCreatedHandler(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
     : INotificationHandler<StaffCreatedEvent>
 {
     public async Task Handle(StaffCreatedEvent notification, CancellationToken cancellationToken)
@@ -48,5 +49,7 @@ public sealed class StaffCreatedHandler(UserManager<ApplicationUser> userManager
             new("Status", nameof(AccountStatus.FirstTime)),
             new(nameof(ApplicationUser.UserName), userName)
         ]);
+
+        context.Entry(user).State = EntityState.Detached;
     }
 }

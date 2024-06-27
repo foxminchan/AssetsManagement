@@ -69,6 +69,7 @@ export default function ChangePasswordModal({
       closeInputModal()
       setOpenAlertModal(true)
       setIsSubmitting(false)
+      setShowNewPasswordError(false)
     }
     if (isError) {
       setIsSubmitting(false)
@@ -100,6 +101,7 @@ export default function ChangePasswordModal({
     reset()
     setCanSubmit(false)
     setShowOldPasswordError(false)
+    setShowNewPasswordError(false)
   }
 
   const closeAlertModal = () => {
