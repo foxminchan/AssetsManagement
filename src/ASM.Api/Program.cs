@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen(c =>
         Format = "date",
         Example = new OpenApiString(DateTime.Today.ToString("yyyy-MM-dd"))
     });
+    c.CustomSchemaIds(type => type.ToString());
 });
 
 builder.Services.Configure<JsonOptions>(
