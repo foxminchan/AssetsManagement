@@ -40,7 +40,7 @@ export default function ConfirmModal({
         {title ?? "Are you sure?"}
       </DialogTitle>
       <DialogContent id="confirm-dialog-message" dividers>
-        <Typography className="break-words break-all text-gray-700">
+        <Typography className="!break-words text-gray-700">
           {message}
         </Typography>
       </DialogContent>

@@ -4,6 +4,7 @@ using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.AssignmentAggregate.Enums;
 using ASM.Application.Domain.AssignmentAggregate.Specifications;
 using ASM.Application.Domain.IdentityAggregate;
+using ASM.Application.Domain.IdentityAggregate.Specifications;
 
 namespace ASM.Application.Features.Assignments.List;
 
@@ -34,11 +35,14 @@ public sealed class ListAssignmentsHandler(
             request.Search);
 
         var assignments = await assignmentRepository.ListAsync(spec, cancellationToken);
+        var staffIds = assignments.Select(a => a.StaffId).Concat(assignments.Select(a => a.UpdatedBy)).Distinct();
+        var staffDictionary = (await staffRepository.ListAsync(new StaffFilterSpec(staffIds), cancellationToken))
+            .ToDictionary(staff => staff.Id);
 
         foreach (var assignment in assignments)
         {
-            var assignedTo = await staffRepository.GetByIdAsync(assignment.StaffId, cancellationToken);
-            var assignedBy = await staffRepository.GetByIdAsync(assignment.UpdatedBy, cancellationToken);
+            staffDictionary.TryGetValue(assignment.StaffId, out var assignedTo);
+            staffDictionary.TryGetValue(assignment.UpdatedBy, out var assignedBy);
             assignment.AssignedTo = assignedTo?.UserName;
             assignment.AssignedBy = assignedBy?.UserName;
         }

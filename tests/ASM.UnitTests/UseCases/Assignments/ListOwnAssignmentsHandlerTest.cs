@@ -3,6 +3,7 @@ using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.AssignmentAggregate.Specifications;
 using ASM.Application.Domain.IdentityAggregate;
+using ASM.Application.Domain.IdentityAggregate.Specifications;
 using ASM.Application.Features.Assignments.ListOwn;
 using ASM.UnitTests.Builder;
 using Microsoft.AspNetCore.Http;
@@ -40,30 +41,26 @@ public sealed class ListOwnAssignmentsHandlerTest
 
         var userId = Guid.NewGuid().ToString();
         var staffId = Guid.NewGuid();
-        var user = new ApplicationUser
-        {
-            Id = userId,
-            StaffId = staffId
-        };
+        var user = new ApplicationUser { Id = userId, StaffId = staffId };
 
         var assignedTo = new Staff
         {
             Id = staffId,
-            Users = [new()
-            {
-                Id = userId,
-                UserName = "nhannx"
-            }]
+            Users =
+            [
+                new() { Id = userId, UserName = "nhannx" }
+            ]
         };
         var updatedBy = new Staff
         {
             Id = Guid.NewGuid(),
-            Users = [new()
-            {
-                Id = Guid.NewGuid().ToString(),
-                UserName = "dientm"
-            }]
+            Users =
+            [
+                new() { Id = Guid.NewGuid().ToString(), UserName = "dientm" }
+            ]
         };
+
+        var staffList = new List<Staff> { assignedTo, updatedBy };
 
         var claimsPrincipal = new ClaimsPrincipal(new ClaimsIdentity(
         [
@@ -75,10 +72,9 @@ public sealed class ListOwnAssignmentsHandlerTest
         _assignmentRepositoryMock.Setup(repo =>
                 repo.ListAsync(It.IsAny<AssignmentFilterSpec>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(assignments);
-        _staffRepositoryMock.Setup(repo => repo.GetByIdAsync(assignments[0].StaffId, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(assignedTo);
-        _staffRepositoryMock.Setup(repo => repo.GetByIdAsync(assignments[0].UpdatedBy, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(updatedBy);
+        _staffRepositoryMock.Setup(repo =>
+                repo.ListAsync(It.IsAny<StaffFilterSpec>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(staffList);
 
         var request = new ListOwnAssignmentsQuery(orderBy, isDescending);
 

@@ -4,6 +4,7 @@ using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.AssignmentAggregate.Specifications;
 using ASM.Application.Domain.IdentityAggregate;
+using ASM.Application.Domain.IdentityAggregate.Specifications;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -22,23 +23,23 @@ public sealed class ListOwnAssignmentsHandler(
         CancellationToken cancellationToken)
     {
         var userId = httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
         Guard.Against.NullOrEmpty(userId);
-
         var user = await userManager.FindByIdAsync(userId);
 
         var staffId = user?.StaffId;
-
         Guard.Against.Null(staffId);
 
         AssignmentFilterSpec spec = new(staffId.Value, request.OrderBy, request.IsDescending);
-
         var assignments = await assignmentRepository.ListAsync(spec, cancellationToken);
+
+        var staffIds = assignments.Select(a => a.StaffId).Concat(assignments.Select(a => a.UpdatedBy)).Distinct();
+        var staffDictionary = (await staffRepository.ListAsync(new StaffFilterSpec(staffIds), cancellationToken))
+            .ToDictionary(staff => staff.Id);
 
         foreach (var assignment in assignments)
         {
-            var assignedTo = await staffRepository.GetByIdAsync(assignment.StaffId, cancellationToken);
-            var assignedBy = await staffRepository.GetByIdAsync(assignment.UpdatedBy, cancellationToken);
+            staffDictionary.TryGetValue(assignment.StaffId, out var assignedTo);
+            staffDictionary.TryGetValue(assignment.UpdatedBy, out var assignedBy);
             assignment.AssignedTo = assignedTo?.UserName;
             assignment.AssignedBy = assignedBy?.UserName;
         }

@@ -1,13 +1,19 @@
 import { useContext, useEffect, useState } from "react"
 import DataGrid from "@components/data/data-grid"
+import ConfirmModal from "@components/modals/confirm-modal"
+import ErrorModal from "@components/modals/error-modal"
 import OwnAssignmentModal from "@components/modals/own-assignment-modal"
 import OwnAssignmentColumns from "@components/tables/own-assignment/columns"
 import { OwnAssignmentRowAction } from "@components/tables/own-assignment/row-action"
+import useAcceptAssignment from "@features/assignments/useAcceptAssignment"
+import useDeleteAssignment from "@features/assignments/useDeleteAssignment"
 import useListOwnAssignments from "@features/assignments/useListOwnAssignments"
+import { Action } from "@libs/constants/action"
 import { DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
 import { useRouter, useSearch } from "@tanstack/react-router"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
+import { match } from "ts-pattern"
 
 import { RouteItem } from "@/types/data"
 
@@ -22,7 +28,20 @@ export default function Home() {
   const context = useContext(BreadcrumbsContext)
   const router = useRouter()
   const [open, setOpen] = useState(false)
+  const [openErrorModal, setOpenErrorModal] = useState(false)
   const [selectedAssignmentId, setSelectedAssignmentId] = useState<string>("")
+  const [action, setAction] = useState<string>("")
+  const [openDisableConfirmMod, setOpenDisableConfirmMod] = useState(false)
+  const {
+    mutate: acceptAssignment,
+    error: acceptAssignmentError,
+    isSuccess: acceptAssignmentSuccess,
+  } = useAcceptAssignment()
+  const {
+    mutate: deleteAssignment,
+    error: deleteAssignmentError,
+    isSuccess: deleteAssignmentSuccess,
+  } = useDeleteAssignment()
   const params = useSearch({
     strict: false,
   })
@@ -43,8 +62,11 @@ export default function Home() {
     pageIndex: 1,
     pageSize: DEFAULT_PAGE_SIZE,
   })
-  const { data, isLoading: listLoading } =
-    useListOwnAssignments(queryParameters)
+  const {
+    data,
+    isLoading: listLoading,
+    refetch,
+  } = useListOwnAssignments(queryParameters)
 
   useEffect(() => {
     // Update sorting and pagination based on query parameters
@@ -66,6 +88,33 @@ export default function Home() {
       }))()
   }, [sorting])
 
+  const handleAssignmentAction = (id: string, action: string) => {
+    match(action)
+      .with(Action.Accept, () => {
+        acceptAssignment(id)
+      })
+      .with(Action.Delete, () => {
+        deleteAssignment(id)
+      })
+      .otherwise(() => {
+        // TODO: Implement request assignment
+      })
+
+    setOpenDisableConfirmMod(false)
+  }
+
+  useEffect(() => {
+    if (acceptAssignmentSuccess || deleteAssignmentSuccess) {
+      refetch()
+    }
+  }, [acceptAssignmentSuccess, deleteAssignmentSuccess])
+
+  useEffect(() => {
+    if (acceptAssignmentError || deleteAssignmentError) {
+      setOpenErrorModal(true)
+    }
+  }, [acceptAssignmentError, deleteAssignmentError])
+
   return (
     <>
       <DataGrid
@@ -82,7 +131,13 @@ export default function Home() {
             setSorting: setSorting,
             actionState: 120,
             renderRowActions: (assignment) => (
-              <OwnAssignmentRowAction key={assignment.id} data={assignment} />
+              <OwnAssignmentRowAction
+                key={assignment.id}
+                data={assignment}
+                action={setAction}
+                openModal={setOpenDisableConfirmMod}
+                id={setSelectedAssignmentId}
+              />
             ),
             pageCount: 0,
             pagination: pagination,
@@ -100,6 +155,31 @@ export default function Home() {
           title={"Detailed Assignment Information"}
         />
       )}
+      <ConfirmModal
+        open={openDisableConfirmMod}
+        message={match(action)
+          .with(Action.Accept, () => "Do you want to accept this assignment?")
+          .with(Action.Delete, () => "Do you want to decline this assignment?")
+          .otherwise(
+            () => "Do you want to create a returning request for this asset?"
+          )}
+        title="Are you sure?"
+        buttonOkLabel={match(action)
+          .with(Action.Accept, () => Action.Accept)
+          .with(Action.Delete, () => "Decline")
+          .otherwise(() => "Yes")}
+        buttonCloseLabel="Cancel"
+        onOk={() => handleAssignmentAction(selectedAssignmentId, action)}
+        onClose={() => setOpenDisableConfirmMod(false)}
+      />
+      <ErrorModal
+        open={openErrorModal}
+        actionName="Reload"
+        onOK={() => {
+          setOpenErrorModal(false)
+          window.location.reload()
+        }}
+      />
     </>
   )
 }

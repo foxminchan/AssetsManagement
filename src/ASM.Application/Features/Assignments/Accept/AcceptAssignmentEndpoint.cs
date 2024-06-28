@@ -2,31 +2,29 @@
 using ASM.Application.Common.Endpoints;
 using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.AssignmentAggregate.Enums;
+using ASM.Application.Features.Assignments.UpdateState;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
 
-namespace ASM.Application.Features.Assignments.UpdateState;
+namespace ASM.Application.Features.Assignments.Accept;
 
-public sealed record UpdateAssignmentStateRequest(Guid Id, State State);
-
-public sealed class UpdateAssignmentStateEndpoint(ISender sender) : IEndpoint<Ok, UpdateAssignmentStateRequest>
+public sealed class AcceptAssignmentEndpoint(ISender sender) : IEndpoint<Ok, Guid>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapPatch("/assignments",
-                async (UpdateAssignmentStateRequest request) => await HandleAsync(request))
+        app.MapPatch("/assignments/{id:guid}/accepted",
+                async (Guid id) => await HandleAsync(id))
             .Produces<Ok>()
             .Produces<NotFound<string>>()
             .WithTags(nameof(Assignment))
-            .WithName("Update Assignment State")
+            .WithName("Accepted Assignment ")
             .RequireAuthorization(AuthRole.User);
 
-    public async Task<Ok> HandleAsync(UpdateAssignmentStateRequest request,
-        CancellationToken cancellationToken = default)
+    public async Task<Ok> HandleAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        UpdateAssignmentStateCommand command = new(request.Id, request.State);
+        UpdateAssignmentStateCommand command = new(id, State.Accepted);
 
         await sender.Send(command, cancellationToken);
 

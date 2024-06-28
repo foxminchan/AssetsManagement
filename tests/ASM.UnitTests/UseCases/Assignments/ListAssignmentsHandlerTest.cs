@@ -4,6 +4,7 @@ using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.AssignmentAggregate.Enums;
 using ASM.Application.Domain.AssignmentAggregate.Specifications;
 using ASM.Application.Domain.IdentityAggregate;
+using ASM.Application.Domain.IdentityAggregate.Specifications;
 using ASM.Application.Features.Assignments.List;
 using ASM.UnitTests.Builder;
 using Moq;
@@ -26,16 +27,31 @@ public sealed class ListAssignmentsHandlerTest
     [Theory]
     [InlineData(null, null, 1, 20, nameof(Asset.AssetCode), false, null)]
     [InlineData(null, null, 1, 20, nameof(Asset.AssetCode), true, null)]
-    public async Task GivenQueryRequest_ShouldReturnsAssignments_WhenAssignmentsExist(State? state, DateOnly? assignedDate,
-        int pageIndex, int pageSize, string orderBy, bool isDescending, string? search)
+    public async Task GivenQueryRequest_ShouldReturnsAssignments_WhenAssignmentsExist(
+        State? state, DateOnly? assignedDate, int pageIndex, int pageSize, string orderBy, bool isDescending,
+        string? search)
     {
         // Arrange
         var assignments = ListAssignmentsBuilder.WithDefaultValues();
 
-        var staff1 = new Staff { Id = assignments[0].StaffId, Users = [new() { UserName = "nhannx" }] };
-        var staff2 = new Staff { Id = assignments[1].StaffId, Users = [new() { UserName = "dientm" }] };
-        var updatedBy1 = new Staff { Id = assignments[0].UpdatedBy, Users = [new() { UserName = "minhnl" }] };
-        var updatedBy2 = new Staff { Id = assignments[1].UpdatedBy, Users = [new() { UserName = "nhannx" }] };
+        var staff1 = new Staff
+        {
+            Id = assignments[0].StaffId, Users = [new() { UserName = "nhannx" }]
+        };
+        var staff2 = new Staff
+        {
+            Id = assignments[1].StaffId, Users = [new() { UserName = "dientm" }]
+        };
+        var updatedBy1 = new Staff
+        {
+            Id = assignments[0].UpdatedBy, Users = [new() { UserName = "minhnl" }]
+        };
+        var updatedBy2 = new Staff
+        {
+            Id = assignments[1].UpdatedBy, Users = [new() { UserName = "nhannx" }]
+        };
+
+        var staffList = new List<Staff> { staff1, staff2, updatedBy1, updatedBy2 };
 
         _assignmentRepositoryMock.Setup(repo =>
                 repo.ListAsync(It.IsAny<AssignmentFilterSpec>(), It.IsAny<CancellationToken>()))
@@ -43,14 +59,9 @@ public sealed class ListAssignmentsHandlerTest
         _assignmentRepositoryMock.Setup(repo =>
                 repo.CountAsync(It.IsAny<AssignmentFilterSpec>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(assignments.Count);
-        _staffRepositoryMock.Setup(repo => repo.GetByIdAsync(assignments[0].StaffId, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(staff1);
-        _staffRepositoryMock.Setup(repo => repo.GetByIdAsync(assignments[1].StaffId, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(staff2);
-        _staffRepositoryMock.Setup(repo => repo.GetByIdAsync(assignments[0].UpdatedBy, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(updatedBy1);
-        _staffRepositoryMock.Setup(repo => repo.GetByIdAsync(assignments[1].UpdatedBy, It.IsAny<CancellationToken>()))
-            .ReturnsAsync(updatedBy2);
+        _staffRepositoryMock.Setup(repo =>
+                repo.ListAsync(It.IsAny<StaffFilterSpec>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(staffList);
 
         var request = new ListAssignmentsQuery(state, assignedDate, pageIndex, pageSize, orderBy, isDescending, search);
 
@@ -76,20 +87,20 @@ public sealed class ListAssignmentsHandlerTest
     }
 
     [Fact]
-    public async Task GivenQueryRequest_ShouldReturnsEmpty_WhenAssignmentsNotExist()
+    public async Task GivenQueryRequest_ShouldReturnsAssignments_WhenAssignmentsNotExist()
     {
         // Arrange
-        var assignments = new List<Assignment>();
-
         _assignmentRepositoryMock.Setup(repo =>
                 repo.ListAsync(It.IsAny<AssignmentFilterSpec>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(assignments);
+            .ReturnsAsync([]);
         _assignmentRepositoryMock.Setup(repo =>
                 repo.CountAsync(It.IsAny<AssignmentFilterSpec>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(assignments.Count);
+            .ReturnsAsync(0);
+        _staffRepositoryMock.Setup(repo =>
+                repo.ListAsync(It.IsAny<StaffFilterSpec>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync([]);
 
-        var request = new ListAssignmentsQuery(
-            null, null, 1, 10, null, false, null);
+        var request = new ListAssignmentsQuery(State.Accepted, DateOnly.FromDateTime(DateTime.Now), 1, 20, nameof(Asset.AssetCode), false, null);
 
         // Act
         var result = await _handler.Handle(request, CancellationToken.None);
