@@ -65,7 +65,8 @@ export default function Users() {
   if (
     data &&
     data.pagedInfo &&
-    data.pagedInfo.totalPages <= pagination.pageIndex
+    data.pagedInfo.totalPages <= pagination.pageIndex &&
+    data.pagedInfo.totalPages != 0
   ) {
     setPagination({
       pageIndex: DEFAULT_PAGE_INDEX - 1,
