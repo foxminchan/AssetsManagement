@@ -44,10 +44,10 @@ export default class HttpService {
           throw redirect({
             to: "/",
           })
-        } else if (
-          error.response?.status === HttpStatusCode.ServiceUnavailable
-        ) {
-          alert("There has been an error processing your request")
+        } else if (error.response?.status === HttpStatusCode.Forbidden) {
+          throw redirect({
+            to: "/forbidden",
+          })
         }
         console.error(`${error.response?.data.detail}`)
         return Promise.reject(error)
