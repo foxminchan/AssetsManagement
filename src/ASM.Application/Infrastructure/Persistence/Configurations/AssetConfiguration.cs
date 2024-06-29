@@ -45,6 +45,9 @@ public sealed class AssetConfiguration : BaseConfiguration<Asset>
         builder.Navigation(x => x.Category)
             .AutoInclude();
 
+        builder.Navigation(x => x.Assignments)
+            .AutoInclude();
+
         builder.HasData(GetSampleData());
     }
 

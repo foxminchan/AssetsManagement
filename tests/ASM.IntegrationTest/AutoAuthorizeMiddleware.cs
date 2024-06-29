@@ -17,6 +17,7 @@ public sealed class AutoAuthorizeMiddleware(RequestDelegate rd)
         identity.AddClaim(new("Status", nameof(AccountStatus.Active)));
         identity.AddClaim(new(nameof(ApplicationUser.UserName), "nhannx"));
         identity.AddClaim(new(nameof(Location), nameof(Location.HoChiMinh)));
+        identity.AddClaim(new(ClaimTypes.Role, AuthRole.Admin));
 
         httpContext.User.AddIdentity(identity);
 

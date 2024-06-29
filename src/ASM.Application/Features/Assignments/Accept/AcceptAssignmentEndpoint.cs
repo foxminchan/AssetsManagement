@@ -19,7 +19,7 @@ public sealed class AcceptAssignmentEndpoint(ISender sender) : IEndpoint<Ok, Gui
             .Produces<Ok>()
             .Produces<NotFound<string>>()
             .WithTags(nameof(Assignment))
-            .WithName("Accepted Assignment ")
+            .WithName("Accepted Assignment")
             .RequireAuthorization(AuthRole.User);
 
     public async Task<Ok> HandleAsync(Guid id, CancellationToken cancellationToken = default)

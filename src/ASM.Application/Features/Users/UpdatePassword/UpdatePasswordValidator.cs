@@ -30,13 +30,13 @@ public sealed class UpdatePasswordValidator : AbstractValidator<UpdatePasswordCo
 
 public sealed class PasswordValidator : AbstractValidator<string>
 {
-    private readonly UserManager<ApplicationUser> userManager;
-    private readonly IHttpContextAccessor httpContextAccessor;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public PasswordValidator(UserManager<ApplicationUser> _userManager, IHttpContextAccessor _httpContextAccessor)
+    public PasswordValidator(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
     {
-        userManager = _userManager;
-        httpContextAccessor = _httpContextAccessor;
+        _userManager = userManager;
+        _httpContextAccessor = httpContextAccessor;
 
         RuleFor(x => x)
             .MustAsync(PasswordCorrect)
@@ -45,11 +45,11 @@ public sealed class PasswordValidator : AbstractValidator<string>
 
     private async Task<bool> PasswordCorrect(string password, CancellationToken cancellationToken)
     {
-        var userId = httpContextAccessor.HttpContext?.User
+        var userId = _httpContextAccessor.HttpContext?.User
             .FindFirstValue(ClaimTypes.NameIdentifier);
         Guard.Against.NullOrEmpty(userId);
-        var user = await userManager.FindByIdAsync(userId);
+        var user = await _userManager.FindByIdAsync(userId);
         Guard.Against.NotFound(userId, user);
-        return await userManager.CheckPasswordAsync(user, password);
+        return await _userManager.CheckPasswordAsync(user, password);
     }
 }
