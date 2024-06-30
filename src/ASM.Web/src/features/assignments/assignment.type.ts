@@ -34,3 +34,24 @@ export enum State {
   Accepted = "Accepted",
   IsRequested = "IsRequested",
 }
+
+export type UpdateAssignmentRequest = CreateAssignmentRequest & {
+  id: string
+}
+
+export type ViewUpdateAssignmentRequest = {
+  assetName: string
+  userName: string
+  userId: string
+  assetId: string
+  note: string
+  assignedDate: Date
+  id: string
+}
+
+export type CreateAssignmentRequest = {
+  userId: string
+  assetId: string
+  assignedDate: string
+  note: string
+}

@@ -36,19 +36,23 @@ public sealed class ListAssignmentsHandlerTest
 
         var staff1 = new Staff
         {
-            Id = assignments[0].StaffId, Users = [new() { UserName = "nhannx" }]
+            Id = assignments[0].StaffId,
+            Users = [new() { UserName = "nhannx" }]
         };
         var staff2 = new Staff
         {
-            Id = assignments[1].StaffId, Users = [new() { UserName = "dientm" }]
+            Id = assignments[1].StaffId,
+            Users = [new() { UserName = "dientm" }]
         };
         var updatedBy1 = new Staff
         {
-            Id = assignments[0].UpdatedBy, Users = [new() { UserName = "minhnl" }]
+            Id = assignments[0].UpdatedBy,
+            Users = [new() { UserName = "minhnl" }]
         };
         var updatedBy2 = new Staff
         {
-            Id = assignments[1].UpdatedBy, Users = [new() { UserName = "nhannx" }]
+            Id = assignments[1].UpdatedBy,
+            Users = [new() { UserName = "nhannx" }]
         };
 
         var staffList = new List<Staff> { staff1, staff2, updatedBy1, updatedBy2 };
