@@ -29,5 +29,6 @@ public sealed class StaffFaker : Faker<Staff>
             var number = 9999 - f.UniqueIndex;
             return $"SD{number:D4}";
         });
+        RuleFor(x => x.Users, f => [new() { UserName = f.Person.UserName }]);
     }
 }

@@ -19,7 +19,7 @@ public sealed class GetStaffEndpoint(ISender sender) : IEndpoint<Ok<StaffDto>, G
             .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Staff))
             .WithName("Get User")
-            .RequireAuthorization(AuthRole.User);
+            .RequireAuthorization(AuthRole.Admin);
 
     public async Task<Ok<StaffDto>> HandleAsync(GetStaffRequest request, CancellationToken cancellationToken = default)
     {

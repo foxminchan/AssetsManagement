@@ -1,4 +1,7 @@
 ﻿using System.Net;
+using ASM.Application.Domain.AssetAggregate;
+using ASM.Application.Domain.AssetAggregate.Enums;
+using ASM.Application.Domain.Shared;
 using ASM.IntegrationTest.Extensions;
 using ASM.IntegrationTest.Fakers;
 using ASM.IntegrationTest.Fixtures;
@@ -36,6 +39,8 @@ public sealed class DeleteAssetTests(ApplicationFactory<Program> factory)
         // Arrange
         var client = _factory.CreateClient();
         var asset = _faker.Generate(1);
+        asset[0].State = State.Available;
+        asset[0].Location = Location.HoChiMinh;
         var id = asset[0].Id;
 
         // Act

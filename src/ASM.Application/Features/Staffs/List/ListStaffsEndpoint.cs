@@ -37,7 +37,7 @@ public sealed class ListStaffsEndpoint(ISender sender) : IEndpoint<Ok<ListStaffR
             .Produces<Ok<ListStaffResponse>>()
             .WithTags(nameof(Staff))
             .WithName("List Staffs")
-            .RequireAuthorization(AuthRole.User);
+            .RequireAuthorization(AuthRole.Admin);
 
     public async Task<Ok<ListStaffResponse>> HandleAsync(ListStaffRequest request,
         CancellationToken cancellationToken = default)
