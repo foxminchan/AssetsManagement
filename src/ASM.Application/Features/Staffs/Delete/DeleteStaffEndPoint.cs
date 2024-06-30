@@ -12,23 +12,22 @@ namespace ASM.Application.Features.Staffs.Delete;
 
 public sealed record DeleteStaffRequest(Guid UserId);
 
-
 public sealed class DeleteStaffEndPoint(ISender sender) : IEndpoint<NoContent, DeleteStaffRequest>
 {
-
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapDelete("/users/{id:guid}", async (Guid id) => await HandleAsync(new(id)))
-             .Produces<NoContent>(StatusCodes.Status204NoContent)
-             .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
-             .WithTags(nameof(Staff))
-             .WithName("Delete Staff")
-             .RequireAuthorization(AuthRole.User);
-
+            .Produces<NoContent>(StatusCodes.Status204NoContent)
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
+            .WithTags(nameof(Staff))
+            .WithName("Delete Staff")
+            .RequireAuthorization(AuthRole.Admin);
 
     public async Task<NoContent> HandleAsync(DeleteStaffRequest request, CancellationToken cancellationToken = default)
     {
-        var command = new DeleteStaffCommand(request.UserId);
+        DeleteStaffCommand command = new(request.UserId);
+
         await sender.Send(command, cancellationToken);
+
         return TypedResults.NoContent();
     }
 }

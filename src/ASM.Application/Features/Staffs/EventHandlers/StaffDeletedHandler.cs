@@ -3,7 +3,6 @@ using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
 using ASM.Application.Domain.IdentityAggregate.Events;
 using ASM.Application.Infrastructure.Persistence;
-using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -15,14 +14,13 @@ public sealed class StaffDeletedHandler(UserManager<ApplicationUser> userManager
 {
     public async Task Handle(StaffDeletedEvent notification, CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByIdAsync(notification.User.Id);
-
-        Guard.Against.NotFound(notification.User.Id, user);
+        var user = await userManager.FindByIdAsync(notification.UserId);
+        Guard.Against.NotFound(notification.UserId, user);
 
         user.LockoutEnd = DateTimeOffset.MaxValue;
-
         var claims = await userManager.GetClaimsAsync(user);
         var statusClaim = claims.First(c => c.Type == "Status");
+
         await userManager.RemoveClaimAsync(user, statusClaim);
         await userManager.AddClaimAsync(user, new("Status", nameof(AccountStatus.Deactivated)));
 

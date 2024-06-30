@@ -3,7 +3,6 @@ using Ardalis.Result;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.IdentityAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
-using ASM.Application.Domain.IdentityAggregate.Events;
 using Microsoft.AspNetCore.Identity;
 
 namespace ASM.Application.Features.Users.UpdatePassword;
@@ -25,7 +24,7 @@ public sealed class UpdatePasswordHandler(UserManager<ApplicationUser> userManag
             var staffId = user.StaffId;
             Guard.Against.Null(staffId);
             var staff = await repository.GetByIdAsync((Guid)staffId, cancellationToken);
-            staff?.UpdateClaim(new PasswordUpdatedEvent(user));
+            staff?.UpdateActiveClaim(user);
         }
 
         await userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);

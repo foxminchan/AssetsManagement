@@ -3,7 +3,7 @@ using ASM.Application.Common.SeedWorks;
 
 namespace ASM.Application.Domain.IdentityAggregate.Events;
 
-public sealed class StaffDeletedEvent(ApplicationUser user) : EventBase
+public sealed class StaffDeletedEvent(string userId) : EventBase
 {
-    public ApplicationUser User { get; set; } = Guard.Against.Null(user);
+    public string UserId { get; set; } = Guard.Against.NullOrEmpty(userId);
 }

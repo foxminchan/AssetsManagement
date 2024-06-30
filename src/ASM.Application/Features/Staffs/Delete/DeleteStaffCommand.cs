@@ -2,7 +2,6 @@
 using Ardalis.Result;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.IdentityAggregate;
-using ASM.Application.Domain.IdentityAggregate.Events;
 
 namespace ASM.Application.Features.Staffs.Delete;
 
@@ -16,11 +15,12 @@ public sealed class DeleteStaffHandler(IRepository<Staff> repository)
         var staff = await repository.GetByIdAsync(request.Id, cancellationToken);
 
         Guard.Against.NotFound(request.Id, staff);
+
         if (staff.Users is not null)
         {
             var user = staff.Users.First();
             staff.Delete();
-            staff.UpdateClaim(new StaffDeletedEvent(user));
+            staff.UpdateDeactivatedClaim(user.Id);
         }
 
         await repository.UpdateAsync(staff, cancellationToken);

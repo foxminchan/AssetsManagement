@@ -9,6 +9,7 @@ public sealed class StaffFaker : Faker<Staff>
 {
     public StaffFaker()
     {
+        RuleFor(x => x.Id, f => f.Random.Guid());
         RuleFor(x => x.Gender, f => f.PickRandom<Gender>());
         RuleFor(x => x.Location, f => f.PickRandom<Location>());
         RuleFor(x => x.FirstName, f => f.Person.FirstName);
@@ -25,7 +26,7 @@ public sealed class StaffFaker : Faker<Staff>
         });
         RuleFor(x => x.StaffCode, f =>
         {
-            var number = f.UniqueIndex + 1;
+            var number = 9999 - f.UniqueIndex;
             return $"SD{number:D4}";
         });
     }

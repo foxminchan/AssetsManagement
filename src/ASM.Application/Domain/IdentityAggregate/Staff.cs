@@ -73,9 +73,15 @@ public sealed class Staff : EntityBase, ISoftDelete, IAggregateRoot
 
     public void Delete() => IsDeleted = true;
 
-    public void UpdateClaim(EventBase domainEvent)
+    public void UpdateDeactivatedClaim(string userId)
     {
-        RegisterDomainEvent(domainEvent);
+        StaffDeletedEvent staffDeletedEvent = new(userId);
+        RegisterDomainEvent(staffDeletedEvent);
     }
 
+    public void UpdateActiveClaim(ApplicationUser user)
+    {
+        PasswordUpdatedEvent passwordUpdatedEvent = new(user);
+        RegisterDomainEvent(passwordUpdatedEvent);
+    }
 }
