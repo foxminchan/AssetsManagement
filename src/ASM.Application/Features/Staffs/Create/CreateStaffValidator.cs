@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace ASM.Application.Features.Staffs.Create;
 
-public sealed class CreateStaffValidator : AbstractValidator<CreateStaffRequest>
+public sealed class CreateStaffValidator : AbstractValidator<CreateStaffCommand>
 {
     public CreateStaffValidator()
     {
