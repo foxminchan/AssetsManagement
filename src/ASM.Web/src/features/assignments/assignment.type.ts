@@ -53,5 +53,5 @@ export type CreateAssignmentRequest = {
   userId: string
   assetId: string
   assignedDate: string
-  note: string
+  note?: string
 }

@@ -6,6 +6,7 @@ import { OrderParams } from "@/types/api"
 import {
   Assignment,
   AssignmentFilter,
+  CreateAssignmentRequest,
   ListAssignments,
 } from "./assignment.type"
 
@@ -39,6 +40,10 @@ class AssignmentService extends HttpService {
 
   deleteAssignment(id: string): Promise<void> {
     return this.delete(`/assignments/${id}`)
+  }
+
+  createAssignment(data: CreateAssignmentRequest): Promise<string> {
+    return this.post("/assignments", data)
   }
 }
 

@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useState } from "react"
+import Columns from "@components/tables/user-content/columns"
 import { User } from "@features/users/user.type"
 import { MRT_SortingState, useMaterialReactTable } from "material-react-table"
 
-import { CellAction } from "../../tables/user-content/cell-action"
-import Columns from "../../tables/user-content/columns"
+import { CellAction } from "@/components/tables/user-content/row-action"
 
 type UserTableProps = {
   data: User[]
@@ -32,7 +32,7 @@ export default function DialogOptions({
       />,
     ],
     columns: Columns(),
-    data, // Ensure this contains all the data you want to display
+    data,
     layoutMode: "grid",
     enablePagination: false,
     enableBottomToolbar: false,
@@ -42,17 +42,27 @@ export default function DialogOptions({
     enableColumnFilters: false,
     enableColumnActions: false,
     muiPaginationProps: {
-      rowsPerPageOptions: [], // Set to an empty array to remove options
-      showRowsPerPage: false, // Ensure this is set to false
-      count: -1, // Set count to -1 if applicable to disable count display
+      rowsPerPageOptions: [],
+      showRowsPerPage: false,
+      count: -1,
     },
-    manualPagination: false, // Set to false to disable manual pagination
+    manualPagination: false,
     manualSorting: true,
     onSortingChange: setSorting,
     state: {
       sorting,
       showProgressBars: isLoading,
     },
+    muiTableBodyRowProps: ({ row }) => ({
+      onClick: (event: React.MouseEvent<HTMLTableRowElement>) => {
+        if (!(event.target instanceof HTMLButtonElement)) {
+          handleSelectRow(row.original.id)
+        }
+      },
+      sx: {
+        cursor: "pointer",
+      },
+    }),
     initialState: {
       density: "compact",
     },

@@ -1,11 +1,11 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using ASM.Application.Domain.AssetAggregate.Enums;
 using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Features.Assignments.List;
 using ASM.IntegrationTest.Extensions;
 using ASM.IntegrationTest.Fakers;
 using ASM.IntegrationTest.Fixtures;
-using ASM.Application.Domain.AssetAggregate.Enums;
 
 namespace ASM.IntegrationTest.Features.Assignments;
 

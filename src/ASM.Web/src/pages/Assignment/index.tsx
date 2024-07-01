@@ -9,12 +9,15 @@ import AssignmentColumns from "@components/tables/assignment/columns"
 import { AssignmentRowAction } from "@components/tables/assignment/row-action"
 import { State } from "@features/assignments/assignment.type"
 import useDeleteAssignment from "@features/assignments/useDeleteAssignment"
+import useGetAssignment from "@features/assignments/useGetAssignment"
 import useListAssignments from "@features/assignments/useListAssignments"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
+import { assignmentAtoms } from "@libs/jotai/assignmentAtom"
 import { Button } from "@mui/material"
 import { useNavigate, useRouter, useSearch } from "@tanstack/react-router"
 import { format } from "date-fns"
+import { useAtomValue } from "jotai"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
 
 const breadcrumbItems = [
@@ -34,6 +37,8 @@ const states = [
 export default function Assignments() {
   const navigate = useNavigate({ from: "/assignment" })
   const router = useRouter()
+  const assignmentId = useAtomValue(assignmentAtoms)
+  const { data: assignment } = useGetAssignment(assignmentId)
   const context = useContext(BreadcrumbsContext)
   const [open, setOpen] = useState(false)
   const [selectedAssignmentId, setSelectedAssignmentId] = useState<string>("")
@@ -74,6 +79,7 @@ export default function Assignments() {
     isLoading: listLoading,
     refetch,
   } = useListAssignments(queryParameters)
+  const [isNewlyCreated, setIsNewlyCreated] = useState(!!assignmentId)
 
   if (
     data &&
@@ -106,6 +112,21 @@ export default function Assignments() {
     setOpenDisableConfirmMod(false)
   }
 
+  const getDisplayedAssignments = () => {
+    if (assignment && queryParameters.pageIndex === 1) {
+      return [
+        assignment,
+        ...(data?.assignments.filter((x) => x.id !== assignment.id) || []),
+      ]
+    }
+    if (isNewlyCreated) {
+      setIsNewlyCreated(false)
+      setSorting([
+        { id: queryParameters.orderBy, desc: queryParameters.isDescending },
+      ])
+    }
+    return [...(data?.assignments || [])]
+  }
   useEffect(() => {
     sorting[0] = {
       id: queryParameters.orderBy,
@@ -115,7 +136,7 @@ export default function Assignments() {
   }, [params])
 
   useEffect(() => {
-    ;(async () =>
+    ;(async () => {
       await router.navigate({
         search: {
           ...queryParameters,
@@ -129,7 +150,15 @@ export default function Assignments() {
             : undefined,
           search: keyword !== "" ? keyword : undefined,
         },
-      }))()
+      })
+
+      if (isNewlyCreated) {
+        setIsNewlyCreated(false)
+        setSorting([
+          { id: queryParameters.orderBy, desc: queryParameters.isDescending },
+        ])
+      }
+    })()
   }, [pagination, sorting])
 
   useEffect(() => {
@@ -197,9 +226,14 @@ export default function Assignments() {
               <Button
                 variant="contained"
                 color="error"
-                onClick={() => navigate({ to: "/assignment" })}
+                sx={{
+                  fontSize: "0.75rem",
+                  padding: "4px 8px",
+                  minWidth: "auto",
+                }}
+                onClick={() => navigate({ to: "/assignment/new" })}
               >
-                Create User
+                Create Assignment
               </Button>
             ),
           },
@@ -207,7 +241,7 @@ export default function Assignments() {
         tableProps={{
           tableOptionsProps: {
             columns: AssignmentColumns(),
-            data: [...(data?.assignments || [])],
+            data: getDisplayedAssignments(),
             isLoading: listLoading,
             pageCount: data?.pagedInfo.totalPages ?? 0,
             setOpen: setOpen,

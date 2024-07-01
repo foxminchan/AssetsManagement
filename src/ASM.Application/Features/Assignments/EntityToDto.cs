@@ -7,6 +7,8 @@ public static class EntityToDto
     public static AssignmentDto ToAssignmentDto(this Assignment assignment, int index = 1) =>
         new(index,
             assignment.Id,
+            assignment.AssetId,
+            assignment.StaffId,
             assignment.Asset?.AssetCode,
             assignment.Asset?.Name,
             assignment.Asset?.Specification,

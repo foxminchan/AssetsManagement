@@ -3,6 +3,7 @@ using Ardalis.GuardClauses;
 using ASM.Application.Common.SeedWorks;
 using ASM.Application.Domain.AssetAggregate;
 using ASM.Application.Domain.AssignmentAggregate.Enums;
+using ASM.Application.Domain.AssignmentAggregate.Events;
 using ASM.Application.Domain.IdentityAggregate;
 
 namespace ASM.Application.Domain.AssignmentAggregate;
@@ -36,4 +37,16 @@ public sealed class Assignment : TrackableEntityBase, IAggregateRoot
 
     [NotMapped] public string? AssignedBy { get; set; }
     [NotMapped] public string? AssignedTo { get; set; }
+
+    public void UpdateAssetState(Guid assetId)
+    {
+        var assetCreatedEvent = new AssignmentCreatedEvent(assetId);
+        RegisterDomainEvent(assetCreatedEvent);
+    }
+
+    public void UpdateAssetState(Guid newAssetAssignId, Guid? oldAssetAssignId)
+    {
+        var assetUpdatedEvent = new AssignmentUpdatedEvent(newAssetAssignId, oldAssetAssignId);
+        RegisterDomainEvent(assetUpdatedEvent);
+    }
 }

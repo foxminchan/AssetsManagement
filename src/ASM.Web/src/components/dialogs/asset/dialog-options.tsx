@@ -1,9 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react"
+import Columns from "@components/tables/asset-content/columns"
+import { CellAction } from "@components/tables/asset-content/row-action"
 import { Asset } from "@features/assets/asset.type"
 import { MRT_SortingState, useMaterialReactTable } from "material-react-table"
-
-import { CellAction } from "../../tables/asset-content/cell-action"
-import Columns from "../../tables/asset-content/columns"
 
 type AssetTableProps = {
   data: Asset[]
@@ -56,6 +55,16 @@ export default function AssetDialogOptions({
     initialState: {
       density: "compact",
     },
+    muiTableBodyRowProps: ({ row }) => ({
+      onClick: (event: React.MouseEvent<HTMLTableRowElement>) => {
+        if (!(event.target instanceof HTMLButtonElement)) {
+          handleSelectRow(row.original.id)
+        }
+      },
+      sx: {
+        cursor: "pointer",
+      },
+    }),
     displayColumnDefOptions: {
       "mrt-row-actions": {
         header: undefined,

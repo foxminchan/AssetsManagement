@@ -1,10 +1,10 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { Asset } from "@features/assets/asset.type"
 import { selectedRowAsset } from "@libs/jotai/assetAtom"
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline"
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked"
 import { Checkbox } from "@mui/material"
-import { useAtom } from "jotai"
+import { useSetAtom } from "jotai"
 
 type CellActionProps = {
   data: Asset
@@ -17,7 +17,7 @@ export const CellAction: FC<CellActionProps> = ({
   isSelected,
   onSelectRow,
 }) => {
-  const [selectedRow, setSelectedRow] = useAtom(selectedRowAsset)
+  const setSelectedRow = useSetAtom(selectedRowAsset)
 
   const handleSelectRow = (id: string, name: string) => {
     setSelectedRow({ id, name })
@@ -27,11 +27,16 @@ export const CellAction: FC<CellActionProps> = ({
     if (checked) {
       onSelectRow(data.id)
       handleSelectRow(data.id, data.name)
-      console.log(selectedRow)
-    } else {
-      console.log("Un checked")
     }
   }
+
+  useEffect(() => {
+    if (isSelected) {
+      handleClick({
+        target: { checked: true },
+      } as React.ChangeEvent<HTMLInputElement>)
+    }
+  }, [isSelected])
 
   return (
     <Checkbox

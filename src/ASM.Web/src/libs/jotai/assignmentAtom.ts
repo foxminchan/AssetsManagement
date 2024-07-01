@@ -10,4 +10,5 @@ const initialUserChoose: UserChoose = {
   name: "",
 }
 
+export const assignmentAtoms = atom("")
 export const selectedRowUser = atom<UserChoose | null>(initialUserChoose)
