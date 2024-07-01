@@ -6,3 +6,20 @@ input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
   display: none;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+}
+
+.MuiOutlinedInput-input:focus ~ .MuiOutlinedInput-notchedOutline {
+  border-width: 1px !important;
+  border-color: #757575 !important;
+}
+
+.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-width: 1px !important;
+  border-color: #757575 !important;
+}

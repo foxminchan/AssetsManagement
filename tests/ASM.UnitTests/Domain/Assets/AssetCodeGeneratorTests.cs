@@ -9,13 +9,14 @@ public sealed class AssetCodeGeneratorTests
     {
         // Arrange
         var categoryId = Guid.NewGuid();
+        const string prefix = "TH";
         var assets = new List<Asset>
         {
             new() { CategoryId = categoryId, AssetCode = null, Category = new() { Prefix = "TH" } }
         };
 
         // Act
-        var newAssetCode = Asset.GenerateAssetCode(assets, categoryId);
+        var newAssetCode = Asset.GenerateAssetCode(assets, prefix);
 
         // Assert
         newAssetCode.Should().Be("TH000001");
@@ -33,7 +34,7 @@ public sealed class AssetCodeGeneratorTests
         };
 
         // Act
-        var newAssetCode = Asset.GenerateAssetCode(assets, categoryId);
+        var newAssetCode = Asset.GenerateAssetCode(assets, prefix);
 
         // Assert
         newAssetCode.Should().Be("CT000002");
@@ -52,27 +53,28 @@ public sealed class AssetCodeGeneratorTests
         };
 
         // Act
-        var newAssetCode = Asset.GenerateAssetCode(assets, categoryId);
+        var newAssetCode = Asset.GenerateAssetCode(assets, prefix);
 
         // Assert
         newAssetCode.Should().Be("CT000003");
     }
 
     [Fact]
-    public void GivenCategoriesWithPrefix_ShouldThrowException_WhenNoCategoryWithGivenId()
+    public void GivenCategoriesWithPrefix_ShouldGenerateCorrectAssetCode_WhenMultipleFragmentedConflicts()
     {
         // Arrange
         var categoryId = Guid.NewGuid();
+        const string prefix = "CT";
         var assets = new List<Asset>
         {
-            new() { CategoryId = Guid.NewGuid(), AssetCode = "TH000001", Category = new() { Prefix = "TH" } }
+            new() { CategoryId = categoryId, AssetCode = "CT000001", Category = new() { Prefix = prefix } },
+            new() { CategoryId = categoryId, AssetCode = "CT000003", Category = new() { Prefix = prefix } }
         };
 
         // Act
-        Action act = () => Asset.GenerateAssetCode(assets, categoryId);
+        var newAssetCode = Asset.GenerateAssetCode(assets, prefix);
 
         // Assert
-        act.Should().Throw<InvalidOperationException>()
-            .WithMessage("Sequence contains no matching element");
+        newAssetCode.Should().Be("CT000002");
     }
 }

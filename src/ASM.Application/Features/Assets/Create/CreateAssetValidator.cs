@@ -14,6 +14,8 @@ public sealed class CreateAssetValidator : AbstractValidator<CreateAssetCommand>
             .MaximumLength(DataSchemaLength.SuperLarge);
 
         RuleFor(x => x.Specification)
+            .NotEmpty()
+            .WithMessage("Specification is required")
             .MaximumLength(DataSchemaLength.Max);
 
         RuleFor(x => x.InstallDate)

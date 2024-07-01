@@ -9,14 +9,17 @@ import AssetColumns from "@components/tables/asset/columns"
 import { AssetRowAction } from "@components/tables/asset/row-action"
 import { AssetState } from "@features/assets/asset.type"
 import useDeleteAsset from "@features/assets/useDeleteAsset"
+import useGetAsset from "@features/assets/useGetAsset"
 import useListAssets from "@features/assets/useListAssets"
 import { Category } from "@features/categories/categories.type"
 import useListCategories from "@features/categories/useListCategories"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
+import { assetAtom } from "@libs/jotai/assetAtom"
 import { Typography } from "@mui/material"
 import Button from "@mui/material/Button"
-import { Link, useRouter, useSearch } from "@tanstack/react-router"
+import { Link, useNavigate, useRouter, useSearch } from "@tanstack/react-router"
+import { useAtomValue, useSetAtom } from "jotai"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
 
 const breadcrumbItems = [
@@ -29,12 +32,13 @@ const states = [
   "All",
   AssetState.Assigned,
   AssetState.Available,
+  AssetState.NotAvailable,
   AssetState.WaitingForRecycling,
   AssetState.Recycled,
-  AssetState.NotAvailable,
 ]
 
 export default function Assets() {
+  const navigate = useNavigate({ from: "/user" })
   const router = useRouter()
   const context = useContext(BreadcrumbsContext)
   const [open, setOpen] = useState(false)
@@ -75,7 +79,9 @@ export default function Assets() {
     pageSize: DEFAULT_PAGE_SIZE,
   })
   const [selectedState, setSelectedState] = useState<string[]>(
-    queryParameters.state ? [...queryParameters.state] : ["All"]
+    queryParameters.state
+      ? [...queryParameters.state]
+      : [AssetState.Assigned, AssetState.Available, AssetState.NotAvailable]
   )
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
@@ -100,6 +106,11 @@ export default function Assets() {
       pageSize: DEFAULT_PAGE_SIZE,
     })
   }
+
+  const assetId = useAtomValue(assetAtom)
+  const { data: newAsset, isLoading: newAssetIsLoading } = useGetAsset(assetId)
+  const setNewAssetId = useSetAtom(assetAtom)
+
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
   const [deleteErrorModalOpen, setDeleteErrorModalOpen] =
     useState<boolean>(false)
@@ -112,6 +123,7 @@ export default function Assets() {
   }
 
   const searchOnClick = () => {
+    setNewAssetId("")
     resetPagination()
   }
 
@@ -196,7 +208,10 @@ export default function Assets() {
                 label="State"
                 multiple={true}
                 selected={selectedState}
-                setSelected={(value) => setSelectedState(value as string[])}
+                setSelected={(value) => {
+                  setNewAssetId("")
+                  setSelectedState(value as string[])
+                }}
               />
             ),
           },
@@ -208,9 +223,10 @@ export default function Assets() {
                 label="Category"
                 multiple={true}
                 selected={selectedCategories}
-                setSelected={(value) =>
+                setSelected={(value) => {
+                  setNewAssetId("")
                   setSelectedCategories(value as string[])
-                }
+                }}
               />
             ),
           },
@@ -234,7 +250,8 @@ export default function Assets() {
               <Button
                 variant="contained"
                 color="error"
-                // Todo: add onClick event
+                onClick={() => navigate({ to: "/asset/new" })}
+                fullWidth
               >
                 Create Asset
               </Button>
@@ -244,8 +261,14 @@ export default function Assets() {
         tableProps={{
           tableOptionsProps: {
             columns: AssetColumns(),
-            data: [...(data?.assets || [])],
-            isLoading: listLoading,
+            data:
+              newAsset && queryParameters.pageIndex === 1
+                ? [
+                    newAsset,
+                    ...(data?.assets.filter((x) => x.id !== newAsset.id) || []),
+                  ]
+                : [...(data?.assets || [])],
+            isLoading: listLoading || newAssetIsLoading,
             pageCount: data?.pagedInfo.totalPages ?? 0,
             setOpen: setOpen,
             setSelectedEntityId: setSelectedAssetId,

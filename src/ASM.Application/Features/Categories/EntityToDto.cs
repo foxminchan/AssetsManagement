@@ -4,7 +4,7 @@ namespace ASM.Application.Features.Categories;
 
 public static class EntityToDto
 {
-    public static CategoryDto ToCategoryDto(this Category category, int index = 1) =>
+    public static CategoryDto ToCategoryDto(this Category category) =>
         new(category.Id,
             category.Name,
             category.Prefix);

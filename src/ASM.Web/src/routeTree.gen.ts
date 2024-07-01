@@ -40,6 +40,9 @@ const AuthenticatedUserNewIndexLazyImport = createFileRoute(
 const AuthenticatedAssignmentNewIndexLazyImport = createFileRoute(
   "/_authenticated/assignment/new/"
 )()
+const AuthenticatedAssetNewIndexLazyImport = createFileRoute(
+  "/_authenticated/asset/new/"
+)()
 
 // Create/Update Routes
 
@@ -118,6 +121,14 @@ const AuthenticatedAssignmentNewIndexLazyRoute =
     )
   )
 
+const AuthenticatedAssetNewIndexLazyRoute =
+  AuthenticatedAssetNewIndexLazyImport.update({
+    path: "/asset/new/",
+    getParentRoute: () => AuthenticatedRoute,
+  } as any).lazy(() =>
+    import("./routes/_authenticated/asset/new/index.lazy").then((d) => d.Route)
+  )
+
 // Populate the FileRoutesByPath interface
 
 declare module "@tanstack/react-router" {
@@ -178,6 +189,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedUserIndexLazyImport
       parentRoute: typeof AuthenticatedImport
     }
+    "/_authenticated/asset/new/": {
+      id: "/_authenticated/asset/new/"
+      path: "/asset/new"
+      fullPath: "/asset/new"
+      preLoaderRoute: typeof AuthenticatedAssetNewIndexLazyImport
+      parentRoute: typeof AuthenticatedImport
+    }
     "/_authenticated/assignment/new/": {
       id: "/_authenticated/assignment/new/"
       path: "/assignment/new"
@@ -206,6 +224,7 @@ export const routeTree = rootRoute.addChildren({
     AuthenticatedForbiddenIndexLazyRoute,
     AuthenticatedHomeIndexLazyRoute,
     AuthenticatedUserIndexLazyRoute,
+    AuthenticatedAssetNewIndexLazyRoute,
     AuthenticatedAssignmentNewIndexLazyRoute,
     AuthenticatedUserNewIndexLazyRoute,
   }),
@@ -235,6 +254,7 @@ export const routeTree = rootRoute.addChildren({
         "/_authenticated/forbidden/",
         "/_authenticated/home/",
         "/_authenticated/user/",
+        "/_authenticated/asset/new/",
         "/_authenticated/assignment/new/",
         "/_authenticated/user/new/"
       ]
@@ -261,6 +281,10 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_authenticated/user/": {
       "filePath": "_authenticated/user/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/asset/new/": {
+      "filePath": "_authenticated/asset/new/index.lazy.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/assignment/new/": {

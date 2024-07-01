@@ -59,7 +59,7 @@ export default function DataGrid({
             <Grid
               key={buttonComponent.id}
               item
-              xs={4}
+              xs={4.5}
               className="!flex !justify-end"
             >
               {buttonComponent.component}

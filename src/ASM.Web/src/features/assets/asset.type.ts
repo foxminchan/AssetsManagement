@@ -9,7 +9,7 @@ export type Asset = {
   specification: string
   category: string
   categoryId: string
-  state: string
+  state: AssetState
   installDate: Date
   location: Location
 }
@@ -40,4 +40,12 @@ export enum AssetState {
   NotAvailable = "NotAvailable",
   WaitingForRecycling = "WaitingForRecycling",
   Recycled = "Recycled",
+}
+
+export type CreateAssetRequest = {
+  name: string
+  specification: string
+  installDate: Date
+  state: AssetState
+  categoryId: string
 }

@@ -11,16 +11,18 @@ namespace ASM.UnitTests.UseCases.Assets;
 
 public sealed class CreateAssetHandlerTest
 {
-    private readonly Mock<IRepository<Asset>> _repositoryMock;
+    private readonly Mock<IRepository<Asset>> _assetRepositoryMock;
+    private readonly Mock<IRepository<Category>> _categoryRepositoryMock;
     private readonly Mock<IHttpContextAccessor> _httpContextAccessorMock;
     private readonly CreateAssetHandler _handler;
 
     public CreateAssetHandlerTest()
     {
-        _repositoryMock = new();
+        _assetRepositoryMock = new();
+        _categoryRepositoryMock = new();
         _httpContextAccessorMock = new();
 
-        _handler = new(_repositoryMock.Object, _httpContextAccessorMock.Object);
+        _handler = new(_assetRepositoryMock.Object, _categoryRepositoryMock.Object, _httpContextAccessorMock.Object);
 
         ClaimsPrincipal user = new(new ClaimsIdentity(
         [
@@ -34,12 +36,19 @@ public sealed class CreateAssetHandlerTest
     public async Task GivenValidRequest_ShouldReturnAssetId_WhenCommandIsValid()
     {
         // Arrange
+        var categoryId = Guid.NewGuid();
+        var category = new Category
+        {
+            Id = categoryId,
+            Name = "CategoryName",
+            Prefix = "CategoryPrefix",
+        };
         var command = new CreateAssetCommand(
             "AssetName",
             "Specification",
             DateOnly.FromDateTime(DateTime.Now),
             State.Available,
-            Guid.NewGuid());
+            categoryId);
         var asset = new Asset(
             command.Name,
             "AssetCode",
@@ -49,15 +58,16 @@ public sealed class CreateAssetHandlerTest
             Location.HoChiMinh,
             command.CategoryId);
 
-        _repositoryMock.Setup(r => r.ListAsync(It.IsAny<CancellationToken>())).ReturnsAsync([asset]);
-        _repositoryMock.Setup(r => r.AddAsync(It.IsAny<Asset>(), It.IsAny<CancellationToken>())).ReturnsAsync(asset);
+        _assetRepositoryMock.Setup(r => r.ListAsync(It.IsAny<CancellationToken>())).ReturnsAsync([asset]);
+        _assetRepositoryMock.Setup(r => r.AddAsync(It.IsAny<Asset>(), It.IsAny<CancellationToken>())).ReturnsAsync(asset);
+        _categoryRepositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>())).ReturnsAsync(category);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         result.Value.Should().Be(asset.Id);
-        _repositoryMock.Verify(r => r.AddAsync(It.IsAny<Asset>(), It.IsAny<CancellationToken>()), Times.Once);
+        _assetRepositoryMock.Verify(r => r.AddAsync(It.IsAny<Asset>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 
     [Fact]
@@ -83,28 +93,36 @@ public sealed class CreateAssetHandlerTest
     public async Task GivenValidRequest_ShouldGenerateAssetCode_WhenCommandIsValid()
     {
         // Arrange
+        var categoryId = Guid.NewGuid();
+        var category = new Category
+        {
+            Id = categoryId,
+            Name = "CategoryName",
+            Prefix = "CategoryPrefix",
+        };
         var command = new CreateAssetCommand(
             "AssetName",
             "Specification",
             DateOnly.FromDateTime(DateTime.Now),
             State.Available,
-            Guid.NewGuid());
+            categoryId);
         var assets = new[]
         {
             new Asset("ExistingAsset", "ExistingCode", "Specification", DateOnly.FromDateTime(DateTime.Now),
                 State.Available, Location.HoChiMinh, command.CategoryId)
         };
 
-        _repositoryMock.Setup(r => r.ListAsync(It.IsAny<CancellationToken>())).ReturnsAsync(assets.ToList);
-        _repositoryMock.Setup(r => r.AddAsync(It.IsAny<Asset>(), It.IsAny<CancellationToken>())).ReturnsAsync(
+        _assetRepositoryMock.Setup(r => r.ListAsync(It.IsAny<CancellationToken>())).ReturnsAsync(assets.ToList);
+        _assetRepositoryMock.Setup(r => r.AddAsync(It.IsAny<Asset>(), It.IsAny<CancellationToken>())).ReturnsAsync(
             new Asset(command.Name, "GeneratedCode", command.Specification, command.InstallDate, command.State,
                 Location.HoChiMinh, command.CategoryId));
+        _categoryRepositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>())).ReturnsAsync(category);
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
-        _repositoryMock.Verify(r => r.ListAsync(It.IsAny<CancellationToken>()), Times.Once);
+        _assetRepositoryMock.Verify(r => r.ListAsync(It.IsAny<CancellationToken>()), Times.Once);
         result.Should().NotBeNull();
     }
 
@@ -112,12 +130,13 @@ public sealed class CreateAssetHandlerTest
     public async Task GivenPastInstalledDate_ShouldThrowOutOfRangeException_WhenCommandIsValid()
     {
         // Arrange
+        var categoryId = Guid.NewGuid();
         var command = new CreateAssetCommand(
             "AssetName",
             "Specification",
             DateOnly.FromDateTime(DateTime.Now.AddDays(-1)),
             State.Available,
-            Guid.NewGuid());
+            categoryId);
         _httpContextAccessorMock.Setup(x => x.HttpContext!.User).Returns(new ClaimsPrincipal());
 
         // Act

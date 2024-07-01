@@ -1,5 +1,6 @@
 ﻿using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.AssetAggregate;
+using ASM.Application.Domain.AssetAggregate.Specifications;
 using ASM.Application.Features.Categories.List;
 using ASM.UnitTests.Builder;
 using Moq;
@@ -9,7 +10,7 @@ namespace ASM.UnitTests.UseCases.Categories;
 public class ListCategoriesHandlerTests
 {
     private readonly Mock<IReadRepository<Category>> _repositoryMock;
-    private readonly ListCategorieHandler _handler;
+    private readonly ListCategoriesHandler _handler;
 
     public ListCategoriesHandlerTests()
     {
@@ -31,7 +32,7 @@ public class ListCategoriesHandlerTests
 
         var query = new ListCategoriesQuery();
 
-        _repositoryMock.Setup(r => r.ListAsync(It.IsAny<CancellationToken>()))
+        _repositoryMock.Setup(r => r.ListAsync(It.IsAny<CategoryFilterSpec>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(categories);
 
         // Act
@@ -40,6 +41,6 @@ public class ListCategoriesHandlerTests
         // Assert
         result.Count().Should().Be(totalRecords);
 
-        _repositoryMock.Verify(r => r.ListAsync(It.IsAny<CancellationToken>()), Times.Once);
+        _repositoryMock.Verify(r => r.ListAsync(It.IsAny<CategoryFilterSpec>(), It.IsAny<CancellationToken>()), Times.Once);
     }
 }

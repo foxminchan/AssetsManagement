@@ -18,7 +18,13 @@ export default function App({ router }: Readonly<AppProps>) {
     },
   })
 
-  const defaultTheme = createTheme()
+  const defaultTheme = createTheme({
+    palette: {
+      primary: {
+        main: "#757575",
+      },
+    },
+  })
 
   const authentication = useAuth()
 

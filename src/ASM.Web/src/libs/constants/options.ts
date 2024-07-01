@@ -1,3 +1,4 @@
+import { AssetState } from "@features/assets/asset.type"
 import { Gender, RoleType } from "@features/users/user.type"
 
 import { OptionItem } from "@/types/data"
@@ -21,5 +22,16 @@ export const genderOptions: OptionItem<Gender>[] = [
   {
     label: "Female",
     value: Gender.Female,
+  },
+]
+
+export const createAssetStateOptions: OptionItem<AssetState>[] = [
+  {
+    label: "Available",
+    value: AssetState.Available,
+  },
+  {
+    label: "Not available",
+    value: AssetState.NotAvailable,
   },
 ]

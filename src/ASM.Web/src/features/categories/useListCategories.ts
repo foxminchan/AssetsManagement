@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
 
-import categoryService from "./categories.service"
+import categoryService from "./category.service"
 
 export default function useListCategories() {
   return useQuery({
-    queryKey: ["category"],
+    queryKey: ["categories"],
     queryFn: () => categoryService.listCategories(),
   })
 }

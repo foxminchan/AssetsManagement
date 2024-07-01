@@ -12,17 +12,17 @@ using Microsoft.AspNetCore.Routing;
 namespace ASM.Application.Features.Assets.Create;
 
 public sealed record CreateAssetRequest(
-    string? Name,
-    string? Specification,
+    string Name,
+    string Specification,
     DateOnly InstallDate,
     State State,
     Guid CategoryId);
 
-public sealed class CreateAssetEndpoint(ISender sender) : IEndpoint<Created<Guid>, CreateAssetRequest>
+public sealed class CreateAssetEndpoint : IEndpoint<Created<Guid>, CreateAssetRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapPost("/assets",
-                async (CreateAssetRequest request) => await HandleAsync(request))
+                async (CreateAssetRequest request, ISender sender) => await HandleAsync(request, sender))
             .Produces<Created<Guid>>(StatusCodes.Status201Created)
             .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Asset))
@@ -30,6 +30,7 @@ public sealed class CreateAssetEndpoint(ISender sender) : IEndpoint<Created<Guid
             .RequireAuthorization(AuthRole.Admin);
 
     public async Task<Created<Guid>> HandleAsync(CreateAssetRequest request,
+        ISender sender,
         CancellationToken cancellationToken = default)
     {
         CreateAssetCommand command = new(

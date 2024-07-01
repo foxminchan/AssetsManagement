@@ -12,10 +12,10 @@ namespace ASM.Application.Features.Categories.Create;
 
 public sealed record CreateCategoryRequest(string Name, string Prefix);
 
-public sealed class CreateCategoryEndpoint(ISender sender) : IEndpoint<Created<Guid>, CreateCategoryRequest>
+public sealed class CreateCategoryEndpoint : IEndpoint<Created<Guid>, CreateCategoryRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapPost("/categories", async (CreateCategoryRequest request) => await HandleAsync(request))
+        app.MapPost("/categories", async (CreateCategoryRequest request, ISender sender) => await HandleAsync(request, sender))
             .Produces<Created<Guid>>(StatusCodes.Status201Created)
             .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .Produces<Conflict<ValidationError>>(StatusCodes.Status409Conflict)
@@ -24,6 +24,7 @@ public sealed class CreateCategoryEndpoint(ISender sender) : IEndpoint<Created<G
             .RequireAuthorization(AuthRole.Admin);
 
     public async Task<Created<Guid>> HandleAsync(CreateCategoryRequest request,
+        ISender sender,
         CancellationToken cancellationToken = default)
     {
         CreateCategoryCommand command = new(request.Name, request.Prefix);

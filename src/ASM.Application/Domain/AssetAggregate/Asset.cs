@@ -36,9 +36,8 @@ public sealed class Asset : EntityBase, IAggregateRoot
     public Category? Category { get; set; }
     public ICollection<Assignment>? Assignments { get; set; } = [];
 
-    public static string GenerateAssetCode(List<Asset> assets, Guid categoryId)
+    public static string GenerateAssetCode(List<Asset> assets, string prefix)
     {
-        var prefix = assets.First(x => x.CategoryId == categoryId).Category?.Prefix;
         var assetCode = $"{prefix}000001";
         var count = 1;
 
