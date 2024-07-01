@@ -54,8 +54,8 @@ public sealed class UpdateAssignmentStateHandlerTest
         _repositoryMock.Setup(r => r.GetByIdAsync(command.Id, It.IsAny<CancellationToken>()))
             .ReturnsAsync(assignment);
 
-        _repositoryMock.Setup(r => r.UpdateAsync(assignment, It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask);
+        _repositoryMock.Setup(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()))
+            .Returns(Task.FromResult(1));
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -63,7 +63,7 @@ public sealed class UpdateAssignmentStateHandlerTest
         // Assert
         result.IsSuccess.Should().BeTrue();
         _repositoryMock.Verify(r => r.GetByIdAsync(command.Id, It.IsAny<CancellationToken>()), Times.Once);
-        _repositoryMock.Verify(r => r.UpdateAsync(assignment, It.IsAny<CancellationToken>()), Times.Once);
+        _repositoryMock.Verify(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         assignment.State.Should().Be(State.Accepted);
     }
 
@@ -83,8 +83,8 @@ public sealed class UpdateAssignmentStateHandlerTest
         _repositoryMock.Setup(r => r.FirstOrDefaultAsync(It.IsAny<AssignmentFilterSpec>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(assignment);
 
-        _repositoryMock.Setup(r => r.UpdateAsync(assignment, It.IsAny<CancellationToken>()))
-            .Returns(Task.CompletedTask);
+        _repositoryMock.Setup(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()))
+            .Returns(Task.FromResult(1));
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
@@ -92,7 +92,7 @@ public sealed class UpdateAssignmentStateHandlerTest
         // Assert
         result.IsSuccess.Should().BeTrue();
         _repositoryMock.Verify(r => r.FirstOrDefaultAsync(It.IsAny<AssignmentFilterSpec>(), It.IsAny<CancellationToken>()), Times.Once);
-        _repositoryMock.Verify(r => r.UpdateAsync(assignment, It.IsAny<CancellationToken>()), Times.Once);
+        _repositoryMock.Verify(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         assignment.State.Should().Be(State.Accepted);
     }
 
@@ -113,7 +113,7 @@ public sealed class UpdateAssignmentStateHandlerTest
         // Assert
         await act.Should().ThrowAsync<NotFoundException>();
         _repositoryMock.Verify(r => r.GetByIdAsync(command.Id, It.IsAny<CancellationToken>()), Times.Once);
-        _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<Assignment>(), It.IsAny<CancellationToken>()), Times.Never);
+        _repositoryMock.Verify(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
     }
 
     [Fact]
@@ -130,7 +130,7 @@ public sealed class UpdateAssignmentStateHandlerTest
         await act.Should().ThrowAsync<ArgumentNullException>();
         _userManagerMock.Verify(u => u.FindByIdAsync(It.IsAny<string>()), Times.Never);
         _repositoryMock.Verify(r => r.FirstOrDefaultAsync(It.IsAny<AssignmentFilterSpec>(), It.IsAny<CancellationToken>()), Times.Never);
-        _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<Assignment>(), It.IsAny<CancellationToken>()), Times.Never);
+        _repositoryMock.Verify(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
     }
 
     [Fact]
@@ -149,6 +149,6 @@ public sealed class UpdateAssignmentStateHandlerTest
         // Assert
         await act.Should().ThrowAsync<ArgumentNullException>();
         _repositoryMock.Verify(r => r.FirstOrDefaultAsync(It.IsAny<AssignmentFilterSpec>(), It.IsAny<CancellationToken>()), Times.Never);
-        _repositoryMock.Verify(r => r.UpdateAsync(It.IsAny<Assignment>(), It.IsAny<CancellationToken>()), Times.Never);
+        _repositoryMock.Verify(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
     }
 }

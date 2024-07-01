@@ -135,7 +135,7 @@ export default function Assets() {
       desc: queryParameters.isDescending,
     }
     pagination.pageIndex = queryParameters.pageIndex - 1
-    
+
     if (queryParameters.state === undefined && selectedState[0] !== "All") {
       setSelectedState([
         AssetState.Assigned,

@@ -15,7 +15,7 @@ public sealed record UpdateAssetRequest(
     Guid Id,
     string? Name,
     string? Specification,
-    DateOnly InstalledDate,
+    DateOnly InstallDate,
     State State);
 
 public sealed class UpdateAssetEndpoint : IEndpoint<Ok, UpdateAssetRequest>
@@ -36,7 +36,7 @@ public sealed class UpdateAssetEndpoint : IEndpoint<Ok, UpdateAssetRequest>
             request.Id,
             request.Name,
             request.Specification,
-            request.InstalledDate,
+            request.InstallDate,
             request.State);
 
         await sender.Send(command, cancellationToken);

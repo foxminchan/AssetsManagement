@@ -10,7 +10,7 @@ public sealed record UpdateAssetCommand(
     Guid Id,
     string? Name,
     string? Specification,
-    DateOnly InstalledDate,
+    DateOnly InstallDate,
     State State) : ICommand<Result>;
 
 public sealed class UpdateAssetHandler(IRepository<Asset> repository) : ICommandHandler<UpdateAssetCommand, Result>
@@ -21,7 +21,7 @@ public sealed class UpdateAssetHandler(IRepository<Asset> repository) : ICommand
 
         Guard.Against.NotFound(request.Id, asset);
 
-        asset.Update(request.Name, request.Specification, request.InstalledDate, request.State);
+        asset.Update(request.Name, request.Specification, request.InstallDate, request.State);
 
         await repository.UpdateAsync(asset, cancellationToken);
 

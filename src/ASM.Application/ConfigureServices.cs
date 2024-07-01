@@ -59,8 +59,8 @@ public static class ConfigureServices
                         sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(30), null);
                         sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
                     })
-                .UseExceptionProcessor()
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                .UseExceptionProcessor();
+                //.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             options.AddInterceptors(sp.GetRequiredService<AuditableEntityInterceptor>());
             options.AddInterceptors(sp.GetRequiredService<TrackableEntityInterceptor>());

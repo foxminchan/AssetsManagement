@@ -7,6 +7,7 @@ import {
   AssetFilter,
   CreateAssetRequest,
   ListAssets,
+  UpdateAssetRequest,
 } from "./asset.type"
 
 class AssetService extends HttpService {
@@ -33,6 +34,14 @@ class AssetService extends HttpService {
 
   deleteAsset(id: string): Promise<void> {
     return this.delete(`/assets/${id}`)
+  }
+
+  updateAsset(data: UpdateAssetRequest): Promise<void> {
+    const formattedData = {
+      ...data,
+      installDate: format(data.installDate, "yyyy-MM-dd"),
+    }
+    return this.put("/assets", formattedData)
   }
 }
 

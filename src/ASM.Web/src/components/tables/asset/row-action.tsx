@@ -3,6 +3,7 @@ import { Asset, AssetState } from "@features/assets/asset.type"
 import EditIcon from "@mui/icons-material/Edit"
 import HighlightOffIcon from "@mui/icons-material/HighlightOff"
 import { IconButton } from "@mui/material"
+import { useNavigate } from "@tanstack/react-router"
 
 import { BaseEntity } from "@/types/data"
 
@@ -12,6 +13,7 @@ type AssetRowActionProps = {
 }
 
 export const AssetRowAction: FC<AssetRowActionProps> = ({ data, setOpen }) => {
+  const navigate = useNavigate({ from: "/asset/$id" })
   const assetData = data as Asset
 
   return (
@@ -22,6 +24,9 @@ export const AssetRowAction: FC<AssetRowActionProps> = ({ data, setOpen }) => {
         color="error"
         id="btn-edit"
         disabled={assetData.state === AssetState.Assigned}
+        onClick={() =>
+          navigate({ to: "/asset/$id", params: { id: assetData.id } })
+        }
       >
         <EditIcon />
       </IconButton>

@@ -42,6 +42,10 @@ export enum AssetState {
   Recycled = "Recycled",
 }
 
+export type UpdateAssetRequest = CreateAssetRequest & {
+  id: string
+}
+
 export type CreateAssetRequest = {
   name: string
   specification: string

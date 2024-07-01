@@ -34,7 +34,7 @@ public sealed class UpdateAssetHandlerTest
             command.Name,
             "AssetCode",
             command.Specification,
-            command.InstalledDate,
+            command.InstallDate,
             command.State,
             Location.HoChiMinh,
             Guid.NewGuid());

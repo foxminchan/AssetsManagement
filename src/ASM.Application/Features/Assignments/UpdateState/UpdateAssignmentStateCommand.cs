@@ -46,7 +46,7 @@ public sealed class UpdateAssignmentStateHandler(
 
         assignment.UpdateState(request.State);
 
-        await repository.UpdateAsync(assignment, cancellationToken);
+        await repository.SaveChangesAsync(cancellationToken);
 
         return Result.Success();
     }

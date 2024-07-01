@@ -27,7 +27,7 @@ public sealed class ListAssetsTests(ApplicationFactory<Program> factory)
         var client = _factory.CreateClient();
         var assets = _faker.Generate(10);
         var category = new Category { Id = Guid.NewGuid(), Name = "Category 1", Prefix = "C1" };
-        
+
         foreach (var asset in assets)
         {
             asset.CategoryId = category.Id;
@@ -90,8 +90,7 @@ public sealed class ListAssetsTests(ApplicationFactory<Program> factory)
         await _factory.EnsureCreatedAndPopulateDataAsync(assets);
         var response =
             await client.GetAsync(
-                $"/api/assets?pageIndex={pageIndex}&pageSize={pageSize}&state={
-                    string.Join(",", states.Select(x => (int)x))}");
+                $"/api/assets?pageIndex={pageIndex}&pageSize={pageSize}&state={string.Join(",", states.Select(x => (int)x))}");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);

@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react"
 import { assetSchema } from "@features/assets/asset.schema"
-import { AssetState, CreateAssetRequest } from "@features/assets/asset.type"
+import {
+  AssetState,
+  CreateAssetRequest,
+  UpdateAssetRequest,
+} from "@features/assets/asset.type"
 import useCreateAsset from "@features/assets/useCreateAsset"
+import useUpdateAsset from "@features/assets/useUpdateAsset"
 import { categorySchema } from "@features/categories/category.schema"
 import {
   Category,
@@ -9,7 +14,10 @@ import {
 } from "@features/categories/category.type"
 import useCreateCategory from "@features/categories/useCreateCategory"
 import useListCategories from "@features/categories/useListCategories"
-import { createAssetStateOptions } from "@libs/constants/options"
+import {
+  createAssetStateOptions,
+  updateAssetStateOptions,
+} from "@libs/constants/options"
 import { assetAtom } from "@libs/jotai/assetAtom"
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded"
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
@@ -32,7 +40,7 @@ import {
 } from "@mui/material"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { useForm } from "@tanstack/react-form"
-import { Link, useNavigate } from "@tanstack/react-router"
+import { Link, useNavigate, useParams } from "@tanstack/react-router"
 import { zodValidator } from "@tanstack/zod-form-adapter"
 import { useSetAtom } from "jotai"
 import { z } from "zod"
@@ -40,7 +48,7 @@ import { z } from "zod"
 import { OptionItem } from "@/types/data"
 
 type AssetFormProps = {
-  initialData?: CreateAssetRequest
+  initialData?: UpdateAssetRequest
 }
 
 export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
@@ -95,6 +103,10 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
       return "Prefix is already existed. Please enter a different prefix"
     }
   }
+
+  const params = isUpdating
+    ? useParams({ from: "/_authenticated/asset/$id" })
+    : null
 
   const [openCategorySelect, setOpenCategorySelect] = useState(false)
   const [showCategoryNameError, setShowCategoryNameError] = useState(false)
@@ -193,6 +205,19 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
   }, [createAssetIsSuccess])
 
   const {
+    mutate: updateAsset,
+    isSuccess: updateAssetIsSuccess,
+    isPending: updateAssetIsPending,
+  } = useUpdateAsset()
+
+  useEffect(() => {
+    if (updateAssetIsSuccess) {
+      navigate({ from: "/asset/$id", to: "/asset" })
+      params && setNewAssetId(params.id)
+    }
+  }, [updateAssetIsSuccess])
+
+  const {
     Field: AssetField,
     Subscribe: AssetSubscribe,
     handleSubmit: handleAssetSubmit,
@@ -210,6 +235,12 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
     onSubmit: async ({ value }: { value: CreateAssetRequest }) => {
       if (!isUpdating) {
         createAsset(value satisfies CreateAssetRequest)
+      } else {
+        const updateValue = {
+          ...value,
+          id: initialData.id,
+        }
+        updateAsset(updateValue satisfies UpdateAssetRequest)
       }
     },
   })
@@ -525,6 +556,25 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
                       />
                     )
                   )}
+                {isUpdating &&
+                  updateAssetStateOptions.map(
+                    (item: OptionItem<AssetState>) => (
+                      <FormControlLabel
+                        key={item.value}
+                        value={item.value}
+                        control={
+                          <Radio
+                            sx={{
+                              "&.Mui-checked": {
+                                color: "#e30c18",
+                              },
+                            }}
+                          />
+                        }
+                        label={item.label}
+                      />
+                    )
+                  )}
               </RadioGroup>
               <FormHelperText className="!text-red-500">
                 {state.meta.errors}
@@ -559,7 +609,11 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
                 compare(values, initialData)
               }
             >
-              {createAssetIsPending ? <CircularProgress size={25} /> : "Save"}
+              {createAssetIsPending || updateAssetIsPending ? (
+                <CircularProgress size={25} />
+              ) : (
+                "Save"
+              )}
             </Button>
           )}
         </AssetSubscribe>

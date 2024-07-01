@@ -19,10 +19,9 @@ public sealed class UpdateAssetValidator : AbstractValidator<UpdateAssetCommand>
         RuleFor(x => x.Specification)
             .MaximumLength(DataSchemaLength.Max);
 
-        RuleFor(x => x.InstalledDate)
+        RuleFor(x => x.InstallDate)
             .NotEmpty()
-            .WithMessage("Install date is required")
-            .GreaterThanOrEqualTo(DateOnly.FromDateTime(DateTime.Now));
+            .WithMessage("Install date is required");
 
         RuleFor(x => x.State)
             .IsInEnum()

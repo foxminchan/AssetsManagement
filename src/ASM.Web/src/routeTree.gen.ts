@@ -14,6 +14,7 @@ import { createFileRoute } from "@tanstack/react-router"
 
 import { Route as rootRoute } from "./routes/__root"
 import { Route as AuthenticatedImport } from "./routes/_authenticated"
+import { Route as AuthenticatedAssetIdImport } from "./routes/_authenticated/asset/$id"
 import { Route as AuthenticatedUserIdImport } from "./routes/_authenticated/user/$id"
 import { Route as IndexImport } from "./routes/index"
 
@@ -103,6 +104,11 @@ const AuthenticatedUserIdRoute = AuthenticatedUserIdImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedAssetIdRoute = AuthenticatedAssetIdImport.update({
+  path: "/asset/$id",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
 const AuthenticatedUserNewIndexLazyRoute =
   AuthenticatedUserNewIndexLazyImport.update({
     path: "/user/new/",
@@ -146,6 +152,13 @@ declare module "@tanstack/react-router" {
       fullPath: ""
       preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
+    }
+    "/_authenticated/asset/$id": {
+      id: "/_authenticated/asset/$id"
+      path: "/asset/$id"
+      fullPath: "/asset/$id"
+      preLoaderRoute: typeof AuthenticatedAssetIdImport
+      parentRoute: typeof AuthenticatedImport
     }
     "/_authenticated/user/$id": {
       id: "/_authenticated/user/$id"
@@ -218,6 +231,7 @@ declare module "@tanstack/react-router" {
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AuthenticatedRoute: AuthenticatedRoute.addChildren({
+    AuthenticatedAssetIdRoute,
     AuthenticatedUserIdRoute,
     AuthenticatedAssetIndexLazyRoute,
     AuthenticatedAssignmentIndexLazyRoute,
@@ -248,6 +262,7 @@ export const routeTree = rootRoute.addChildren({
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
+        "/_authenticated/asset/$id",
         "/_authenticated/user/$id",
         "/_authenticated/asset/",
         "/_authenticated/assignment/",
@@ -258,6 +273,10 @@ export const routeTree = rootRoute.addChildren({
         "/_authenticated/assignment/new/",
         "/_authenticated/user/new/"
       ]
+    },
+    "/_authenticated/asset/$id": {
+      "filePath": "_authenticated/asset/$id.tsx",
+      "parent": "/_authenticated"
     },
     "/_authenticated/user/$id": {
       "filePath": "_authenticated/user/$id.tsx",
