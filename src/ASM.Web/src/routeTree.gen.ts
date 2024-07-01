@@ -15,6 +15,7 @@ import { createFileRoute } from "@tanstack/react-router"
 import { Route as rootRoute } from "./routes/__root"
 import { Route as AuthenticatedImport } from "./routes/_authenticated"
 import { Route as AuthenticatedAssetIdImport } from "./routes/_authenticated/asset/$id"
+import { Route as AuthenticatedAssignmentIdImport } from "./routes/_authenticated/assignment/$id"
 import { Route as AuthenticatedUserIdImport } from "./routes/_authenticated/user/$id"
 import { Route as IndexImport } from "./routes/index"
 
@@ -104,6 +105,11 @@ const AuthenticatedUserIdRoute = AuthenticatedUserIdImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedAssignmentIdRoute = AuthenticatedAssignmentIdImport.update({
+  path: "/assignment/$id",
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
 const AuthenticatedAssetIdRoute = AuthenticatedAssetIdImport.update({
   path: "/asset/$id",
   getParentRoute: () => AuthenticatedRoute,
@@ -158,6 +164,13 @@ declare module "@tanstack/react-router" {
       path: "/asset/$id"
       fullPath: "/asset/$id"
       preLoaderRoute: typeof AuthenticatedAssetIdImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    "/_authenticated/assignment/$id": {
+      id: "/_authenticated/assignment/$id"
+      path: "/assignment/$id"
+      fullPath: "/assignment/$id"
+      preLoaderRoute: typeof AuthenticatedAssignmentIdImport
       parentRoute: typeof AuthenticatedImport
     }
     "/_authenticated/user/$id": {
@@ -232,6 +245,7 @@ export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AuthenticatedRoute: AuthenticatedRoute.addChildren({
     AuthenticatedAssetIdRoute,
+    AuthenticatedAssignmentIdRoute,
     AuthenticatedUserIdRoute,
     AuthenticatedAssetIndexLazyRoute,
     AuthenticatedAssignmentIndexLazyRoute,
@@ -263,6 +277,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_authenticated.tsx",
       "children": [
         "/_authenticated/asset/$id",
+        "/_authenticated/assignment/$id",
         "/_authenticated/user/$id",
         "/_authenticated/asset/",
         "/_authenticated/assignment/",
@@ -276,6 +291,10 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_authenticated/asset/$id": {
       "filePath": "_authenticated/asset/$id.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/assignment/$id": {
+      "filePath": "_authenticated/assignment/$id.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/user/$id": {

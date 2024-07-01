@@ -20,7 +20,7 @@ public sealed class CreateAssignmentHandlerTest
     [Fact]
     public async Task CreateAssignment_ShouldReturnAssignmentId_WhenCommandIsValid()
     {
-        //Arrange
+        // Arrange
         var command = new CreateAssignmentCommand(
             Guid.NewGuid(),
             Guid.NewGuid(),
@@ -37,8 +37,10 @@ public sealed class CreateAssignmentHandlerTest
         _repositoryMock.Setup(x => x.AddAsync(It.IsAny<Assignment>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(assignment);
 
+        // Act
         var result = await _handler.Handle(command, It.IsAny<CancellationToken>());
 
+        // Assert
         result.Value.Should().Be(assignment.Id);
         _repositoryMock.Verify(x => x.AddAsync(It.IsAny<Assignment>(), It.IsAny<CancellationToken>()), Times.Once);
     }

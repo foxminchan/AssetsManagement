@@ -14,6 +14,8 @@ export type Assignment = BaseEntity & {
   assignedDate: Date
   state: State
   note: string
+  userId: string
+  assetId: string
 }
 
 export type ListAssignments = {

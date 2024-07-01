@@ -5,7 +5,6 @@ import { CreateAssignmentRequest } from "./assignment.type"
 
 export default function useCreateAssignment() {
   const queryClient = useQueryClient()
-
   return useMutation<string, AppAxiosError, CreateAssignmentRequest>({
     mutationFn: (data: CreateAssignmentRequest) =>
       assignmentService.createAssignment(data),

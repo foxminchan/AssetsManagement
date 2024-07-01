@@ -4,6 +4,7 @@ import EditIcon from "@mui/icons-material/Edit"
 import HighlightOffIcon from "@mui/icons-material/HighlightOff"
 import RestartAltIcon from "@mui/icons-material/RestartAlt"
 import { IconButton } from "@mui/material"
+import { useNavigate } from "@tanstack/react-router"
 import { SetStateAction } from "jotai"
 
 import { BaseEntity } from "@/types/data"
@@ -20,7 +21,7 @@ export const AssignmentRowAction: FC<AssignmentRowActionProps> = ({
   id: setId,
 }) => {
   const assignmentData = data as Assignment
-
+  const navigate = useNavigate({ from: "/assignment/$id" })
   return (
     <>
       <IconButton
@@ -29,6 +30,9 @@ export const AssignmentRowAction: FC<AssignmentRowActionProps> = ({
         color="error"
         id="btn-edit"
         disabled={assignmentData.state === State.Accepted}
+        onClick={() =>
+          navigate({ to: "/assignment/$id", params: { id: data.id } })
+        }
       >
         <EditIcon />
       </IconButton>

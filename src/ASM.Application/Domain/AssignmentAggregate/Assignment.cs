@@ -38,6 +38,15 @@ public sealed class Assignment : TrackableEntityBase, IAggregateRoot
     [NotMapped] public string? AssignedBy { get; set; }
     [NotMapped] public string? AssignedTo { get; set; }
 
+    public void Update(Guid userId, Guid assetId, DateOnly assignedDate, string note)
+    {
+        StaffId = Guard.Against.Null(userId);
+        AssetId = Guard.Against.Null(assetId);
+        AssignedDate = assignedDate;
+        Note = note;
+        Asset = null;
+    }
+
     public void UpdateAssetState(Guid assetId)
     {
         var assetCreatedEvent = new AssignmentCreatedEvent(assetId);

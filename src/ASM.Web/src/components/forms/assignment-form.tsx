@@ -8,10 +8,15 @@ import {
   ViewUpdateAssignmentRequest,
 } from "@features/assignments/assignment.type"
 import useCreateAssignment from "@features/assignments/useCreateAssignment"
+import useUpdateAssignment from "@features/assignments/useUpdateAssignment"
 import useListUsers from "@features/users/useListUsers"
 import { RoleType } from "@features/users/user.type"
-import { selectedRowAsset } from "@libs/jotai/assetAtom"
-import { assignmentAtoms, selectedRowUser } from "@libs/jotai/assignmentAtom"
+import { selectedRowAsset, submitAsset } from "@libs/jotai/assetAtom"
+import {
+  assignmentAtoms,
+  selectedRowUser,
+  submitUser,
+} from "@libs/jotai/assignmentAtom"
 import SearchIcon from "@mui/icons-material/Search"
 import {
   Box,
@@ -31,8 +36,8 @@ import {
 } from "@mui/material"
 import Dialog from "@mui/material/Dialog"
 import { DatePicker } from "@mui/x-date-pickers"
-import { useForm } from "@tanstack/react-form"
-import { Link, useNavigate, useSearch } from "@tanstack/react-router"
+import { FieldMeta, useForm } from "@tanstack/react-form"
+import { Link, useNavigate, useParams, useSearch } from "@tanstack/react-router"
 import { zodValidator } from "@tanstack/zod-form-adapter"
 import { format } from "date-fns"
 import { useAtom, useSetAtom } from "jotai"
@@ -43,6 +48,11 @@ import UserDialog from "../dialogs/user/user-dialog"
 import SearchInput from "../fields/search-dialog"
 
 const types = ["All", RoleType.Admin, RoleType.Staff]
+
+const initialAssetChoose = {
+  id: "",
+  name: "",
+}
 
 type AssignmentProps = {
   initialData?:
@@ -70,8 +80,10 @@ export default function AssignmentForm({
   }
   const { data: userData, isLoading: listLoading } =
     useListUsers(queryUserParameters)
-  const [userChoose] = useAtom(selectedRowUser)
+  const [userChoose, setUserChooser] = useAtom(selectedRowUser)
   const [isUserDialogOpen, setIsUserDialogOpen] = useState(false)
+  const [assetSubmit, setAssetSubmit] = useAtom(submitAsset)
+  const [userSubmit, setUserSubmit] = useAtom(submitUser)
 
   const navigate = useNavigate({ from: "/assignment/new" })
 
@@ -87,13 +99,15 @@ export default function AssignmentForm({
   }
   const { data: assetData, isLoading: listAssetLoading } =
     useListAsset(queryAssetParameters)
-  const [assetChoose] = useAtom(selectedRowAsset)
+  const [assetChoose, setAssetChoose] = useAtom(selectedRowAsset)
   const [isAssetDialogOpen, setIsAssetDialogOpen] = useState(false)
   const isEditing = !!initialData
-
-  const setAssignmentId = useSetAtom(assignmentAtoms)
   const today = new Date(Date.now())
   const defaultValues = initialData
+  const setAssignmentId = useSetAtom(assignmentAtoms)
+  const params = isEditing
+    ? useParams({ from: "/_authenticated/assignment/$id" })
+    : null
   const {
     data: createdAssignmentId,
     mutate: createAssignment,
@@ -101,57 +115,123 @@ export default function AssignmentForm({
     isPending: createAssignmentPending,
   } = useCreateAssignment()
 
-  const { Field, Subscribe, handleSubmit, getFieldValue, setFieldValue } =
-    useForm({
-      defaultValues,
-      validatorAdapter: zodValidator,
-      validators: {
-        onSubmitAsync: createAssignmentSchema,
-      },
-      onSubmit: async ({
-        value,
-      }: {
-        value:
-          | CreateAssignmentRequest
-          | ViewUpdateAssignmentRequest
-          | UpdateAssignmentRequest
-          | z.infer<typeof createAssignmentSchema>
-      }) => {
-        const formattedValue = {
-          ...value,
-          assignedDate: format(value.assignedDate, "yyyy-MM-dd"),
+  const {
+    mutate: updateAssignment,
+    isSuccess: updateAssignmentSuccess,
+    isPending: updateAssignmentPending,
+  } = useUpdateAssignment()
+
+  const { Field, Subscribe, handleSubmit, setFieldValue } = useForm({
+    defaultValues,
+    validatorAdapter: zodValidator,
+    validators: {
+      onSubmitAsync: createAssignmentSchema,
+    },
+    onSubmit: async ({
+      value,
+    }: {
+      value:
+        | CreateAssignmentRequest
+        | ViewUpdateAssignmentRequest
+        | UpdateAssignmentRequest
+        | z.infer<typeof createAssignmentSchema>
+    }) => {
+      const formattedValue = {
+        ...value,
+        assignedDate: format(value.assignedDate, "yyyy-MM-dd"),
+      }
+      let userIdUpdate = ""
+      let assetIdUpdate = ""
+      if (params) {
+        if (assetSubmit?.name !== "") {
+          assetIdUpdate = assetSubmit?.id ?? ""
+        } else {
+          assetIdUpdate = (
+            formattedValue as unknown as ViewUpdateAssignmentRequest
+          ).assetName
         }
-        if (!isEditing) {
-          const request: CreateAssignmentRequest = {
+
+        if (userSubmit?.name !== "") {
+          userIdUpdate = userSubmit?.id ?? ""
+        } else {
+          userIdUpdate = (
+            formattedValue as unknown as ViewUpdateAssignmentRequest
+          ).userName
+        }
+      }
+
+      if (!isEditing) {
+        const request: CreateAssignmentRequest = {
+          ...formattedValue,
+          assetId: assetSubmit?.id as string,
+          userId: userSubmit?.id as string,
+          note: formattedValue.note ?? "",
+        }
+        createAssignment(request)
+      } else {
+        params &&
+          updateAssignment({
+            id: params.id,
             ...formattedValue,
-            assetId: assetChoose!.id,
-            userId: userChoose!.id,
-            note: formattedValue.note ?? "",
-          }
-          console.log(request)
-          createAssignment(request)
-        }
-      },
-    })
+            assignedDate: format(value.assignedDate, "yyyy-MM-dd"),
+            assetId: assetIdUpdate,
+            userId: userIdUpdate,
+            note: (formattedValue as unknown as ViewUpdateAssignmentRequest)
+              .note,
+          } satisfies UpdateAssignmentRequest)
+      }
+    },
+  })
+
   useEffect(() => {
     if (createAssignmentSuccess) {
+      setAssignmentId(createdAssignmentId)
       navigate({
         to: "/assignment",
       })
-      setAssignmentId(createdAssignmentId)
     }
   }, [createAssignmentSuccess])
 
+  useEffect(() => {
+    if (updateAssignmentSuccess) {
+      params && setAssignmentId(params.id)
+      navigate({ from: "/assignment/$id", to: "/assignment" })
+    }
+  }, [updateAssignmentSuccess])
+
   const onSubmitValue = (type: string, name: string | undefined) => {
     if (type === "Asset" && name !== undefined) {
+      setAssetSubmit(assetChoose)
+      setAssetChoose(initialAssetChoose)
       setFieldValue("assetId", name)
     } else if (name !== undefined) {
+      setUserSubmit(userChoose)
+      setUserChooser(initialAssetChoose)
       setFieldValue("userId", name)
     }
     setIsAssetDialogOpen(false)
     setIsUserDialogOpen(false)
   }
 
+  const getUserValue = (state: { value: any; meta?: FieldMeta }) => {
+    if (params && userSubmit?.name !== "") {
+      return userSubmit?.name
+    } else if (params && userSubmit?.name === "") {
+      return state.value
+    } else {
+      return state.value
+    }
+  }
+
+  const getAssetValue = (state: { value: any; meta?: FieldMeta }) => {
+    if (params && assetSubmit?.name !== "") {
+      return assetSubmit?.name
+    } else if (params && assetSubmit?.name === "") {
+      return state.value
+    } else {
+      return state.value
+    }
+  }
   return (
     <form
       onSubmit={(e) => {
@@ -173,10 +253,10 @@ export default function AssignmentForm({
           {({ handleChange, state }) => (
             <Box display="flex" alignItems="center">
               <TextField
-                id="txt-asset-name"
+                id="txt-user-name"
                 disabled={true}
                 defaultValue={state.value}
-                value={state.value}
+                value={getUserValue(state)}
                 color={state.meta.errors.length ? "error" : "primary"}
                 focused={state.meta.errors.length !== 0}
                 onChange={(e) => handleChange(e.target.value)}
@@ -215,8 +295,7 @@ export default function AssignmentForm({
               <TextField
                 id="txt-asset-name"
                 disabled={true}
-                defaultValue={state.value}
-                value={state.value}
+                value={getAssetValue(state)}
                 color={state.meta.errors.length ? "error" : "primary"}
                 focused={state.meta.errors.length !== 0}
                 onChange={(e) => handleChange(e.target.value)}
@@ -246,25 +325,14 @@ export default function AssignmentForm({
         <FormLabel>Assigned Date:</FormLabel>
         <Field
           name="assignedDate"
-          defaultValue={today}
-          validators={{
-            onChangeListenTo: ["assignedDate"],
-            onChange: createAssignmentSchema.shape.assignedDate.refine(
-              (data) => {
-                if (!data) return true // Allow empty dates if not required
-                const selectedDate = getFieldValue("assignedDate") as Date
-                return selectedDate
-              },
-              "Date must be today or in the future"
-            ),
-          }}
+          defaultValue={params ? initialData?.assignedDate : today}
         >
           {({ handleChange, state }) => (
             <>
               <DatePicker
                 className=""
                 minDate={today}
-                defaultValue={new Date(state.value as Date)}
+                defaultValue={new Date((state.value as Date) || today)}
                 name="assignedDate"
                 onChange={(value) => {
                   value && handleChange(value)
@@ -315,7 +383,7 @@ export default function AssignmentForm({
             >
               <TextField
                 id="txt-note"
-                defaultValue={state.value ?? ""}
+                defaultValue={state.value || ""}
                 onChange={(e) => handleChange(e.target.value)}
                 multiline
                 rows={3}
@@ -353,10 +421,11 @@ export default function AssignmentForm({
                 !(values as CreateAssignmentRequest).userId ||
                 !(values as CreateAssignmentRequest).assetId ||
                 !(values as CreateAssignmentRequest).assignedDate ||
-                createAssignmentPending
+                createAssignmentPending ||
+                updateAssignmentPending
               }
             >
-              {createAssignmentPending ? (
+              {createAssignmentPending || updateAssignmentPending ? (
                 <CircularProgress size={25} />
               ) : (
                 "Save"
@@ -396,8 +465,13 @@ export default function AssignmentForm({
               id="btn-save"
               disabled={!userChoose?.name}
               onClick={() => {
-                navigate({ to: "/assignment/new" })
                 onSubmitValue("User", userChoose?.name)
+                if (params) {
+                  queryUserParameters.search = ""
+                  navigate({ to: `/assignment/${params?.id}` })
+                } else {
+                  navigate({ to: "/assignment/new" })
+                }
               }}
               className="disabled:!hover:bg-red-800 !bg-red-500 !text-white disabled:!bg-red-700 disabled:!text-gray-300"
             >
@@ -406,8 +480,14 @@ export default function AssignmentForm({
             <Button
               id="btn-cancel"
               onClick={() => {
-                navigate({ to: "/assignment/new" })
                 setIsUserDialogOpen(false)
+                if (params) {
+                  setUserChooser(initialAssetChoose)
+                  navigate({ to: `/assignment/${params?.id}` })
+                  setFieldValue("userId", initialData?.userId as string)
+                } else {
+                  navigate({ to: "/assignment/new" })
+                }
               }}
               autoFocus
               className="!hover:bg-gray-700 rounded !bg-gray-100 px-4 py-2 font-bold !text-black"
@@ -446,7 +526,11 @@ export default function AssignmentForm({
             <Button
               disabled={!assetChoose?.name}
               onClick={() => {
-                navigate({ to: "/assignment/new" })
+                if (params) {
+                  navigate({ to: `/assignment/${params?.id}` })
+                } else {
+                  navigate({ to: "/assignment/new" })
+                }
                 onSubmitValue("Asset", assetChoose?.name)
               }}
               className="disabled:!hover:bg-red-800 !bg-red-500 !text-white disabled:!bg-red-700 disabled:!text-gray-300"
@@ -455,8 +539,13 @@ export default function AssignmentForm({
             </Button>
             <Button
               onClick={() => {
-                navigate({ to: "/assignment/new" })
                 setIsAssetDialogOpen(false)
+                if (params) {
+                  setFieldValue("assetId", initialData?.assetId as string)
+                  navigate({ to: `/assignment/${params?.id}` })
+                } else {
+                  navigate({ to: "/assignment/new" })
+                }
               }}
               autoFocus
               className="!hover:bg-gray-700 rounded !bg-gray-100 px-4 py-2 font-bold !text-black"

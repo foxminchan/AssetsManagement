@@ -8,6 +8,7 @@ import {
   AssignmentFilter,
   CreateAssignmentRequest,
   ListAssignments,
+  UpdateAssignmentRequest,
 } from "./assignment.type"
 
 class AssignmentService extends HttpService {
@@ -44,6 +45,10 @@ class AssignmentService extends HttpService {
 
   createAssignment(data: CreateAssignmentRequest): Promise<string> {
     return this.post("/assignments", data)
+  }
+
+  updateAssignment(data: UpdateAssignmentRequest): Promise<void> {
+    return this.put("/assignments", data)
   }
 }
 

@@ -15,10 +15,8 @@ public class AssignmentCreatedHandler(IRepository<Asset> repository)
 
         if (asset is not null)
         {
-            asset.Assignments = null;
-            asset.Category = null;
-            asset.State = State.Assigned;
-            await repository.UpdateAsync(asset, cancellationToken);
+            asset.UpdateState(State.Assigned);
+            await repository.SaveChangesAsync(cancellationToken);
         }
     }
 }

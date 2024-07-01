@@ -54,6 +54,8 @@ export const assignmentFieldLabels: Record<keyof Assignment, string> = {
   assignedDate: "Assigned Date",
   state: "State",
   note: "Note",
+  assetId: "",
+  userId: "",
 }
 export const assetFieldOrder: (keyof Asset)[] = [
   "assetCode",

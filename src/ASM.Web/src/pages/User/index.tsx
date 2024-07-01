@@ -3,9 +3,11 @@ import DataGrid from "@components/data/data-grid"
 import FilterInput from "@components/fields/filter-input"
 import SearchInput from "@components/fields/search-input"
 import ConfirmModal from "@components/modals/confirm-modal"
+import MessageModal from "@components/modals/message-modal"
 import UserInfoModal from "@components/modals/user-info-modal"
 import UserColumns from "@components/tables/user/columns"
 import { UserRowAction } from "@components/tables/user/row-action"
+import useListAssignments from "@features/assignments/useListAssignments"
 import useDeleteUser from "@features/users/useDeleteUser"
 import useGetUser from "@features/users/useGetUser"
 import useListUsers from "@features/users/useListUsers"
@@ -33,6 +35,8 @@ export default function Users() {
   const context = useContext(BreadcrumbsContext)
   const [open, setOpen] = useState(false)
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
+  const [undeletedUserWarningModalOpen, setUndeletedUserWarningModalOpen] =
+    useState<boolean>(false)
   const [selectedUserId, setSelectedUserId] = useState<string>("")
   const params = useSearch({
     strict: false,
@@ -44,8 +48,14 @@ export default function Users() {
     isError: isDeleteUserError,
   } = useDeleteUser()
   const handleModalOpen = (id: string) => {
-    setSelectedUserId(id)
-    setDeleteModalOpen(true)
+    if (
+      assignmentData?.assignments.find((x) => x.userId === id) === undefined
+    ) {
+      setSelectedUserId(id)
+      setDeleteModalOpen(true)
+    } else {
+      setUndeletedUserWarningModalOpen(true)
+    }
   }
 
   useEffect(() => {
@@ -84,6 +94,7 @@ export default function Users() {
     refetch,
   } = useListUsers(queryParameters)
 
+  const { data: assignmentData } = useListAssignments()
   if (
     data &&
     data.pagedInfo &&
@@ -228,6 +239,13 @@ export default function Users() {
         buttonCloseLabel="Cancel"
         onOk={() => handleDisableUser(selectedUserId)}
         onClose={() => setDeleteModalOpen(false)}
+      />
+
+      <MessageModal
+        message="There are valid assignments belonging to this user. Please close all assignments before disabling user."
+        title="Can not disable user"
+        open={undeletedUserWarningModalOpen}
+        onClose={() => setUndeletedUserWarningModalOpen(false)}
       />
       {selectedUserId && (
         <UserInfoModal

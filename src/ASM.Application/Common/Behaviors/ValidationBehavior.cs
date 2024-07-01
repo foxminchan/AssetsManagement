@@ -40,11 +40,6 @@ public sealed class ValidationBehavior<TRequest, TResponse>(
 
         var response = await next();
 
-        //logger.LogInformation(
-        //    "[{Behavior}] handled response={Response} with content={ResponseData}",
-        //    behavior, typeof(TResponse).FullName, JsonSerializer.Serialize(response,
-        //        new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.IgnoreCycles }));
-
         return response;
     }
 }

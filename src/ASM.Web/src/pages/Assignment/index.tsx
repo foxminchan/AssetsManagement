@@ -33,7 +33,11 @@ export default function Assignments() {
   const navigate = useNavigate({ from: "/assignment" })
   const router = useRouter()
   const assignmentId = useAtomValue(assignmentAtoms)
-  const { data: assignment } = useGetAssignment(assignmentId)
+  const {
+    data: assignment,
+    isLoading: assignmentLoading,
+    refetch: getAssignmentRefetch,
+  } = useGetAssignment(assignmentId)
   const context = useContext(BreadcrumbsContext)
   const [open, setOpen] = useState(false)
   const [selectedAssignmentId, setSelectedAssignmentId] = useState<string>("")
@@ -109,10 +113,13 @@ export default function Assignments() {
 
   const getDisplayedAssignments = () => {
     if (assignment && queryParameters.pageIndex === 1) {
-      return [
-        assignment,
-        ...(data?.assignments.filter((x) => x.id !== assignment.id) || []),
-      ]
+      getAssignmentRefetch()
+      refetch()
+      const assignments = data?.assignments || []
+      const filteredAssignments = assignments.filter(
+        (x) => x.id !== assignment.id
+      )
+      return [assignment, ...filteredAssignments]
     }
     if (isNewlyCreated) {
       setIsNewlyCreated(false)
@@ -181,6 +188,10 @@ export default function Assignments() {
     }
   }, [deleteAssignmentSuccess])
 
+  useEffect(() => {
+    refetch()
+  }, [assignmentId])
+
   return (
     <>
       <DataGrid
@@ -240,7 +251,7 @@ export default function Assignments() {
           tableOptionsProps: {
             columns: AssignmentColumns(),
             data: getDisplayedAssignments(),
-            isLoading: listLoading,
+            isLoading: listLoading || assignmentLoading,
             pageCount: data?.pagedInfo.totalPages ?? 0,
             setOpen: setOpen,
             setSelectedEntityId: setSelectedAssignmentId,
