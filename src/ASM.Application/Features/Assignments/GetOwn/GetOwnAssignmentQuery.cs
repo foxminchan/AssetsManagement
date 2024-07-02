@@ -32,7 +32,7 @@ public sealed class GetOwnAssignmentHandler(
         Guard.Against.NotFound(request.Id, assignment);
 
         var assignedTo = await staffRepository.GetByIdAsync(assignment.StaffId, cancellationToken);
-        var assignedBy = await staffRepository.GetByIdAsync(assignment.UpdatedBy, cancellationToken);
+        var assignedBy = await staffRepository.GetByIdAsync(assignment.CreatedBy, cancellationToken);
         assignment.AssignedTo = assignedTo?.UserName;
         assignment.AssignedBy = assignedBy?.UserName;
 

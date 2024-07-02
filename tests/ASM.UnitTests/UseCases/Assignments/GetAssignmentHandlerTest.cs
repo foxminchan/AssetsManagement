@@ -29,19 +29,19 @@ public sealed class GetAssignmentHandlerTest
         // Arrange
         var assignmentId = Guid.NewGuid();
         var staffId = Guid.NewGuid();
-        var updatedById = Guid.NewGuid();
+        var createdById = Guid.NewGuid();
 
-        var assignment = new Assignment { Id = assignmentId, StaffId = staffId, UpdatedBy = updatedById };
+        var assignment = new Assignment { Id = assignmentId, StaffId = staffId, CreatedBy = createdById };
 
         var assignedTo = new Staff { Id = staffId, Users = [new() { UserName = assignedToUserName }] };
 
-        var assignedBy = new Staff { Id = updatedById, Users = [new() { UserName = assignedByUserName }] };
+        var assignedBy = new Staff { Id = createdById, Users = [new() { UserName = assignedByUserName }] };
 
         _assignmentRepositoryMock.Setup(repo => repo.GetByIdAsync(assignmentId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(assignment);
         _staffRepositoryMock.Setup(repo => repo.GetByIdAsync(staffId, It.IsAny<CancellationToken>()))
             .ReturnsAsync(assignedTo);
-        _staffRepositoryMock.Setup(repo => repo.GetByIdAsync(updatedById, It.IsAny<CancellationToken>()))
+        _staffRepositoryMock.Setup(repo => repo.GetByIdAsync(createdById, It.IsAny<CancellationToken>()))
             .ReturnsAsync(assignedBy);
 
         var request = new GetAssignmentQuery(assignmentId);

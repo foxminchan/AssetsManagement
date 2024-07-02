@@ -32,14 +32,14 @@ public sealed class ListOwnAssignmentsHandler(
         AssignmentFilterSpec spec = new(staffId.Value, request.OrderBy, request.IsDescending);
         var assignments = await assignmentRepository.ListAsync(spec, cancellationToken);
 
-        var staffIds = assignments.Select(a => a.StaffId).Concat(assignments.Select(a => a.UpdatedBy)).Distinct();
+        var staffIds = assignments.Select(a => a.StaffId).Concat(assignments.Select(a => a.CreatedBy)).Distinct();
         var staffDictionary = (await staffRepository.ListAsync(new StaffFilterSpec(staffIds), cancellationToken))
             .ToDictionary(staff => staff.Id);
 
         foreach (var assignment in assignments)
         {
             staffDictionary.TryGetValue(assignment.StaffId, out var assignedTo);
-            staffDictionary.TryGetValue(assignment.UpdatedBy, out var assignedBy);
+            staffDictionary.TryGetValue(assignment.CreatedBy, out var assignedBy);
             assignment.AssignedTo = assignedTo?.UserName;
             assignment.AssignedBy = assignedBy?.UserName;
         }

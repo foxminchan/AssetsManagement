@@ -44,7 +44,7 @@ public sealed class ListAssignmentsHandler(
         foreach (var assignment in assignments)
         {
             staffDictionary.TryGetValue(assignment.StaffId, out var assignedTo);
-            staffDictionary.TryGetValue(assignment.UpdatedBy, out var assignedBy);
+            staffDictionary.TryGetValue(assignment.CreatedBy, out var assignedBy);
             assignment.AssignedTo = assignedTo?.UserName;
             assignment.AssignedBy = assignedBy?.UserName;
         }
