@@ -1,4 +1,5 @@
 ﻿using Ardalis.Result;
+using ASM.Application.Common.Constants;
 using ASM.Application.Common.Endpoints;
 using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.AssignmentAggregate.Enums;
@@ -40,7 +41,8 @@ public sealed class ListAssignmentsEndpoint(ISender sender)
                 await HandleAsync(new(state, assignedDate, pageIndex, pageSize, orderBy, isDescending, search, assetId)))
             .Produces<Ok<ListAssignmentsResponse>>()
             .WithTags(nameof(Assignment))
-            .WithName("List Assignments");
+            .WithName("List Assignments")
+            .RequireAuthorization(AuthRole.Admin);
 
     public async Task<Ok<ListAssignmentsResponse>> HandleAsync(ListAssignmentsRequest request,
         CancellationToken cancellationToken = default)

@@ -19,7 +19,7 @@ public sealed class GetAssignmentEndpoint(ISender sender) : IEndpoint<Ok<Assignm
             .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Assignment))
             .WithName("Get Assignment")
-            .RequireAuthorization(AuthRole.User);
+            .RequireAuthorization(AuthRole.Admin);
 
     public async Task<Ok<AssignmentDto>> HandleAsync(GetAssignmentRequest request,
         CancellationToken cancellationToken = default)
