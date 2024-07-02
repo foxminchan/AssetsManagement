@@ -12,7 +12,7 @@ export function buildQueryString(options?: Record<string, any>): string {
   return Object.entries(options)
     .filter(([, value]) => value !== undefined && value !== null)
     .map(([key, value]) =>
-      key === "state" || key === "categories"
+      (key === "state" && Array.isArray(value)) || key === "categories"
         ? (value as string[])
             .map(
               (item) => `${encodeURIComponent(key)}=${encodeURIComponent(item)}`

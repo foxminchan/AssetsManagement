@@ -59,7 +59,11 @@ public sealed class ListAssignmentsEndpoint(ISender sender)
 
         var result = await sender.Send(query, cancellationToken);
 
-        var assignments = result.Value.ToAssignmentDtos((int)result.PagedInfo.TotalRecords, request.IsDescending);
+        var assignments = result.Value.ToAssignmentDtos(
+            (int)result.PagedInfo.PageNumber,
+            (int)result.PagedInfo.PageSize,
+            (int)result.PagedInfo.TotalRecords,
+            request.IsDescending);
 
         ListAssignmentsResponse response = new(result.PagedInfo, assignments);
 

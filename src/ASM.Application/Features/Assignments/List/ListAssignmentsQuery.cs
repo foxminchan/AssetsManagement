@@ -37,7 +37,7 @@ public sealed class ListAssignmentsHandler(
             request.AssetId);
 
         var assignments = await assignmentRepository.ListAsync(spec, cancellationToken);
-        var staffIds = assignments.Select(a => a.StaffId).Concat(assignments.Select(a => a.UpdatedBy)).Distinct();
+        var staffIds = assignments.Select(a => a.StaffId).Concat(assignments.Select(a => a.CreatedBy)).Distinct();
         var staffDictionary = (await staffRepository.ListAsync(new StaffFilterSpec(staffIds), cancellationToken))
             .ToDictionary(staff => staff.Id);
 

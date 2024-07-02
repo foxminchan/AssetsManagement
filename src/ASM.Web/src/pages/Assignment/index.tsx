@@ -27,12 +27,7 @@ const breadcrumbItems = [
   },
 ]
 
-const states = [
-  "All",
-  State.Accepted,
-  State.WaitingForAcceptance,
-  State.IsRequested,
-]
+const states = ["All", State.Accepted, State.WaitingForAcceptance]
 
 export default function Assignments() {
   const navigate = useNavigate({ from: "/assignment" })
@@ -133,6 +128,9 @@ export default function Assignments() {
       desc: queryParameters.isDescending,
     }
     pagination.pageIndex = queryParameters.pageIndex - 1
+    if (queryParameters.state === undefined && selectedState !== "All") {
+      setSelectedState("All")
+    }
   }, [params])
 
   useEffect(() => {

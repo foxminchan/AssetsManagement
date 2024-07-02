@@ -31,5 +31,5 @@ public sealed class StaffFilterSpec : Specification<Staff>
         => Query.Where(x => x.Id == id && x.Location == location && !x.IsDeleted);
 
     public StaffFilterSpec(IEnumerable<Guid> ids)
-        => Query.Where(x => ids.Contains(x.Id) && !x.IsDeleted);
+        => Query.Where(x => ids.Contains(x.Id));
 }
