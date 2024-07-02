@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react"
+import useDeleteAssignment from "@features/assignments/useDeleteAssignment"
 import DataGrid from "@components/data/data-grid"
 import FilterDate from "@components/fields/date-input"
 import FilterInput from "@components/fields/filter-input"
 import SearchInput from "@components/fields/search-input"
 import AssignmentInfoModal from "@components/modals/assignment-info-modal"
+import ConfirmModal from "@components/modals/confirm-modal"
 import AssignmentColumns from "@components/tables/assignment/columns"
 import { AssignmentRowAction } from "@components/tables/assignment/row-action"
 import { State } from "@features/assignments/assignment.type"
@@ -65,8 +67,13 @@ export default function Assignments() {
   )
   const [selectedDate, setSelectedDate] = useState<Date>()
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
+  const [openDisableConfirmMod, setOpenDisableConfirmMod] = useState(false)
 
-  const { data, isLoading: listLoading } = useListAssignments(queryParameters)
+  const {
+    data,
+    isLoading: listLoading,
+    refetch,
+  } = useListAssignments(queryParameters)
 
   if (
     data &&
@@ -89,6 +96,14 @@ export default function Assignments() {
 
   const searchOnClick = () => {
     resetPagination()
+  }
+
+  const { mutate: deleteAssignment, isSuccess: deleteAssignmentSuccess } =
+    useDeleteAssignment()
+
+  const handleAssignmentAction = (id: string) => {
+    deleteAssignment(id)
+    setOpenDisableConfirmMod(false)
   }
 
   useEffect(() => {
@@ -132,6 +147,12 @@ export default function Assignments() {
   useEffect(() => {
     context?.setBreadcrumbs(breadcrumbItems)
   }, [])
+
+  useEffect(() => {
+    if (deleteAssignmentSuccess) {
+      refetch()
+    }
+  }, [deleteAssignmentSuccess])
 
   return (
     <>
@@ -196,7 +217,12 @@ export default function Assignments() {
             sorting: sorting,
             setSorting: setSorting,
             renderRowActions: (assignment) => (
-              <AssignmentRowAction key={assignment.id} data={assignment} />
+              <AssignmentRowAction
+                key={assignment.id}
+                data={assignment}
+                openModal={setOpenDisableConfirmMod}
+                id={setSelectedAssignmentId}
+              />
             ),
           },
         }}
@@ -209,6 +235,15 @@ export default function Assignments() {
           title={"Detailed Assignment Information"}
         />
       )}
+      <ConfirmModal
+        open={openDisableConfirmMod}
+        message="Do you want to disable this user?"
+        title="Are you sure?"
+        buttonOkLabel="Disable"
+        buttonCloseLabel="Cancel"
+        onOk={() => handleAssignmentAction(selectedAssignmentId)}
+        onClose={() => setOpenDisableConfirmMod(false)}
+      />
     </>
   )
 }

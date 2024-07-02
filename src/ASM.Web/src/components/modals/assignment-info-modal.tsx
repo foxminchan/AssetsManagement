@@ -59,7 +59,7 @@ export default function AssignmentInfoModal({
               .otherwise(() => value)
 
             return (
-              <Grid container key={key} rowSpacing={3}>
+              <Grid container key={key}>
                 <Grid xs={4} item>
                   {assignmentFieldLabels[key]}
                 </Grid>

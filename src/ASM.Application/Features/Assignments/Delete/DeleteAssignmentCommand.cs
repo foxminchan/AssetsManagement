@@ -21,7 +21,6 @@ public class DeleteAssignmentHandler(
     public async Task<Result> Handle(DeleteAssignmentCommand request, CancellationToken cancellationToken)
     {
         Assignment? assignment;
-
         var claimsPrincipal = httpContextAccessor.HttpContext?.User;
 
         if (claimsPrincipal?.FindFirst(x => x.Type == nameof(AuthRole))?.Value == AuthRole.Admin)
@@ -42,6 +41,9 @@ public class DeleteAssignmentHandler(
         }
 
         Guard.Against.NotFound(request.Id, assignment);
+
+        assignment.Staff = null;
+        assignment.Asset = null;
 
         await repository.DeleteAsync(assignment, cancellationToken);
 

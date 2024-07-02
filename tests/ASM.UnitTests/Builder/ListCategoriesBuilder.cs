@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ASM.Application.Domain.AssetAggregate;
+﻿using ASM.Application.Domain.AssetAggregate;
 
 namespace ASM.UnitTests.Builder;
 
-public class ListCategoriesBuilder
+public static class ListCategoriesBuilder
 {
     private static List<Category> _categories = [];
 
