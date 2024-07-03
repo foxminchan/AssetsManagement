@@ -23,10 +23,12 @@ stages:
 
         steps:
           - task: NodeTool@0
+            displayName: "Install Node.js"
             inputs:
               versionSpec: "22.0.0"
 
           - task: UseDotNet@2
+            displayName: "Install .NET Core SDK"
             inputs:
               version: "8.0.204"
 
@@ -44,13 +46,14 @@ stages:
               projects: $(solution)
               arguments: --configuration $(buildConfiguration)
 
-          - task: DotNetCoreCLI@2
-            displayName: Test
+          - script: dotnet test $(solution) --logger "junit;LogFilePath=./TestResults/results.xml" --collect:"XPlat Code Coverage" /p:CollectCoverage=true /p:CoverletOutput=./TestResults /p:CoverletOutputFormat=cobertura
+            displayName: "Run Tests"
+          - task: PublishTestResults@2
             inputs:
-              command: "test"
-              projects: $(solution)
-              publishTestResults: false
-              arguments: '--collect:"XPlat Code Coverage" /p:CollectCoverage=true /p:CoverletOutput=./TestResults /p:CoverletOutputFormat=cobertura'
+              testResultsFormat: "JUnit"
+              testResultsFiles: "$(Build.SourcesDirectory)/tests/**/TestResults/**/results.xml"
+              testRunTitle: "Test Results"
+              displayName: "Publish Test Result"
 
           - task: reportgenerator@5
             displayName: Generate Test Report

@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using ASM.Application.Domain.AssetAggregate;
 using ASM.Application.Features.Assignments;
 using ASM.IntegrationTest.Extensions;
 using ASM.IntegrationTest.Fakers;
@@ -38,6 +39,8 @@ public sealed class GetAssignmentTests(ApplicationFactory<Program> factory)
         var assignment = new AssignmentFaker().Generate(1);
         var assets = new AssetFaker().Generate(1);
         var staffs = new StaffFaker().Generate(1);
+        var category = new Category { Id = Guid.NewGuid(), Name = "Category 1", Prefix = "C1" };
+        assets[0].CategoryId = category.Id;
         assignment[0].AssetId = assets[0].Id;
         assignment[0].StaffId = staffs[0].Id;
         assignment[0].CreatedBy = staffs[0].Id;
@@ -45,6 +48,7 @@ public sealed class GetAssignmentTests(ApplicationFactory<Program> factory)
         var id = assignment[0].Id;
 
         // Act
+        await _factory.EnsureCreatedAndPopulateDataAsync([category]);
         await _factory.EnsureCreatedAndPopulateDataAsync(assets);
         await _factory.EnsureCreatedAndPopulateDataAsync(staffs);
         await _factory.EnsureCreatedAndPopulateDataAsync(assignment);

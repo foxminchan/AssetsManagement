@@ -27,6 +27,7 @@ public sealed class ListAssignmentsTests(ApplicationFactory<Program> factory)
         var client = _factory.CreateClient();
         var assignments = _faker.Generate(10);
         var assets = new AssetFaker().Generate(1);
+        assets[0].Category = new() { Id = Guid.NewGuid(), Name = "Category 1", Prefix = "C1" };
         var staffs = new StaffFaker().Generate(1);
 
         foreach (var assignment in assignments)
@@ -56,6 +57,7 @@ public sealed class ListAssignmentsTests(ApplicationFactory<Program> factory)
         var client = _factory.CreateClient();
         var assignments = _faker.Generate(10);
         var assets = new AssetFaker().Generate(1);
+        assets[0].Category = new() { Id = Guid.NewGuid(), Name = "Category 1", Prefix = "C1" };
         var staffs = new StaffFaker().Generate(1);
 
         foreach (var assignment in assignments)

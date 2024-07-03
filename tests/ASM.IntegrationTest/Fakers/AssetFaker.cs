@@ -15,11 +15,5 @@ public sealed class AssetFaker : Faker<Asset>
         RuleFor(x => x.InstallDate, f => f.Date.FutureDateOnly());
         RuleFor(x => x.Location, f => f.PickRandom<Location>());
         RuleFor(x => x.State, f => f.PickRandom<State>());
-        RuleFor(x => x.Category, f => new()
-        {
-            Id = f.Random.Guid(),
-            Prefix = f.Random.String2(2),
-            Name = f.Commerce.Categories(1)[0]
-        });
     }
 }

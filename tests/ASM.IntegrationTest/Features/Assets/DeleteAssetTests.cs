@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using ASM.Application.Domain.AssetAggregate;
 using ASM.Application.Domain.AssetAggregate.Enums;
 using ASM.Application.Domain.Shared;
 using ASM.IntegrationTest.Extensions;
@@ -38,11 +39,14 @@ public sealed class DeleteAssetTests(ApplicationFactory<Program> factory)
         // Arrange
         var client = _factory.CreateClient();
         var asset = _faker.Generate(1);
+        var category = new Category { Id = Guid.NewGuid(), Name = "Category 1", Prefix = "C1" };
         asset[0].State = State.Available;
         asset[0].Location = Location.HoChiMinh;
+        asset[0].CategoryId = category.Id;
         var id = asset[0].Id;
 
         // Act
+        await _factory.EnsureCreatedAndPopulateDataAsync([category]);
         await _factory.EnsureCreatedAndPopulateDataAsync(asset);
         var response = await client.DeleteAsync($"/api/assets/{id}");
 

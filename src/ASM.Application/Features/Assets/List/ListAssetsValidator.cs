@@ -1,5 +1,4 @@
-﻿using ASM.Application.Domain.AssetAggregate.Enums;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace ASM.Application.Features.Assets.List;
 
