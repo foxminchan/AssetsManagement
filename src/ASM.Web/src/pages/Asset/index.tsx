@@ -123,6 +123,15 @@ export default function Assets() {
       desc: queryParameters.isDescending,
     }
     pagination.pageIndex = queryParameters.pageIndex - 1
+    
+    if (queryParameters.state === undefined && selectedState[0] !== "All") {
+      setSelectedState([
+        AssetState.Assigned,
+        AssetState.Available,
+        AssetState.NotAvailable,
+      ])
+      setSelectedCategories(["All"])
+    }
   }, [params])
 
   useEffect(() => {

@@ -43,7 +43,7 @@ export default class HttpService {
           error.response?.status === HttpStatusCode.Unauthorized &&
           localStorage.getItem(".AspNetCore.Identity.Token")
         ) {
-          localStorage.removeItem("isAuthenticated")
+          localStorage.removeItem(".AspNetCore.Identity.Token")
           throw redirect({
             to: "/",
           })
