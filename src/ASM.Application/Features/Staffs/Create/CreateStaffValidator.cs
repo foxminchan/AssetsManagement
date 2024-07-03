@@ -22,7 +22,7 @@ public sealed class CreateStaffValidator : AbstractValidator<CreateStaffCommand>
 
         RuleFor(x => x.JoinedDate)
             .NotEmpty().WithMessage("Join day is required")
-            .Must(x => x.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday)
+            .Must(x => x.DayOfWeek is not DayOfWeek.Saturday or DayOfWeek.Sunday)
             .WithMessage("Joined date is Saturday or Sunday. Please select a different date")
             .GreaterThan(x => x.Dob)
             .WithMessage("Joined date must be later than Date of Birth. Please select a different date");
