@@ -39,8 +39,11 @@ export default class HttpService {
         return response.data
       },
       (error: AppAxiosError) => {
-        if (error.response?.status === HttpStatusCode.Unauthorized) {
-          localStorage.removeItem(".AspNetCore.Identity.Token")
+        if (
+          error.response?.status === HttpStatusCode.Unauthorized &&
+          localStorage.getItem(".AspNetCore.Identity.Token")
+        ) {
+          localStorage.removeItem("isAuthenticated")
           throw redirect({
             to: "/",
           })
