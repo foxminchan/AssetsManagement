@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from "react"
 import DataGrid from "@components/data/data-grid"
 import FilterInput from "@components/fields/filter-input"
 import SearchInput from "@components/fields/search-input"
+import ConfirmModal from "@components/modals/confirm-modal"
 import UserInfoModal from "@components/modals/user-info-modal"
 import UserColumns from "@components/tables/user/columns"
 import { UserRowAction } from "@components/tables/user/row-action"
+import useDeleteUser from "@features/users/useDeleteUser"
 import useGetUser from "@features/users/useGetUser"
 import useListUsers from "@features/users/useListUsers"
 import { RoleType } from "@features/users/user.type"
@@ -30,10 +32,26 @@ export default function Users() {
   const router = useRouter()
   const context = useContext(BreadcrumbsContext)
   const [open, setOpen] = useState(false)
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
   const [selectedUserId, setSelectedUserId] = useState<string>("")
   const params = useSearch({
     strict: false,
   })
+
+  const {
+    mutate: deleteUser,
+    isSuccess: isDeleteUserSuccess,
+    isError: isDeleteUserError,
+  } = useDeleteUser()
+  const handleModalOpen = (id: string) => {
+    setSelectedUserId(id)
+    setDeleteModalOpen(true)
+  }
+
+  useEffect(() => {
+    if (isDeleteUserSuccess) refetch()
+    else if (isDeleteUserError) setDeleteModalOpen(false)
+  }, [isDeleteUserSuccess, isDeleteUserError])
 
   const queryParameters = {
     pageIndex:
@@ -60,7 +78,11 @@ export default function Users() {
   )
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
 
-  const { data, isLoading: listLoading } = useListUsers(queryParameters)
+  const {
+    data,
+    isLoading: listLoading,
+    refetch,
+  } = useListUsers(queryParameters)
 
   if (
     data &&
@@ -74,6 +96,8 @@ export default function Users() {
     })
   }
 
+  const handleDisableUser = (id: string) =>
+    Promise.resolve(deleteUser(id)).then(() => (window.location.href = "/user"))
   const userId = useAtomValue(userAtoms)
   const { data: user, isLoading: userLoading } = useGetUser(userId)
 
@@ -183,10 +207,23 @@ export default function Users() {
             sorting: sorting,
             setSorting: setSorting,
             renderRowActions: (user) => (
-              <UserRowAction key={user.id} data={user} />
+              <UserRowAction
+                key={user.id}
+                data={user}
+                setOpen={handleModalOpen}
+              />
             ),
           },
         }}
+      />
+      <ConfirmModal
+        open={deleteModalOpen}
+        message="Do you want to disable this user?"
+        title="Are you sure?"
+        buttonOkLabel="Disable"
+        buttonCloseLabel="Cancel"
+        onOk={() => handleDisableUser(selectedUserId)}
+        onClose={() => setDeleteModalOpen(false)}
       />
       {selectedUserId && (
         <UserInfoModal
