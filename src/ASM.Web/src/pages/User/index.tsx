@@ -120,6 +120,10 @@ export default function Users() {
       desc: queryParameters.isDescending,
     }
     pagination.pageIndex = queryParameters.pageIndex - 1
+
+    if (queryParameters.roleType === undefined && selectedType !== "") {
+      setSelectedType("")
+    }
   }, [params])
 
   useEffect(() => {
