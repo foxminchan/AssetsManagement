@@ -25,11 +25,12 @@ public sealed record ListAssignmentsResponse(
     PagedInfo PagedInfo,
     List<AssignmentDto> Assignments);
 
-public sealed class ListAssignmentsEndpoint(ISender sender)
+public sealed class ListAssignmentsEndpoint
     : IEndpoint<Ok<ListAssignmentsResponse>, ListAssignmentsRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/assignments", async (
+                    ISender sender,
                     int pageIndex = 1,
                     int pageSize = 20,
                     string? orderBy = nameof(Assignment.Asset.AssetCode),
@@ -38,13 +39,14 @@ public sealed class ListAssignmentsEndpoint(ISender sender)
                     DateOnly? assignedDate = null,
                     string? search = null,
                     Guid? assetId = null) =>
-                await HandleAsync(new(state, assignedDate, pageIndex, pageSize, orderBy, isDescending, search, assetId)))
+                await HandleAsync(new(state, assignedDate, pageIndex, pageSize, orderBy, isDescending, search, assetId),
+                    sender))
             .Produces<Ok<ListAssignmentsResponse>>()
             .WithTags(nameof(Assignment))
             .WithName("List Assignments")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Ok<ListAssignmentsResponse>> HandleAsync(ListAssignmentsRequest request,
+    public async Task<Ok<ListAssignmentsResponse>> HandleAsync(ListAssignmentsRequest request, ISender sender,
         CancellationToken cancellationToken = default)
     {
         ListAssignmentsQuery query = new(

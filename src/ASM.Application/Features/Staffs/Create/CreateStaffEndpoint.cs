@@ -19,18 +19,19 @@ public sealed record CreateStaffRequest(
     Gender Gender,
     RoleType RoleType);
 
-public sealed class CreateStaffEndpoint(ISender sender)
+public sealed class CreateStaffEndpoint
     : IEndpoint<Created<Guid>, CreateStaffRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapPost("/users", async (CreateStaffRequest request) => await HandleAsync(request))
+        app.MapPost("/users",
+                async (CreateStaffRequest request, ISender sender) => await HandleAsync(request, sender))
             .Produces<Created<Guid>>(StatusCodes.Status201Created)
             .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Staff))
             .WithName("Create User")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Created<Guid>> HandleAsync(CreateStaffRequest request,
+    public async Task<Created<Guid>> HandleAsync(CreateStaffRequest request, ISender sender,
         CancellationToken cancellationToken = default)
     {
         CreateStaffCommand command = new(

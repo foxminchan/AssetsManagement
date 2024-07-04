@@ -11,18 +11,18 @@ using Microsoft.AspNetCore.Routing;
 
 namespace ASM.Application.Features.Assignments.Accept;
 
-public sealed class AcceptAssignmentEndpoint(ISender sender) : IEndpoint<Ok, Guid>
+public sealed class AcceptAssignmentEndpoint : IEndpoint<Ok, Guid>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapPatch("/assignments/{id:guid}/accepted",
-                async (Guid id) => await HandleAsync(id))
+                async (Guid id, ISender sender) => await HandleAsync(id, sender))
             .Produces<Ok>()
             .Produces<NotFound<string>>()
             .WithTags(nameof(Assignment))
             .WithName("Accepted Assignment")
             .RequireAuthorization(AuthRole.User);
 
-    public async Task<Ok> HandleAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<Ok> HandleAsync(Guid id, ISender sender, CancellationToken cancellationToken = default)
     {
         UpdateAssignmentStateCommand command = new(id, State.Accepted);
 

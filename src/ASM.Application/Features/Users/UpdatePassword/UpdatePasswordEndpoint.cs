@@ -12,18 +12,20 @@ namespace ASM.Application.Features.Users.UpdatePassword;
 
 public sealed record UpdatePasswordRequest(Guid Id, string OldPassword, string NewPassword);
 
-public sealed class UpdatePasswordEndpoint(ISender sender)
+public sealed class UpdatePasswordEndpoint
     : IEndpoint<Ok, UpdatePasswordRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapPatch("/updatePassword", async (UpdatePasswordRequest request) => await HandleAsync(request))
+        app.MapPatch("/updatePassword",
+                async (UpdatePasswordRequest request, ISender sender) => await HandleAsync(request, sender))
             .Produces<Ok>()
             .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(ApplicationUser))
             .WithName("Update Password")
             .RequireAuthorization(AuthRole.User);
 
-    public async Task<Ok> HandleAsync(UpdatePasswordRequest request, CancellationToken cancellationToken = default)
+    public async Task<Ok> HandleAsync(UpdatePasswordRequest request, ISender sender,
+        CancellationToken cancellationToken = default)
     {
         UpdatePasswordCommand command = new(request.Id, request.OldPassword, request.NewPassword);
 

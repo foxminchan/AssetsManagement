@@ -18,17 +18,19 @@ public sealed record UpdateAssetRequest(
     DateOnly InstalledDate,
     State State);
 
-public sealed class UpdateAssetEndpoint(ISender sender) : IEndpoint<Ok, UpdateAssetRequest>
+public sealed class UpdateAssetEndpoint : IEndpoint<Ok, UpdateAssetRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapPut("/assets", async (UpdateAssetRequest request) => await HandleAsync(request))
+        app.MapPut("/assets",
+                async (UpdateAssetRequest request, ISender sender) => await HandleAsync(request, sender))
             .Produces<Ok>()
             .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Asset))
             .WithName("Update Asset")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Ok> HandleAsync(UpdateAssetRequest request, CancellationToken cancellationToken = default)
+    public async Task<Ok> HandleAsync(UpdateAssetRequest request, ISender sender,
+        CancellationToken cancellationToken = default)
     {
         UpdateAssetCommand command = new(
             request.Id,

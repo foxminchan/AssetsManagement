@@ -9,26 +9,27 @@ using Microsoft.AspNetCore.Routing;
 
 namespace ASM.Application.Features.Categories.List;
 
-public sealed record ListCategorieResponse(
+public sealed record ListCategoriesResponse(
     List<CategoryDto> Categories);
 
-public sealed class ListCategoriesEndpoint(ISender sender) : IEndpointWithoutRequest<Ok<ListCategorieResponse>>
+public sealed class ListCategoriesEndpoint : IEndpointWithoutRequest<Ok<ListCategoriesResponse>>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapGet("/categories", async () =>
-                await HandleAsync())
-            .Produces<Ok<ListCategorieResponse>>()
+        app.MapGet("/categories", async (ISender sender) =>
+                await HandleAsync(sender))
+            .Produces<Ok<ListCategoriesResponse>>()
             .WithTags(nameof(Category))
             .WithName("List Categories")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Ok<ListCategorieResponse>> HandleAsync(CancellationToken cancellationToken = default)
+    public async Task<Ok<ListCategoriesResponse>> HandleAsync(ISender sender,
+        CancellationToken cancellationToken = default)
     {
         ListCategoriesQuery query = new();
 
         var result = await sender.Send(query, cancellationToken);
 
-        ListCategorieResponse response = new(result.ToCategoryDtos());
+        ListCategoriesResponse response = new(result.ToCategoryDtos());
 
         return TypedResults.Ok(response);
     }

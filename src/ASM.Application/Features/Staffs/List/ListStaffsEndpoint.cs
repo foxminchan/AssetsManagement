@@ -23,23 +23,24 @@ public sealed record ListStaffResponse(
     PagedInfo PagedInfo,
     List<StaffDto> Users);
 
-public sealed class ListStaffsEndpoint(ISender sender) : IEndpoint<Ok<ListStaffResponse>, ListStaffRequest>
+public sealed class ListStaffsEndpoint : IEndpoint<Ok<ListStaffResponse>, ListStaffRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/users", async (
+                    ISender sender,
                     int pageIndex = 1,
                     int pageSize = 20,
                     string? orderBy = nameof(Staff.StaffCode),
                     bool isDescending = false,
                     RoleType? roleType = null,
                     string? search = null) =>
-                await HandleAsync(new(roleType, pageIndex, pageSize, orderBy, isDescending, search)))
+                await HandleAsync(new(roleType, pageIndex, pageSize, orderBy, isDescending, search), sender))
             .Produces<Ok<ListStaffResponse>>()
             .WithTags(nameof(Staff))
             .WithName("List Staffs")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Ok<ListStaffResponse>> HandleAsync(ListStaffRequest request,
+    public async Task<Ok<ListStaffResponse>> HandleAsync(ListStaffRequest request, ISender sender,
         CancellationToken cancellationToken = default)
     {
         ListStaffsQuery query = new(

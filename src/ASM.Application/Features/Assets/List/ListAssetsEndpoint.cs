@@ -24,10 +24,11 @@ public sealed record ListAssetResponse(
     PagedInfo PagedInfo,
     List<AssetDto> Assets);
 
-public sealed class ListAssetsEndpoint(ISender sender) : IEndpoint<Ok<ListAssetResponse>, ListAssetRequest>
+public sealed class ListAssetsEndpoint : IEndpoint<Ok<ListAssetResponse>, ListAssetRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/assets", async (
+                    ISender sender,
                     string[]? categories = null,
                     State[]? state = null,
                     int pageIndex = 1,
@@ -35,13 +36,13 @@ public sealed class ListAssetsEndpoint(ISender sender) : IEndpoint<Ok<ListAssetR
                     string? orderBy = nameof(Asset.AssetCode),
                     bool isDescending = false,
                     string? search = null) =>
-                await HandleAsync(new(categories, state, pageIndex, pageSize, orderBy, isDescending, search)))
+                await HandleAsync(new(categories, state, pageIndex, pageSize, orderBy, isDescending, search), sender))
             .Produces<Ok<ListAssetResponse>>()
             .WithTags(nameof(Asset))
             .WithName("List Assets")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Ok<ListAssetResponse>> HandleAsync(ListAssetRequest request,
+    public async Task<Ok<ListAssetResponse>> HandleAsync(ListAssetRequest request, ISender sender,
         CancellationToken cancellationToken = default)
     {
         ListAssetsQuery query = new(

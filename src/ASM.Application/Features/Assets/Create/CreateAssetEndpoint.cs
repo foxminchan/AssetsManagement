@@ -29,8 +29,7 @@ public sealed class CreateAssetEndpoint : IEndpoint<Created<Guid>, CreateAssetRe
             .WithName("Create Asset")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Created<Guid>> HandleAsync(CreateAssetRequest request,
-        ISender sender,
+    public async Task<Created<Guid>> HandleAsync(CreateAssetRequest request, ISender sender,
         CancellationToken cancellationToken = default)
     {
         CreateAssetCommand command = new(

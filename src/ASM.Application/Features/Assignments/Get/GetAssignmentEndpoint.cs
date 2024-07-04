@@ -11,17 +11,17 @@ namespace ASM.Application.Features.Assignments.Get;
 
 public sealed record GetAssignmentRequest(Guid Id);
 
-public sealed class GetAssignmentEndpoint(ISender sender) : IEndpoint<Ok<AssignmentDto>, GetAssignmentRequest>
+public sealed class GetAssignmentEndpoint : IEndpoint<Ok<AssignmentDto>, GetAssignmentRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapGet("/assignments/{id:guid}", async (Guid id) => await HandleAsync(new(id)))
+        app.MapGet("/assignments/{id:guid}", async (Guid id, ISender sender) => await HandleAsync(new(id), sender))
             .Produces<Ok<AssignmentDto>>()
             .Produces<NotFound<string>>(StatusCodes.Status404NotFound)
             .WithTags(nameof(Assignment))
             .WithName("Get Assignment")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Ok<AssignmentDto>> HandleAsync(GetAssignmentRequest request,
+    public async Task<Ok<AssignmentDto>> HandleAsync(GetAssignmentRequest request, ISender sender,
         CancellationToken cancellationToken = default)
     {
         GetAssignmentQuery query = new(request.Id);

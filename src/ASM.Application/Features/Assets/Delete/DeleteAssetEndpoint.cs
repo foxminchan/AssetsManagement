@@ -11,10 +11,10 @@ namespace ASM.Application.Features.Assets.Delete;
 
 public sealed record DeleteAssetRequest(Guid Id);
 
-public sealed class DeleteAssetEndpoint(ISender sender) : IEndpoint<NoContent, DeleteAssetRequest>
+public sealed class DeleteAssetEndpoint : IEndpoint<NoContent, DeleteAssetRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapDelete("/assets/{id:guid}", async (Guid id) => await HandleAsync(new(id)))
+        app.MapDelete("/assets/{id:guid}", async (Guid id, ISender sender) => await HandleAsync(new(id), sender))
             .Produces<NoContent>(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest)
@@ -22,7 +22,8 @@ public sealed class DeleteAssetEndpoint(ISender sender) : IEndpoint<NoContent, D
             .WithName("Delete Asset")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<NoContent> HandleAsync(DeleteAssetRequest request, CancellationToken cancellationToken = default)
+    public async Task<NoContent> HandleAsync(DeleteAssetRequest request, ISender sender,
+        CancellationToken cancellationToken = default)
     {
         DeleteAssetCommand command = new(request.Id);
 

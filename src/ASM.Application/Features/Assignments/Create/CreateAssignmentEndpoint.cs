@@ -16,18 +16,18 @@ public sealed record CreateAssignmentRequest(
     DateOnly AssignedDate,
     string Note);
 
-public sealed class CreateAssignmentEndpoint(ISender sender)
-    : IEndpoint<Created<Guid>, CreateAssignmentRequest>
+public sealed class CreateAssignmentEndpoint : IEndpoint<Created<Guid>, CreateAssignmentRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapPost("/assignments", async (CreateAssignmentRequest request) => await HandleAsync(request))
+        app.MapPost("/assignments",
+                async (CreateAssignmentRequest request, ISender sender) => await HandleAsync(request, sender))
             .Produces<Created<Guid>>(StatusCodes.Status201Created)
             .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Assignment))
             .WithName("Create Assignment")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Created<Guid>> HandleAsync(CreateAssignmentRequest request,
+    public async Task<Created<Guid>> HandleAsync(CreateAssignmentRequest request, ISender sender,
         CancellationToken cancellationToken = default)
     {
         CreateAssignmentCommand command = new(

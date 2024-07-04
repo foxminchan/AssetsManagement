@@ -18,17 +18,19 @@ public sealed record UpdateStaffRequest(
     Gender Gender,
     RoleType RoleType);
 
-public sealed class UpdateStaffEndpoint(ISender sender) : IEndpoint<Ok, UpdateStaffRequest>
+public sealed class UpdateStaffEndpoint : IEndpoint<Ok, UpdateStaffRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapPut("/users", async (UpdateStaffRequest request) => await HandleAsync(request))
+        app.MapPut("/users",
+                async (UpdateStaffRequest request, ISender sender) => await HandleAsync(request, sender))
             .Produces<Ok>()
             .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
             .WithTags(nameof(Staff))
             .WithName("Update Staff")
             .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Ok> HandleAsync(UpdateStaffRequest request, CancellationToken cancellationToken = default)
+    public async Task<Ok> HandleAsync(UpdateStaffRequest request, ISender sender,
+        CancellationToken cancellationToken = default)
     {
         UpdateStaffCommand command = new(request.Id, request.Dob, request.JoinedDate, request.Gender, request.RoleType);
 
