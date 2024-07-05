@@ -320,7 +320,7 @@ export default function Assets() {
           in{" "}
           <Link
             className="!text-blue-600 !underline"
-            to={`/asset/edit/${selectedAssetId}`}
+            to={`/asset/${selectedAssetId}`}
           >
             Edit Asset page
           </Link>
