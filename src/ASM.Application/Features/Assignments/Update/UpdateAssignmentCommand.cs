@@ -27,7 +27,6 @@ public sealed class UpdateAssignmentHandler(IRepository<Assignment> repository)
             assignment.UpdateAssetState(request.AssetId, assignment.AssetId);
         }
 
-        assignment.Asset = null;
         assignment.Update(request.UserId, request.AssetId, request.AssignedDate, request.Note);
         await repository.UpdateAsync(assignment, cancellationToken);
         await repository.SaveChangesAsync(cancellationToken);

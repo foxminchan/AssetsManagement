@@ -44,7 +44,6 @@ public sealed class Assignment : TrackableEntityBase, IAggregateRoot
         AssetId = Guard.Against.Null(assetId);
         AssignedDate = assignedDate;
         Note = note;
-        Asset = null;
     }
 
     public void UpdateAssetState(Guid assetId)
