@@ -3,6 +3,7 @@ using ASM.Application.Common.Behaviors;
 using ASM.Application.Common.Endpoints;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Common.Security;
+using ASM.Application.Infrastructure.Excel;
 using ASM.Application.Infrastructure.Persistence;
 using ASM.Application.Infrastructure.Persistence.Interceptors;
 using EntityFramework.Exceptions.SqlServer;
@@ -37,6 +38,8 @@ public static class ConfigureServices
                 cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(TxBehavior<,>),
                     ServiceLifetime.Scoped);
             });
+
+        builder.Services.AddScoped(typeof(IExcelWriter<>), typeof(ExcelWriter<>));
 
         return builder;
     }

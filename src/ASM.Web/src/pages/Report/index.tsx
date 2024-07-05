@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react"
 import DataGrid from "@components/data/data-grid"
 import AssetsByCategoryReportColumns from "@components/tables/report/columns"
+import useExportAssetsByCategoryReport from "@features/report/useExportAssetsByCategoryReport"
 import useGetAssetsByCategoryReport from "@features/report/useGetAssetsByCategoryReport"
 import { DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
 import { Button } from "@mui/material"
 import { useRouter, useSearch } from "@tanstack/react-router"
+import saveAs from "file-saver"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
 
 import { RouteItem } from "@/types/data"
@@ -43,9 +45,10 @@ export default function Report() {
   const { data, isLoading: listLoading } =
     useGetAssetsByCategoryReport(queryParameters)
 
+  const { data: Report, isLoading: reportLoading } =
+    useExportAssetsByCategoryReport(queryParameters)
+
   useEffect(() => {
-    // Update sorting and pagination based on query parameters
-    // when navigating back to this page, to match previous state
     sorting[0] = {
       id: queryParameters.orderBy,
       desc: queryParameters.isDescending,
@@ -68,7 +71,7 @@ export default function Report() {
       title="Report"
       buttonComponents={[
         {
-          id: "createNewAssignment",
+          id: "btn-export-report",
           component: (
             <Button
               variant="contained"
@@ -78,11 +81,10 @@ export default function Report() {
                 padding: "4px 8px",
                 minWidth: "auto",
               }}
-              onClick={() => {
-                console.log("Export")
-              }}
+              disabled={reportLoading}
+              onClick={() => saveAs(Report || new Blob(), "Report.xlsx")}
             >
-              Export
+              {reportLoading ? "Exporting..." : "Export Report"}
             </Button>
           ),
         },

@@ -13,6 +13,17 @@ class ReportService extends HttpService {
   ): Promise<AssetsByCategory[]> {
     return this.get(`/reports/assets-by-category?${buildQueryString(options)}`)
   }
+
+  exportAssetsByCategoryReport(
+    options?: Partial<AssetsByCategoryRequest>
+  ): Promise<Blob> {
+    return this.get(
+      `/reports/assets-by-category/export?${buildQueryString(options)}`,
+      {
+        responseType: "blob",
+      }
+    )
+  }
 }
 
 export default new ReportService()

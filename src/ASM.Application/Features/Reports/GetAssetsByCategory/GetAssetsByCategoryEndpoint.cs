@@ -1,16 +1,17 @@
 ﻿using ASM.Application.Common.Constants;
 using ASM.Application.Common.Endpoints;
+using ASM.Application.Features.Reports.AssetsByCategory;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
 
-namespace ASM.Application.Features.Reports.AssetsByCategory;
+namespace ASM.Application.Features.Reports.GetAssetsByCategory;
 
 public sealed record AssetsByCategoryRequest(string OrderBy, bool IsDescending);
 
-public sealed class AssetsByCategoryEndpoint : IEndpoint<Ok<List<AssetsByCategoryDto>>, AssetsByCategoryRequest>
+public sealed class GetAssetsByCategoryEndpoint : IEndpoint<Ok<List<AssetsByCategoryDto>>, AssetsByCategoryRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
         app.MapGet("/reports/assets-by-category", async (
@@ -18,7 +19,7 @@ public sealed class AssetsByCategoryEndpoint : IEndpoint<Ok<List<AssetsByCategor
                 string orderBy = nameof(AssetsByCategoryDto.Category),
                 bool isDescending = true) => await HandleAsync(new(orderBy, isDescending), sender))
             .Produces<Ok<List<AssetsByCategoryDto>>>()
-            .WithTags("Reports")
+            .WithTags(nameof(Reports))
             .WithName("Assets by Category")
             .RequireAuthorization(AuthRole.Admin);
 
