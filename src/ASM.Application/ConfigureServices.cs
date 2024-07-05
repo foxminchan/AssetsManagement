@@ -47,6 +47,8 @@ public static class ConfigureServices
 
         Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
 
+        builder.Services.AddSingleton<IDatabaseFactory, DatabaseFactory>();
+
         builder.Services.AddSingleton<AuditableEntityInterceptor>();
         builder.Services.AddSingleton<TrackableEntityInterceptor>();
 
@@ -60,7 +62,6 @@ public static class ConfigureServices
                         sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
                     })
                 .UseExceptionProcessor();
-                //.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             options.AddInterceptors(sp.GetRequiredService<AuditableEntityInterceptor>());
             options.AddInterceptors(sp.GetRequiredService<TrackableEntityInterceptor>());
