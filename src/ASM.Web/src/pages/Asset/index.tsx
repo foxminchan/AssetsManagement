@@ -19,7 +19,7 @@ import { assetAtom } from "@libs/jotai/assetAtom"
 import { Typography } from "@mui/material"
 import Button from "@mui/material/Button"
 import { Link, useNavigate, useRouter, useSearch } from "@tanstack/react-router"
-import { useAtomValue, useSetAtom } from "jotai"
+import { useAtom, useSetAtom } from "jotai"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
 
 const breadcrumbItems = [
@@ -107,7 +107,7 @@ export default function Assets() {
     })
   }
 
-  const assetId = useAtomValue(assetAtom)
+  const [assetId, setAssetId] = useAtom(assetAtom)
   const { data: newAsset, isLoading: newAssetIsLoading } = useGetAsset(assetId)
   const setNewAssetId = useSetAtom(assetAtom)
 
@@ -190,8 +190,10 @@ export default function Assets() {
   } = useDeleteAsset()
 
   useEffect(() => {
-    if (isDeleteAssetSuccess) refetch()
-    else if (isDeleteAssetError) setDeleteErrorModalOpen(true)
+    if (isDeleteAssetSuccess) {
+      refetch()
+      if (selectedAssetId == assetId) setAssetId("")
+    } else if (isDeleteAssetError) setDeleteErrorModalOpen(true)
     setDeleteModalOpen(false)
   }, [isDeleteAssetSuccess, isDeleteAssetError])
 
