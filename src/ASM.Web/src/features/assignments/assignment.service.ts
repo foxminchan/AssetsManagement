@@ -39,6 +39,10 @@ class AssignmentService extends HttpService {
     return this.patch(`/assignments/${id}/accepted`, {})
   }
 
+  requestForReturningAssignment(id: string): Promise<void> {
+    return this.patch(`/assignments/${id}/request-for-returning`, {})
+  }
+
   deleteAssignment(id: string): Promise<void> {
     return this.delete(`/assignments/${id}`)
   }

@@ -59,4 +59,10 @@ public sealed class Assignment : TrackableEntityBase, IAggregateRoot
         var assetUpdatedEvent = new AssignmentUpdatedEvent(newAssetAssignId, oldAssetAssignId);
         RegisterDomainEvent(assetUpdatedEvent);
     }
+
+    public void RequestForReturning(Guid id)
+    {
+        var assignmentRequestedForReturningEvent = new AssignmentRequestedForReturningEvent(id);
+        RegisterDomainEvent(assignmentRequestedForReturningEvent);
+    }
 }

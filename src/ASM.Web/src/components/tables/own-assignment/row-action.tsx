@@ -26,7 +26,7 @@ export const OwnAssignmentRowAction: FC<OwnAssignmentRowActionProps> = ({
   const state = assignmentData.state
 
   const { isDoneDisabled, isCloseDisabled, isRefreshDisabled } = match(state)
-    .with(State.IsRequested, () => ({
+    .with(State.RequestForReturning, () => ({
       isDoneDisabled: true,
       isCloseDisabled: true,
       isRefreshDisabled: true,
@@ -77,7 +77,7 @@ export const OwnAssignmentRowAction: FC<OwnAssignmentRowActionProps> = ({
       <IconButton
         aria-label="refresh"
         size="small"
-        color="primary"
+        color="info"
         id="btn-return"
         disabled={isRefreshDisabled}
         onClick={(event) => {

@@ -46,6 +46,8 @@ public sealed class UpdateAssignmentStateHandler(
 
         assignment.UpdateState(request.State);
 
+        if (request.State == State.RequestForReturning) assignment.RequestForReturning(assignment.Id);
+
         await repository.SaveChangesAsync(cancellationToken);
 
         return Result.Success();

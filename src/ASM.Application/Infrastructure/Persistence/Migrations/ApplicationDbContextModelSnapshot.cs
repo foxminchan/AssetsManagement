@@ -23,4584 +23,4584 @@ namespace ASM.Application.Infrastructure.Persistence.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("ASM.Application.Domain.AssetAggregate.Asset", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AssetCode")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nchar(8)")
-                        .IsFixedLength();
+                b.Property<string>("AssetCode")
+                    .IsRequired()
+                    .HasMaxLength(8)
+                    .HasColumnType("nchar(8)")
+                    .IsFixedLength();
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("CategoryId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 324, DateTimeKind.Utc).AddTicks(122));
+                b.Property<DateTime>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 324, DateTimeKind.Utc).AddTicks(122));
 
-                    b.Property<DateOnly>("InstallDate")
-                        .HasColumnType("date");
+                b.Property<DateOnly>("InstallDate")
+                    .HasColumnType("date");
 
-                    b.Property<byte>("Location")
-                        .HasColumnType("tinyint");
+                b.Property<byte>("Location")
+                    .HasColumnType("tinyint");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("Specification")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                b.Property<string>("Specification")
+                    .HasMaxLength(1000)
+                    .HasColumnType("nvarchar(1000)");
 
-                    b.Property<byte>("State")
-                        .HasColumnType("tinyint");
+                b.Property<byte>("State")
+                    .HasColumnType("tinyint");
 
-                    b.Property<DateTime?>("UpdateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 324, DateTimeKind.Utc).AddTicks(660));
+                b.Property<DateTime?>("UpdateDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 324, DateTimeKind.Utc).AddTicks(660));
 
-                    b.Property<Guid>("Version")
-                        .IsConcurrencyToken()
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("Version")
+                    .IsConcurrencyToken()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("AssetCode")
-                        .IsUnique();
+                b.HasIndex("AssetCode")
+                    .IsUnique();
 
-                    b.HasIndex("CategoryId");
+                b.HasIndex("CategoryId");
 
-                    b.ToTable("Assets");
+                b.ToTable("Assets");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4f21bb59-c059-4940-a6d9-2f7a85cadd74"),
-                            AssetCode = "PC000000",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(885),
-                            InstallDate = new DateOnly(2024, 12, 27),
-                            Location = (byte)0,
-                            Name = "Sleek Plastic Mouse",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)0,
-                            Version = new Guid("8a8fe20d-ac12-4854-89dc-7ee9e27e7978")
-                        },
-                        new
-                        {
-                            Id = new Guid("2d06d019-1a6d-42ca-af38-53de7d6de993"),
-                            AssetCode = "PC000001",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1334),
-                            InstallDate = new DateOnly(2025, 6, 12),
-                            Location = (byte)1,
-                            Name = "Practical Wooden Car",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)4,
-                            Version = new Guid("54101e8f-1d22-4cf9-a606-5594aa8172dc")
-                        },
-                        new
-                        {
-                            Id = new Guid("8c3796c1-30cc-4bba-bbff-233514c80341"),
-                            AssetCode = "PC000002",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1370),
-                            InstallDate = new DateOnly(2025, 6, 19),
-                            Location = (byte)2,
-                            Name = "Intelligent Steel Bike",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)4,
-                            Version = new Guid("13a4bc6f-5765-484f-bd34-dd5077133561")
-                        },
-                        new
-                        {
-                            Id = new Guid("c9a63e1d-546e-4158-b14f-56314fd191fb"),
-                            AssetCode = "PC000003",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1412),
-                            InstallDate = new DateOnly(2025, 4, 2),
-                            Location = (byte)2,
-                            Name = "Ergonomic Steel Bike",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("fb6a0752-605e-4ebe-b278-eaedc45fc13e")
-                        },
-                        new
-                        {
-                            Id = new Guid("43dbca0f-d21c-4d9d-8669-07c0e447ce60"),
-                            AssetCode = "PC000004",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1489),
-                            InstallDate = new DateOnly(2024, 10, 19),
-                            Location = (byte)2,
-                            Name = "Incredible Fresh Fish",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)4,
-                            Version = new Guid("ed132a94-d87d-4e31-a84f-e2286b411450")
-                        },
-                        new
-                        {
-                            Id = new Guid("9355a36b-e0fc-4147-a0e2-596a6a7ec79d"),
-                            AssetCode = "PC000005",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1517),
-                            InstallDate = new DateOnly(2024, 11, 7),
-                            Location = (byte)0,
-                            Name = "Handcrafted Concrete Chicken",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)0,
-                            Version = new Guid("cfff79f0-1b13-4e1f-832b-b419a15f5c90")
-                        },
-                        new
-                        {
-                            Id = new Guid("a12fdbf0-9c04-4545-8ae8-4f51572f26e0"),
-                            AssetCode = "PC000006",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1543),
-                            InstallDate = new DateOnly(2025, 5, 13),
-                            Location = (byte)0,
-                            Name = "Licensed Frozen Fish",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)1,
-                            Version = new Guid("5623d971-924f-477e-8c5d-d2746b885f65")
-                        },
-                        new
-                        {
-                            Id = new Guid("32cca81d-e39d-435f-ad6d-d554e5da51f3"),
-                            AssetCode = "PC000007",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1567),
-                            InstallDate = new DateOnly(2025, 3, 20),
-                            Location = (byte)1,
-                            Name = "Sleek Plastic Shoes",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)1,
-                            Version = new Guid("59efcb03-d507-4849-93ae-aaaf33db9b15")
-                        },
-                        new
-                        {
-                            Id = new Guid("5e0147f4-a8b5-4966-9488-e42d0e9fd8ca"),
-                            AssetCode = "PC000008",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1588),
-                            InstallDate = new DateOnly(2025, 4, 10),
-                            Location = (byte)2,
-                            Name = "Practical Rubber Mouse",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)3,
-                            Version = new Guid("8a597dd7-60b2-457a-8497-0d39bec456b3")
-                        },
-                        new
-                        {
-                            Id = new Guid("44c80632-60e0-488a-a1e0-1d78fbe4fb99"),
-                            AssetCode = "PC000009",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1611),
-                            InstallDate = new DateOnly(2024, 8, 25),
-                            Location = (byte)2,
-                            Name = "Generic Granite Towels",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)5,
-                            Version = new Guid("7e9c5143-adda-45e3-8feb-d4faeace4ea8")
-                        },
-                        new
-                        {
-                            Id = new Guid("10ce3de3-e61b-4db6-8351-c9dc72827421"),
-                            AssetCode = "PC000010",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1636),
-                            InstallDate = new DateOnly(2025, 2, 25),
-                            Location = (byte)0,
-                            Name = "Incredible Granite Bacon",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)4,
-                            Version = new Guid("240aac45-f193-4aec-adf8-bcb833a79653")
-                        },
-                        new
-                        {
-                            Id = new Guid("d04944aa-cf19-4a61-9b1d-bd53d1b73108"),
-                            AssetCode = "PC000011",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1709),
-                            InstallDate = new DateOnly(2024, 12, 28),
-                            Location = (byte)1,
-                            Name = "Awesome Concrete Pizza",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)4,
-                            Version = new Guid("2f7fa736-60e4-4000-abf4-2bcd130f792c")
-                        },
-                        new
-                        {
-                            Id = new Guid("e420309d-da94-4780-8f15-ba5494893264"),
-                            AssetCode = "PC000012",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1731),
-                            InstallDate = new DateOnly(2024, 8, 14),
-                            Location = (byte)0,
-                            Name = "Unbranded Cotton Bacon",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)4,
-                            Version = new Guid("e226a5d9-c53f-4a6e-8565-abb74128008a")
-                        },
-                        new
-                        {
-                            Id = new Guid("d858a273-ae52-45b8-82c8-30d0eb9b8359"),
-                            AssetCode = "PC000013",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1754),
-                            InstallDate = new DateOnly(2025, 2, 26),
-                            Location = (byte)0,
-                            Name = "Intelligent Concrete Bacon",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)1,
-                            Version = new Guid("20af7278-9c87-41cb-b105-c7a17cc63c75")
-                        },
-                        new
-                        {
-                            Id = new Guid("ac429c35-c7e2-4f8f-b431-ec6b74c69dc9"),
-                            AssetCode = "PC000014",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1773),
-                            InstallDate = new DateOnly(2025, 4, 28),
-                            Location = (byte)0,
-                            Name = "Handcrafted Cotton Shirt",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)0,
-                            Version = new Guid("126003b6-234e-4839-bdd6-13cae10bd743")
-                        },
-                        new
-                        {
-                            Id = new Guid("57060acb-cd30-4b32-bd15-37245d9ed5c6"),
-                            AssetCode = "PC000015",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1792),
-                            InstallDate = new DateOnly(2025, 3, 22),
-                            Location = (byte)1,
-                            Name = "Practical Frozen Shirt",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)4,
-                            Version = new Guid("44478199-de73-47cb-add5-beda98651754")
-                        },
-                        new
-                        {
-                            Id = new Guid("f5207248-4d4b-4515-9dde-e127c60523fc"),
-                            AssetCode = "PC000016",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1810),
-                            InstallDate = new DateOnly(2025, 3, 6),
-                            Location = (byte)2,
-                            Name = "Gorgeous Fresh Towels",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)3,
-                            Version = new Guid("90aa63df-2b19-4d35-b46e-bdfef4911f9c")
-                        },
-                        new
-                        {
-                            Id = new Guid("e3a4049c-c9e7-439a-89ee-4236443ac8d1"),
-                            AssetCode = "PC000017",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1830),
-                            InstallDate = new DateOnly(2024, 11, 29),
-                            Location = (byte)1,
-                            Name = "Sleek Wooden Pizza",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)4,
-                            Version = new Guid("34ad4196-b7a2-41fb-bd03-97c0ef4e3a08")
-                        },
-                        new
-                        {
-                            Id = new Guid("70372553-d5f6-462a-a6a0-02c2f67ba276"),
-                            AssetCode = "PC000018",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1850),
-                            InstallDate = new DateOnly(2024, 11, 18),
-                            Location = (byte)0,
-                            Name = "Unbranded Fresh Shirt",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("6e3977b2-38fe-4de3-b31e-cd6076427186")
-                        },
-                        new
-                        {
-                            Id = new Guid("25f920f3-9b74-47bd-a815-806d3fa92fc8"),
-                            AssetCode = "PC000019",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1907),
-                            InstallDate = new DateOnly(2024, 8, 26),
-                            Location = (byte)2,
-                            Name = "Practical Wooden Tuna",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)3,
-                            Version = new Guid("5d42a994-6a81-4429-b4bf-ed5c5a70d5a9")
-                        },
-                        new
-                        {
-                            Id = new Guid("3a591a8d-5e2a-4639-9b4c-11fb4939b794"),
-                            AssetCode = "PC000020",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1925),
-                            InstallDate = new DateOnly(2025, 1, 12),
-                            Location = (byte)0,
-                            Name = "Licensed Rubber Tuna",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)1,
-                            Version = new Guid("ba85c942-f397-4655-9424-66bf9adc036b")
-                        },
-                        new
-                        {
-                            Id = new Guid("4c293bba-bd49-4951-a07f-795b946700d9"),
-                            AssetCode = "PC000021",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1943),
-                            InstallDate = new DateOnly(2024, 12, 12),
-                            Location = (byte)2,
-                            Name = "Incredible Frozen Ball",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)5,
-                            Version = new Guid("3e6dc461-e484-4238-a8f2-2cb1e56fe457")
-                        },
-                        new
-                        {
-                            Id = new Guid("58cc0ddc-2e4d-4c8a-948e-570ef8d3d24c"),
-                            AssetCode = "PC000022",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1964),
-                            InstallDate = new DateOnly(2024, 8, 23),
-                            Location = (byte)2,
-                            Name = "Incredible Soft Chips",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)0,
-                            Version = new Guid("641b388e-1b4d-49aa-b25a-144246dbe353")
-                        },
-                        new
-                        {
-                            Id = new Guid("7776bd31-b321-4af6-9ed1-68206ee4833f"),
-                            AssetCode = "PC000023",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1984),
-                            InstallDate = new DateOnly(2024, 12, 6),
-                            Location = (byte)0,
-                            Name = "Handcrafted Cotton Table",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)0,
-                            Version = new Guid("ac8b6061-4409-4ff0-94e6-1698b70104d9")
-                        },
-                        new
-                        {
-                            Id = new Guid("63056a42-774e-4292-8608-fa592cb976cc"),
-                            AssetCode = "PC000024",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2002),
-                            InstallDate = new DateOnly(2025, 5, 20),
-                            Location = (byte)1,
-                            Name = "Unbranded Cotton Cheese",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)0,
-                            Version = new Guid("ecec095c-4a0d-4759-a63d-7e30483524be")
-                        },
-                        new
-                        {
-                            Id = new Guid("a22b9672-9a23-4541-be88-2c946afc0674"),
-                            AssetCode = "PC000025",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2020),
-                            InstallDate = new DateOnly(2024, 10, 2),
-                            Location = (byte)0,
-                            Name = "Licensed Metal Shirt",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)5,
-                            Version = new Guid("c6701923-afe2-43dc-be45-e6c25d1d26aa")
-                        },
-                        new
-                        {
-                            Id = new Guid("b940ce9f-e637-4de7-9683-3604a238a0f1"),
-                            AssetCode = "PC000026",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2071),
-                            InstallDate = new DateOnly(2024, 7, 7),
-                            Location = (byte)0,
-                            Name = "Small Plastic Pants",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)0,
-                            Version = new Guid("dd1143c7-9ae4-43e9-9efd-29bafc432320")
-                        },
-                        new
-                        {
-                            Id = new Guid("8ed3bb31-2e1e-4df2-b18e-084f66536781"),
-                            AssetCode = "PC000027",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2094),
-                            InstallDate = new DateOnly(2025, 6, 14),
-                            Location = (byte)0,
-                            Name = "Fantastic Wooden Shoes",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)0,
-                            Version = new Guid("e431e940-91f8-48bb-9852-41add903670e")
-                        },
-                        new
-                        {
-                            Id = new Guid("74ceced4-e41a-496c-a04c-64a4ab582df8"),
-                            AssetCode = "PC000028",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2112),
-                            InstallDate = new DateOnly(2024, 8, 18),
-                            Location = (byte)1,
-                            Name = "Tasty Metal Car",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)3,
-                            Version = new Guid("1fd9c6cf-52d5-4e53-9d56-8fb9dd4b0d12")
-                        },
-                        new
-                        {
-                            Id = new Guid("3c156432-5231-4265-8223-75ed84560449"),
-                            AssetCode = "PC000029",
-                            CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2131),
-                            InstallDate = new DateOnly(2024, 11, 10),
-                            Location = (byte)1,
-                            Name = "Awesome Frozen Keyboard",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)5,
-                            Version = new Guid("8370b383-35d8-41ae-bdb4-3d9024610054")
-                        },
-                        new
-                        {
-                            Id = new Guid("89c113f1-6623-4348-893d-c091922960c7"),
-                            AssetCode = "LT000000",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2154),
-                            InstallDate = new DateOnly(2024, 10, 22),
-                            Location = (byte)2,
-                            Name = "Ergonomic Granite Mouse",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)3,
-                            Version = new Guid("2cca6a77-3a0f-4e34-9b0b-83d36235f10f")
-                        },
-                        new
-                        {
-                            Id = new Guid("615f8589-a3c9-4846-8468-94be75d950e3"),
-                            AssetCode = "LT000001",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2177),
-                            InstallDate = new DateOnly(2025, 4, 2),
-                            Location = (byte)0,
-                            Name = "Incredible Granite Salad",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)5,
-                            Version = new Guid("60add87b-cfdf-4d48-92d9-a02544435f16")
-                        },
-                        new
-                        {
-                            Id = new Guid("23da8014-5fe2-4f83-ab7c-f9721120d111"),
-                            AssetCode = "LT000002",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2197),
-                            InstallDate = new DateOnly(2025, 6, 19),
-                            Location = (byte)2,
-                            Name = "Licensed Metal Keyboard",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)0,
-                            Version = new Guid("390988a2-129a-4116-915e-43dc1e897064")
-                        },
-                        new
-                        {
-                            Id = new Guid("379ed1ee-289b-42b6-99ab-50a874648bad"),
-                            AssetCode = "LT000003",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2248),
-                            InstallDate = new DateOnly(2024, 10, 21),
-                            Location = (byte)0,
-                            Name = "Sleek Granite Keyboard",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)3,
-                            Version = new Guid("e2973681-11ee-4234-81dd-81d48f368985")
-                        },
-                        new
-                        {
-                            Id = new Guid("1a74f292-c4e2-48b8-88f4-de04580d8ba8"),
-                            AssetCode = "LT000004",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2268),
-                            InstallDate = new DateOnly(2024, 10, 7),
-                            Location = (byte)0,
-                            Name = "Licensed Fresh Sausages",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)0,
-                            Version = new Guid("198d9b14-3aff-40ad-ac53-25954dcc65ba")
-                        },
-                        new
-                        {
-                            Id = new Guid("6076e72c-f67a-47ff-a780-a5ab15c3b040"),
-                            AssetCode = "LT000005",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2289),
-                            InstallDate = new DateOnly(2025, 5, 17),
-                            Location = (byte)1,
-                            Name = "Fantastic Cotton Shoes",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)5,
-                            Version = new Guid("9bcdf2eb-a761-466f-9832-63d8d4abbbe7")
-                        },
-                        new
-                        {
-                            Id = new Guid("f92f0a83-7076-45eb-ab78-f158bb3701a1"),
-                            AssetCode = "LT000006",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2309),
-                            InstallDate = new DateOnly(2024, 10, 4),
-                            Location = (byte)2,
-                            Name = "Handcrafted Fresh Mouse",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("9edef26c-2031-41f9-bddb-5246a2ec6219")
-                        },
-                        new
-                        {
-                            Id = new Guid("f9e3828a-dd71-4472-b94a-151fa6e96e17"),
-                            AssetCode = "LT000007",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2327),
-                            InstallDate = new DateOnly(2024, 8, 8),
-                            Location = (byte)2,
-                            Name = "Rustic Granite Gloves",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)5,
-                            Version = new Guid("56bdefd2-7e74-460c-b577-a303dd2072f6")
-                        },
-                        new
-                        {
-                            Id = new Guid("8cc4c970-8455-4248-94a6-8707c056a2fa"),
-                            AssetCode = "LT000008",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2346),
-                            InstallDate = new DateOnly(2024, 10, 3),
-                            Location = (byte)2,
-                            Name = "Ergonomic Rubber Chicken",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)0,
-                            Version = new Guid("b7e1f323-d68c-4d9f-9eaa-04146c53731f")
-                        },
-                        new
-                        {
-                            Id = new Guid("63a6954c-7fc8-4493-af10-de2f2b204e24"),
-                            AssetCode = "LT000009",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2365),
-                            InstallDate = new DateOnly(2024, 10, 25),
-                            Location = (byte)2,
-                            Name = "Refined Rubber Salad",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)3,
-                            Version = new Guid("a7ae0dbd-2322-412a-b599-bdeb24b14f54")
-                        },
-                        new
-                        {
-                            Id = new Guid("9879851d-233b-4fee-b112-0632cf3e1cc5"),
-                            AssetCode = "LT000010",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2416),
-                            InstallDate = new DateOnly(2025, 5, 24),
-                            Location = (byte)2,
-                            Name = "Gorgeous Rubber Gloves",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)1,
-                            Version = new Guid("e189b77d-fbc8-4d29-a826-6767255c02d4")
-                        },
-                        new
-                        {
-                            Id = new Guid("f39ce5d8-f34b-4623-9365-1cece061b8fb"),
-                            AssetCode = "LT000011",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2435),
-                            InstallDate = new DateOnly(2024, 12, 10),
-                            Location = (byte)1,
-                            Name = "Fantastic Wooden Pizza",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)3,
-                            Version = new Guid("6ce3b1d7-0feb-4294-812c-ded7ca7507f8")
-                        },
-                        new
-                        {
-                            Id = new Guid("38821e85-9310-4aa3-a720-bc4f36e97b95"),
-                            AssetCode = "LT000012",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2454),
-                            InstallDate = new DateOnly(2025, 4, 4),
-                            Location = (byte)1,
-                            Name = "Sleek Concrete Bike",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)4,
-                            Version = new Guid("421fa656-d4ea-4635-aebd-72f26a8ce8de")
-                        },
-                        new
-                        {
-                            Id = new Guid("b6399f64-8dc8-45e5-8661-9125495ecd54"),
-                            AssetCode = "LT000013",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2474),
-                            InstallDate = new DateOnly(2025, 2, 11),
-                            Location = (byte)2,
-                            Name = "Incredible Cotton Cheese",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)4,
-                            Version = new Guid("b43aa465-f668-454b-b582-a7b0a495256c")
-                        },
-                        new
-                        {
-                            Id = new Guid("8d6baccc-cbd1-4ef6-9e8b-192599099c82"),
-                            AssetCode = "LT000014",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2492),
-                            InstallDate = new DateOnly(2024, 7, 31),
-                            Location = (byte)0,
-                            Name = "Handcrafted Wooden Ball",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)4,
-                            Version = new Guid("ebd44187-6024-4e26-a523-e7b61d224497")
-                        },
-                        new
-                        {
-                            Id = new Guid("53ee96ec-e14c-47e4-8e2f-e5a4c5440223"),
-                            AssetCode = "LT000015",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2509),
-                            InstallDate = new DateOnly(2025, 7, 5),
-                            Location = (byte)1,
-                            Name = "Sleek Fresh Mouse",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)4,
-                            Version = new Guid("e3468ff2-1071-413c-a5ac-a9be1072a5c9")
-                        },
-                        new
-                        {
-                            Id = new Guid("ae5b680e-9aba-4897-849d-4d195bdce56d"),
-                            AssetCode = "LT000016",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2526),
-                            InstallDate = new DateOnly(2025, 3, 3),
-                            Location = (byte)1,
-                            Name = "Ergonomic Cotton Gloves",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)3,
-                            Version = new Guid("e8c7d76f-44b1-4675-ab2a-1e5fd744ac56")
-                        },
-                        new
-                        {
-                            Id = new Guid("68c13a60-30b3-4502-a9e4-5fe745a1f730"),
-                            AssetCode = "LT000017",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2546),
-                            InstallDate = new DateOnly(2024, 11, 27),
-                            Location = (byte)1,
-                            Name = "Incredible Soft Pizza",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)0,
-                            Version = new Guid("37634b2c-dd34-4352-9fa6-2d7fbdcea086")
-                        },
-                        new
-                        {
-                            Id = new Guid("c3fb49c1-c3ca-41c6-ac87-e0569d824c1e"),
-                            AssetCode = "LT000018",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2602),
-                            InstallDate = new DateOnly(2024, 9, 14),
-                            Location = (byte)1,
-                            Name = "Rustic Granite Sausages",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)3,
-                            Version = new Guid("a64f12cc-12d1-4195-9ddd-dfbe1799838b")
-                        },
-                        new
-                        {
-                            Id = new Guid("ab4b3ef8-c950-44b3-b697-78479b143eb8"),
-                            AssetCode = "LT000019",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2622),
-                            InstallDate = new DateOnly(2025, 5, 25),
-                            Location = (byte)1,
-                            Name = "Gorgeous Cotton Bacon",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)4,
-                            Version = new Guid("ab249d72-71ae-49f8-8975-79ac25b1df90")
-                        },
-                        new
-                        {
-                            Id = new Guid("db229ca2-3716-4c34-b844-f0b6ac76f9b3"),
-                            AssetCode = "LT000020",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2641),
-                            InstallDate = new DateOnly(2025, 4, 11),
-                            Location = (byte)2,
-                            Name = "Tasty Steel Bike",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)4,
-                            Version = new Guid("4aee6a65-54be-453c-a803-4e3065b88c2a")
-                        },
-                        new
-                        {
-                            Id = new Guid("9b86110d-acb2-4e51-ae3a-00f2aefe4f19"),
-                            AssetCode = "LT000021",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2662),
-                            InstallDate = new DateOnly(2024, 9, 4),
-                            Location = (byte)0,
-                            Name = "Unbranded Cotton Bacon",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)4,
-                            Version = new Guid("d0b52935-94f2-496e-850d-4a464f3933b7")
-                        },
-                        new
-                        {
-                            Id = new Guid("60031e4c-2609-4ace-ab3b-fd96dc8efb66"),
-                            AssetCode = "LT000022",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2680),
-                            InstallDate = new DateOnly(2024, 11, 9),
-                            Location = (byte)0,
-                            Name = "Refined Rubber Shirt",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)0,
-                            Version = new Guid("57c91320-0483-4c0c-bff2-4bc58557c39a")
-                        },
-                        new
-                        {
-                            Id = new Guid("b85fb833-6c36-4142-aa91-67fbee1200aa"),
-                            AssetCode = "LT000023",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2698),
-                            InstallDate = new DateOnly(2025, 2, 8),
-                            Location = (byte)1,
-                            Name = "Handcrafted Cotton Shoes",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)5,
-                            Version = new Guid("e8338903-d529-4b5c-9c99-08cc26dfb712")
-                        },
-                        new
-                        {
-                            Id = new Guid("fc5d2ef9-ce9c-4066-bfff-7c9e80a53ae4"),
-                            AssetCode = "LT000024",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2716),
-                            InstallDate = new DateOnly(2024, 7, 19),
-                            Location = (byte)2,
-                            Name = "Ergonomic Granite Fish",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)0,
-                            Version = new Guid("ed4c1829-32ca-49b6-9f25-35981a5cb4ba")
-                        },
-                        new
-                        {
-                            Id = new Guid("20884ead-3f88-4cfc-addc-a18602c51a3d"),
-                            AssetCode = "LT000025",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2756),
-                            InstallDate = new DateOnly(2025, 4, 9),
-                            Location = (byte)1,
-                            Name = "Rustic Fresh Keyboard",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)0,
-                            Version = new Guid("6376f359-5f89-4d19-af5a-0dbafd73d769")
-                        },
-                        new
-                        {
-                            Id = new Guid("c6489947-f2c6-48d2-ad6e-b92fb3cbd4cb"),
-                            AssetCode = "LT000026",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2776),
-                            InstallDate = new DateOnly(2024, 7, 9),
-                            Location = (byte)1,
-                            Name = "Awesome Metal Towels",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)1,
-                            Version = new Guid("c99746d4-21bb-49ae-beed-2d307baa4214")
-                        },
-                        new
-                        {
-                            Id = new Guid("86879f58-b09f-4b85-a8c9-87a169da01f8"),
-                            AssetCode = "LT000027",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2794),
-                            InstallDate = new DateOnly(2024, 12, 5),
-                            Location = (byte)1,
-                            Name = "Licensed Rubber Pizza",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("6ac0afd7-6a86-4574-9310-b5409c3aef25")
-                        },
-                        new
-                        {
-                            Id = new Guid("adff7fc0-2aef-4da8-a2bc-7309a58e2818"),
-                            AssetCode = "LT000028",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2812),
-                            InstallDate = new DateOnly(2025, 4, 10),
-                            Location = (byte)2,
-                            Name = "Generic Soft Pants",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)3,
-                            Version = new Guid("7a79aa9e-5f61-41ea-9c58-650f5b9e64f6")
-                        },
-                        new
-                        {
-                            Id = new Guid("06631810-1fd2-4bc5-b134-ed360c179385"),
-                            AssetCode = "LT000029",
-                            CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2833),
-                            InstallDate = new DateOnly(2024, 8, 8),
-                            Location = (byte)0,
-                            Name = "Intelligent Rubber Keyboard",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)4,
-                            Version = new Guid("c8ef977c-0b5b-4aa1-9185-2a4edb15f206")
-                        },
-                        new
-                        {
-                            Id = new Guid("847a81ea-479c-4311-bdd9-c779a40f0d8b"),
-                            AssetCode = "PR000000",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2854),
-                            InstallDate = new DateOnly(2025, 4, 8),
-                            Location = (byte)0,
-                            Name = "Handcrafted Steel Ball",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)3,
-                            Version = new Guid("fd7b1395-0b7c-4c55-a5b3-3e1d40d51dba")
-                        },
-                        new
-                        {
-                            Id = new Guid("f2d81916-5235-4b07-a7b1-08b3818791a3"),
-                            AssetCode = "PR000001",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2874),
-                            InstallDate = new DateOnly(2025, 2, 8),
-                            Location = (byte)0,
-                            Name = "Incredible Rubber Hat",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)0,
-                            Version = new Guid("ab452c60-db59-415d-a809-e6342fa3f952")
-                        },
-                        new
-                        {
-                            Id = new Guid("36b1747b-5e9a-4290-9715-fe88d10a179b"),
-                            AssetCode = "PR000002",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2936),
-                            InstallDate = new DateOnly(2025, 4, 28),
-                            Location = (byte)0,
-                            Name = "Incredible Rubber Keyboard",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)1,
-                            Version = new Guid("925c0cbe-0061-4437-89a5-5fafe00c6da2")
-                        },
-                        new
-                        {
-                            Id = new Guid("9a24b78f-84a1-4370-abfd-899b7d0feca6"),
-                            AssetCode = "PR000003",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2959),
-                            InstallDate = new DateOnly(2025, 5, 12),
-                            Location = (byte)1,
-                            Name = "Awesome Concrete Sausages",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)0,
-                            Version = new Guid("a87ec9be-f9d5-4a7d-a0b2-69a111ea87d3")
-                        },
-                        new
-                        {
-                            Id = new Guid("2f8f41f6-3454-4c75-8d36-efa021446e16"),
-                            AssetCode = "PR000004",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2978),
-                            InstallDate = new DateOnly(2024, 10, 9),
-                            Location = (byte)0,
-                            Name = "Refined Frozen Pizza",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)0,
-                            Version = new Guid("2a60790c-2f7b-4cea-bcd0-b325b7f3fc55")
-                        },
-                        new
-                        {
-                            Id = new Guid("eb0558f4-1977-4074-a339-49dbbce388a6"),
-                            AssetCode = "PR000005",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2998),
-                            InstallDate = new DateOnly(2024, 7, 15),
-                            Location = (byte)2,
-                            Name = "Fantastic Frozen Ball",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)1,
-                            Version = new Guid("2aae75cc-2648-4373-bc94-d141fe44099b")
-                        },
-                        new
-                        {
-                            Id = new Guid("98026a9b-63e1-475a-823b-934ce509ddaf"),
-                            AssetCode = "PR000006",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3017),
-                            InstallDate = new DateOnly(2024, 8, 22),
-                            Location = (byte)0,
-                            Name = "Handcrafted Metal Shoes",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)1,
-                            Version = new Guid("932af8ec-7abc-4790-979b-31650b5597d2")
-                        },
-                        new
-                        {
-                            Id = new Guid("b855420a-1b9d-4d83-b9bb-9366352895f3"),
-                            AssetCode = "PR000007",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3037),
-                            InstallDate = new DateOnly(2024, 12, 10),
-                            Location = (byte)1,
-                            Name = "Tasty Cotton Pants",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)1,
-                            Version = new Guid("a8d5bfac-18d3-4185-b15d-88b70a58ced6")
-                        },
-                        new
-                        {
-                            Id = new Guid("1da45cb3-6283-4c6b-81aa-8bc53289995c"),
-                            AssetCode = "PR000008",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3105),
-                            InstallDate = new DateOnly(2024, 8, 22),
-                            Location = (byte)0,
-                            Name = "Practical Granite Chips",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)1,
-                            Version = new Guid("facbae67-1540-491e-989a-dbddfa390fbe")
-                        },
-                        new
-                        {
-                            Id = new Guid("8039d9d6-7eea-404c-97ac-9cad249408fd"),
-                            AssetCode = "PR000009",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3125),
-                            InstallDate = new DateOnly(2024, 12, 17),
-                            Location = (byte)2,
-                            Name = "Handmade Frozen Keyboard",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)4,
-                            Version = new Guid("1d89bf56-3906-4bde-b76d-be0cd4550fae")
-                        },
-                        new
-                        {
-                            Id = new Guid("ac44f014-8aba-48b5-8665-806857ff6075"),
-                            AssetCode = "PR000010",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3144),
-                            InstallDate = new DateOnly(2025, 2, 4),
-                            Location = (byte)1,
-                            Name = "Ergonomic Frozen Shirt",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)3,
-                            Version = new Guid("d7ee9c71-c339-4498-aa96-0d44e136826b")
-                        },
-                        new
-                        {
-                            Id = new Guid("59938a3b-f476-41a4-928a-8b0f6ca9843c"),
-                            AssetCode = "PR000011",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3165),
-                            InstallDate = new DateOnly(2024, 10, 14),
-                            Location = (byte)2,
-                            Name = "Licensed Granite Mouse",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)0,
-                            Version = new Guid("4d93d48b-ab0e-4fb1-b562-f8543aa12eee")
-                        },
-                        new
-                        {
-                            Id = new Guid("27200a3e-270e-40fc-b50b-a76aa6ff1736"),
-                            AssetCode = "PR000012",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3183),
-                            InstallDate = new DateOnly(2025, 1, 16),
-                            Location = (byte)2,
-                            Name = "Awesome Metal Shirt",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)4,
-                            Version = new Guid("c77c000b-7156-4fe6-9b76-f9e6342ede4e")
-                        },
-                        new
-                        {
-                            Id = new Guid("1e41779b-4d83-4e39-b744-c528083ef8da"),
-                            AssetCode = "PR000013",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3201),
-                            InstallDate = new DateOnly(2024, 9, 13),
-                            Location = (byte)1,
-                            Name = "Licensed Frozen Chair",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)4,
-                            Version = new Guid("c96845c3-760e-425a-a95d-2b443d3ae40c")
-                        },
-                        new
-                        {
-                            Id = new Guid("7f9c92b5-7478-4fa3-9fd6-5bcaf5625596"),
-                            AssetCode = "PR000014",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3218),
-                            InstallDate = new DateOnly(2024, 10, 2),
-                            Location = (byte)0,
-                            Name = "Generic Steel Soap",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)5,
-                            Version = new Guid("b8ec607e-4585-438b-bc5c-60560fa61c74")
-                        },
-                        new
-                        {
-                            Id = new Guid("84fbcee5-3a72-4dea-ae3e-d769b847fc34"),
-                            AssetCode = "PR000015",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3237),
-                            InstallDate = new DateOnly(2024, 11, 17),
-                            Location = (byte)1,
-                            Name = "Practical Fresh Soap",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)4,
-                            Version = new Guid("cd803540-c8b4-48d0-b0a1-1dc7d718dfb3")
-                        },
-                        new
-                        {
-                            Id = new Guid("d0a6480e-34b8-4557-a5cb-4930d687b90b"),
-                            AssetCode = "PR000016",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3290),
-                            InstallDate = new DateOnly(2025, 3, 7),
-                            Location = (byte)1,
-                            Name = "Refined Soft Shirt",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)0,
-                            Version = new Guid("490c6967-a05c-4078-99c4-eee7a3c902ac")
-                        },
-                        new
-                        {
-                            Id = new Guid("171a0213-f412-4c2d-9deb-558b82d1b975"),
-                            AssetCode = "PR000017",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3309),
-                            InstallDate = new DateOnly(2024, 9, 30),
-                            Location = (byte)0,
-                            Name = "Gorgeous Wooden Soap",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)5,
-                            Version = new Guid("2f953d86-b66a-4b65-8178-0d32a08fd466")
-                        },
-                        new
-                        {
-                            Id = new Guid("57f41991-a63a-4864-b32f-f31392475ce9"),
-                            AssetCode = "PR000018",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3327),
-                            InstallDate = new DateOnly(2024, 9, 22),
-                            Location = (byte)1,
-                            Name = "Refined Concrete Pants",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)1,
-                            Version = new Guid("73cbed0a-0820-4945-ab4c-68c9615035f9")
-                        },
-                        new
-                        {
-                            Id = new Guid("95d351b6-cabf-4d65-b346-51d0aa4116cd"),
-                            AssetCode = "PR000019",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3349),
-                            InstallDate = new DateOnly(2024, 7, 8),
-                            Location = (byte)2,
-                            Name = "Awesome Metal Tuna",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)5,
-                            Version = new Guid("a55532e9-5d9c-437e-9b61-4f4ae3aa53bb")
-                        },
-                        new
-                        {
-                            Id = new Guid("cc52377d-6e3a-44cd-9bed-41aec5ee084d"),
-                            AssetCode = "PR000020",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3367),
-                            InstallDate = new DateOnly(2024, 8, 7),
-                            Location = (byte)1,
-                            Name = "Intelligent Concrete Sausages",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)4,
-                            Version = new Guid("4cb58854-8252-489a-8875-a8842ea4f8a0")
-                        },
-                        new
-                        {
-                            Id = new Guid("c154f6b2-e8fd-433e-938f-b0ce79e18525"),
-                            AssetCode = "PR000021",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3385),
-                            InstallDate = new DateOnly(2024, 7, 9),
-                            Location = (byte)1,
-                            Name = "Awesome Fresh Mouse",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)4,
-                            Version = new Guid("769490a4-8ec0-4a2e-a078-2261b82251ff")
-                        },
-                        new
-                        {
-                            Id = new Guid("4315175c-0843-48bb-bb53-9a88339a1ab7"),
-                            AssetCode = "PR000022",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3403),
-                            InstallDate = new DateOnly(2025, 3, 25),
-                            Location = (byte)2,
-                            Name = "Incredible Steel Fish",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)5,
-                            Version = new Guid("5c051378-94f5-4898-b080-0c1129ac2762")
-                        },
-                        new
-                        {
-                            Id = new Guid("409451bb-0f80-4baa-b580-bb76f45f7a27"),
-                            AssetCode = "PR000023",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3459),
-                            InstallDate = new DateOnly(2024, 12, 30),
-                            Location = (byte)0,
-                            Name = "Intelligent Rubber Gloves",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)0,
-                            Version = new Guid("b6768200-a14a-42bc-85fd-36e3dda021e4")
-                        },
-                        new
-                        {
-                            Id = new Guid("dd900042-45de-44da-a6b2-d10816537bca"),
-                            AssetCode = "PR000024",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3478),
-                            InstallDate = new DateOnly(2024, 11, 2),
-                            Location = (byte)1,
-                            Name = "Unbranded Steel Ball",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)1,
-                            Version = new Guid("066f4878-6c25-4d23-9f25-4d438753f6b4")
-                        },
-                        new
-                        {
-                            Id = new Guid("c8dfd0c0-c1fb-47fb-9cca-5522a33c70dd"),
-                            AssetCode = "PR000025",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3497),
-                            InstallDate = new DateOnly(2025, 6, 13),
-                            Location = (byte)2,
-                            Name = "Tasty Frozen Chips",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)0,
-                            Version = new Guid("12cbc188-2ada-4114-9dde-6ebac119284a")
-                        },
-                        new
-                        {
-                            Id = new Guid("189d5504-111c-4247-8f09-3e75a77908b5"),
-                            AssetCode = "PR000026",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3515),
-                            InstallDate = new DateOnly(2024, 10, 20),
-                            Location = (byte)2,
-                            Name = "Gorgeous Plastic Shirt",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)0,
-                            Version = new Guid("f8109107-a41a-4f8d-abc3-f74c50e79454")
-                        },
-                        new
-                        {
-                            Id = new Guid("6707fa72-d649-4f41-8a5d-8bb55ccb6dc0"),
-                            AssetCode = "PR000027",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3535),
-                            InstallDate = new DateOnly(2024, 7, 27),
-                            Location = (byte)0,
-                            Name = "Handmade Frozen Tuna",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)4,
-                            Version = new Guid("d7142fa9-72fe-4a23-933c-a9865e8c4a7a")
-                        },
-                        new
-                        {
-                            Id = new Guid("7d5a9add-2819-4c6b-9652-42a2c24ad310"),
-                            AssetCode = "PR000028",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3552),
-                            InstallDate = new DateOnly(2025, 5, 10),
-                            Location = (byte)1,
-                            Name = "Tasty Concrete Chicken",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)5,
-                            Version = new Guid("45ff6796-8288-4a5c-838e-f8339c7bdd6f")
-                        },
-                        new
-                        {
-                            Id = new Guid("204d641a-3d06-4ea4-97d7-77c838f611d3"),
-                            AssetCode = "PR000029",
-                            CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3571),
-                            InstallDate = new DateOnly(2024, 11, 11),
-                            Location = (byte)1,
-                            Name = "Intelligent Concrete Salad",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)4,
-                            Version = new Guid("4165be3b-3884-4816-857c-ffa24d808307")
-                        },
-                        new
-                        {
-                            Id = new Guid("5d505fee-b336-456e-8804-4fab5dad7c08"),
-                            AssetCode = "BM000000",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3590),
-                            InstallDate = new DateOnly(2024, 12, 31),
-                            Location = (byte)0,
-                            Name = "Generic Concrete Table",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)4,
-                            Version = new Guid("52e5070f-99f2-4a61-9427-26affe72f230")
-                        },
-                        new
-                        {
-                            Id = new Guid("5cacd1f3-4830-46a0-82b4-f19e90ee8b86"),
-                            AssetCode = "BM000001",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3646),
-                            InstallDate = new DateOnly(2025, 5, 18),
-                            Location = (byte)2,
-                            Name = "Awesome Cotton Salad",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)0,
-                            Version = new Guid("68510842-8ad5-4b6b-b848-8c69c9f5ace5")
-                        },
-                        new
-                        {
-                            Id = new Guid("49c01b4a-9306-4405-8163-c1165e278aa6"),
-                            AssetCode = "BM000002",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3665),
-                            InstallDate = new DateOnly(2024, 11, 5),
-                            Location = (byte)1,
-                            Name = "Tasty Granite Chair",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)0,
-                            Version = new Guid("2ced17bb-397a-4048-8bf0-888e54ba53b5")
-                        },
-                        new
-                        {
-                            Id = new Guid("2bc4c621-03c3-4ada-8283-46a234f6b3ef"),
-                            AssetCode = "BM000003",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3683),
-                            InstallDate = new DateOnly(2025, 1, 16),
-                            Location = (byte)0,
-                            Name = "Handcrafted Metal Hat",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)4,
-                            Version = new Guid("587b9332-2823-4436-b218-480825e9b20e")
-                        },
-                        new
-                        {
-                            Id = new Guid("845e52c0-7041-425d-8547-6e581a75c81f"),
-                            AssetCode = "BM000004",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3701),
-                            InstallDate = new DateOnly(2024, 10, 22),
-                            Location = (byte)2,
-                            Name = "Incredible Fresh Table",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)0,
-                            Version = new Guid("22d9ae69-1cfd-4f7d-b325-acc64c6fd79c")
-                        },
-                        new
-                        {
-                            Id = new Guid("cf5ea9d4-9b28-4272-84c6-16fbede7512e"),
-                            AssetCode = "BM000005",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3721),
-                            InstallDate = new DateOnly(2025, 1, 3),
-                            Location = (byte)1,
-                            Name = "Handcrafted Fresh Shirt",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)4,
-                            Version = new Guid("44ad4e41-a72f-44d2-8ddf-8e850de17a5c")
-                        },
-                        new
-                        {
-                            Id = new Guid("9811ff7d-a87a-4795-8154-3661c61f1c3f"),
-                            AssetCode = "BM000006",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3738),
-                            InstallDate = new DateOnly(2024, 10, 12),
-                            Location = (byte)1,
-                            Name = "Awesome Metal Shoes",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)5,
-                            Version = new Guid("25bf2948-3b0f-4e06-9031-7e69b7801c67")
-                        },
-                        new
-                        {
-                            Id = new Guid("f6ff9146-d2fb-4c93-a453-a49f3aa73e32"),
-                            AssetCode = "BM000007",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3754),
-                            InstallDate = new DateOnly(2025, 5, 18),
-                            Location = (byte)1,
-                            Name = "Incredible Frozen Gloves",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)1,
-                            Version = new Guid("f3be6a7c-4cf3-4e17-9ad8-eeeb3d291094")
-                        },
-                        new
-                        {
-                            Id = new Guid("8c7ded0f-fbb3-48a2-bd17-4b46397893ce"),
-                            AssetCode = "BM000008",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3813),
-                            InstallDate = new DateOnly(2024, 12, 14),
-                            Location = (byte)0,
-                            Name = "Handmade Fresh Computer",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)5,
-                            Version = new Guid("78925dea-4272-488c-a179-7d1c6659b2e4")
-                        },
-                        new
-                        {
-                            Id = new Guid("1a365916-0ec1-421b-95ce-c6b4504bfc8d"),
-                            AssetCode = "BM000009",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3835),
-                            InstallDate = new DateOnly(2024, 12, 1),
-                            Location = (byte)1,
-                            Name = "Handcrafted Granite Chips",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)0,
-                            Version = new Guid("e96e2d1e-cabe-43c0-b9e9-84e0d64ee5ef")
-                        },
-                        new
-                        {
-                            Id = new Guid("46a6e60f-fe29-4c73-a5d1-17342fd40f6d"),
-                            AssetCode = "BM000010",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3855),
-                            InstallDate = new DateOnly(2024, 8, 10),
-                            Location = (byte)0,
-                            Name = "Licensed Soft Cheese",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)5,
-                            Version = new Guid("646db4f3-1c01-4d92-a674-44cc194665e2")
-                        },
-                        new
-                        {
-                            Id = new Guid("c0e07068-ea53-42c5-8994-184e07824329"),
-                            AssetCode = "BM000011",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3875),
-                            InstallDate = new DateOnly(2024, 11, 3),
-                            Location = (byte)0,
-                            Name = "Sleek Metal Bacon",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)1,
-                            Version = new Guid("54ab6c50-23cc-4da1-8806-88fed798849d")
-                        },
-                        new
-                        {
-                            Id = new Guid("a02b0c33-032b-4ca9-8b20-ec6f77c56983"),
-                            AssetCode = "BM000012",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3894),
-                            InstallDate = new DateOnly(2025, 6, 14),
-                            Location = (byte)2,
-                            Name = "Rustic Granite Mouse",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)1,
-                            Version = new Guid("471826d1-25b2-4751-b0e9-b333508dc40c")
-                        },
-                        new
-                        {
-                            Id = new Guid("f9e00ada-bed8-4df8-8516-145708c608d9"),
-                            AssetCode = "BM000013",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3913),
-                            InstallDate = new DateOnly(2025, 7, 4),
-                            Location = (byte)2,
-                            Name = "Unbranded Steel Bike",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)5,
-                            Version = new Guid("14d11686-9b72-48a5-9222-6d05b094fc81")
-                        },
-                        new
-                        {
-                            Id = new Guid("534c9896-5c35-42e0-9cdf-0248ae88b909"),
-                            AssetCode = "BM000014",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3931),
-                            InstallDate = new DateOnly(2024, 10, 6),
-                            Location = (byte)2,
-                            Name = "Licensed Rubber Fish",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)1,
-                            Version = new Guid("25f7a447-3345-4fe9-939a-eb9568845e7b")
-                        },
-                        new
-                        {
-                            Id = new Guid("f5874607-941e-4670-90af-4eee1d874bb1"),
-                            AssetCode = "BM000015",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3978),
-                            InstallDate = new DateOnly(2025, 1, 23),
-                            Location = (byte)1,
-                            Name = "Intelligent Cotton Shoes",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)3,
-                            Version = new Guid("bb299f0a-01d1-4490-b33c-9f16387c6c9e")
-                        },
-                        new
-                        {
-                            Id = new Guid("3083639c-a023-4721-bb76-004460fea846"),
-                            AssetCode = "BM000016",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3999),
-                            InstallDate = new DateOnly(2024, 9, 26),
-                            Location = (byte)2,
-                            Name = "Sleek Plastic Bacon",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)1,
-                            Version = new Guid("a047abf6-d3bf-4158-b3ff-4bc932d3d1b9")
-                        },
-                        new
-                        {
-                            Id = new Guid("51093426-aa45-41dc-a792-941ae1f183b5"),
-                            AssetCode = "BM000017",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4018),
-                            InstallDate = new DateOnly(2025, 4, 8),
-                            Location = (byte)2,
-                            Name = "Handcrafted Frozen Pants",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("a3b6a855-abe0-4e2e-a54b-d94f69677e19")
-                        },
-                        new
-                        {
-                            Id = new Guid("8b66f314-ec0b-4af6-ab22-bc2fbbc56bb8"),
-                            AssetCode = "BM000018",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4037),
-                            InstallDate = new DateOnly(2025, 1, 11),
-                            Location = (byte)2,
-                            Name = "Tasty Fresh Computer",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)5,
-                            Version = new Guid("a6349191-fb11-482d-a1cc-9da41d7a61a7")
-                        },
-                        new
-                        {
-                            Id = new Guid("f927fb40-d1da-4351-8659-2eee94aae860"),
-                            AssetCode = "BM000019",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4056),
-                            InstallDate = new DateOnly(2025, 2, 13),
-                            Location = (byte)2,
-                            Name = "Gorgeous Soft Chicken",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)0,
-                            Version = new Guid("aa012e59-8ae9-4f42-be70-13a26f282ce3")
-                        },
-                        new
-                        {
-                            Id = new Guid("889e7588-201e-4f6a-babc-d12262849f08"),
-                            AssetCode = "BM000020",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4074),
-                            InstallDate = new DateOnly(2025, 3, 6),
-                            Location = (byte)0,
-                            Name = "Fantastic Concrete Sausages",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)3,
-                            Version = new Guid("5b9a10e7-85c6-4cc9-b14d-ff12923682a3")
-                        },
-                        new
-                        {
-                            Id = new Guid("f2ca9cc2-aa4f-4725-80bf-a3b4796b3371"),
-                            AssetCode = "BM000021",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4093),
-                            InstallDate = new DateOnly(2024, 11, 13),
-                            Location = (byte)1,
-                            Name = "Fantastic Frozen Car",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)5,
-                            Version = new Guid("bb9557a8-a7f6-4681-b965-059a79cac82d")
-                        },
-                        new
-                        {
-                            Id = new Guid("00429609-de7e-4c9a-b71f-b2eca32513a7"),
-                            AssetCode = "BM000022",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4112),
-                            InstallDate = new DateOnly(2025, 5, 27),
-                            Location = (byte)2,
-                            Name = "Practical Fresh Tuna",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)5,
-                            Version = new Guid("d19fb3eb-8b0e-4264-98fb-9b925740ef4e")
-                        },
-                        new
-                        {
-                            Id = new Guid("1cf4293e-6e6b-48d7-a46b-a55957d9c4dc"),
-                            AssetCode = "BM000023",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4150),
-                            InstallDate = new DateOnly(2024, 12, 10),
-                            Location = (byte)1,
-                            Name = "Sleek Wooden Fish",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)1,
-                            Version = new Guid("cd1d028e-f80c-4fbb-b5b6-e41be5db06e5")
-                        },
-                        new
-                        {
-                            Id = new Guid("9957fb5f-ecfd-46c2-bf41-6685e4289654"),
-                            AssetCode = "BM000024",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4170),
-                            InstallDate = new DateOnly(2024, 9, 29),
-                            Location = (byte)2,
-                            Name = "Ergonomic Cotton Shirt",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)3,
-                            Version = new Guid("a51e0268-d484-4eaa-a367-e8740c8e01ac")
-                        },
-                        new
-                        {
-                            Id = new Guid("cb0b5186-f945-4f06-9c0a-9d7fb3311611"),
-                            AssetCode = "BM000025",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4192),
-                            InstallDate = new DateOnly(2024, 10, 2),
-                            Location = (byte)2,
-                            Name = "Intelligent Soft Hat",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)1,
-                            Version = new Guid("f996a0c8-463c-44a2-af00-186c20bd63b9")
-                        },
-                        new
-                        {
-                            Id = new Guid("ca860ae6-e5b8-4156-b067-3064a157cd25"),
-                            AssetCode = "BM000026",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4210),
-                            InstallDate = new DateOnly(2025, 3, 22),
-                            Location = (byte)2,
-                            Name = "Rustic Cotton Sausages",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)3,
-                            Version = new Guid("b228731f-c2ed-4cc9-ab79-a5ce3a0fbf3e")
-                        },
-                        new
-                        {
-                            Id = new Guid("68032710-542d-44c9-8068-16ab29efc1a8"),
-                            AssetCode = "BM000027",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4227),
-                            InstallDate = new DateOnly(2025, 4, 27),
-                            Location = (byte)0,
-                            Name = "Incredible Plastic Ball",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)3,
-                            Version = new Guid("2ac99c11-632a-4917-8c70-f483f4dba9c8")
-                        },
-                        new
-                        {
-                            Id = new Guid("fd924ca4-b144-45e6-812c-561f2f332bbb"),
-                            AssetCode = "BM000028",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4244),
-                            InstallDate = new DateOnly(2025, 1, 14),
-                            Location = (byte)1,
-                            Name = "Small Cotton Tuna",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)5,
-                            Version = new Guid("46c27ac1-9486-4a7c-87a6-57a97566646e")
-                        },
-                        new
-                        {
-                            Id = new Guid("a8541bb9-f3c3-45c7-a4d7-7062088ceafc"),
-                            AssetCode = "BM000029",
-                            CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4264),
-                            InstallDate = new DateOnly(2025, 5, 10),
-                            Location = (byte)0,
-                            Name = "Handcrafted Wooden Gloves",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)1,
-                            Version = new Guid("a4337140-74d0-40a5-94eb-b6447ae92333")
-                        },
-                        new
-                        {
-                            Id = new Guid("f3c8317b-45a5-4732-9a89-c1487ec133b2"),
-                            AssetCode = "BS000000",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4323),
-                            InstallDate = new DateOnly(2024, 7, 21),
-                            Location = (byte)1,
-                            Name = "Practical Granite Keyboard",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)0,
-                            Version = new Guid("e4a832f1-6c89-462e-9760-ea82fd46ac35")
-                        },
-                        new
-                        {
-                            Id = new Guid("eb38c873-f9e7-4052-b26d-0aaea03af805"),
-                            AssetCode = "BS000001",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4343),
-                            InstallDate = new DateOnly(2024, 8, 6),
-                            Location = (byte)0,
-                            Name = "Generic Steel Fish",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)0,
-                            Version = new Guid("133af516-d86d-4189-b3d7-a4f7aceacd57")
-                        },
-                        new
-                        {
-                            Id = new Guid("9c8c9550-dbd4-498f-8ee1-cf9075a865de"),
-                            AssetCode = "BS000002",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4363),
-                            InstallDate = new DateOnly(2025, 1, 15),
-                            Location = (byte)1,
-                            Name = "Ergonomic Cotton Salad",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)4,
-                            Version = new Guid("1a49cf4b-bfa3-4f9a-8e22-23f6373ec3fc")
-                        },
-                        new
-                        {
-                            Id = new Guid("ef8647fc-0df4-4690-98a2-1b42c3007fee"),
-                            AssetCode = "BS000003",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4383),
-                            InstallDate = new DateOnly(2025, 1, 7),
-                            Location = (byte)1,
-                            Name = "Small Fresh Bike",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)4,
-                            Version = new Guid("dd9c5bb8-031a-4c32-b137-096be812827f")
-                        },
-                        new
-                        {
-                            Id = new Guid("cc4fb089-925b-459c-a3c3-cf4a9c802127"),
-                            AssetCode = "BS000004",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4400),
-                            InstallDate = new DateOnly(2025, 4, 15),
-                            Location = (byte)1,
-                            Name = "Fantastic Fresh Tuna",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)3,
-                            Version = new Guid("ad3c25cd-cffa-4e00-a825-937f155e021f")
-                        },
-                        new
-                        {
-                            Id = new Guid("1928aa31-0aad-4bff-92f6-a430e34ad636"),
-                            AssetCode = "BS000005",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4419),
-                            InstallDate = new DateOnly(2024, 11, 24),
-                            Location = (byte)2,
-                            Name = "Intelligent Soft Soap",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)3,
-                            Version = new Guid("e7970faa-b761-4846-82b4-b257b89424bb")
-                        },
-                        new
-                        {
-                            Id = new Guid("aa505349-01d1-480f-b364-60ebfb223b91"),
-                            AssetCode = "BS000006",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4436),
-                            InstallDate = new DateOnly(2025, 3, 6),
-                            Location = (byte)1,
-                            Name = "Incredible Concrete Bacon",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("e621560c-7465-4a0e-9477-d0f8ffbcad09")
-                        },
-                        new
-                        {
-                            Id = new Guid("2f78bf1f-6f20-4ad4-b767-f2873e448300"),
-                            AssetCode = "BS000007",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4456),
-                            InstallDate = new DateOnly(2024, 10, 14),
-                            Location = (byte)0,
-                            Name = "Rustic Granite Computer",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)0,
-                            Version = new Guid("17a71eef-8ec6-446e-9908-b2bb53506016")
-                        },
-                        new
-                        {
-                            Id = new Guid("68059ce7-d47a-40bc-aedb-ddaeee1d8fb6"),
-                            AssetCode = "BS000008",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4522),
-                            InstallDate = new DateOnly(2025, 3, 29),
-                            Location = (byte)0,
-                            Name = "Handcrafted Plastic Bacon",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)5,
-                            Version = new Guid("083ccfb4-b879-4c23-b0b1-28f5ad61e47c")
-                        },
-                        new
-                        {
-                            Id = new Guid("3c0d0803-7782-466d-ba2f-5959df4a041e"),
-                            AssetCode = "BS000009",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4543),
-                            InstallDate = new DateOnly(2025, 1, 27),
-                            Location = (byte)2,
-                            Name = "Gorgeous Granite Chicken",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)5,
-                            Version = new Guid("df3874ca-a757-40e0-b24a-2695af0b788e")
-                        },
-                        new
-                        {
-                            Id = new Guid("3d9031e5-86e8-486a-a51a-dcea606bca28"),
-                            AssetCode = "BS000010",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4560),
-                            InstallDate = new DateOnly(2025, 2, 27),
-                            Location = (byte)1,
-                            Name = "Sleek Frozen Shirt",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)4,
-                            Version = new Guid("a04ae5cd-f847-4d7e-80c2-040cba2a5d59")
-                        },
-                        new
-                        {
-                            Id = new Guid("721571f6-a1aa-4362-8cef-9219d1b60ef1"),
-                            AssetCode = "BS000011",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4580),
-                            InstallDate = new DateOnly(2024, 11, 21),
-                            Location = (byte)0,
-                            Name = "Practical Metal Keyboard",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)5,
-                            Version = new Guid("6c3155a7-b420-42b6-a3a1-1d0928969934")
-                        },
-                        new
-                        {
-                            Id = new Guid("d08181f7-bdc5-466a-bb3c-e2e36af38d65"),
-                            AssetCode = "BS000012",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4598),
-                            InstallDate = new DateOnly(2024, 10, 3),
-                            Location = (byte)2,
-                            Name = "Gorgeous Metal Tuna",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)4,
-                            Version = new Guid("252867db-5736-425c-b8a8-e77fc9ba4c25")
-                        },
-                        new
-                        {
-                            Id = new Guid("b38ef7cc-e819-4e0d-beff-68308bc058a8"),
-                            AssetCode = "BS000013",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4648),
-                            InstallDate = new DateOnly(2024, 12, 2),
-                            Location = (byte)1,
-                            Name = "Incredible Plastic Car",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)0,
-                            Version = new Guid("234c4c1d-f9c7-43d3-a843-f016dd7e031c")
-                        },
-                        new
-                        {
-                            Id = new Guid("bc643eee-a87e-4108-92ed-a50c1b85398c"),
-                            AssetCode = "BS000014",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4668),
-                            InstallDate = new DateOnly(2025, 1, 20),
-                            Location = (byte)2,
-                            Name = "Handcrafted Concrete Gloves",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)4,
-                            Version = new Guid("0a0416dc-6e34-4e93-9ce1-735d5d5a5705")
-                        },
-                        new
-                        {
-                            Id = new Guid("ac18bbde-5d71-4b98-adb4-68cab3a8c997"),
-                            AssetCode = "BS000015",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4687),
-                            InstallDate = new DateOnly(2025, 4, 2),
-                            Location = (byte)0,
-                            Name = "Tasty Plastic Salad",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)4,
-                            Version = new Guid("a7e010c0-c734-42de-a2ec-b289a4fc8e85")
-                        },
-                        new
-                        {
-                            Id = new Guid("87657bea-bc93-4831-b515-da17d52cfee8"),
-                            AssetCode = "BS000016",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4706),
-                            InstallDate = new DateOnly(2024, 12, 19),
-                            Location = (byte)1,
-                            Name = "Generic Concrete Cheese",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)5,
-                            Version = new Guid("7563c1e1-3bf1-4831-877c-f13d4f4ee956")
-                        },
-                        new
-                        {
-                            Id = new Guid("3382deeb-39ea-43f9-acf3-97a5ad6d40ea"),
-                            AssetCode = "BS000017",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4724),
-                            InstallDate = new DateOnly(2025, 1, 22),
-                            Location = (byte)0,
-                            Name = "Refined Cotton Chair",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)1,
-                            Version = new Guid("d07e3e10-bffa-4c1b-9669-71062db70441")
-                        },
-                        new
-                        {
-                            Id = new Guid("4085091a-5b68-45fb-874a-7a5ca0e00b47"),
-                            AssetCode = "BS000018",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4741),
-                            InstallDate = new DateOnly(2025, 2, 1),
-                            Location = (byte)0,
-                            Name = "Fantastic Wooden Chair",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)1,
-                            Version = new Guid("f46d08f7-0920-4291-8e85-c5dd91a39a3a")
-                        },
-                        new
-                        {
-                            Id = new Guid("1fad89e3-2435-41b1-aa40-b3785d932c8f"),
-                            AssetCode = "BS000019",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4761),
-                            InstallDate = new DateOnly(2025, 4, 14),
-                            Location = (byte)1,
-                            Name = "Practical Fresh Ball",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)1,
-                            Version = new Guid("e0e4f9d5-0f57-44e9-8930-e2af343afd80")
-                        },
-                        new
-                        {
-                            Id = new Guid("400750c6-28ae-4124-914e-59444543e837"),
-                            AssetCode = "BS000020",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4813),
-                            InstallDate = new DateOnly(2024, 8, 4),
-                            Location = (byte)2,
-                            Name = "Handcrafted Wooden Chair",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)3,
-                            Version = new Guid("9a7a0e22-2377-4e5e-80e9-a051630988fb")
-                        },
-                        new
-                        {
-                            Id = new Guid("c968f1bc-c777-4d9d-a27e-44c37eab36a6"),
-                            AssetCode = "BS000021",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4833),
-                            InstallDate = new DateOnly(2025, 3, 28),
-                            Location = (byte)0,
-                            Name = "Sleek Steel Hat",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)3,
-                            Version = new Guid("cfc00220-a920-496e-bb83-769b93289ff7")
-                        },
-                        new
-                        {
-                            Id = new Guid("f7489e73-660e-4794-9f95-42633f663b8f"),
-                            AssetCode = "BS000022",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4852),
-                            InstallDate = new DateOnly(2025, 1, 13),
-                            Location = (byte)1,
-                            Name = "Awesome Metal Ball",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)4,
-                            Version = new Guid("d08d3475-107d-4dca-a28d-37ba8770560b")
-                        },
-                        new
-                        {
-                            Id = new Guid("b48c9a89-a221-4fb5-aee5-e90733e5fd7d"),
-                            AssetCode = "BS000023",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4872),
-                            InstallDate = new DateOnly(2025, 4, 2),
-                            Location = (byte)2,
-                            Name = "Incredible Rubber Bacon",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)5,
-                            Version = new Guid("f839e402-a68c-41c9-8886-f750d05f8fe3")
-                        },
-                        new
-                        {
-                            Id = new Guid("4e6cf5ba-697d-4c4d-9cbf-41af3cdc9d64"),
-                            AssetCode = "BS000024",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4890),
-                            InstallDate = new DateOnly(2024, 9, 6),
-                            Location = (byte)2,
-                            Name = "Incredible Granite Fish",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)1,
-                            Version = new Guid("66711ada-4e01-4be9-95a4-558d5815b7e1")
-                        },
-                        new
-                        {
-                            Id = new Guid("2080e737-ec8b-4eed-99fb-333d8ecee011"),
-                            AssetCode = "BS000025",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4908),
-                            InstallDate = new DateOnly(2024, 9, 29),
-                            Location = (byte)2,
-                            Name = "Generic Cotton Sausages",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)1,
-                            Version = new Guid("03aced9b-23a9-44ed-8b79-66d5867a8642")
-                        },
-                        new
-                        {
-                            Id = new Guid("f99e8615-ef53-4c9f-96d5-b817addd2d5c"),
-                            AssetCode = "BS000026",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4925),
-                            InstallDate = new DateOnly(2025, 3, 16),
-                            Location = (byte)2,
-                            Name = "Ergonomic Metal Chips",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)4,
-                            Version = new Guid("14a75d6b-326b-499d-a6f1-fa3bf7864768")
-                        },
-                        new
-                        {
-                            Id = new Guid("a192e1e9-4bb3-4b01-bd5a-9db9917e4010"),
-                            AssetCode = "BS000027",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4944),
-                            InstallDate = new DateOnly(2024, 8, 12),
-                            Location = (byte)1,
-                            Name = "Sleek Metal Sausages",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)5,
-                            Version = new Guid("6e8f90c4-c70c-477d-8925-e609addbfe71")
-                        },
-                        new
-                        {
-                            Id = new Guid("1319b859-4abf-4924-9b3a-69315bf02f94"),
-                            AssetCode = "BS000028",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4995),
-                            InstallDate = new DateOnly(2024, 12, 26),
-                            Location = (byte)2,
-                            Name = "Tasty Metal Computer",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)5,
-                            Version = new Guid("c23318b9-6891-4a04-9934-3a9e6c274f04")
-                        },
-                        new
-                        {
-                            Id = new Guid("9f33f59e-fb99-411a-9e70-5b8ba6502390"),
-                            AssetCode = "BS000029",
-                            CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5015),
-                            InstallDate = new DateOnly(2024, 10, 24),
-                            Location = (byte)2,
-                            Name = "Fantastic Steel Chicken",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)0,
-                            Version = new Guid("06b57e14-8cea-4e5b-99b6-e110a5e77af4")
-                        },
-                        new
-                        {
-                            Id = new Guid("d7972aff-6953-473a-9f44-a3ab4e5954d7"),
-                            AssetCode = "MN000000",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5034),
-                            InstallDate = new DateOnly(2025, 5, 30),
-                            Location = (byte)1,
-                            Name = "Handcrafted Plastic Cheese",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)3,
-                            Version = new Guid("2857d6f8-8c0d-45c3-bbcf-54f63857b720")
-                        },
-                        new
-                        {
-                            Id = new Guid("9cf13283-a301-45ae-9d06-e97321a962ce"),
-                            AssetCode = "MN000001",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5054),
-                            InstallDate = new DateOnly(2025, 3, 12),
-                            Location = (byte)2,
-                            Name = "Sleek Cotton Bike",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)3,
-                            Version = new Guid("2b8a28e9-11aa-4526-8cc8-efbb50b7c75b")
-                        },
-                        new
-                        {
-                            Id = new Guid("05fc37d4-1297-41fa-b3d0-730e0b3a8bc7"),
-                            AssetCode = "MN000002",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5074),
-                            InstallDate = new DateOnly(2025, 6, 3),
-                            Location = (byte)0,
-                            Name = "Fantastic Granite Gloves",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)0,
-                            Version = new Guid("5cd9aaaf-0078-44a6-aa7d-12f78aa1dfe1")
-                        },
-                        new
-                        {
-                            Id = new Guid("d4dd08be-28aa-47e5-815c-f59ebfca31b4"),
-                            AssetCode = "MN000003",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5092),
-                            InstallDate = new DateOnly(2025, 6, 24),
-                            Location = (byte)0,
-                            Name = "Unbranded Metal Keyboard",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)5,
-                            Version = new Guid("1dc5d1ac-a9e6-4965-b847-ed5eb99195be")
-                        },
-                        new
-                        {
-                            Id = new Guid("87d3605d-5f7e-44ef-bf49-0f69a98d28ca"),
-                            AssetCode = "MN000004",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5110),
-                            InstallDate = new DateOnly(2025, 3, 6),
-                            Location = (byte)2,
-                            Name = "Ergonomic Fresh Soap",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)3,
-                            Version = new Guid("56a0536d-d35e-4983-ab97-de7fd938ef7a")
-                        },
-                        new
-                        {
-                            Id = new Guid("f9823935-3e89-4b4a-8c4d-0cc3963c72d2"),
-                            AssetCode = "MN000005",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5160),
-                            InstallDate = new DateOnly(2025, 3, 18),
-                            Location = (byte)2,
-                            Name = "Incredible Granite Tuna",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)0,
-                            Version = new Guid("f32cd181-1903-4f0f-98a5-4c6977e8f243")
-                        },
-                        new
-                        {
-                            Id = new Guid("6fb6d198-7146-495b-bcf0-7aa02bc44080"),
-                            AssetCode = "MN000006",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5181),
-                            InstallDate = new DateOnly(2024, 11, 20),
-                            Location = (byte)1,
-                            Name = "Fantastic Cotton Ball",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)1,
-                            Version = new Guid("d529aad4-3956-47d4-8a36-fb327f473641")
-                        },
-                        new
-                        {
-                            Id = new Guid("9772e9a1-b32f-47fb-8be8-23718be3474a"),
-                            AssetCode = "MN000007",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5199),
-                            InstallDate = new DateOnly(2025, 1, 2),
-                            Location = (byte)2,
-                            Name = "Unbranded Plastic Soap",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)5,
-                            Version = new Guid("834ec4b1-7fe4-465c-9d2e-44ec9db735bb")
-                        },
-                        new
-                        {
-                            Id = new Guid("2e928692-4764-4448-af82-7692e2df8a71"),
-                            AssetCode = "MN000008",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5216),
-                            InstallDate = new DateOnly(2025, 1, 5),
-                            Location = (byte)1,
-                            Name = "Gorgeous Frozen Pants",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)4,
-                            Version = new Guid("afac1e3f-caf6-4151-861f-23ac65956523")
-                        },
-                        new
-                        {
-                            Id = new Guid("b8cd0db7-209b-435a-8cf6-6e356490643a"),
-                            AssetCode = "MN000009",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5236),
-                            InstallDate = new DateOnly(2025, 1, 24),
-                            Location = (byte)1,
-                            Name = "Rustic Plastic Bacon",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)5,
-                            Version = new Guid("85d0a0e5-001e-44fa-a15b-6d064ba1eefa")
-                        },
-                        new
-                        {
-                            Id = new Guid("1c4a8c64-af59-4c72-8a64-bda0beedf268"),
-                            AssetCode = "MN000010",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5253),
-                            InstallDate = new DateOnly(2025, 1, 10),
-                            Location = (byte)1,
-                            Name = "Unbranded Metal Sausages",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)1,
-                            Version = new Guid("bb9e7a87-238b-48fb-aaa0-9ca9bc4d7e9a")
-                        },
-                        new
-                        {
-                            Id = new Guid("1b958ac8-36c4-457d-8432-78ed7c113feb"),
-                            AssetCode = "MN000011",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5271),
-                            InstallDate = new DateOnly(2025, 5, 16),
-                            Location = (byte)2,
-                            Name = "Generic Wooden Pants",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)1,
-                            Version = new Guid("be59d163-f6e6-4633-94a8-583e4f60db80")
-                        },
-                        new
-                        {
-                            Id = new Guid("3e48182b-9bf7-4847-8ae8-23c214cf39a4"),
-                            AssetCode = "MN000012",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5322),
-                            InstallDate = new DateOnly(2025, 1, 26),
-                            Location = (byte)0,
-                            Name = "Unbranded Metal Chair",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("17074abb-6520-4ea2-b481-7b2aa86c9dce")
-                        },
-                        new
-                        {
-                            Id = new Guid("7863fe01-e3c9-445a-9342-8b5cbbf18e80"),
-                            AssetCode = "MN000013",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5343),
-                            InstallDate = new DateOnly(2025, 5, 30),
-                            Location = (byte)2,
-                            Name = "Refined Cotton Pizza",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)1,
-                            Version = new Guid("eb0d082a-c9c3-4bfb-add2-93e249b01d36")
-                        },
-                        new
-                        {
-                            Id = new Guid("70a5d677-ca9e-4928-846a-4d7be34912a5"),
-                            AssetCode = "MN000014",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5361),
-                            InstallDate = new DateOnly(2025, 3, 30),
-                            Location = (byte)0,
-                            Name = "Ergonomic Steel Gloves",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("86065695-50be-48be-82d7-9cea1359c46b")
-                        },
-                        new
-                        {
-                            Id = new Guid("a59eeabb-05ef-40b1-b100-7d770d5a50df"),
-                            AssetCode = "MN000015",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5379),
-                            InstallDate = new DateOnly(2024, 9, 5),
-                            Location = (byte)0,
-                            Name = "Refined Granite Bike",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)0,
-                            Version = new Guid("54debe56-bfd7-4615-aeb3-7a0a6a4263ff")
-                        },
-                        new
-                        {
-                            Id = new Guid("ef32a950-9511-4195-a6e8-824e55ba0361"),
-                            AssetCode = "MN000016",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5397),
-                            InstallDate = new DateOnly(2025, 2, 5),
-                            Location = (byte)1,
-                            Name = "Tasty Rubber Mouse",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)5,
-                            Version = new Guid("0fa727f5-6888-49d1-9c12-d92328531aa0")
-                        },
-                        new
-                        {
-                            Id = new Guid("6e773b7b-5de3-4566-98d2-1b42f4964302"),
-                            AssetCode = "MN000017",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5415),
-                            InstallDate = new DateOnly(2024, 11, 27),
-                            Location = (byte)0,
-                            Name = "Intelligent Granite Computer",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)4,
-                            Version = new Guid("b037b554-83c7-4ba0-bf8a-6e6e31276b3b")
-                        },
-                        new
-                        {
-                            Id = new Guid("4e33b27e-8082-4c5c-b204-dd744abade0e"),
-                            AssetCode = "MN000018",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5433),
-                            InstallDate = new DateOnly(2025, 2, 26),
-                            Location = (byte)2,
-                            Name = "Fantastic Granite Mouse",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)3,
-                            Version = new Guid("6667fe4a-5b5c-459c-a729-01d6c942816f")
-                        },
-                        new
-                        {
-                            Id = new Guid("8c47477d-e575-42cc-893b-8fd13d13657a"),
-                            AssetCode = "MN000019",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5451),
-                            InstallDate = new DateOnly(2024, 8, 20),
-                            Location = (byte)0,
-                            Name = "Generic Rubber Salad",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)5,
-                            Version = new Guid("e4a13b53-5c28-4304-ae25-fb655eeb7eb0")
-                        },
-                        new
-                        {
-                            Id = new Guid("d6ebd673-aea3-4b1a-8d72-cc65774875b7"),
-                            AssetCode = "MN000020",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5518),
-                            InstallDate = new DateOnly(2024, 7, 21),
-                            Location = (byte)0,
-                            Name = "Unbranded Frozen Chair",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)5,
-                            Version = new Guid("db1b4dbc-c769-45b7-95cb-b38fc308b7e0")
-                        },
-                        new
-                        {
-                            Id = new Guid("22d2c476-1e3a-4721-8e73-3bfd80aba1fd"),
-                            AssetCode = "MN000021",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5538),
-                            InstallDate = new DateOnly(2024, 8, 24),
-                            Location = (byte)0,
-                            Name = "Practical Frozen Salad",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)5,
-                            Version = new Guid("dfa91cfe-cb14-4b0f-bac3-61cf180867ee")
-                        },
-                        new
-                        {
-                            Id = new Guid("3a8123cd-5570-4d9c-a3e6-0cd967834a30"),
-                            AssetCode = "MN000022",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5556),
-                            InstallDate = new DateOnly(2025, 1, 7),
-                            Location = (byte)0,
-                            Name = "Tasty Granite Soap",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)1,
-                            Version = new Guid("4e915c16-15ee-4ffb-a368-9a0c71be5e72")
-                        },
-                        new
-                        {
-                            Id = new Guid("a6c41aa6-da2d-420f-824d-4508bd20a0ed"),
-                            AssetCode = "MN000023",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5574),
-                            InstallDate = new DateOnly(2025, 1, 30),
-                            Location = (byte)0,
-                            Name = "Awesome Granite Chair",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("4e5aae13-ba50-4f7f-8485-46267e81c0af")
-                        },
-                        new
-                        {
-                            Id = new Guid("5c7ef223-7e60-47d3-aad1-5c11bd0e8271"),
-                            AssetCode = "MN000024",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5590),
-                            InstallDate = new DateOnly(2025, 2, 21),
-                            Location = (byte)0,
-                            Name = "Ergonomic Concrete Shoes",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)4,
-                            Version = new Guid("c7aa59dc-fe14-424a-970d-9cee879ee903")
-                        },
-                        new
-                        {
-                            Id = new Guid("567d9313-89fa-40e5-a161-c0ba19090506"),
-                            AssetCode = "MN000025",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5611),
-                            InstallDate = new DateOnly(2024, 9, 5),
-                            Location = (byte)1,
-                            Name = "Licensed Concrete Pants",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)0,
-                            Version = new Guid("1f9a8d50-40f0-4eb3-abb1-8e3751931117")
-                        },
-                        new
-                        {
-                            Id = new Guid("f1c1ca78-f7ba-46c4-9fa3-badcc682efd2"),
-                            AssetCode = "MN000026",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5629),
-                            InstallDate = new DateOnly(2025, 1, 22),
-                            Location = (byte)1,
-                            Name = "Unbranded Granite Bike",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("96bf33d1-05f8-4281-ab2c-485e2fae5989")
-                        },
-                        new
-                        {
-                            Id = new Guid("6b344ba2-9ff3-4ca0-a574-ca8ed0569442"),
-                            AssetCode = "MN000027",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5689),
-                            InstallDate = new DateOnly(2025, 7, 3),
-                            Location = (byte)0,
-                            Name = "Tasty Wooden Sausages",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)4,
-                            Version = new Guid("6f08cd5d-7135-4a54-b17e-c92c756e0cba")
-                        },
-                        new
-                        {
-                            Id = new Guid("88b82478-1fa8-4596-9fa4-37349d2f9cad"),
-                            AssetCode = "MN000028",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5708),
-                            InstallDate = new DateOnly(2024, 8, 8),
-                            Location = (byte)0,
-                            Name = "Incredible Fresh Car",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)5,
-                            Version = new Guid("adef28e1-9861-45c6-8b5d-532479657e7f")
-                        },
-                        new
-                        {
-                            Id = new Guid("ddb011d5-3e8e-4a64-9d8a-c78a1dfcba6f"),
-                            AssetCode = "MN000029",
-                            CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5728),
-                            InstallDate = new DateOnly(2025, 2, 23),
-                            Location = (byte)2,
-                            Name = "Intelligent Granite Bike",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)1,
-                            Version = new Guid("46ff7f9c-7509-4610-9804-83b33c926d49")
-                        },
-                        new
-                        {
-                            Id = new Guid("8f29906b-1e5d-47e3-8fa9-ba158c3b6366"),
-                            AssetCode = "KB000000",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5748),
-                            InstallDate = new DateOnly(2025, 3, 18),
-                            Location = (byte)2,
-                            Name = "Tasty Concrete Shirt",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)1,
-                            Version = new Guid("2466c4da-6a1f-4e25-a3df-5b87c583004c")
-                        },
-                        new
-                        {
-                            Id = new Guid("74d4ca62-2aaa-4e99-9966-833c59708749"),
-                            AssetCode = "KB000001",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5766),
-                            InstallDate = new DateOnly(2024, 8, 21),
-                            Location = (byte)2,
-                            Name = "Handcrafted Wooden Cheese",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("b7c8d21c-72eb-4cf7-882f-b53865806988")
-                        },
-                        new
-                        {
-                            Id = new Guid("6d504b8a-9fee-4ce1-862f-1073eaa6f16f"),
-                            AssetCode = "KB000002",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5783),
-                            InstallDate = new DateOnly(2025, 4, 15),
-                            Location = (byte)0,
-                            Name = "Generic Frozen Table",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)3,
-                            Version = new Guid("ac31c562-2f61-4b1a-b5b4-58a4d13e7847")
-                        },
-                        new
-                        {
-                            Id = new Guid("db08ac56-072e-4681-b2a0-96a077c2af75"),
-                            AssetCode = "KB000003",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5803),
-                            InstallDate = new DateOnly(2025, 6, 30),
-                            Location = (byte)0,
-                            Name = "Licensed Fresh Gloves",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)3,
-                            Version = new Guid("4e56144b-6fde-457b-94df-426505ad58a2")
-                        },
-                        new
-                        {
-                            Id = new Guid("21e0479e-dc29-488f-86be-f0a7fb0d7e80"),
-                            AssetCode = "KB000004",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5891),
-                            InstallDate = new DateOnly(2024, 8, 16),
-                            Location = (byte)1,
-                            Name = "Incredible Wooden Hat",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)3,
-                            Version = new Guid("f0eb4b4d-cec2-44ae-87ae-43a06c5a4725")
-                        },
-                        new
-                        {
-                            Id = new Guid("3a93e35a-a2a6-4792-a16e-4cf9ab807091"),
-                            AssetCode = "KB000005",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5911),
-                            InstallDate = new DateOnly(2024, 8, 24),
-                            Location = (byte)2,
-                            Name = "Ergonomic Frozen Car",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)5,
-                            Version = new Guid("8f14c774-65bb-4771-bfb3-e29a289a983e")
-                        },
-                        new
-                        {
-                            Id = new Guid("aecdfb48-e3c9-4bc6-aa9e-4fb8ef4d92f3"),
-                            AssetCode = "KB000006",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5929),
-                            InstallDate = new DateOnly(2025, 4, 1),
-                            Location = (byte)1,
-                            Name = "Incredible Frozen Shirt",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)0,
-                            Version = new Guid("6af8443a-170f-4013-b35b-17f61462a5c7")
-                        },
-                        new
-                        {
-                            Id = new Guid("1313ac17-ae98-4f92-bae5-754b0d524660"),
-                            AssetCode = "KB000007",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5949),
-                            InstallDate = new DateOnly(2025, 4, 4),
-                            Location = (byte)2,
-                            Name = "Tasty Rubber Pants",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)4,
-                            Version = new Guid("38fb8d75-4d76-4b40-811e-bc1b504cf5cb")
-                        },
-                        new
-                        {
-                            Id = new Guid("42ab0e6c-b51f-4053-985a-b1a1f713ad61"),
-                            AssetCode = "KB000008",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5967),
-                            InstallDate = new DateOnly(2025, 3, 10),
-                            Location = (byte)2,
-                            Name = "Gorgeous Concrete Ball",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)4,
-                            Version = new Guid("b262f12a-65f8-4448-a74f-d1f6efe752f4")
-                        },
-                        new
-                        {
-                            Id = new Guid("0207ebe7-7855-4526-a0c5-cca6af62709e"),
-                            AssetCode = "KB000009",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5984),
-                            InstallDate = new DateOnly(2025, 1, 2),
-                            Location = (byte)2,
-                            Name = "Rustic Frozen Towels",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)3,
-                            Version = new Guid("a8914815-c545-4d83-a2a4-b58c1411a53a")
-                        },
-                        new
-                        {
-                            Id = new Guid("f3aad915-ada5-40a1-ba2f-d9d55339f22a"),
-                            AssetCode = "KB000010",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6002),
-                            InstallDate = new DateOnly(2024, 10, 11),
-                            Location = (byte)0,
-                            Name = "Small Frozen Fish",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)4,
-                            Version = new Guid("ea93ccb8-a27c-4829-ba67-ae6b83f18fda")
-                        },
-                        new
-                        {
-                            Id = new Guid("7f6fe401-0c90-43bf-b72c-b50acd230d10"),
-                            AssetCode = "KB000011",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6057),
-                            InstallDate = new DateOnly(2025, 1, 30),
-                            Location = (byte)0,
-                            Name = "Ergonomic Wooden Shoes",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)5,
-                            Version = new Guid("e6dc1bf6-ed02-4577-a8ea-255b3252a630")
-                        },
-                        new
-                        {
-                            Id = new Guid("f2e0c118-fdc4-480d-95fb-36714c693a6b"),
-                            AssetCode = "KB000012",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6078),
-                            InstallDate = new DateOnly(2024, 10, 8),
-                            Location = (byte)2,
-                            Name = "Ergonomic Soft Hat",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)0,
-                            Version = new Guid("166d8cf1-fe6d-4caa-ae75-9848faae678b")
-                        },
-                        new
-                        {
-                            Id = new Guid("3b88cca8-e216-465a-b252-52a84cdb58d0"),
-                            AssetCode = "KB000013",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6096),
-                            InstallDate = new DateOnly(2024, 12, 30),
-                            Location = (byte)1,
-                            Name = "Generic Soft Pizza",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)0,
-                            Version = new Guid("34630879-7a75-41fe-8d55-75b8369147d1")
-                        },
-                        new
-                        {
-                            Id = new Guid("41d3dce5-3d83-4b80-a754-af941cd19d55"),
-                            AssetCode = "KB000014",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6114),
-                            InstallDate = new DateOnly(2025, 5, 18),
-                            Location = (byte)1,
-                            Name = "Sleek Frozen Chair",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)1,
-                            Version = new Guid("eb6ce31d-6838-43c9-a3af-a4233e6ec8e5")
-                        },
-                        new
-                        {
-                            Id = new Guid("ec25f324-2d63-4803-b50f-bc31b0e07a06"),
-                            AssetCode = "KB000015",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6134),
-                            InstallDate = new DateOnly(2025, 6, 17),
-                            Location = (byte)0,
-                            Name = "Tasty Soft Tuna",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)0,
-                            Version = new Guid("f63eded8-fa9f-4688-9279-d4e67e3f99f7")
-                        },
-                        new
-                        {
-                            Id = new Guid("6f674137-df7b-44c8-9325-5fd9b24cbcd0"),
-                            AssetCode = "KB000016",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6152),
-                            InstallDate = new DateOnly(2025, 4, 23),
-                            Location = (byte)1,
-                            Name = "Rustic Steel Chair",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)4,
-                            Version = new Guid("2cc6bd5b-ee43-441b-b56b-2fa3c93906dd")
-                        },
-                        new
-                        {
-                            Id = new Guid("e7f43912-7270-4d2c-bdb8-979a43215693"),
-                            AssetCode = "KB000017",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6169),
-                            InstallDate = new DateOnly(2025, 2, 6),
-                            Location = (byte)1,
-                            Name = "Refined Cotton Cheese",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)3,
-                            Version = new Guid("efa0421d-494b-4e3a-8eb2-4d6142ae9fed")
-                        },
-                        new
-                        {
-                            Id = new Guid("d8d21810-de6e-47cc-b42f-440f4bbbd24f"),
-                            AssetCode = "KB000018",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6186),
-                            InstallDate = new DateOnly(2024, 7, 22),
-                            Location = (byte)0,
-                            Name = "Intelligent Cotton Shoes",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)3,
-                            Version = new Guid("a2b491cd-b12c-40f8-b44a-979db4a5dd6c")
-                        },
-                        new
-                        {
-                            Id = new Guid("d9d2b322-06da-44ce-b1a6-c72ecc694cdb"),
-                            AssetCode = "KB000019",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6238),
-                            InstallDate = new DateOnly(2025, 2, 27),
-                            Location = (byte)1,
-                            Name = "Awesome Steel Bacon",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)4,
-                            Version = new Guid("45007e01-c69a-4f29-860d-f713dd715df0")
-                        },
-                        new
-                        {
-                            Id = new Guid("15f1db7f-6fca-4fa6-8793-dad5aa68706c"),
-                            AssetCode = "KB000020",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6257),
-                            InstallDate = new DateOnly(2024, 9, 23),
-                            Location = (byte)2,
-                            Name = "Licensed Cotton Bacon",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)5,
-                            Version = new Guid("8e18d17f-6af2-4380-8c23-f0b9b6d8af87")
-                        },
-                        new
-                        {
-                            Id = new Guid("fb88b0a3-3060-46e0-ac56-5a47c8c7ffe8"),
-                            AssetCode = "KB000021",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6275),
-                            InstallDate = new DateOnly(2025, 6, 2),
-                            Location = (byte)2,
-                            Name = "Rustic Cotton Car",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)5,
-                            Version = new Guid("565bf1fc-5858-4af3-b4da-4dec06cf8930")
-                        },
-                        new
-                        {
-                            Id = new Guid("8f7f7c1f-60bb-48b1-8919-0cc16cf32a0b"),
-                            AssetCode = "KB000022",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6292),
-                            InstallDate = new DateOnly(2024, 8, 11),
-                            Location = (byte)0,
-                            Name = "Small Concrete Towels",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)0,
-                            Version = new Guid("3b8a9183-2738-4ae9-a039-33e9970286b5")
-                        },
-                        new
-                        {
-                            Id = new Guid("ef4eb56f-eed7-4b45-87af-d684bc4d4550"),
-                            AssetCode = "KB000023",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6312),
-                            InstallDate = new DateOnly(2025, 5, 3),
-                            Location = (byte)0,
-                            Name = "Handcrafted Granite Pizza",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)3,
-                            Version = new Guid("37f407bd-4375-49bb-a339-15218a17f5ea")
-                        },
-                        new
-                        {
-                            Id = new Guid("59f24fe2-941c-4151-8584-cf663c62b086"),
-                            AssetCode = "KB000024",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6330),
-                            InstallDate = new DateOnly(2025, 1, 21),
-                            Location = (byte)1,
-                            Name = "Awesome Soft Sausages",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("63d0fcb1-0a57-4e9a-95c3-13eed0939325")
-                        },
-                        new
-                        {
-                            Id = new Guid("615b3ddb-30b4-4390-9059-8ac0c378a566"),
-                            AssetCode = "KB000025",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6347),
-                            InstallDate = new DateOnly(2024, 11, 5),
-                            Location = (byte)2,
-                            Name = "Incredible Granite Sausages",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)1,
-                            Version = new Guid("bd215f45-29d6-4b59-8629-ae6dbd06182a")
-                        },
-                        new
-                        {
-                            Id = new Guid("0801be8a-99df-4ad0-9ce4-e6a787519c11"),
-                            AssetCode = "KB000026",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6395),
-                            InstallDate = new DateOnly(2025, 2, 10),
-                            Location = (byte)2,
-                            Name = "Licensed Wooden Bacon",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)1,
-                            Version = new Guid("eaf58cd2-2ce4-4731-b468-f6b87e38ee05")
-                        },
-                        new
-                        {
-                            Id = new Guid("70257548-0784-4ccb-81df-826d98753dfa"),
-                            AssetCode = "KB000027",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6417),
-                            InstallDate = new DateOnly(2024, 9, 17),
-                            Location = (byte)1,
-                            Name = "Small Granite Table",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)4,
-                            Version = new Guid("bdfaa2b1-c413-45e6-a687-ae69e964a994")
-                        },
-                        new
-                        {
-                            Id = new Guid("de8f6bf8-2674-4f28-aa57-bb8fbfb629da"),
-                            AssetCode = "KB000028",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6436),
-                            InstallDate = new DateOnly(2025, 1, 25),
-                            Location = (byte)1,
-                            Name = "Practical Rubber Ball",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)0,
-                            Version = new Guid("6d3ee82a-b72b-4081-b5a1-cb4bbf889ec4")
-                        },
-                        new
-                        {
-                            Id = new Guid("70506de2-e08f-4fc4-8afb-2fd2f2793430"),
-                            AssetCode = "KB000029",
-                            CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6454),
-                            InstallDate = new DateOnly(2025, 6, 20),
-                            Location = (byte)0,
-                            Name = "Small Metal Fish",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)4,
-                            Version = new Guid("9d5ec683-a4e3-43be-aa2e-c6fff3b70b76")
-                        },
-                        new
-                        {
-                            Id = new Guid("63c36d61-93ee-406c-8c25-66054f1a4d71"),
-                            AssetCode = "HP000000",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6474),
-                            InstallDate = new DateOnly(2025, 3, 8),
-                            Location = (byte)2,
-                            Name = "Gorgeous Granite Towels",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)5,
-                            Version = new Guid("7baed9a6-cbdb-4055-99ea-298bf35943a9")
-                        },
-                        new
-                        {
-                            Id = new Guid("b9507a8e-db23-46ba-b53b-3a3e1c2a2396"),
-                            AssetCode = "HP000001",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6494),
-                            InstallDate = new DateOnly(2025, 1, 26),
-                            Location = (byte)0,
-                            Name = "Licensed Soft Towels",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)0,
-                            Version = new Guid("d626ac3a-924f-459e-ba2f-95ca2faac05b")
-                        },
-                        new
-                        {
-                            Id = new Guid("022b3a95-6cd1-447b-a650-670e8d08d6be"),
-                            AssetCode = "HP000002",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6511),
-                            InstallDate = new DateOnly(2025, 6, 16),
-                            Location = (byte)2,
-                            Name = "Ergonomic Concrete Sausages",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)1,
-                            Version = new Guid("79266e36-aa4e-44ef-90b6-2502d896d7b1")
-                        },
-                        new
-                        {
-                            Id = new Guid("a90c35f9-c0e0-4128-96e5-5205c9d37fcc"),
-                            AssetCode = "HP000003",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6528),
-                            InstallDate = new DateOnly(2025, 3, 28),
-                            Location = (byte)2,
-                            Name = "Intelligent Frozen Chips",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)5,
-                            Version = new Guid("ad60dbe8-4c9b-4b8c-b3ea-a98822bc95de")
-                        },
-                        new
-                        {
-                            Id = new Guid("7da79589-474e-4339-87ba-1f12aa270b07"),
-                            AssetCode = "HP000004",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6599),
-                            InstallDate = new DateOnly(2024, 8, 18),
-                            Location = (byte)1,
-                            Name = "Rustic Wooden Bacon",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)4,
-                            Version = new Guid("8dfede6e-927d-45c5-bf77-fc4eb88ad981")
-                        },
-                        new
-                        {
-                            Id = new Guid("ccb7b765-35b2-4c46-9826-e76cb829cbe7"),
-                            AssetCode = "HP000005",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6620),
-                            InstallDate = new DateOnly(2025, 5, 27),
-                            Location = (byte)2,
-                            Name = "Gorgeous Steel Ball",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)4,
-                            Version = new Guid("6abe59b8-4e77-4a2c-9193-40effe4bf4e3")
-                        },
-                        new
-                        {
-                            Id = new Guid("2ae811c3-d8c6-4fc1-8fc9-80ffef2603a5"),
-                            AssetCode = "HP000006",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6640),
-                            InstallDate = new DateOnly(2025, 1, 11),
-                            Location = (byte)1,
-                            Name = "Gorgeous Granite Table",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("d5b11c1a-3cd8-41ec-ad32-e955d0cd5571")
-                        },
-                        new
-                        {
-                            Id = new Guid("93631555-2138-4cc7-9b0e-c686c53453e3"),
-                            AssetCode = "HP000007",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6658),
-                            InstallDate = new DateOnly(2025, 2, 2),
-                            Location = (byte)2,
-                            Name = "Incredible Steel Gloves",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)0,
-                            Version = new Guid("ed6d8bd3-19fc-4e00-9231-debda7f1c3df")
-                        },
-                        new
-                        {
-                            Id = new Guid("65d76fca-2616-4639-9f65-149adb459b73"),
-                            AssetCode = "HP000008",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6675),
-                            InstallDate = new DateOnly(2024, 9, 15),
-                            Location = (byte)2,
-                            Name = "Practical Fresh Soap",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)0,
-                            Version = new Guid("22beec34-e4af-44b1-9d1d-50f9a07496b4")
-                        },
-                        new
-                        {
-                            Id = new Guid("7a220d90-7850-48f3-8e02-48560d841fa9"),
-                            AssetCode = "HP000009",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6696),
-                            InstallDate = new DateOnly(2024, 8, 5),
-                            Location = (byte)2,
-                            Name = "Refined Frozen Ball",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)0,
-                            Version = new Guid("abc3c27e-7740-42af-9041-4dbebcff23e5")
-                        },
-                        new
-                        {
-                            Id = new Guid("1dd80fba-a6ce-4fc5-ba07-64d642fb2861"),
-                            AssetCode = "HP000010",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6714),
-                            InstallDate = new DateOnly(2025, 1, 17),
-                            Location = (byte)1,
-                            Name = "Refined Concrete Chair",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)5,
-                            Version = new Guid("a1e85e35-3a52-44ee-ba2d-d5683c60069a")
-                        },
-                        new
-                        {
-                            Id = new Guid("d0431482-5939-4e0a-9e9c-98b2991d92fb"),
-                            AssetCode = "HP000011",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6765),
-                            InstallDate = new DateOnly(2025, 2, 7),
-                            Location = (byte)1,
-                            Name = "Practical Soft Soap",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)3,
-                            Version = new Guid("a07c8fbd-9625-4169-9bcb-fd2f6ea0b1fa")
-                        },
-                        new
-                        {
-                            Id = new Guid("1e5e9c7f-82a8-4a4b-b645-6795c1369e3d"),
-                            AssetCode = "HP000012",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6785),
-                            InstallDate = new DateOnly(2024, 12, 26),
-                            Location = (byte)0,
-                            Name = "Rustic Cotton Gloves",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)1,
-                            Version = new Guid("4f806e96-d495-42e1-87dd-e3e0f8708c75")
-                        },
-                        new
-                        {
-                            Id = new Guid("3850ea67-407b-4328-8af6-79e82d053eb6"),
-                            AssetCode = "HP000013",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6805),
-                            InstallDate = new DateOnly(2025, 3, 22),
-                            Location = (byte)2,
-                            Name = "Rustic Metal Table",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)0,
-                            Version = new Guid("a0288d4e-093d-4e5e-ad0c-042d259a24c0")
-                        },
-                        new
-                        {
-                            Id = new Guid("5e726dff-cd3b-4d27-8469-a3c01e6ed43e"),
-                            AssetCode = "HP000014",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6824),
-                            InstallDate = new DateOnly(2025, 6, 11),
-                            Location = (byte)2,
-                            Name = "Rustic Metal Shoes",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)1,
-                            Version = new Guid("1bd04452-b72d-4390-99d2-f573b00fc172")
-                        },
-                        new
-                        {
-                            Id = new Guid("599df96f-12c1-4c64-a963-21011b9363da"),
-                            AssetCode = "HP000015",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6842),
-                            InstallDate = new DateOnly(2024, 8, 31),
-                            Location = (byte)0,
-                            Name = "Unbranded Concrete Mouse",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)5,
-                            Version = new Guid("bdbc31a2-a432-4fd0-b4f3-4dc45a632f7c")
-                        },
-                        new
-                        {
-                            Id = new Guid("819a793e-7dec-4cec-a171-f608fa3f8ed3"),
-                            AssetCode = "HP000016",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6859),
-                            InstallDate = new DateOnly(2025, 3, 2),
-                            Location = (byte)1,
-                            Name = "Generic Rubber Ball",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)3,
-                            Version = new Guid("00408e1f-15d1-4cd3-839a-40cf7d02cbcb")
-                        },
-                        new
-                        {
-                            Id = new Guid("60864e04-d67f-4a1f-8900-5e374f85c18c"),
-                            AssetCode = "HP000017",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6878),
-                            InstallDate = new DateOnly(2024, 12, 7),
-                            Location = (byte)2,
-                            Name = "Handcrafted Frozen Tuna",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)1,
-                            Version = new Guid("7a18ce22-7fd0-4ac3-86cf-ee6cea1fd54e")
-                        },
-                        new
-                        {
-                            Id = new Guid("931cfd41-6f65-4d3d-9390-689db7251e17"),
-                            AssetCode = "HP000018",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6895),
-                            InstallDate = new DateOnly(2024, 9, 10),
-                            Location = (byte)0,
-                            Name = "Awesome Granite Pants",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)5,
-                            Version = new Guid("5bec7efa-05d7-4db7-90d2-8a878f472efd")
-                        },
-                        new
-                        {
-                            Id = new Guid("2fec555f-d0a0-49b5-aeeb-280410457909"),
-                            AssetCode = "HP000019",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6947),
-                            InstallDate = new DateOnly(2025, 5, 12),
-                            Location = (byte)1,
-                            Name = "Tasty Wooden Gloves",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)1,
-                            Version = new Guid("04574e6f-7ba3-496c-beba-8b4878935e18")
-                        },
-                        new
-                        {
-                            Id = new Guid("9dac5a63-8152-4ce7-9105-f735afec2e9a"),
-                            AssetCode = "HP000020",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7083),
-                            InstallDate = new DateOnly(2025, 5, 10),
-                            Location = (byte)0,
-                            Name = "Awesome Concrete Cheese",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)5,
-                            Version = new Guid("13da739d-5938-4095-bdab-f71621327b76")
-                        },
-                        new
-                        {
-                            Id = new Guid("7f83960e-bb62-46d5-b72f-d78102109cd8"),
-                            AssetCode = "HP000021",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7108),
-                            InstallDate = new DateOnly(2024, 11, 12),
-                            Location = (byte)0,
-                            Name = "Awesome Steel Towels",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)0,
-                            Version = new Guid("f5ff71c9-99df-44e2-b527-e6f3bf963fb7")
-                        },
-                        new
-                        {
-                            Id = new Guid("47b32a0e-d70c-4b28-9fbc-346f36ded7fc"),
-                            AssetCode = "HP000022",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7127),
-                            InstallDate = new DateOnly(2025, 2, 1),
-                            Location = (byte)2,
-                            Name = "Intelligent Concrete Sausages",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)1,
-                            Version = new Guid("afbf0fc2-a7ac-4524-bbd0-f136fcdf8547")
-                        },
-                        new
-                        {
-                            Id = new Guid("faa4e5e1-0b2b-4219-832f-bb0763d2bdf0"),
-                            AssetCode = "HP000023",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7145),
-                            InstallDate = new DateOnly(2025, 1, 20),
-                            Location = (byte)0,
-                            Name = "Refined Fresh Mouse",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)3,
-                            Version = new Guid("aa6201cf-d897-4291-9ebf-66d1f0317ebd")
-                        },
-                        new
-                        {
-                            Id = new Guid("a7a513c4-274c-4ded-987e-4e1c3b4e100b"),
-                            AssetCode = "HP000024",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7163),
-                            InstallDate = new DateOnly(2024, 11, 3),
-                            Location = (byte)1,
-                            Name = "Gorgeous Wooden Table",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)1,
-                            Version = new Guid("fd2ae64a-3ec2-451a-8b4b-c51b1a8bf96b")
-                        },
-                        new
-                        {
-                            Id = new Guid("a7d53c7f-9094-4f56-b8f2-782f25847186"),
-                            AssetCode = "HP000025",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7183),
-                            InstallDate = new DateOnly(2025, 5, 31),
-                            Location = (byte)0,
-                            Name = "Rustic Rubber Soap",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("d44066e7-2f84-4b22-be1f-ad92e7d8fbf4")
-                        },
-                        new
-                        {
-                            Id = new Guid("5b5147a3-c377-4c5e-a095-0611ede4accb"),
-                            AssetCode = "HP000026",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7245),
-                            InstallDate = new DateOnly(2025, 2, 9),
-                            Location = (byte)0,
-                            Name = "Refined Metal Car",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)3,
-                            Version = new Guid("8dfaf429-c402-4d3c-872c-6979809094ef")
-                        },
-                        new
-                        {
-                            Id = new Guid("0caf9879-e618-4553-ac59-41e45a41fc70"),
-                            AssetCode = "HP000027",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7266),
-                            InstallDate = new DateOnly(2025, 3, 2),
-                            Location = (byte)2,
-                            Name = "Awesome Wooden Tuna",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)5,
-                            Version = new Guid("2cab9404-b127-455b-9e98-23838238e804")
-                        },
-                        new
-                        {
-                            Id = new Guid("1c8f5bd8-3f31-4e78-bc52-e174042dfd1a"),
-                            AssetCode = "HP000028",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7285),
-                            InstallDate = new DateOnly(2024, 7, 16),
-                            Location = (byte)1,
-                            Name = "Handmade Frozen Towels",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)1,
-                            Version = new Guid("028b86d9-56af-49e1-82c1-43d80ae528e2")
-                        },
-                        new
-                        {
-                            Id = new Guid("3acbcc05-2291-4d22-9f81-02204d88d2df"),
-                            AssetCode = "HP000029",
-                            CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7304),
-                            InstallDate = new DateOnly(2025, 2, 16),
-                            Location = (byte)1,
-                            Name = "Practical Soft Fish",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)0,
-                            Version = new Guid("30bc52b7-dc3a-4390-be56-e77c4bd5af1d")
-                        },
-                        new
-                        {
-                            Id = new Guid("7b7c330b-5826-41da-a6d0-b9ee3b0057dc"),
-                            AssetCode = "MC000000",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7329),
-                            InstallDate = new DateOnly(2024, 11, 12),
-                            Location = (byte)0,
-                            Name = "Refined Granite Soap",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("60672150-c599-4ea7-8c88-8e9485756441")
-                        },
-                        new
-                        {
-                            Id = new Guid("77ad5bb4-58be-49e9-8e44-cd05bf991455"),
-                            AssetCode = "MC000001",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7347),
-                            InstallDate = new DateOnly(2024, 8, 2),
-                            Location = (byte)1,
-                            Name = "Awesome Frozen Keyboard",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)0,
-                            Version = new Guid("2d84e770-dc9e-4459-a7ea-15162d693851")
-                        },
-                        new
-                        {
-                            Id = new Guid("f704f9d5-a9b7-4a1e-9ad1-13c82273a162"),
-                            AssetCode = "MC000002",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7365),
-                            InstallDate = new DateOnly(2024, 10, 16),
-                            Location = (byte)0,
-                            Name = "Sleek Granite Sausages",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)0,
-                            Version = new Guid("d4743122-c4e2-476f-a6d9-2020ea34b4d6")
-                        },
-                        new
-                        {
-                            Id = new Guid("412fe128-d327-424d-9de0-f86294dcbadf"),
-                            AssetCode = "MC000003",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7475),
-                            InstallDate = new DateOnly(2024, 7, 29),
-                            Location = (byte)0,
-                            Name = "Awesome Soft Keyboard",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)1,
-                            Version = new Guid("1ca02ec2-293d-4f85-8b43-6c778cb00fc0")
-                        },
-                        new
-                        {
-                            Id = new Guid("7bef865a-7378-495a-9fe6-2c00ab9fecd6"),
-                            AssetCode = "MC000004",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7496),
-                            InstallDate = new DateOnly(2024, 8, 6),
-                            Location = (byte)2,
-                            Name = "Practical Granite Chicken",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)4,
-                            Version = new Guid("ac1ef204-9fbf-40fc-8ca6-d8a189ca2cf4")
-                        },
-                        new
-                        {
-                            Id = new Guid("745b16da-8b9d-448a-974e-637cb4329332"),
-                            AssetCode = "MC000005",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7516),
-                            InstallDate = new DateOnly(2024, 12, 14),
-                            Location = (byte)2,
-                            Name = "Practical Frozen Table",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)5,
-                            Version = new Guid("91e7570a-2ab0-44d6-8011-0d56366333dd")
-                        },
-                        new
-                        {
-                            Id = new Guid("b62fb8a6-709e-4627-82cd-29fb16fd6d6d"),
-                            AssetCode = "MC000006",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7534),
-                            InstallDate = new DateOnly(2025, 4, 12),
-                            Location = (byte)0,
-                            Name = "Rustic Concrete Car",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)3,
-                            Version = new Guid("fd4d888f-63d3-4339-a613-957deb89683a")
-                        },
-                        new
-                        {
-                            Id = new Guid("f1e889ec-288a-496e-9ce4-0935c847a83f"),
-                            AssetCode = "MC000007",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7553),
-                            InstallDate = new DateOnly(2024, 9, 26),
-                            Location = (byte)1,
-                            Name = "Licensed Steel Salad",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)4,
-                            Version = new Guid("8a890a5b-f948-4915-8086-8255fa70502b")
-                        },
-                        new
-                        {
-                            Id = new Guid("1af3fde1-12c4-477b-9cef-c8d9f36600bb"),
-                            AssetCode = "MC000008",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7571),
-                            InstallDate = new DateOnly(2025, 3, 22),
-                            Location = (byte)2,
-                            Name = "Incredible Granite Bacon",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)1,
-                            Version = new Guid("c8698698-2706-42e5-abf3-045f84ec7ab6")
-                        },
-                        new
-                        {
-                            Id = new Guid("801be5e6-84f1-4e6b-ba6b-577a5003f76d"),
-                            AssetCode = "MC000009",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7588),
-                            InstallDate = new DateOnly(2024, 12, 23),
-                            Location = (byte)0,
-                            Name = "Licensed Frozen Sausages",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)4,
-                            Version = new Guid("eb9c01a9-3660-44c7-8d62-7ca49dd7d3d9")
-                        },
-                        new
-                        {
-                            Id = new Guid("bb3abce4-c239-4e6d-bdd5-c8f9eb545f5a"),
-                            AssetCode = "MC000010",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7606),
-                            InstallDate = new DateOnly(2024, 9, 30),
-                            Location = (byte)2,
-                            Name = "Ergonomic Plastic Salad",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)4,
-                            Version = new Guid("dbb745d1-d629-4e82-8749-00056b6c2035")
-                        },
-                        new
-                        {
-                            Id = new Guid("ada8fa45-7570-4d35-8f7f-6533215903d6"),
-                            AssetCode = "MC000011",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7708),
-                            InstallDate = new DateOnly(2024, 11, 25),
-                            Location = (byte)2,
-                            Name = "Intelligent Wooden Towels",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("6d162adf-384d-4945-b355-eac35cd6749b")
-                        },
-                        new
-                        {
-                            Id = new Guid("989ae6c6-decb-45f1-98ff-ac1995c18f50"),
-                            AssetCode = "MC000012",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7729),
-                            InstallDate = new DateOnly(2024, 11, 4),
-                            Location = (byte)0,
-                            Name = "Rustic Rubber Salad",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)4,
-                            Version = new Guid("5a740e3e-ac08-4bf8-ba89-560e6b2e2e92")
-                        },
-                        new
-                        {
-                            Id = new Guid("a4097557-eef6-4378-a338-4da908511615"),
-                            AssetCode = "MC000013",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7747),
-                            InstallDate = new DateOnly(2024, 7, 16),
-                            Location = (byte)0,
-                            Name = "Tasty Plastic Bike",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)3,
-                            Version = new Guid("2f29f70d-466b-4cd2-8218-ad97cb86258a")
-                        },
-                        new
-                        {
-                            Id = new Guid("aea3fbe1-66df-4c48-8a2b-d609380fe6f8"),
-                            AssetCode = "MC000014",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7766),
-                            InstallDate = new DateOnly(2025, 4, 5),
-                            Location = (byte)1,
-                            Name = "Incredible Cotton Keyboard",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)1,
-                            Version = new Guid("185045a9-93ea-4bcc-9c01-94cf1f65a716")
-                        },
-                        new
-                        {
-                            Id = new Guid("6e91d3fe-5da5-439d-876d-e715f2523106"),
-                            AssetCode = "MC000015",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7785),
-                            InstallDate = new DateOnly(2024, 9, 21),
-                            Location = (byte)2,
-                            Name = "Gorgeous Metal Ball",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)3,
-                            Version = new Guid("9d503f7c-d909-4213-b51e-386915510257")
-                        },
-                        new
-                        {
-                            Id = new Guid("8cb6cc1f-9085-42ee-b924-d516b3145797"),
-                            AssetCode = "MC000016",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7802),
-                            InstallDate = new DateOnly(2024, 9, 8),
-                            Location = (byte)1,
-                            Name = "Handmade Wooden Sausages",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)1,
-                            Version = new Guid("029d2024-ec9e-4bf1-b929-b1bc7eed80f5")
-                        },
-                        new
-                        {
-                            Id = new Guid("b322b600-f321-4af1-b7c9-1b8c235cfaf8"),
-                            AssetCode = "MC000017",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7855),
-                            InstallDate = new DateOnly(2024, 7, 31),
-                            Location = (byte)0,
-                            Name = "Practical Soft Sausages",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)3,
-                            Version = new Guid("30526103-7ea9-4f4d-a140-8382271d07e4")
-                        },
-                        new
-                        {
-                            Id = new Guid("162d4c65-7b55-4d34-affd-6fd9a6c90b2f"),
-                            AssetCode = "MC000018",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7874),
-                            InstallDate = new DateOnly(2025, 5, 29),
-                            Location = (byte)2,
-                            Name = "Rustic Wooden Car",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("55edc822-dbf7-4259-9bb9-e226b0b97d59")
-                        },
-                        new
-                        {
-                            Id = new Guid("d614cda0-bcde-4296-a259-47e0d91be6d3"),
-                            AssetCode = "MC000019",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7894),
-                            InstallDate = new DateOnly(2025, 5, 19),
-                            Location = (byte)0,
-                            Name = "Awesome Rubber Table",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)1,
-                            Version = new Guid("7cc5813c-bba4-4ac9-8e21-bf939c7456e2")
-                        },
-                        new
-                        {
-                            Id = new Guid("946c52bf-b7dd-4502-be11-6e16685cf799"),
-                            AssetCode = "MC000020",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7913),
-                            InstallDate = new DateOnly(2024, 10, 10),
-                            Location = (byte)0,
-                            Name = "Sleek Frozen Keyboard",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)0,
-                            Version = new Guid("4fd5a68c-f61a-42b1-91b0-869bb467a375")
-                        },
-                        new
-                        {
-                            Id = new Guid("e41aa749-212e-470e-b13d-5de95ee39daa"),
-                            AssetCode = "MC000021",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7931),
-                            InstallDate = new DateOnly(2025, 5, 13),
-                            Location = (byte)0,
-                            Name = "Sleek Metal Soap",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)4,
-                            Version = new Guid("60380b7b-89a9-4924-b519-f9fb20c536d8")
-                        },
-                        new
-                        {
-                            Id = new Guid("c9577a2c-3a30-4b1f-ae5f-a628b0bc45b2"),
-                            AssetCode = "MC000022",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7983),
-                            InstallDate = new DateOnly(2025, 4, 5),
-                            Location = (byte)0,
-                            Name = "Incredible Wooden Chair",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("cbf837ed-f34f-4b82-8635-8316a1d28142")
-                        },
-                        new
-                        {
-                            Id = new Guid("0eb228e9-3634-49f3-8183-e8451267f76c"),
-                            AssetCode = "MC000023",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8004),
-                            InstallDate = new DateOnly(2024, 7, 27),
-                            Location = (byte)1,
-                            Name = "Licensed Granite Tuna",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)0,
-                            Version = new Guid("8f9e302c-0566-4ebe-bbe1-9331373cb5ef")
-                        },
-                        new
-                        {
-                            Id = new Guid("97cc8124-4f21-48f5-9643-ebbbe92e694a"),
-                            AssetCode = "MC000024",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8022),
-                            InstallDate = new DateOnly(2024, 9, 24),
-                            Location = (byte)0,
-                            Name = "Licensed Frozen Mouse",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("f6ea632c-713e-48aa-83a2-72d39d5cc283")
-                        },
-                        new
-                        {
-                            Id = new Guid("10eaf653-957e-4780-be3f-c61465afcd1f"),
-                            AssetCode = "MC000025",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8040),
-                            InstallDate = new DateOnly(2025, 4, 28),
-                            Location = (byte)1,
-                            Name = "Sleek Plastic Shoes",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)1,
-                            Version = new Guid("fcfe9d50-3e7a-42e7-b4c3-d18fa82ae796")
-                        },
-                        new
-                        {
-                            Id = new Guid("20bf1a93-6bf3-4b1e-bc3b-a4a03dc4189b"),
-                            AssetCode = "MC000026",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8056),
-                            InstallDate = new DateOnly(2025, 1, 6),
-                            Location = (byte)2,
-                            Name = "Intelligent Rubber Tuna",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)3,
-                            Version = new Guid("e7e6cc8f-fdba-4777-9c32-92ca17b8cafc")
-                        },
-                        new
-                        {
-                            Id = new Guid("9df5cd52-c95c-4513-86f1-b1300c2928a6"),
-                            AssetCode = "MC000027",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8076),
-                            InstallDate = new DateOnly(2024, 10, 19),
-                            Location = (byte)0,
-                            Name = "Practical Frozen Pants",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)5,
-                            Version = new Guid("7edbfd13-2ad7-474c-b29b-48066b04e34e")
-                        },
-                        new
-                        {
-                            Id = new Guid("3d571cca-ff47-4f3f-8a9e-6e66e8c61dfc"),
-                            AssetCode = "MC000028",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8095),
-                            InstallDate = new DateOnly(2025, 7, 6),
-                            Location = (byte)0,
-                            Name = "Rustic Steel Pants",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)5,
-                            Version = new Guid("8897442f-88a6-45d7-933e-c82f4567a63b")
-                        },
-                        new
-                        {
-                            Id = new Guid("5a6731a6-a178-4255-a940-6b7483aa8ae6"),
-                            AssetCode = "MC000029",
-                            CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8142),
-                            InstallDate = new DateOnly(2025, 4, 5),
-                            Location = (byte)2,
-                            Name = "Refined Rubber Pizza",
-                            Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-                            State = (byte)5,
-                            Version = new Guid("92059e23-becf-4d95-bd8d-95d2b2c79228")
-                        },
-                        new
-                        {
-                            Id = new Guid("968963b3-1f5c-47c7-aff0-9f873c586de0"),
-                            AssetCode = "WC000000",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8163),
-                            InstallDate = new DateOnly(2025, 1, 1),
-                            Location = (byte)0,
-                            Name = "Intelligent Soft Shirt",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)0,
-                            Version = new Guid("98ebb737-5f51-48d0-b4dd-13e08e8925fa")
-                        },
-                        new
-                        {
-                            Id = new Guid("c8a14e23-88b1-4f8d-9ef4-45415621b0dd"),
-                            AssetCode = "WC000001",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8185),
-                            InstallDate = new DateOnly(2024, 11, 6),
-                            Location = (byte)2,
-                            Name = "Gorgeous Granite Computer",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)0,
-                            Version = new Guid("bf9128d9-9c36-419b-a576-cf72e3e021f1")
-                        },
-                        new
-                        {
-                            Id = new Guid("03ae4ee2-15bd-46be-944a-e8d26c276e2e"),
-                            AssetCode = "WC000002",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8203),
-                            InstallDate = new DateOnly(2024, 11, 27),
-                            Location = (byte)1,
-                            Name = "Licensed Steel Cheese",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)5,
-                            Version = new Guid("09e777a2-487f-44d5-a137-f3f4e1533ad5")
-                        },
-                        new
-                        {
-                            Id = new Guid("cbfcd82b-1b4f-407b-99cb-3f0f5c553176"),
-                            AssetCode = "WC000003",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8221),
-                            InstallDate = new DateOnly(2025, 2, 9),
-                            Location = (byte)1,
-                            Name = "Intelligent Concrete Cheese",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)3,
-                            Version = new Guid("f543bb68-2c2c-4d9c-a57d-17daaf03b23b")
-                        },
-                        new
-                        {
-                            Id = new Guid("c2ec249d-6094-4905-8682-36fed0a9de62"),
-                            AssetCode = "WC000004",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8239),
-                            InstallDate = new DateOnly(2024, 11, 16),
-                            Location = (byte)1,
-                            Name = "Practical Concrete Tuna",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)3,
-                            Version = new Guid("6193e1b5-8c85-44cf-92c5-ad1367dead1b")
-                        },
-                        new
-                        {
-                            Id = new Guid("79c40122-ff75-479d-be56-8cc842fd7076"),
-                            AssetCode = "WC000005",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8259),
-                            InstallDate = new DateOnly(2024, 12, 2),
-                            Location = (byte)0,
-                            Name = "Unbranded Metal Chips",
-                            Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-                            State = (byte)3,
-                            Version = new Guid("55b4d935-3084-47b4-9f71-323724a3030e")
-                        },
-                        new
-                        {
-                            Id = new Guid("79660936-aca0-4ba4-a3c0-cf294c270da5"),
-                            AssetCode = "WC000006",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8308),
-                            InstallDate = new DateOnly(2025, 3, 15),
-                            Location = (byte)0,
-                            Name = "Rustic Cotton Bacon",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)3,
-                            Version = new Guid("ee334cfd-bdf7-4942-9ebf-129d5ee015bc")
-                        },
-                        new
-                        {
-                            Id = new Guid("70d6c151-2e59-49ae-9382-5307dc671fc1"),
-                            AssetCode = "WC000007",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8329),
-                            InstallDate = new DateOnly(2024, 9, 27),
-                            Location = (byte)1,
-                            Name = "Incredible Soft Shoes",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)0,
-                            Version = new Guid("fa587709-fad2-4670-995c-3155f4fe1e03")
-                        },
-                        new
-                        {
-                            Id = new Guid("66704f4d-c8c7-4e72-bd59-b3f2fa54c4d9"),
-                            AssetCode = "WC000008",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8348),
-                            InstallDate = new DateOnly(2024, 7, 9),
-                            Location = (byte)2,
-                            Name = "Gorgeous Soft Table",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)5,
-                            Version = new Guid("a54a65ce-4047-4ecf-8eef-ca69f4bc999a")
-                        },
-                        new
-                        {
-                            Id = new Guid("030c51e3-3058-41e8-8213-44ad258026ca"),
-                            AssetCode = "WC000009",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8367),
-                            InstallDate = new DateOnly(2024, 9, 29),
-                            Location = (byte)2,
-                            Name = "Handcrafted Frozen Shirt",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)3,
-                            Version = new Guid("ee5b1cdd-e22e-4c9d-88ea-91bbd47089ac")
-                        },
-                        new
-                        {
-                            Id = new Guid("6f0e8f63-2ad0-4afe-8cde-0aa330a459be"),
-                            AssetCode = "WC000010",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8385),
-                            InstallDate = new DateOnly(2024, 8, 24),
-                            Location = (byte)2,
-                            Name = "Sleek Fresh Bike",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)5,
-                            Version = new Guid("a74e050a-bf0d-4de2-9167-b50b661412c7")
-                        },
-                        new
-                        {
-                            Id = new Guid("8ef03366-1fe9-4729-8e75-04d9cbe5cb5f"),
-                            AssetCode = "WC000011",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8401),
-                            InstallDate = new DateOnly(2024, 8, 19),
-                            Location = (byte)1,
-                            Name = "Small Wooden Pizza",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)4,
-                            Version = new Guid("f780d7ba-e290-4e6e-9efc-9fb2b797ef8d")
-                        },
-                        new
-                        {
-                            Id = new Guid("1d5c1e6e-f337-4fab-a19e-e0c5617ff4bf"),
-                            AssetCode = "WC000012",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8419),
-                            InstallDate = new DateOnly(2025, 1, 29),
-                            Location = (byte)1,
-                            Name = "Gorgeous Granite Bacon",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)3,
-                            Version = new Guid("0599284d-543a-4df6-8370-32abdab77b6b")
-                        },
-                        new
-                        {
-                            Id = new Guid("bf18dd56-b427-45e6-b661-0f13e9f4da61"),
-                            AssetCode = "WC000013",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8439),
-                            InstallDate = new DateOnly(2024, 9, 20),
-                            Location = (byte)2,
-                            Name = "Licensed Steel Shirt",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)3,
-                            Version = new Guid("e42471de-dd8c-48fa-8a99-bebbabbd27b9")
-                        },
-                        new
-                        {
-                            Id = new Guid("9f746d51-fe0b-41b4-8855-f16a158c6d8c"),
-                            AssetCode = "WC000014",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8518),
-                            InstallDate = new DateOnly(2025, 4, 19),
-                            Location = (byte)2,
-                            Name = "Tasty Concrete Soap",
-                            Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-                            State = (byte)1,
-                            Version = new Guid("966505d3-70e8-4d7e-8f71-dda50c794890")
-                        },
-                        new
-                        {
-                            Id = new Guid("91a99995-75ae-4217-a797-1c929b3f945f"),
-                            AssetCode = "WC000015",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8537),
-                            InstallDate = new DateOnly(2024, 8, 21),
-                            Location = (byte)2,
-                            Name = "Intelligent Frozen Shirt",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)1,
-                            Version = new Guid("79f18a5b-9a1b-4ce2-9fe3-50c2b861a5d5")
-                        },
-                        new
-                        {
-                            Id = new Guid("7a138c02-eb59-4244-a243-720b3eed4dff"),
-                            AssetCode = "WC000016",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8555),
-                            InstallDate = new DateOnly(2025, 5, 2),
-                            Location = (byte)0,
-                            Name = "Ergonomic Plastic Pants",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)1,
-                            Version = new Guid("557145ea-efdd-4cf4-aa49-cb2d9c3e75fd")
-                        },
-                        new
-                        {
-                            Id = new Guid("414c602b-e552-45f7-97ff-899c335e2c03"),
-                            AssetCode = "WC000017",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8574),
-                            InstallDate = new DateOnly(2025, 6, 25),
-                            Location = (byte)0,
-                            Name = "Unbranded Concrete Salad",
-                            Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-                            State = (byte)0,
-                            Version = new Guid("abd1e158-6996-4681-bc30-d3c0ec5bf6a0")
-                        },
-                        new
-                        {
-                            Id = new Guid("6e99ee6b-66d7-4064-af8a-983a8d34a6a4"),
-                            AssetCode = "WC000018",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8591),
-                            InstallDate = new DateOnly(2024, 9, 1),
-                            Location = (byte)2,
-                            Name = "Handcrafted Concrete Towels",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)5,
-                            Version = new Guid("f3a2c2b4-f565-43ed-912e-757e4a92d36c")
-                        },
-                        new
-                        {
-                            Id = new Guid("d5af9023-3a64-4696-9b6f-40e3eab94c5a"),
-                            AssetCode = "WC000019",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8608),
-                            InstallDate = new DateOnly(2025, 1, 13),
-                            Location = (byte)1,
-                            Name = "Intelligent Plastic Chair",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)4,
-                            Version = new Guid("07a42224-0a8f-49f1-89de-4ee2249c562c")
-                        },
-                        new
-                        {
-                            Id = new Guid("558ee108-5fe7-4374-834f-8c0fe6cd38a0"),
-                            AssetCode = "WC000020",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8626),
-                            InstallDate = new DateOnly(2025, 2, 15),
-                            Location = (byte)2,
-                            Name = "Licensed Rubber Sausages",
-                            Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            State = (byte)4,
-                            Version = new Guid("92befb31-170a-4d19-a5f7-05dbfdc95b47")
-                        },
-                        new
-                        {
-                            Id = new Guid("3e3ca879-8ceb-481f-a81e-464683792eb2"),
-                            AssetCode = "WC000021",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8669),
-                            InstallDate = new DateOnly(2025, 6, 12),
-                            Location = (byte)2,
-                            Name = "Sleek Granite Bike",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)5,
-                            Version = new Guid("2712a322-673d-4a00-8a7f-c82bd74d8e85")
-                        },
-                        new
-                        {
-                            Id = new Guid("555c03ec-2c2c-44d4-bbdb-8882f140d861"),
-                            AssetCode = "WC000022",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8689),
-                            InstallDate = new DateOnly(2024, 7, 23),
-                            Location = (byte)0,
-                            Name = "Unbranded Fresh Table",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)0,
-                            Version = new Guid("333b8d5f-e77a-4461-827c-fd34a4221373")
-                        },
-                        new
-                        {
-                            Id = new Guid("f3cb100a-854f-4d69-b009-b828c3029836"),
-                            AssetCode = "WC000023",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8707),
-                            InstallDate = new DateOnly(2025, 2, 14),
-                            Location = (byte)0,
-                            Name = "Tasty Concrete Towels",
-                            Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            State = (byte)3,
-                            Version = new Guid("ee4b7c2b-7af2-4e91-ac02-efb9266d68c0")
-                        },
-                        new
-                        {
-                            Id = new Guid("4cbbd9e4-f172-47f4-a604-16d34160bddb"),
-                            AssetCode = "WC000024",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8724),
-                            InstallDate = new DateOnly(2024, 9, 28),
-                            Location = (byte)1,
-                            Name = "Gorgeous Frozen Fish",
-                            Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-                            State = (byte)3,
-                            Version = new Guid("1906c336-f3ae-4969-9ee0-aa5793398851")
-                        },
-                        new
-                        {
-                            Id = new Guid("57ac4318-fa86-4bf5-b7d8-ae9b5b015363"),
-                            AssetCode = "WC000025",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8745),
-                            InstallDate = new DateOnly(2025, 3, 13),
-                            Location = (byte)2,
-                            Name = "Practical Rubber Shirt",
-                            Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-                            State = (byte)5,
-                            Version = new Guid("c5fe24bc-b697-49b5-b3be-ec2ec82d67ee")
-                        },
-                        new
-                        {
-                            Id = new Guid("eec4fe6f-52bf-43bc-9ebc-ed54518e3641"),
-                            AssetCode = "WC000026",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8762),
-                            InstallDate = new DateOnly(2025, 6, 11),
-                            Location = (byte)2,
-                            Name = "Unbranded Steel Chair",
-                            Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            State = (byte)5,
-                            Version = new Guid("de6a641c-7675-4c57-9691-61a3d152b2a7")
-                        },
-                        new
-                        {
-                            Id = new Guid("aed03a82-8f76-40eb-a3c6-f85b5285feec"),
-                            AssetCode = "WC000027",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8779),
-                            InstallDate = new DateOnly(2024, 8, 5),
-                            Location = (byte)2,
-                            Name = "Fantastic Granite Sausages",
-                            Specification = "The Football Is Good For Training And Recreational Purposes",
-                            State = (byte)3,
-                            Version = new Guid("51b6642d-aa59-4036-8dbf-d8d0ee4c6a70")
-                        },
-                        new
-                        {
-                            Id = new Guid("f0959423-ae55-4c64-83a8-441e260c855c"),
-                            AssetCode = "WC000028",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8841),
-                            InstallDate = new DateOnly(2024, 7, 24),
-                            Location = (byte)0,
-                            Name = "Rustic Granite Tuna",
-                            Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-                            State = (byte)5,
-                            Version = new Guid("f3cf405b-1889-41a8-adac-f7ccdbe2ac3d")
-                        },
-                        new
-                        {
-                            Id = new Guid("142b58d3-44fe-48f0-92a6-154aeebaa06e"),
-                            AssetCode = "WC000029",
-                            CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8864),
-                            InstallDate = new DateOnly(2025, 2, 27),
-                            Location = (byte)0,
-                            Name = "Licensed Soft Keyboard",
-                            Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-                            State = (byte)4,
-                            Version = new Guid("2dd5e1cb-531a-46c4-becb-0b308b2e0c9f")
-                        });
-                });
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("4f21bb59-c059-4940-a6d9-2f7a85cadd74"),
+                        AssetCode = "PC000000",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(885),
+                        InstallDate = new DateOnly(2024, 12, 27),
+                        Location = (byte)0,
+                        Name = "Sleek Plastic Mouse",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)0,
+                        Version = new Guid("8a8fe20d-ac12-4854-89dc-7ee9e27e7978")
+                    },
+                    new
+                    {
+                        Id = new Guid("2d06d019-1a6d-42ca-af38-53de7d6de993"),
+                        AssetCode = "PC000001",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1334),
+                        InstallDate = new DateOnly(2025, 6, 12),
+                        Location = (byte)1,
+                        Name = "Practical Wooden Car",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)4,
+                        Version = new Guid("54101e8f-1d22-4cf9-a606-5594aa8172dc")
+                    },
+                    new
+                    {
+                        Id = new Guid("8c3796c1-30cc-4bba-bbff-233514c80341"),
+                        AssetCode = "PC000002",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1370),
+                        InstallDate = new DateOnly(2025, 6, 19),
+                        Location = (byte)2,
+                        Name = "Intelligent Steel Bike",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)4,
+                        Version = new Guid("13a4bc6f-5765-484f-bd34-dd5077133561")
+                    },
+                    new
+                    {
+                        Id = new Guid("c9a63e1d-546e-4158-b14f-56314fd191fb"),
+                        AssetCode = "PC000003",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1412),
+                        InstallDate = new DateOnly(2025, 4, 2),
+                        Location = (byte)2,
+                        Name = "Ergonomic Steel Bike",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("fb6a0752-605e-4ebe-b278-eaedc45fc13e")
+                    },
+                    new
+                    {
+                        Id = new Guid("43dbca0f-d21c-4d9d-8669-07c0e447ce60"),
+                        AssetCode = "PC000004",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1489),
+                        InstallDate = new DateOnly(2024, 10, 19),
+                        Location = (byte)2,
+                        Name = "Incredible Fresh Fish",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)4,
+                        Version = new Guid("ed132a94-d87d-4e31-a84f-e2286b411450")
+                    },
+                    new
+                    {
+                        Id = new Guid("9355a36b-e0fc-4147-a0e2-596a6a7ec79d"),
+                        AssetCode = "PC000005",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1517),
+                        InstallDate = new DateOnly(2024, 11, 7),
+                        Location = (byte)0,
+                        Name = "Handcrafted Concrete Chicken",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)0,
+                        Version = new Guid("cfff79f0-1b13-4e1f-832b-b419a15f5c90")
+                    },
+                    new
+                    {
+                        Id = new Guid("a12fdbf0-9c04-4545-8ae8-4f51572f26e0"),
+                        AssetCode = "PC000006",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1543),
+                        InstallDate = new DateOnly(2025, 5, 13),
+                        Location = (byte)0,
+                        Name = "Licensed Frozen Fish",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)1,
+                        Version = new Guid("5623d971-924f-477e-8c5d-d2746b885f65")
+                    },
+                    new
+                    {
+                        Id = new Guid("32cca81d-e39d-435f-ad6d-d554e5da51f3"),
+                        AssetCode = "PC000007",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1567),
+                        InstallDate = new DateOnly(2025, 3, 20),
+                        Location = (byte)1,
+                        Name = "Sleek Plastic Shoes",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)1,
+                        Version = new Guid("59efcb03-d507-4849-93ae-aaaf33db9b15")
+                    },
+                    new
+                    {
+                        Id = new Guid("5e0147f4-a8b5-4966-9488-e42d0e9fd8ca"),
+                        AssetCode = "PC000008",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1588),
+                        InstallDate = new DateOnly(2025, 4, 10),
+                        Location = (byte)2,
+                        Name = "Practical Rubber Mouse",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)3,
+                        Version = new Guid("8a597dd7-60b2-457a-8497-0d39bec456b3")
+                    },
+                    new
+                    {
+                        Id = new Guid("44c80632-60e0-488a-a1e0-1d78fbe4fb99"),
+                        AssetCode = "PC000009",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1611),
+                        InstallDate = new DateOnly(2024, 8, 25),
+                        Location = (byte)2,
+                        Name = "Generic Granite Towels",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)5,
+                        Version = new Guid("7e9c5143-adda-45e3-8feb-d4faeace4ea8")
+                    },
+                    new
+                    {
+                        Id = new Guid("10ce3de3-e61b-4db6-8351-c9dc72827421"),
+                        AssetCode = "PC000010",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1636),
+                        InstallDate = new DateOnly(2025, 2, 25),
+                        Location = (byte)0,
+                        Name = "Incredible Granite Bacon",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)4,
+                        Version = new Guid("240aac45-f193-4aec-adf8-bcb833a79653")
+                    },
+                    new
+                    {
+                        Id = new Guid("d04944aa-cf19-4a61-9b1d-bd53d1b73108"),
+                        AssetCode = "PC000011",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1709),
+                        InstallDate = new DateOnly(2024, 12, 28),
+                        Location = (byte)1,
+                        Name = "Awesome Concrete Pizza",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)4,
+                        Version = new Guid("2f7fa736-60e4-4000-abf4-2bcd130f792c")
+                    },
+                    new
+                    {
+                        Id = new Guid("e420309d-da94-4780-8f15-ba5494893264"),
+                        AssetCode = "PC000012",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1731),
+                        InstallDate = new DateOnly(2024, 8, 14),
+                        Location = (byte)0,
+                        Name = "Unbranded Cotton Bacon",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)4,
+                        Version = new Guid("e226a5d9-c53f-4a6e-8565-abb74128008a")
+                    },
+                    new
+                    {
+                        Id = new Guid("d858a273-ae52-45b8-82c8-30d0eb9b8359"),
+                        AssetCode = "PC000013",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1754),
+                        InstallDate = new DateOnly(2025, 2, 26),
+                        Location = (byte)0,
+                        Name = "Intelligent Concrete Bacon",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)1,
+                        Version = new Guid("20af7278-9c87-41cb-b105-c7a17cc63c75")
+                    },
+                    new
+                    {
+                        Id = new Guid("ac429c35-c7e2-4f8f-b431-ec6b74c69dc9"),
+                        AssetCode = "PC000014",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1773),
+                        InstallDate = new DateOnly(2025, 4, 28),
+                        Location = (byte)0,
+                        Name = "Handcrafted Cotton Shirt",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)0,
+                        Version = new Guid("126003b6-234e-4839-bdd6-13cae10bd743")
+                    },
+                    new
+                    {
+                        Id = new Guid("57060acb-cd30-4b32-bd15-37245d9ed5c6"),
+                        AssetCode = "PC000015",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1792),
+                        InstallDate = new DateOnly(2025, 3, 22),
+                        Location = (byte)1,
+                        Name = "Practical Frozen Shirt",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)4,
+                        Version = new Guid("44478199-de73-47cb-add5-beda98651754")
+                    },
+                    new
+                    {
+                        Id = new Guid("f5207248-4d4b-4515-9dde-e127c60523fc"),
+                        AssetCode = "PC000016",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1810),
+                        InstallDate = new DateOnly(2025, 3, 6),
+                        Location = (byte)2,
+                        Name = "Gorgeous Fresh Towels",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)3,
+                        Version = new Guid("90aa63df-2b19-4d35-b46e-bdfef4911f9c")
+                    },
+                    new
+                    {
+                        Id = new Guid("e3a4049c-c9e7-439a-89ee-4236443ac8d1"),
+                        AssetCode = "PC000017",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1830),
+                        InstallDate = new DateOnly(2024, 11, 29),
+                        Location = (byte)1,
+                        Name = "Sleek Wooden Pizza",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)4,
+                        Version = new Guid("34ad4196-b7a2-41fb-bd03-97c0ef4e3a08")
+                    },
+                    new
+                    {
+                        Id = new Guid("70372553-d5f6-462a-a6a0-02c2f67ba276"),
+                        AssetCode = "PC000018",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1850),
+                        InstallDate = new DateOnly(2024, 11, 18),
+                        Location = (byte)0,
+                        Name = "Unbranded Fresh Shirt",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("6e3977b2-38fe-4de3-b31e-cd6076427186")
+                    },
+                    new
+                    {
+                        Id = new Guid("25f920f3-9b74-47bd-a815-806d3fa92fc8"),
+                        AssetCode = "PC000019",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1907),
+                        InstallDate = new DateOnly(2024, 8, 26),
+                        Location = (byte)2,
+                        Name = "Practical Wooden Tuna",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)3,
+                        Version = new Guid("5d42a994-6a81-4429-b4bf-ed5c5a70d5a9")
+                    },
+                    new
+                    {
+                        Id = new Guid("3a591a8d-5e2a-4639-9b4c-11fb4939b794"),
+                        AssetCode = "PC000020",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1925),
+                        InstallDate = new DateOnly(2025, 1, 12),
+                        Location = (byte)0,
+                        Name = "Licensed Rubber Tuna",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)1,
+                        Version = new Guid("ba85c942-f397-4655-9424-66bf9adc036b")
+                    },
+                    new
+                    {
+                        Id = new Guid("4c293bba-bd49-4951-a07f-795b946700d9"),
+                        AssetCode = "PC000021",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1943),
+                        InstallDate = new DateOnly(2024, 12, 12),
+                        Location = (byte)2,
+                        Name = "Incredible Frozen Ball",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)5,
+                        Version = new Guid("3e6dc461-e484-4238-a8f2-2cb1e56fe457")
+                    },
+                    new
+                    {
+                        Id = new Guid("58cc0ddc-2e4d-4c8a-948e-570ef8d3d24c"),
+                        AssetCode = "PC000022",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1964),
+                        InstallDate = new DateOnly(2024, 8, 23),
+                        Location = (byte)2,
+                        Name = "Incredible Soft Chips",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)0,
+                        Version = new Guid("641b388e-1b4d-49aa-b25a-144246dbe353")
+                    },
+                    new
+                    {
+                        Id = new Guid("7776bd31-b321-4af6-9ed1-68206ee4833f"),
+                        AssetCode = "PC000023",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(1984),
+                        InstallDate = new DateOnly(2024, 12, 6),
+                        Location = (byte)0,
+                        Name = "Handcrafted Cotton Table",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)0,
+                        Version = new Guid("ac8b6061-4409-4ff0-94e6-1698b70104d9")
+                    },
+                    new
+                    {
+                        Id = new Guid("63056a42-774e-4292-8608-fa592cb976cc"),
+                        AssetCode = "PC000024",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2002),
+                        InstallDate = new DateOnly(2025, 5, 20),
+                        Location = (byte)1,
+                        Name = "Unbranded Cotton Cheese",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)0,
+                        Version = new Guid("ecec095c-4a0d-4759-a63d-7e30483524be")
+                    },
+                    new
+                    {
+                        Id = new Guid("a22b9672-9a23-4541-be88-2c946afc0674"),
+                        AssetCode = "PC000025",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2020),
+                        InstallDate = new DateOnly(2024, 10, 2),
+                        Location = (byte)0,
+                        Name = "Licensed Metal Shirt",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)5,
+                        Version = new Guid("c6701923-afe2-43dc-be45-e6c25d1d26aa")
+                    },
+                    new
+                    {
+                        Id = new Guid("b940ce9f-e637-4de7-9683-3604a238a0f1"),
+                        AssetCode = "PC000026",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2071),
+                        InstallDate = new DateOnly(2024, 7, 7),
+                        Location = (byte)0,
+                        Name = "Small Plastic Pants",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)0,
+                        Version = new Guid("dd1143c7-9ae4-43e9-9efd-29bafc432320")
+                    },
+                    new
+                    {
+                        Id = new Guid("8ed3bb31-2e1e-4df2-b18e-084f66536781"),
+                        AssetCode = "PC000027",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2094),
+                        InstallDate = new DateOnly(2025, 6, 14),
+                        Location = (byte)0,
+                        Name = "Fantastic Wooden Shoes",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)0,
+                        Version = new Guid("e431e940-91f8-48bb-9852-41add903670e")
+                    },
+                    new
+                    {
+                        Id = new Guid("74ceced4-e41a-496c-a04c-64a4ab582df8"),
+                        AssetCode = "PC000028",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2112),
+                        InstallDate = new DateOnly(2024, 8, 18),
+                        Location = (byte)1,
+                        Name = "Tasty Metal Car",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)3,
+                        Version = new Guid("1fd9c6cf-52d5-4e53-9d56-8fb9dd4b0d12")
+                    },
+                    new
+                    {
+                        Id = new Guid("3c156432-5231-4265-8223-75ed84560449"),
+                        AssetCode = "PC000029",
+                        CategoryId = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2131),
+                        InstallDate = new DateOnly(2024, 11, 10),
+                        Location = (byte)1,
+                        Name = "Awesome Frozen Keyboard",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)5,
+                        Version = new Guid("8370b383-35d8-41ae-bdb4-3d9024610054")
+                    },
+                    new
+                    {
+                        Id = new Guid("89c113f1-6623-4348-893d-c091922960c7"),
+                        AssetCode = "LT000000",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2154),
+                        InstallDate = new DateOnly(2024, 10, 22),
+                        Location = (byte)2,
+                        Name = "Ergonomic Granite Mouse",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)3,
+                        Version = new Guid("2cca6a77-3a0f-4e34-9b0b-83d36235f10f")
+                    },
+                    new
+                    {
+                        Id = new Guid("615f8589-a3c9-4846-8468-94be75d950e3"),
+                        AssetCode = "LT000001",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2177),
+                        InstallDate = new DateOnly(2025, 4, 2),
+                        Location = (byte)0,
+                        Name = "Incredible Granite Salad",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)5,
+                        Version = new Guid("60add87b-cfdf-4d48-92d9-a02544435f16")
+                    },
+                    new
+                    {
+                        Id = new Guid("23da8014-5fe2-4f83-ab7c-f9721120d111"),
+                        AssetCode = "LT000002",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2197),
+                        InstallDate = new DateOnly(2025, 6, 19),
+                        Location = (byte)2,
+                        Name = "Licensed Metal Keyboard",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)0,
+                        Version = new Guid("390988a2-129a-4116-915e-43dc1e897064")
+                    },
+                    new
+                    {
+                        Id = new Guid("379ed1ee-289b-42b6-99ab-50a874648bad"),
+                        AssetCode = "LT000003",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2248),
+                        InstallDate = new DateOnly(2024, 10, 21),
+                        Location = (byte)0,
+                        Name = "Sleek Granite Keyboard",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)3,
+                        Version = new Guid("e2973681-11ee-4234-81dd-81d48f368985")
+                    },
+                    new
+                    {
+                        Id = new Guid("1a74f292-c4e2-48b8-88f4-de04580d8ba8"),
+                        AssetCode = "LT000004",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2268),
+                        InstallDate = new DateOnly(2024, 10, 7),
+                        Location = (byte)0,
+                        Name = "Licensed Fresh Sausages",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)0,
+                        Version = new Guid("198d9b14-3aff-40ad-ac53-25954dcc65ba")
+                    },
+                    new
+                    {
+                        Id = new Guid("6076e72c-f67a-47ff-a780-a5ab15c3b040"),
+                        AssetCode = "LT000005",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2289),
+                        InstallDate = new DateOnly(2025, 5, 17),
+                        Location = (byte)1,
+                        Name = "Fantastic Cotton Shoes",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)5,
+                        Version = new Guid("9bcdf2eb-a761-466f-9832-63d8d4abbbe7")
+                    },
+                    new
+                    {
+                        Id = new Guid("f92f0a83-7076-45eb-ab78-f158bb3701a1"),
+                        AssetCode = "LT000006",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2309),
+                        InstallDate = new DateOnly(2024, 10, 4),
+                        Location = (byte)2,
+                        Name = "Handcrafted Fresh Mouse",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("9edef26c-2031-41f9-bddb-5246a2ec6219")
+                    },
+                    new
+                    {
+                        Id = new Guid("f9e3828a-dd71-4472-b94a-151fa6e96e17"),
+                        AssetCode = "LT000007",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2327),
+                        InstallDate = new DateOnly(2024, 8, 8),
+                        Location = (byte)2,
+                        Name = "Rustic Granite Gloves",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)5,
+                        Version = new Guid("56bdefd2-7e74-460c-b577-a303dd2072f6")
+                    },
+                    new
+                    {
+                        Id = new Guid("8cc4c970-8455-4248-94a6-8707c056a2fa"),
+                        AssetCode = "LT000008",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2346),
+                        InstallDate = new DateOnly(2024, 10, 3),
+                        Location = (byte)2,
+                        Name = "Ergonomic Rubber Chicken",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)0,
+                        Version = new Guid("b7e1f323-d68c-4d9f-9eaa-04146c53731f")
+                    },
+                    new
+                    {
+                        Id = new Guid("63a6954c-7fc8-4493-af10-de2f2b204e24"),
+                        AssetCode = "LT000009",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2365),
+                        InstallDate = new DateOnly(2024, 10, 25),
+                        Location = (byte)2,
+                        Name = "Refined Rubber Salad",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)3,
+                        Version = new Guid("a7ae0dbd-2322-412a-b599-bdeb24b14f54")
+                    },
+                    new
+                    {
+                        Id = new Guid("9879851d-233b-4fee-b112-0632cf3e1cc5"),
+                        AssetCode = "LT000010",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2416),
+                        InstallDate = new DateOnly(2025, 5, 24),
+                        Location = (byte)2,
+                        Name = "Gorgeous Rubber Gloves",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)1,
+                        Version = new Guid("e189b77d-fbc8-4d29-a826-6767255c02d4")
+                    },
+                    new
+                    {
+                        Id = new Guid("f39ce5d8-f34b-4623-9365-1cece061b8fb"),
+                        AssetCode = "LT000011",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2435),
+                        InstallDate = new DateOnly(2024, 12, 10),
+                        Location = (byte)1,
+                        Name = "Fantastic Wooden Pizza",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)3,
+                        Version = new Guid("6ce3b1d7-0feb-4294-812c-ded7ca7507f8")
+                    },
+                    new
+                    {
+                        Id = new Guid("38821e85-9310-4aa3-a720-bc4f36e97b95"),
+                        AssetCode = "LT000012",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2454),
+                        InstallDate = new DateOnly(2025, 4, 4),
+                        Location = (byte)1,
+                        Name = "Sleek Concrete Bike",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)4,
+                        Version = new Guid("421fa656-d4ea-4635-aebd-72f26a8ce8de")
+                    },
+                    new
+                    {
+                        Id = new Guid("b6399f64-8dc8-45e5-8661-9125495ecd54"),
+                        AssetCode = "LT000013",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2474),
+                        InstallDate = new DateOnly(2025, 2, 11),
+                        Location = (byte)2,
+                        Name = "Incredible Cotton Cheese",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)4,
+                        Version = new Guid("b43aa465-f668-454b-b582-a7b0a495256c")
+                    },
+                    new
+                    {
+                        Id = new Guid("8d6baccc-cbd1-4ef6-9e8b-192599099c82"),
+                        AssetCode = "LT000014",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2492),
+                        InstallDate = new DateOnly(2024, 7, 31),
+                        Location = (byte)0,
+                        Name = "Handcrafted Wooden Ball",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)4,
+                        Version = new Guid("ebd44187-6024-4e26-a523-e7b61d224497")
+                    },
+                    new
+                    {
+                        Id = new Guid("53ee96ec-e14c-47e4-8e2f-e5a4c5440223"),
+                        AssetCode = "LT000015",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2509),
+                        InstallDate = new DateOnly(2025, 7, 5),
+                        Location = (byte)1,
+                        Name = "Sleek Fresh Mouse",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)4,
+                        Version = new Guid("e3468ff2-1071-413c-a5ac-a9be1072a5c9")
+                    },
+                    new
+                    {
+                        Id = new Guid("ae5b680e-9aba-4897-849d-4d195bdce56d"),
+                        AssetCode = "LT000016",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2526),
+                        InstallDate = new DateOnly(2025, 3, 3),
+                        Location = (byte)1,
+                        Name = "Ergonomic Cotton Gloves",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)3,
+                        Version = new Guid("e8c7d76f-44b1-4675-ab2a-1e5fd744ac56")
+                    },
+                    new
+                    {
+                        Id = new Guid("68c13a60-30b3-4502-a9e4-5fe745a1f730"),
+                        AssetCode = "LT000017",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2546),
+                        InstallDate = new DateOnly(2024, 11, 27),
+                        Location = (byte)1,
+                        Name = "Incredible Soft Pizza",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)0,
+                        Version = new Guid("37634b2c-dd34-4352-9fa6-2d7fbdcea086")
+                    },
+                    new
+                    {
+                        Id = new Guid("c3fb49c1-c3ca-41c6-ac87-e0569d824c1e"),
+                        AssetCode = "LT000018",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2602),
+                        InstallDate = new DateOnly(2024, 9, 14),
+                        Location = (byte)1,
+                        Name = "Rustic Granite Sausages",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)3,
+                        Version = new Guid("a64f12cc-12d1-4195-9ddd-dfbe1799838b")
+                    },
+                    new
+                    {
+                        Id = new Guid("ab4b3ef8-c950-44b3-b697-78479b143eb8"),
+                        AssetCode = "LT000019",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2622),
+                        InstallDate = new DateOnly(2025, 5, 25),
+                        Location = (byte)1,
+                        Name = "Gorgeous Cotton Bacon",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)4,
+                        Version = new Guid("ab249d72-71ae-49f8-8975-79ac25b1df90")
+                    },
+                    new
+                    {
+                        Id = new Guid("db229ca2-3716-4c34-b844-f0b6ac76f9b3"),
+                        AssetCode = "LT000020",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2641),
+                        InstallDate = new DateOnly(2025, 4, 11),
+                        Location = (byte)2,
+                        Name = "Tasty Steel Bike",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)4,
+                        Version = new Guid("4aee6a65-54be-453c-a803-4e3065b88c2a")
+                    },
+                    new
+                    {
+                        Id = new Guid("9b86110d-acb2-4e51-ae3a-00f2aefe4f19"),
+                        AssetCode = "LT000021",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2662),
+                        InstallDate = new DateOnly(2024, 9, 4),
+                        Location = (byte)0,
+                        Name = "Unbranded Cotton Bacon",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)4,
+                        Version = new Guid("d0b52935-94f2-496e-850d-4a464f3933b7")
+                    },
+                    new
+                    {
+                        Id = new Guid("60031e4c-2609-4ace-ab3b-fd96dc8efb66"),
+                        AssetCode = "LT000022",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2680),
+                        InstallDate = new DateOnly(2024, 11, 9),
+                        Location = (byte)0,
+                        Name = "Refined Rubber Shirt",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)0,
+                        Version = new Guid("57c91320-0483-4c0c-bff2-4bc58557c39a")
+                    },
+                    new
+                    {
+                        Id = new Guid("b85fb833-6c36-4142-aa91-67fbee1200aa"),
+                        AssetCode = "LT000023",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2698),
+                        InstallDate = new DateOnly(2025, 2, 8),
+                        Location = (byte)1,
+                        Name = "Handcrafted Cotton Shoes",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)5,
+                        Version = new Guid("e8338903-d529-4b5c-9c99-08cc26dfb712")
+                    },
+                    new
+                    {
+                        Id = new Guid("fc5d2ef9-ce9c-4066-bfff-7c9e80a53ae4"),
+                        AssetCode = "LT000024",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2716),
+                        InstallDate = new DateOnly(2024, 7, 19),
+                        Location = (byte)2,
+                        Name = "Ergonomic Granite Fish",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)0,
+                        Version = new Guid("ed4c1829-32ca-49b6-9f25-35981a5cb4ba")
+                    },
+                    new
+                    {
+                        Id = new Guid("20884ead-3f88-4cfc-addc-a18602c51a3d"),
+                        AssetCode = "LT000025",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2756),
+                        InstallDate = new DateOnly(2025, 4, 9),
+                        Location = (byte)1,
+                        Name = "Rustic Fresh Keyboard",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)0,
+                        Version = new Guid("6376f359-5f89-4d19-af5a-0dbafd73d769")
+                    },
+                    new
+                    {
+                        Id = new Guid("c6489947-f2c6-48d2-ad6e-b92fb3cbd4cb"),
+                        AssetCode = "LT000026",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2776),
+                        InstallDate = new DateOnly(2024, 7, 9),
+                        Location = (byte)1,
+                        Name = "Awesome Metal Towels",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)1,
+                        Version = new Guid("c99746d4-21bb-49ae-beed-2d307baa4214")
+                    },
+                    new
+                    {
+                        Id = new Guid("86879f58-b09f-4b85-a8c9-87a169da01f8"),
+                        AssetCode = "LT000027",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2794),
+                        InstallDate = new DateOnly(2024, 12, 5),
+                        Location = (byte)1,
+                        Name = "Licensed Rubber Pizza",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("6ac0afd7-6a86-4574-9310-b5409c3aef25")
+                    },
+                    new
+                    {
+                        Id = new Guid("adff7fc0-2aef-4da8-a2bc-7309a58e2818"),
+                        AssetCode = "LT000028",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2812),
+                        InstallDate = new DateOnly(2025, 4, 10),
+                        Location = (byte)2,
+                        Name = "Generic Soft Pants",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)3,
+                        Version = new Guid("7a79aa9e-5f61-41ea-9c58-650f5b9e64f6")
+                    },
+                    new
+                    {
+                        Id = new Guid("06631810-1fd2-4bc5-b134-ed360c179385"),
+                        AssetCode = "LT000029",
+                        CategoryId = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2833),
+                        InstallDate = new DateOnly(2024, 8, 8),
+                        Location = (byte)0,
+                        Name = "Intelligent Rubber Keyboard",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)4,
+                        Version = new Guid("c8ef977c-0b5b-4aa1-9185-2a4edb15f206")
+                    },
+                    new
+                    {
+                        Id = new Guid("847a81ea-479c-4311-bdd9-c779a40f0d8b"),
+                        AssetCode = "PR000000",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2854),
+                        InstallDate = new DateOnly(2025, 4, 8),
+                        Location = (byte)0,
+                        Name = "Handcrafted Steel Ball",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)3,
+                        Version = new Guid("fd7b1395-0b7c-4c55-a5b3-3e1d40d51dba")
+                    },
+                    new
+                    {
+                        Id = new Guid("f2d81916-5235-4b07-a7b1-08b3818791a3"),
+                        AssetCode = "PR000001",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2874),
+                        InstallDate = new DateOnly(2025, 2, 8),
+                        Location = (byte)0,
+                        Name = "Incredible Rubber Hat",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)0,
+                        Version = new Guid("ab452c60-db59-415d-a809-e6342fa3f952")
+                    },
+                    new
+                    {
+                        Id = new Guid("36b1747b-5e9a-4290-9715-fe88d10a179b"),
+                        AssetCode = "PR000002",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2936),
+                        InstallDate = new DateOnly(2025, 4, 28),
+                        Location = (byte)0,
+                        Name = "Incredible Rubber Keyboard",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)1,
+                        Version = new Guid("925c0cbe-0061-4437-89a5-5fafe00c6da2")
+                    },
+                    new
+                    {
+                        Id = new Guid("9a24b78f-84a1-4370-abfd-899b7d0feca6"),
+                        AssetCode = "PR000003",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2959),
+                        InstallDate = new DateOnly(2025, 5, 12),
+                        Location = (byte)1,
+                        Name = "Awesome Concrete Sausages",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)0,
+                        Version = new Guid("a87ec9be-f9d5-4a7d-a0b2-69a111ea87d3")
+                    },
+                    new
+                    {
+                        Id = new Guid("2f8f41f6-3454-4c75-8d36-efa021446e16"),
+                        AssetCode = "PR000004",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2978),
+                        InstallDate = new DateOnly(2024, 10, 9),
+                        Location = (byte)0,
+                        Name = "Refined Frozen Pizza",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)0,
+                        Version = new Guid("2a60790c-2f7b-4cea-bcd0-b325b7f3fc55")
+                    },
+                    new
+                    {
+                        Id = new Guid("eb0558f4-1977-4074-a339-49dbbce388a6"),
+                        AssetCode = "PR000005",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(2998),
+                        InstallDate = new DateOnly(2024, 7, 15),
+                        Location = (byte)2,
+                        Name = "Fantastic Frozen Ball",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)1,
+                        Version = new Guid("2aae75cc-2648-4373-bc94-d141fe44099b")
+                    },
+                    new
+                    {
+                        Id = new Guid("98026a9b-63e1-475a-823b-934ce509ddaf"),
+                        AssetCode = "PR000006",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3017),
+                        InstallDate = new DateOnly(2024, 8, 22),
+                        Location = (byte)0,
+                        Name = "Handcrafted Metal Shoes",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)1,
+                        Version = new Guid("932af8ec-7abc-4790-979b-31650b5597d2")
+                    },
+                    new
+                    {
+                        Id = new Guid("b855420a-1b9d-4d83-b9bb-9366352895f3"),
+                        AssetCode = "PR000007",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3037),
+                        InstallDate = new DateOnly(2024, 12, 10),
+                        Location = (byte)1,
+                        Name = "Tasty Cotton Pants",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)1,
+                        Version = new Guid("a8d5bfac-18d3-4185-b15d-88b70a58ced6")
+                    },
+                    new
+                    {
+                        Id = new Guid("1da45cb3-6283-4c6b-81aa-8bc53289995c"),
+                        AssetCode = "PR000008",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3105),
+                        InstallDate = new DateOnly(2024, 8, 22),
+                        Location = (byte)0,
+                        Name = "Practical Granite Chips",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)1,
+                        Version = new Guid("facbae67-1540-491e-989a-dbddfa390fbe")
+                    },
+                    new
+                    {
+                        Id = new Guid("8039d9d6-7eea-404c-97ac-9cad249408fd"),
+                        AssetCode = "PR000009",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3125),
+                        InstallDate = new DateOnly(2024, 12, 17),
+                        Location = (byte)2,
+                        Name = "Handmade Frozen Keyboard",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)4,
+                        Version = new Guid("1d89bf56-3906-4bde-b76d-be0cd4550fae")
+                    },
+                    new
+                    {
+                        Id = new Guid("ac44f014-8aba-48b5-8665-806857ff6075"),
+                        AssetCode = "PR000010",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3144),
+                        InstallDate = new DateOnly(2025, 2, 4),
+                        Location = (byte)1,
+                        Name = "Ergonomic Frozen Shirt",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)3,
+                        Version = new Guid("d7ee9c71-c339-4498-aa96-0d44e136826b")
+                    },
+                    new
+                    {
+                        Id = new Guid("59938a3b-f476-41a4-928a-8b0f6ca9843c"),
+                        AssetCode = "PR000011",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3165),
+                        InstallDate = new DateOnly(2024, 10, 14),
+                        Location = (byte)2,
+                        Name = "Licensed Granite Mouse",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)0,
+                        Version = new Guid("4d93d48b-ab0e-4fb1-b562-f8543aa12eee")
+                    },
+                    new
+                    {
+                        Id = new Guid("27200a3e-270e-40fc-b50b-a76aa6ff1736"),
+                        AssetCode = "PR000012",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3183),
+                        InstallDate = new DateOnly(2025, 1, 16),
+                        Location = (byte)2,
+                        Name = "Awesome Metal Shirt",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)4,
+                        Version = new Guid("c77c000b-7156-4fe6-9b76-f9e6342ede4e")
+                    },
+                    new
+                    {
+                        Id = new Guid("1e41779b-4d83-4e39-b744-c528083ef8da"),
+                        AssetCode = "PR000013",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3201),
+                        InstallDate = new DateOnly(2024, 9, 13),
+                        Location = (byte)1,
+                        Name = "Licensed Frozen Chair",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)4,
+                        Version = new Guid("c96845c3-760e-425a-a95d-2b443d3ae40c")
+                    },
+                    new
+                    {
+                        Id = new Guid("7f9c92b5-7478-4fa3-9fd6-5bcaf5625596"),
+                        AssetCode = "PR000014",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3218),
+                        InstallDate = new DateOnly(2024, 10, 2),
+                        Location = (byte)0,
+                        Name = "Generic Steel Soap",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)5,
+                        Version = new Guid("b8ec607e-4585-438b-bc5c-60560fa61c74")
+                    },
+                    new
+                    {
+                        Id = new Guid("84fbcee5-3a72-4dea-ae3e-d769b847fc34"),
+                        AssetCode = "PR000015",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3237),
+                        InstallDate = new DateOnly(2024, 11, 17),
+                        Location = (byte)1,
+                        Name = "Practical Fresh Soap",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)4,
+                        Version = new Guid("cd803540-c8b4-48d0-b0a1-1dc7d718dfb3")
+                    },
+                    new
+                    {
+                        Id = new Guid("d0a6480e-34b8-4557-a5cb-4930d687b90b"),
+                        AssetCode = "PR000016",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3290),
+                        InstallDate = new DateOnly(2025, 3, 7),
+                        Location = (byte)1,
+                        Name = "Refined Soft Shirt",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)0,
+                        Version = new Guid("490c6967-a05c-4078-99c4-eee7a3c902ac")
+                    },
+                    new
+                    {
+                        Id = new Guid("171a0213-f412-4c2d-9deb-558b82d1b975"),
+                        AssetCode = "PR000017",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3309),
+                        InstallDate = new DateOnly(2024, 9, 30),
+                        Location = (byte)0,
+                        Name = "Gorgeous Wooden Soap",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)5,
+                        Version = new Guid("2f953d86-b66a-4b65-8178-0d32a08fd466")
+                    },
+                    new
+                    {
+                        Id = new Guid("57f41991-a63a-4864-b32f-f31392475ce9"),
+                        AssetCode = "PR000018",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3327),
+                        InstallDate = new DateOnly(2024, 9, 22),
+                        Location = (byte)1,
+                        Name = "Refined Concrete Pants",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)1,
+                        Version = new Guid("73cbed0a-0820-4945-ab4c-68c9615035f9")
+                    },
+                    new
+                    {
+                        Id = new Guid("95d351b6-cabf-4d65-b346-51d0aa4116cd"),
+                        AssetCode = "PR000019",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3349),
+                        InstallDate = new DateOnly(2024, 7, 8),
+                        Location = (byte)2,
+                        Name = "Awesome Metal Tuna",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)5,
+                        Version = new Guid("a55532e9-5d9c-437e-9b61-4f4ae3aa53bb")
+                    },
+                    new
+                    {
+                        Id = new Guid("cc52377d-6e3a-44cd-9bed-41aec5ee084d"),
+                        AssetCode = "PR000020",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3367),
+                        InstallDate = new DateOnly(2024, 8, 7),
+                        Location = (byte)1,
+                        Name = "Intelligent Concrete Sausages",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)4,
+                        Version = new Guid("4cb58854-8252-489a-8875-a8842ea4f8a0")
+                    },
+                    new
+                    {
+                        Id = new Guid("c154f6b2-e8fd-433e-938f-b0ce79e18525"),
+                        AssetCode = "PR000021",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3385),
+                        InstallDate = new DateOnly(2024, 7, 9),
+                        Location = (byte)1,
+                        Name = "Awesome Fresh Mouse",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)4,
+                        Version = new Guid("769490a4-8ec0-4a2e-a078-2261b82251ff")
+                    },
+                    new
+                    {
+                        Id = new Guid("4315175c-0843-48bb-bb53-9a88339a1ab7"),
+                        AssetCode = "PR000022",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3403),
+                        InstallDate = new DateOnly(2025, 3, 25),
+                        Location = (byte)2,
+                        Name = "Incredible Steel Fish",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)5,
+                        Version = new Guid("5c051378-94f5-4898-b080-0c1129ac2762")
+                    },
+                    new
+                    {
+                        Id = new Guid("409451bb-0f80-4baa-b580-bb76f45f7a27"),
+                        AssetCode = "PR000023",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3459),
+                        InstallDate = new DateOnly(2024, 12, 30),
+                        Location = (byte)0,
+                        Name = "Intelligent Rubber Gloves",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)0,
+                        Version = new Guid("b6768200-a14a-42bc-85fd-36e3dda021e4")
+                    },
+                    new
+                    {
+                        Id = new Guid("dd900042-45de-44da-a6b2-d10816537bca"),
+                        AssetCode = "PR000024",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3478),
+                        InstallDate = new DateOnly(2024, 11, 2),
+                        Location = (byte)1,
+                        Name = "Unbranded Steel Ball",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)1,
+                        Version = new Guid("066f4878-6c25-4d23-9f25-4d438753f6b4")
+                    },
+                    new
+                    {
+                        Id = new Guid("c8dfd0c0-c1fb-47fb-9cca-5522a33c70dd"),
+                        AssetCode = "PR000025",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3497),
+                        InstallDate = new DateOnly(2025, 6, 13),
+                        Location = (byte)2,
+                        Name = "Tasty Frozen Chips",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)0,
+                        Version = new Guid("12cbc188-2ada-4114-9dde-6ebac119284a")
+                    },
+                    new
+                    {
+                        Id = new Guid("189d5504-111c-4247-8f09-3e75a77908b5"),
+                        AssetCode = "PR000026",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3515),
+                        InstallDate = new DateOnly(2024, 10, 20),
+                        Location = (byte)2,
+                        Name = "Gorgeous Plastic Shirt",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)0,
+                        Version = new Guid("f8109107-a41a-4f8d-abc3-f74c50e79454")
+                    },
+                    new
+                    {
+                        Id = new Guid("6707fa72-d649-4f41-8a5d-8bb55ccb6dc0"),
+                        AssetCode = "PR000027",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3535),
+                        InstallDate = new DateOnly(2024, 7, 27),
+                        Location = (byte)0,
+                        Name = "Handmade Frozen Tuna",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)4,
+                        Version = new Guid("d7142fa9-72fe-4a23-933c-a9865e8c4a7a")
+                    },
+                    new
+                    {
+                        Id = new Guid("7d5a9add-2819-4c6b-9652-42a2c24ad310"),
+                        AssetCode = "PR000028",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3552),
+                        InstallDate = new DateOnly(2025, 5, 10),
+                        Location = (byte)1,
+                        Name = "Tasty Concrete Chicken",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)5,
+                        Version = new Guid("45ff6796-8288-4a5c-838e-f8339c7bdd6f")
+                    },
+                    new
+                    {
+                        Id = new Guid("204d641a-3d06-4ea4-97d7-77c838f611d3"),
+                        AssetCode = "PR000029",
+                        CategoryId = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3571),
+                        InstallDate = new DateOnly(2024, 11, 11),
+                        Location = (byte)1,
+                        Name = "Intelligent Concrete Salad",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)4,
+                        Version = new Guid("4165be3b-3884-4816-857c-ffa24d808307")
+                    },
+                    new
+                    {
+                        Id = new Guid("5d505fee-b336-456e-8804-4fab5dad7c08"),
+                        AssetCode = "BM000000",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3590),
+                        InstallDate = new DateOnly(2024, 12, 31),
+                        Location = (byte)0,
+                        Name = "Generic Concrete Table",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)4,
+                        Version = new Guid("52e5070f-99f2-4a61-9427-26affe72f230")
+                    },
+                    new
+                    {
+                        Id = new Guid("5cacd1f3-4830-46a0-82b4-f19e90ee8b86"),
+                        AssetCode = "BM000001",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3646),
+                        InstallDate = new DateOnly(2025, 5, 18),
+                        Location = (byte)2,
+                        Name = "Awesome Cotton Salad",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)0,
+                        Version = new Guid("68510842-8ad5-4b6b-b848-8c69c9f5ace5")
+                    },
+                    new
+                    {
+                        Id = new Guid("49c01b4a-9306-4405-8163-c1165e278aa6"),
+                        AssetCode = "BM000002",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3665),
+                        InstallDate = new DateOnly(2024, 11, 5),
+                        Location = (byte)1,
+                        Name = "Tasty Granite Chair",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)0,
+                        Version = new Guid("2ced17bb-397a-4048-8bf0-888e54ba53b5")
+                    },
+                    new
+                    {
+                        Id = new Guid("2bc4c621-03c3-4ada-8283-46a234f6b3ef"),
+                        AssetCode = "BM000003",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3683),
+                        InstallDate = new DateOnly(2025, 1, 16),
+                        Location = (byte)0,
+                        Name = "Handcrafted Metal Hat",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)4,
+                        Version = new Guid("587b9332-2823-4436-b218-480825e9b20e")
+                    },
+                    new
+                    {
+                        Id = new Guid("845e52c0-7041-425d-8547-6e581a75c81f"),
+                        AssetCode = "BM000004",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3701),
+                        InstallDate = new DateOnly(2024, 10, 22),
+                        Location = (byte)2,
+                        Name = "Incredible Fresh Table",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)0,
+                        Version = new Guid("22d9ae69-1cfd-4f7d-b325-acc64c6fd79c")
+                    },
+                    new
+                    {
+                        Id = new Guid("cf5ea9d4-9b28-4272-84c6-16fbede7512e"),
+                        AssetCode = "BM000005",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3721),
+                        InstallDate = new DateOnly(2025, 1, 3),
+                        Location = (byte)1,
+                        Name = "Handcrafted Fresh Shirt",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)4,
+                        Version = new Guid("44ad4e41-a72f-44d2-8ddf-8e850de17a5c")
+                    },
+                    new
+                    {
+                        Id = new Guid("9811ff7d-a87a-4795-8154-3661c61f1c3f"),
+                        AssetCode = "BM000006",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3738),
+                        InstallDate = new DateOnly(2024, 10, 12),
+                        Location = (byte)1,
+                        Name = "Awesome Metal Shoes",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)5,
+                        Version = new Guid("25bf2948-3b0f-4e06-9031-7e69b7801c67")
+                    },
+                    new
+                    {
+                        Id = new Guid("f6ff9146-d2fb-4c93-a453-a49f3aa73e32"),
+                        AssetCode = "BM000007",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3754),
+                        InstallDate = new DateOnly(2025, 5, 18),
+                        Location = (byte)1,
+                        Name = "Incredible Frozen Gloves",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)1,
+                        Version = new Guid("f3be6a7c-4cf3-4e17-9ad8-eeeb3d291094")
+                    },
+                    new
+                    {
+                        Id = new Guid("8c7ded0f-fbb3-48a2-bd17-4b46397893ce"),
+                        AssetCode = "BM000008",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3813),
+                        InstallDate = new DateOnly(2024, 12, 14),
+                        Location = (byte)0,
+                        Name = "Handmade Fresh Computer",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)5,
+                        Version = new Guid("78925dea-4272-488c-a179-7d1c6659b2e4")
+                    },
+                    new
+                    {
+                        Id = new Guid("1a365916-0ec1-421b-95ce-c6b4504bfc8d"),
+                        AssetCode = "BM000009",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3835),
+                        InstallDate = new DateOnly(2024, 12, 1),
+                        Location = (byte)1,
+                        Name = "Handcrafted Granite Chips",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)0,
+                        Version = new Guid("e96e2d1e-cabe-43c0-b9e9-84e0d64ee5ef")
+                    },
+                    new
+                    {
+                        Id = new Guid("46a6e60f-fe29-4c73-a5d1-17342fd40f6d"),
+                        AssetCode = "BM000010",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3855),
+                        InstallDate = new DateOnly(2024, 8, 10),
+                        Location = (byte)0,
+                        Name = "Licensed Soft Cheese",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)5,
+                        Version = new Guid("646db4f3-1c01-4d92-a674-44cc194665e2")
+                    },
+                    new
+                    {
+                        Id = new Guid("c0e07068-ea53-42c5-8994-184e07824329"),
+                        AssetCode = "BM000011",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3875),
+                        InstallDate = new DateOnly(2024, 11, 3),
+                        Location = (byte)0,
+                        Name = "Sleek Metal Bacon",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)1,
+                        Version = new Guid("54ab6c50-23cc-4da1-8806-88fed798849d")
+                    },
+                    new
+                    {
+                        Id = new Guid("a02b0c33-032b-4ca9-8b20-ec6f77c56983"),
+                        AssetCode = "BM000012",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3894),
+                        InstallDate = new DateOnly(2025, 6, 14),
+                        Location = (byte)2,
+                        Name = "Rustic Granite Mouse",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)1,
+                        Version = new Guid("471826d1-25b2-4751-b0e9-b333508dc40c")
+                    },
+                    new
+                    {
+                        Id = new Guid("f9e00ada-bed8-4df8-8516-145708c608d9"),
+                        AssetCode = "BM000013",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3913),
+                        InstallDate = new DateOnly(2025, 7, 4),
+                        Location = (byte)2,
+                        Name = "Unbranded Steel Bike",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)5,
+                        Version = new Guid("14d11686-9b72-48a5-9222-6d05b094fc81")
+                    },
+                    new
+                    {
+                        Id = new Guid("534c9896-5c35-42e0-9cdf-0248ae88b909"),
+                        AssetCode = "BM000014",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3931),
+                        InstallDate = new DateOnly(2024, 10, 6),
+                        Location = (byte)2,
+                        Name = "Licensed Rubber Fish",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)1,
+                        Version = new Guid("25f7a447-3345-4fe9-939a-eb9568845e7b")
+                    },
+                    new
+                    {
+                        Id = new Guid("f5874607-941e-4670-90af-4eee1d874bb1"),
+                        AssetCode = "BM000015",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3978),
+                        InstallDate = new DateOnly(2025, 1, 23),
+                        Location = (byte)1,
+                        Name = "Intelligent Cotton Shoes",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)3,
+                        Version = new Guid("bb299f0a-01d1-4490-b33c-9f16387c6c9e")
+                    },
+                    new
+                    {
+                        Id = new Guid("3083639c-a023-4721-bb76-004460fea846"),
+                        AssetCode = "BM000016",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(3999),
+                        InstallDate = new DateOnly(2024, 9, 26),
+                        Location = (byte)2,
+                        Name = "Sleek Plastic Bacon",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)1,
+                        Version = new Guid("a047abf6-d3bf-4158-b3ff-4bc932d3d1b9")
+                    },
+                    new
+                    {
+                        Id = new Guid("51093426-aa45-41dc-a792-941ae1f183b5"),
+                        AssetCode = "BM000017",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4018),
+                        InstallDate = new DateOnly(2025, 4, 8),
+                        Location = (byte)2,
+                        Name = "Handcrafted Frozen Pants",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("a3b6a855-abe0-4e2e-a54b-d94f69677e19")
+                    },
+                    new
+                    {
+                        Id = new Guid("8b66f314-ec0b-4af6-ab22-bc2fbbc56bb8"),
+                        AssetCode = "BM000018",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4037),
+                        InstallDate = new DateOnly(2025, 1, 11),
+                        Location = (byte)2,
+                        Name = "Tasty Fresh Computer",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)5,
+                        Version = new Guid("a6349191-fb11-482d-a1cc-9da41d7a61a7")
+                    },
+                    new
+                    {
+                        Id = new Guid("f927fb40-d1da-4351-8659-2eee94aae860"),
+                        AssetCode = "BM000019",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4056),
+                        InstallDate = new DateOnly(2025, 2, 13),
+                        Location = (byte)2,
+                        Name = "Gorgeous Soft Chicken",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)0,
+                        Version = new Guid("aa012e59-8ae9-4f42-be70-13a26f282ce3")
+                    },
+                    new
+                    {
+                        Id = new Guid("889e7588-201e-4f6a-babc-d12262849f08"),
+                        AssetCode = "BM000020",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4074),
+                        InstallDate = new DateOnly(2025, 3, 6),
+                        Location = (byte)0,
+                        Name = "Fantastic Concrete Sausages",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)3,
+                        Version = new Guid("5b9a10e7-85c6-4cc9-b14d-ff12923682a3")
+                    },
+                    new
+                    {
+                        Id = new Guid("f2ca9cc2-aa4f-4725-80bf-a3b4796b3371"),
+                        AssetCode = "BM000021",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4093),
+                        InstallDate = new DateOnly(2024, 11, 13),
+                        Location = (byte)1,
+                        Name = "Fantastic Frozen Car",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)5,
+                        Version = new Guid("bb9557a8-a7f6-4681-b965-059a79cac82d")
+                    },
+                    new
+                    {
+                        Id = new Guid("00429609-de7e-4c9a-b71f-b2eca32513a7"),
+                        AssetCode = "BM000022",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4112),
+                        InstallDate = new DateOnly(2025, 5, 27),
+                        Location = (byte)2,
+                        Name = "Practical Fresh Tuna",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)5,
+                        Version = new Guid("d19fb3eb-8b0e-4264-98fb-9b925740ef4e")
+                    },
+                    new
+                    {
+                        Id = new Guid("1cf4293e-6e6b-48d7-a46b-a55957d9c4dc"),
+                        AssetCode = "BM000023",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4150),
+                        InstallDate = new DateOnly(2024, 12, 10),
+                        Location = (byte)1,
+                        Name = "Sleek Wooden Fish",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)1,
+                        Version = new Guid("cd1d028e-f80c-4fbb-b5b6-e41be5db06e5")
+                    },
+                    new
+                    {
+                        Id = new Guid("9957fb5f-ecfd-46c2-bf41-6685e4289654"),
+                        AssetCode = "BM000024",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4170),
+                        InstallDate = new DateOnly(2024, 9, 29),
+                        Location = (byte)2,
+                        Name = "Ergonomic Cotton Shirt",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)3,
+                        Version = new Guid("a51e0268-d484-4eaa-a367-e8740c8e01ac")
+                    },
+                    new
+                    {
+                        Id = new Guid("cb0b5186-f945-4f06-9c0a-9d7fb3311611"),
+                        AssetCode = "BM000025",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4192),
+                        InstallDate = new DateOnly(2024, 10, 2),
+                        Location = (byte)2,
+                        Name = "Intelligent Soft Hat",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)1,
+                        Version = new Guid("f996a0c8-463c-44a2-af00-186c20bd63b9")
+                    },
+                    new
+                    {
+                        Id = new Guid("ca860ae6-e5b8-4156-b067-3064a157cd25"),
+                        AssetCode = "BM000026",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4210),
+                        InstallDate = new DateOnly(2025, 3, 22),
+                        Location = (byte)2,
+                        Name = "Rustic Cotton Sausages",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)3,
+                        Version = new Guid("b228731f-c2ed-4cc9-ab79-a5ce3a0fbf3e")
+                    },
+                    new
+                    {
+                        Id = new Guid("68032710-542d-44c9-8068-16ab29efc1a8"),
+                        AssetCode = "BM000027",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4227),
+                        InstallDate = new DateOnly(2025, 4, 27),
+                        Location = (byte)0,
+                        Name = "Incredible Plastic Ball",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)3,
+                        Version = new Guid("2ac99c11-632a-4917-8c70-f483f4dba9c8")
+                    },
+                    new
+                    {
+                        Id = new Guid("fd924ca4-b144-45e6-812c-561f2f332bbb"),
+                        AssetCode = "BM000028",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4244),
+                        InstallDate = new DateOnly(2025, 1, 14),
+                        Location = (byte)1,
+                        Name = "Small Cotton Tuna",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)5,
+                        Version = new Guid("46c27ac1-9486-4a7c-87a6-57a97566646e")
+                    },
+                    new
+                    {
+                        Id = new Guid("a8541bb9-f3c3-45c7-a4d7-7062088ceafc"),
+                        AssetCode = "BM000029",
+                        CategoryId = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4264),
+                        InstallDate = new DateOnly(2025, 5, 10),
+                        Location = (byte)0,
+                        Name = "Handcrafted Wooden Gloves",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)1,
+                        Version = new Guid("a4337140-74d0-40a5-94eb-b6447ae92333")
+                    },
+                    new
+                    {
+                        Id = new Guid("f3c8317b-45a5-4732-9a89-c1487ec133b2"),
+                        AssetCode = "BS000000",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4323),
+                        InstallDate = new DateOnly(2024, 7, 21),
+                        Location = (byte)1,
+                        Name = "Practical Granite Keyboard",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)0,
+                        Version = new Guid("e4a832f1-6c89-462e-9760-ea82fd46ac35")
+                    },
+                    new
+                    {
+                        Id = new Guid("eb38c873-f9e7-4052-b26d-0aaea03af805"),
+                        AssetCode = "BS000001",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4343),
+                        InstallDate = new DateOnly(2024, 8, 6),
+                        Location = (byte)0,
+                        Name = "Generic Steel Fish",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)0,
+                        Version = new Guid("133af516-d86d-4189-b3d7-a4f7aceacd57")
+                    },
+                    new
+                    {
+                        Id = new Guid("9c8c9550-dbd4-498f-8ee1-cf9075a865de"),
+                        AssetCode = "BS000002",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4363),
+                        InstallDate = new DateOnly(2025, 1, 15),
+                        Location = (byte)1,
+                        Name = "Ergonomic Cotton Salad",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)4,
+                        Version = new Guid("1a49cf4b-bfa3-4f9a-8e22-23f6373ec3fc")
+                    },
+                    new
+                    {
+                        Id = new Guid("ef8647fc-0df4-4690-98a2-1b42c3007fee"),
+                        AssetCode = "BS000003",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4383),
+                        InstallDate = new DateOnly(2025, 1, 7),
+                        Location = (byte)1,
+                        Name = "Small Fresh Bike",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)4,
+                        Version = new Guid("dd9c5bb8-031a-4c32-b137-096be812827f")
+                    },
+                    new
+                    {
+                        Id = new Guid("cc4fb089-925b-459c-a3c3-cf4a9c802127"),
+                        AssetCode = "BS000004",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4400),
+                        InstallDate = new DateOnly(2025, 4, 15),
+                        Location = (byte)1,
+                        Name = "Fantastic Fresh Tuna",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)3,
+                        Version = new Guid("ad3c25cd-cffa-4e00-a825-937f155e021f")
+                    },
+                    new
+                    {
+                        Id = new Guid("1928aa31-0aad-4bff-92f6-a430e34ad636"),
+                        AssetCode = "BS000005",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4419),
+                        InstallDate = new DateOnly(2024, 11, 24),
+                        Location = (byte)2,
+                        Name = "Intelligent Soft Soap",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)3,
+                        Version = new Guid("e7970faa-b761-4846-82b4-b257b89424bb")
+                    },
+                    new
+                    {
+                        Id = new Guid("aa505349-01d1-480f-b364-60ebfb223b91"),
+                        AssetCode = "BS000006",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4436),
+                        InstallDate = new DateOnly(2025, 3, 6),
+                        Location = (byte)1,
+                        Name = "Incredible Concrete Bacon",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("e621560c-7465-4a0e-9477-d0f8ffbcad09")
+                    },
+                    new
+                    {
+                        Id = new Guid("2f78bf1f-6f20-4ad4-b767-f2873e448300"),
+                        AssetCode = "BS000007",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4456),
+                        InstallDate = new DateOnly(2024, 10, 14),
+                        Location = (byte)0,
+                        Name = "Rustic Granite Computer",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)0,
+                        Version = new Guid("17a71eef-8ec6-446e-9908-b2bb53506016")
+                    },
+                    new
+                    {
+                        Id = new Guid("68059ce7-d47a-40bc-aedb-ddaeee1d8fb6"),
+                        AssetCode = "BS000008",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4522),
+                        InstallDate = new DateOnly(2025, 3, 29),
+                        Location = (byte)0,
+                        Name = "Handcrafted Plastic Bacon",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)5,
+                        Version = new Guid("083ccfb4-b879-4c23-b0b1-28f5ad61e47c")
+                    },
+                    new
+                    {
+                        Id = new Guid("3c0d0803-7782-466d-ba2f-5959df4a041e"),
+                        AssetCode = "BS000009",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4543),
+                        InstallDate = new DateOnly(2025, 1, 27),
+                        Location = (byte)2,
+                        Name = "Gorgeous Granite Chicken",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)5,
+                        Version = new Guid("df3874ca-a757-40e0-b24a-2695af0b788e")
+                    },
+                    new
+                    {
+                        Id = new Guid("3d9031e5-86e8-486a-a51a-dcea606bca28"),
+                        AssetCode = "BS000010",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4560),
+                        InstallDate = new DateOnly(2025, 2, 27),
+                        Location = (byte)1,
+                        Name = "Sleek Frozen Shirt",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)4,
+                        Version = new Guid("a04ae5cd-f847-4d7e-80c2-040cba2a5d59")
+                    },
+                    new
+                    {
+                        Id = new Guid("721571f6-a1aa-4362-8cef-9219d1b60ef1"),
+                        AssetCode = "BS000011",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4580),
+                        InstallDate = new DateOnly(2024, 11, 21),
+                        Location = (byte)0,
+                        Name = "Practical Metal Keyboard",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)5,
+                        Version = new Guid("6c3155a7-b420-42b6-a3a1-1d0928969934")
+                    },
+                    new
+                    {
+                        Id = new Guid("d08181f7-bdc5-466a-bb3c-e2e36af38d65"),
+                        AssetCode = "BS000012",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4598),
+                        InstallDate = new DateOnly(2024, 10, 3),
+                        Location = (byte)2,
+                        Name = "Gorgeous Metal Tuna",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)4,
+                        Version = new Guid("252867db-5736-425c-b8a8-e77fc9ba4c25")
+                    },
+                    new
+                    {
+                        Id = new Guid("b38ef7cc-e819-4e0d-beff-68308bc058a8"),
+                        AssetCode = "BS000013",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4648),
+                        InstallDate = new DateOnly(2024, 12, 2),
+                        Location = (byte)1,
+                        Name = "Incredible Plastic Car",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)0,
+                        Version = new Guid("234c4c1d-f9c7-43d3-a843-f016dd7e031c")
+                    },
+                    new
+                    {
+                        Id = new Guid("bc643eee-a87e-4108-92ed-a50c1b85398c"),
+                        AssetCode = "BS000014",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4668),
+                        InstallDate = new DateOnly(2025, 1, 20),
+                        Location = (byte)2,
+                        Name = "Handcrafted Concrete Gloves",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)4,
+                        Version = new Guid("0a0416dc-6e34-4e93-9ce1-735d5d5a5705")
+                    },
+                    new
+                    {
+                        Id = new Guid("ac18bbde-5d71-4b98-adb4-68cab3a8c997"),
+                        AssetCode = "BS000015",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4687),
+                        InstallDate = new DateOnly(2025, 4, 2),
+                        Location = (byte)0,
+                        Name = "Tasty Plastic Salad",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)4,
+                        Version = new Guid("a7e010c0-c734-42de-a2ec-b289a4fc8e85")
+                    },
+                    new
+                    {
+                        Id = new Guid("87657bea-bc93-4831-b515-da17d52cfee8"),
+                        AssetCode = "BS000016",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4706),
+                        InstallDate = new DateOnly(2024, 12, 19),
+                        Location = (byte)1,
+                        Name = "Generic Concrete Cheese",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)5,
+                        Version = new Guid("7563c1e1-3bf1-4831-877c-f13d4f4ee956")
+                    },
+                    new
+                    {
+                        Id = new Guid("3382deeb-39ea-43f9-acf3-97a5ad6d40ea"),
+                        AssetCode = "BS000017",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4724),
+                        InstallDate = new DateOnly(2025, 1, 22),
+                        Location = (byte)0,
+                        Name = "Refined Cotton Chair",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)1,
+                        Version = new Guid("d07e3e10-bffa-4c1b-9669-71062db70441")
+                    },
+                    new
+                    {
+                        Id = new Guid("4085091a-5b68-45fb-874a-7a5ca0e00b47"),
+                        AssetCode = "BS000018",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4741),
+                        InstallDate = new DateOnly(2025, 2, 1),
+                        Location = (byte)0,
+                        Name = "Fantastic Wooden Chair",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)1,
+                        Version = new Guid("f46d08f7-0920-4291-8e85-c5dd91a39a3a")
+                    },
+                    new
+                    {
+                        Id = new Guid("1fad89e3-2435-41b1-aa40-b3785d932c8f"),
+                        AssetCode = "BS000019",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4761),
+                        InstallDate = new DateOnly(2025, 4, 14),
+                        Location = (byte)1,
+                        Name = "Practical Fresh Ball",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)1,
+                        Version = new Guid("e0e4f9d5-0f57-44e9-8930-e2af343afd80")
+                    },
+                    new
+                    {
+                        Id = new Guid("400750c6-28ae-4124-914e-59444543e837"),
+                        AssetCode = "BS000020",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4813),
+                        InstallDate = new DateOnly(2024, 8, 4),
+                        Location = (byte)2,
+                        Name = "Handcrafted Wooden Chair",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)3,
+                        Version = new Guid("9a7a0e22-2377-4e5e-80e9-a051630988fb")
+                    },
+                    new
+                    {
+                        Id = new Guid("c968f1bc-c777-4d9d-a27e-44c37eab36a6"),
+                        AssetCode = "BS000021",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4833),
+                        InstallDate = new DateOnly(2025, 3, 28),
+                        Location = (byte)0,
+                        Name = "Sleek Steel Hat",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)3,
+                        Version = new Guid("cfc00220-a920-496e-bb83-769b93289ff7")
+                    },
+                    new
+                    {
+                        Id = new Guid("f7489e73-660e-4794-9f95-42633f663b8f"),
+                        AssetCode = "BS000022",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4852),
+                        InstallDate = new DateOnly(2025, 1, 13),
+                        Location = (byte)1,
+                        Name = "Awesome Metal Ball",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)4,
+                        Version = new Guid("d08d3475-107d-4dca-a28d-37ba8770560b")
+                    },
+                    new
+                    {
+                        Id = new Guid("b48c9a89-a221-4fb5-aee5-e90733e5fd7d"),
+                        AssetCode = "BS000023",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4872),
+                        InstallDate = new DateOnly(2025, 4, 2),
+                        Location = (byte)2,
+                        Name = "Incredible Rubber Bacon",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)5,
+                        Version = new Guid("f839e402-a68c-41c9-8886-f750d05f8fe3")
+                    },
+                    new
+                    {
+                        Id = new Guid("4e6cf5ba-697d-4c4d-9cbf-41af3cdc9d64"),
+                        AssetCode = "BS000024",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4890),
+                        InstallDate = new DateOnly(2024, 9, 6),
+                        Location = (byte)2,
+                        Name = "Incredible Granite Fish",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)1,
+                        Version = new Guid("66711ada-4e01-4be9-95a4-558d5815b7e1")
+                    },
+                    new
+                    {
+                        Id = new Guid("2080e737-ec8b-4eed-99fb-333d8ecee011"),
+                        AssetCode = "BS000025",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4908),
+                        InstallDate = new DateOnly(2024, 9, 29),
+                        Location = (byte)2,
+                        Name = "Generic Cotton Sausages",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)1,
+                        Version = new Guid("03aced9b-23a9-44ed-8b79-66d5867a8642")
+                    },
+                    new
+                    {
+                        Id = new Guid("f99e8615-ef53-4c9f-96d5-b817addd2d5c"),
+                        AssetCode = "BS000026",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4925),
+                        InstallDate = new DateOnly(2025, 3, 16),
+                        Location = (byte)2,
+                        Name = "Ergonomic Metal Chips",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)4,
+                        Version = new Guid("14a75d6b-326b-499d-a6f1-fa3bf7864768")
+                    },
+                    new
+                    {
+                        Id = new Guid("a192e1e9-4bb3-4b01-bd5a-9db9917e4010"),
+                        AssetCode = "BS000027",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4944),
+                        InstallDate = new DateOnly(2024, 8, 12),
+                        Location = (byte)1,
+                        Name = "Sleek Metal Sausages",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)5,
+                        Version = new Guid("6e8f90c4-c70c-477d-8925-e609addbfe71")
+                    },
+                    new
+                    {
+                        Id = new Guid("1319b859-4abf-4924-9b3a-69315bf02f94"),
+                        AssetCode = "BS000028",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(4995),
+                        InstallDate = new DateOnly(2024, 12, 26),
+                        Location = (byte)2,
+                        Name = "Tasty Metal Computer",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)5,
+                        Version = new Guid("c23318b9-6891-4a04-9934-3a9e6c274f04")
+                    },
+                    new
+                    {
+                        Id = new Guid("9f33f59e-fb99-411a-9e70-5b8ba6502390"),
+                        AssetCode = "BS000029",
+                        CategoryId = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5015),
+                        InstallDate = new DateOnly(2024, 10, 24),
+                        Location = (byte)2,
+                        Name = "Fantastic Steel Chicken",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)0,
+                        Version = new Guid("06b57e14-8cea-4e5b-99b6-e110a5e77af4")
+                    },
+                    new
+                    {
+                        Id = new Guid("d7972aff-6953-473a-9f44-a3ab4e5954d7"),
+                        AssetCode = "MN000000",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5034),
+                        InstallDate = new DateOnly(2025, 5, 30),
+                        Location = (byte)1,
+                        Name = "Handcrafted Plastic Cheese",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)3,
+                        Version = new Guid("2857d6f8-8c0d-45c3-bbcf-54f63857b720")
+                    },
+                    new
+                    {
+                        Id = new Guid("9cf13283-a301-45ae-9d06-e97321a962ce"),
+                        AssetCode = "MN000001",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5054),
+                        InstallDate = new DateOnly(2025, 3, 12),
+                        Location = (byte)2,
+                        Name = "Sleek Cotton Bike",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)3,
+                        Version = new Guid("2b8a28e9-11aa-4526-8cc8-efbb50b7c75b")
+                    },
+                    new
+                    {
+                        Id = new Guid("05fc37d4-1297-41fa-b3d0-730e0b3a8bc7"),
+                        AssetCode = "MN000002",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5074),
+                        InstallDate = new DateOnly(2025, 6, 3),
+                        Location = (byte)0,
+                        Name = "Fantastic Granite Gloves",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)0,
+                        Version = new Guid("5cd9aaaf-0078-44a6-aa7d-12f78aa1dfe1")
+                    },
+                    new
+                    {
+                        Id = new Guid("d4dd08be-28aa-47e5-815c-f59ebfca31b4"),
+                        AssetCode = "MN000003",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5092),
+                        InstallDate = new DateOnly(2025, 6, 24),
+                        Location = (byte)0,
+                        Name = "Unbranded Metal Keyboard",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)5,
+                        Version = new Guid("1dc5d1ac-a9e6-4965-b847-ed5eb99195be")
+                    },
+                    new
+                    {
+                        Id = new Guid("87d3605d-5f7e-44ef-bf49-0f69a98d28ca"),
+                        AssetCode = "MN000004",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5110),
+                        InstallDate = new DateOnly(2025, 3, 6),
+                        Location = (byte)2,
+                        Name = "Ergonomic Fresh Soap",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)3,
+                        Version = new Guid("56a0536d-d35e-4983-ab97-de7fd938ef7a")
+                    },
+                    new
+                    {
+                        Id = new Guid("f9823935-3e89-4b4a-8c4d-0cc3963c72d2"),
+                        AssetCode = "MN000005",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5160),
+                        InstallDate = new DateOnly(2025, 3, 18),
+                        Location = (byte)2,
+                        Name = "Incredible Granite Tuna",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)0,
+                        Version = new Guid("f32cd181-1903-4f0f-98a5-4c6977e8f243")
+                    },
+                    new
+                    {
+                        Id = new Guid("6fb6d198-7146-495b-bcf0-7aa02bc44080"),
+                        AssetCode = "MN000006",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5181),
+                        InstallDate = new DateOnly(2024, 11, 20),
+                        Location = (byte)1,
+                        Name = "Fantastic Cotton Ball",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)1,
+                        Version = new Guid("d529aad4-3956-47d4-8a36-fb327f473641")
+                    },
+                    new
+                    {
+                        Id = new Guid("9772e9a1-b32f-47fb-8be8-23718be3474a"),
+                        AssetCode = "MN000007",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5199),
+                        InstallDate = new DateOnly(2025, 1, 2),
+                        Location = (byte)2,
+                        Name = "Unbranded Plastic Soap",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)5,
+                        Version = new Guid("834ec4b1-7fe4-465c-9d2e-44ec9db735bb")
+                    },
+                    new
+                    {
+                        Id = new Guid("2e928692-4764-4448-af82-7692e2df8a71"),
+                        AssetCode = "MN000008",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5216),
+                        InstallDate = new DateOnly(2025, 1, 5),
+                        Location = (byte)1,
+                        Name = "Gorgeous Frozen Pants",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)4,
+                        Version = new Guid("afac1e3f-caf6-4151-861f-23ac65956523")
+                    },
+                    new
+                    {
+                        Id = new Guid("b8cd0db7-209b-435a-8cf6-6e356490643a"),
+                        AssetCode = "MN000009",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5236),
+                        InstallDate = new DateOnly(2025, 1, 24),
+                        Location = (byte)1,
+                        Name = "Rustic Plastic Bacon",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)5,
+                        Version = new Guid("85d0a0e5-001e-44fa-a15b-6d064ba1eefa")
+                    },
+                    new
+                    {
+                        Id = new Guid("1c4a8c64-af59-4c72-8a64-bda0beedf268"),
+                        AssetCode = "MN000010",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5253),
+                        InstallDate = new DateOnly(2025, 1, 10),
+                        Location = (byte)1,
+                        Name = "Unbranded Metal Sausages",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)1,
+                        Version = new Guid("bb9e7a87-238b-48fb-aaa0-9ca9bc4d7e9a")
+                    },
+                    new
+                    {
+                        Id = new Guid("1b958ac8-36c4-457d-8432-78ed7c113feb"),
+                        AssetCode = "MN000011",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5271),
+                        InstallDate = new DateOnly(2025, 5, 16),
+                        Location = (byte)2,
+                        Name = "Generic Wooden Pants",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)1,
+                        Version = new Guid("be59d163-f6e6-4633-94a8-583e4f60db80")
+                    },
+                    new
+                    {
+                        Id = new Guid("3e48182b-9bf7-4847-8ae8-23c214cf39a4"),
+                        AssetCode = "MN000012",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5322),
+                        InstallDate = new DateOnly(2025, 1, 26),
+                        Location = (byte)0,
+                        Name = "Unbranded Metal Chair",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("17074abb-6520-4ea2-b481-7b2aa86c9dce")
+                    },
+                    new
+                    {
+                        Id = new Guid("7863fe01-e3c9-445a-9342-8b5cbbf18e80"),
+                        AssetCode = "MN000013",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5343),
+                        InstallDate = new DateOnly(2025, 5, 30),
+                        Location = (byte)2,
+                        Name = "Refined Cotton Pizza",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)1,
+                        Version = new Guid("eb0d082a-c9c3-4bfb-add2-93e249b01d36")
+                    },
+                    new
+                    {
+                        Id = new Guid("70a5d677-ca9e-4928-846a-4d7be34912a5"),
+                        AssetCode = "MN000014",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5361),
+                        InstallDate = new DateOnly(2025, 3, 30),
+                        Location = (byte)0,
+                        Name = "Ergonomic Steel Gloves",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("86065695-50be-48be-82d7-9cea1359c46b")
+                    },
+                    new
+                    {
+                        Id = new Guid("a59eeabb-05ef-40b1-b100-7d770d5a50df"),
+                        AssetCode = "MN000015",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5379),
+                        InstallDate = new DateOnly(2024, 9, 5),
+                        Location = (byte)0,
+                        Name = "Refined Granite Bike",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)0,
+                        Version = new Guid("54debe56-bfd7-4615-aeb3-7a0a6a4263ff")
+                    },
+                    new
+                    {
+                        Id = new Guid("ef32a950-9511-4195-a6e8-824e55ba0361"),
+                        AssetCode = "MN000016",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5397),
+                        InstallDate = new DateOnly(2025, 2, 5),
+                        Location = (byte)1,
+                        Name = "Tasty Rubber Mouse",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)5,
+                        Version = new Guid("0fa727f5-6888-49d1-9c12-d92328531aa0")
+                    },
+                    new
+                    {
+                        Id = new Guid("6e773b7b-5de3-4566-98d2-1b42f4964302"),
+                        AssetCode = "MN000017",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5415),
+                        InstallDate = new DateOnly(2024, 11, 27),
+                        Location = (byte)0,
+                        Name = "Intelligent Granite Computer",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)4,
+                        Version = new Guid("b037b554-83c7-4ba0-bf8a-6e6e31276b3b")
+                    },
+                    new
+                    {
+                        Id = new Guid("4e33b27e-8082-4c5c-b204-dd744abade0e"),
+                        AssetCode = "MN000018",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5433),
+                        InstallDate = new DateOnly(2025, 2, 26),
+                        Location = (byte)2,
+                        Name = "Fantastic Granite Mouse",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)3,
+                        Version = new Guid("6667fe4a-5b5c-459c-a729-01d6c942816f")
+                    },
+                    new
+                    {
+                        Id = new Guid("8c47477d-e575-42cc-893b-8fd13d13657a"),
+                        AssetCode = "MN000019",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5451),
+                        InstallDate = new DateOnly(2024, 8, 20),
+                        Location = (byte)0,
+                        Name = "Generic Rubber Salad",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)5,
+                        Version = new Guid("e4a13b53-5c28-4304-ae25-fb655eeb7eb0")
+                    },
+                    new
+                    {
+                        Id = new Guid("d6ebd673-aea3-4b1a-8d72-cc65774875b7"),
+                        AssetCode = "MN000020",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5518),
+                        InstallDate = new DateOnly(2024, 7, 21),
+                        Location = (byte)0,
+                        Name = "Unbranded Frozen Chair",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)5,
+                        Version = new Guid("db1b4dbc-c769-45b7-95cb-b38fc308b7e0")
+                    },
+                    new
+                    {
+                        Id = new Guid("22d2c476-1e3a-4721-8e73-3bfd80aba1fd"),
+                        AssetCode = "MN000021",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5538),
+                        InstallDate = new DateOnly(2024, 8, 24),
+                        Location = (byte)0,
+                        Name = "Practical Frozen Salad",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)5,
+                        Version = new Guid("dfa91cfe-cb14-4b0f-bac3-61cf180867ee")
+                    },
+                    new
+                    {
+                        Id = new Guid("3a8123cd-5570-4d9c-a3e6-0cd967834a30"),
+                        AssetCode = "MN000022",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5556),
+                        InstallDate = new DateOnly(2025, 1, 7),
+                        Location = (byte)0,
+                        Name = "Tasty Granite Soap",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)1,
+                        Version = new Guid("4e915c16-15ee-4ffb-a368-9a0c71be5e72")
+                    },
+                    new
+                    {
+                        Id = new Guid("a6c41aa6-da2d-420f-824d-4508bd20a0ed"),
+                        AssetCode = "MN000023",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5574),
+                        InstallDate = new DateOnly(2025, 1, 30),
+                        Location = (byte)0,
+                        Name = "Awesome Granite Chair",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("4e5aae13-ba50-4f7f-8485-46267e81c0af")
+                    },
+                    new
+                    {
+                        Id = new Guid("5c7ef223-7e60-47d3-aad1-5c11bd0e8271"),
+                        AssetCode = "MN000024",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5590),
+                        InstallDate = new DateOnly(2025, 2, 21),
+                        Location = (byte)0,
+                        Name = "Ergonomic Concrete Shoes",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)4,
+                        Version = new Guid("c7aa59dc-fe14-424a-970d-9cee879ee903")
+                    },
+                    new
+                    {
+                        Id = new Guid("567d9313-89fa-40e5-a161-c0ba19090506"),
+                        AssetCode = "MN000025",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5611),
+                        InstallDate = new DateOnly(2024, 9, 5),
+                        Location = (byte)1,
+                        Name = "Licensed Concrete Pants",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)0,
+                        Version = new Guid("1f9a8d50-40f0-4eb3-abb1-8e3751931117")
+                    },
+                    new
+                    {
+                        Id = new Guid("f1c1ca78-f7ba-46c4-9fa3-badcc682efd2"),
+                        AssetCode = "MN000026",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5629),
+                        InstallDate = new DateOnly(2025, 1, 22),
+                        Location = (byte)1,
+                        Name = "Unbranded Granite Bike",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("96bf33d1-05f8-4281-ab2c-485e2fae5989")
+                    },
+                    new
+                    {
+                        Id = new Guid("6b344ba2-9ff3-4ca0-a574-ca8ed0569442"),
+                        AssetCode = "MN000027",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5689),
+                        InstallDate = new DateOnly(2025, 7, 3),
+                        Location = (byte)0,
+                        Name = "Tasty Wooden Sausages",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)4,
+                        Version = new Guid("6f08cd5d-7135-4a54-b17e-c92c756e0cba")
+                    },
+                    new
+                    {
+                        Id = new Guid("88b82478-1fa8-4596-9fa4-37349d2f9cad"),
+                        AssetCode = "MN000028",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5708),
+                        InstallDate = new DateOnly(2024, 8, 8),
+                        Location = (byte)0,
+                        Name = "Incredible Fresh Car",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)5,
+                        Version = new Guid("adef28e1-9861-45c6-8b5d-532479657e7f")
+                    },
+                    new
+                    {
+                        Id = new Guid("ddb011d5-3e8e-4a64-9d8a-c78a1dfcba6f"),
+                        AssetCode = "MN000029",
+                        CategoryId = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5728),
+                        InstallDate = new DateOnly(2025, 2, 23),
+                        Location = (byte)2,
+                        Name = "Intelligent Granite Bike",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)1,
+                        Version = new Guid("46ff7f9c-7509-4610-9804-83b33c926d49")
+                    },
+                    new
+                    {
+                        Id = new Guid("8f29906b-1e5d-47e3-8fa9-ba158c3b6366"),
+                        AssetCode = "KB000000",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5748),
+                        InstallDate = new DateOnly(2025, 3, 18),
+                        Location = (byte)2,
+                        Name = "Tasty Concrete Shirt",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)1,
+                        Version = new Guid("2466c4da-6a1f-4e25-a3df-5b87c583004c")
+                    },
+                    new
+                    {
+                        Id = new Guid("74d4ca62-2aaa-4e99-9966-833c59708749"),
+                        AssetCode = "KB000001",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5766),
+                        InstallDate = new DateOnly(2024, 8, 21),
+                        Location = (byte)2,
+                        Name = "Handcrafted Wooden Cheese",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("b7c8d21c-72eb-4cf7-882f-b53865806988")
+                    },
+                    new
+                    {
+                        Id = new Guid("6d504b8a-9fee-4ce1-862f-1073eaa6f16f"),
+                        AssetCode = "KB000002",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5783),
+                        InstallDate = new DateOnly(2025, 4, 15),
+                        Location = (byte)0,
+                        Name = "Generic Frozen Table",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)3,
+                        Version = new Guid("ac31c562-2f61-4b1a-b5b4-58a4d13e7847")
+                    },
+                    new
+                    {
+                        Id = new Guid("db08ac56-072e-4681-b2a0-96a077c2af75"),
+                        AssetCode = "KB000003",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5803),
+                        InstallDate = new DateOnly(2025, 6, 30),
+                        Location = (byte)0,
+                        Name = "Licensed Fresh Gloves",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)3,
+                        Version = new Guid("4e56144b-6fde-457b-94df-426505ad58a2")
+                    },
+                    new
+                    {
+                        Id = new Guid("21e0479e-dc29-488f-86be-f0a7fb0d7e80"),
+                        AssetCode = "KB000004",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5891),
+                        InstallDate = new DateOnly(2024, 8, 16),
+                        Location = (byte)1,
+                        Name = "Incredible Wooden Hat",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)3,
+                        Version = new Guid("f0eb4b4d-cec2-44ae-87ae-43a06c5a4725")
+                    },
+                    new
+                    {
+                        Id = new Guid("3a93e35a-a2a6-4792-a16e-4cf9ab807091"),
+                        AssetCode = "KB000005",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5911),
+                        InstallDate = new DateOnly(2024, 8, 24),
+                        Location = (byte)2,
+                        Name = "Ergonomic Frozen Car",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)5,
+                        Version = new Guid("8f14c774-65bb-4771-bfb3-e29a289a983e")
+                    },
+                    new
+                    {
+                        Id = new Guid("aecdfb48-e3c9-4bc6-aa9e-4fb8ef4d92f3"),
+                        AssetCode = "KB000006",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5929),
+                        InstallDate = new DateOnly(2025, 4, 1),
+                        Location = (byte)1,
+                        Name = "Incredible Frozen Shirt",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)0,
+                        Version = new Guid("6af8443a-170f-4013-b35b-17f61462a5c7")
+                    },
+                    new
+                    {
+                        Id = new Guid("1313ac17-ae98-4f92-bae5-754b0d524660"),
+                        AssetCode = "KB000007",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5949),
+                        InstallDate = new DateOnly(2025, 4, 4),
+                        Location = (byte)2,
+                        Name = "Tasty Rubber Pants",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)4,
+                        Version = new Guid("38fb8d75-4d76-4b40-811e-bc1b504cf5cb")
+                    },
+                    new
+                    {
+                        Id = new Guid("42ab0e6c-b51f-4053-985a-b1a1f713ad61"),
+                        AssetCode = "KB000008",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5967),
+                        InstallDate = new DateOnly(2025, 3, 10),
+                        Location = (byte)2,
+                        Name = "Gorgeous Concrete Ball",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)4,
+                        Version = new Guid("b262f12a-65f8-4448-a74f-d1f6efe752f4")
+                    },
+                    new
+                    {
+                        Id = new Guid("0207ebe7-7855-4526-a0c5-cca6af62709e"),
+                        AssetCode = "KB000009",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(5984),
+                        InstallDate = new DateOnly(2025, 1, 2),
+                        Location = (byte)2,
+                        Name = "Rustic Frozen Towels",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)3,
+                        Version = new Guid("a8914815-c545-4d83-a2a4-b58c1411a53a")
+                    },
+                    new
+                    {
+                        Id = new Guid("f3aad915-ada5-40a1-ba2f-d9d55339f22a"),
+                        AssetCode = "KB000010",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6002),
+                        InstallDate = new DateOnly(2024, 10, 11),
+                        Location = (byte)0,
+                        Name = "Small Frozen Fish",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)4,
+                        Version = new Guid("ea93ccb8-a27c-4829-ba67-ae6b83f18fda")
+                    },
+                    new
+                    {
+                        Id = new Guid("7f6fe401-0c90-43bf-b72c-b50acd230d10"),
+                        AssetCode = "KB000011",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6057),
+                        InstallDate = new DateOnly(2025, 1, 30),
+                        Location = (byte)0,
+                        Name = "Ergonomic Wooden Shoes",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)5,
+                        Version = new Guid("e6dc1bf6-ed02-4577-a8ea-255b3252a630")
+                    },
+                    new
+                    {
+                        Id = new Guid("f2e0c118-fdc4-480d-95fb-36714c693a6b"),
+                        AssetCode = "KB000012",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6078),
+                        InstallDate = new DateOnly(2024, 10, 8),
+                        Location = (byte)2,
+                        Name = "Ergonomic Soft Hat",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)0,
+                        Version = new Guid("166d8cf1-fe6d-4caa-ae75-9848faae678b")
+                    },
+                    new
+                    {
+                        Id = new Guid("3b88cca8-e216-465a-b252-52a84cdb58d0"),
+                        AssetCode = "KB000013",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6096),
+                        InstallDate = new DateOnly(2024, 12, 30),
+                        Location = (byte)1,
+                        Name = "Generic Soft Pizza",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)0,
+                        Version = new Guid("34630879-7a75-41fe-8d55-75b8369147d1")
+                    },
+                    new
+                    {
+                        Id = new Guid("41d3dce5-3d83-4b80-a754-af941cd19d55"),
+                        AssetCode = "KB000014",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6114),
+                        InstallDate = new DateOnly(2025, 5, 18),
+                        Location = (byte)1,
+                        Name = "Sleek Frozen Chair",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)1,
+                        Version = new Guid("eb6ce31d-6838-43c9-a3af-a4233e6ec8e5")
+                    },
+                    new
+                    {
+                        Id = new Guid("ec25f324-2d63-4803-b50f-bc31b0e07a06"),
+                        AssetCode = "KB000015",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6134),
+                        InstallDate = new DateOnly(2025, 6, 17),
+                        Location = (byte)0,
+                        Name = "Tasty Soft Tuna",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)0,
+                        Version = new Guid("f63eded8-fa9f-4688-9279-d4e67e3f99f7")
+                    },
+                    new
+                    {
+                        Id = new Guid("6f674137-df7b-44c8-9325-5fd9b24cbcd0"),
+                        AssetCode = "KB000016",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6152),
+                        InstallDate = new DateOnly(2025, 4, 23),
+                        Location = (byte)1,
+                        Name = "Rustic Steel Chair",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)4,
+                        Version = new Guid("2cc6bd5b-ee43-441b-b56b-2fa3c93906dd")
+                    },
+                    new
+                    {
+                        Id = new Guid("e7f43912-7270-4d2c-bdb8-979a43215693"),
+                        AssetCode = "KB000017",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6169),
+                        InstallDate = new DateOnly(2025, 2, 6),
+                        Location = (byte)1,
+                        Name = "Refined Cotton Cheese",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)3,
+                        Version = new Guid("efa0421d-494b-4e3a-8eb2-4d6142ae9fed")
+                    },
+                    new
+                    {
+                        Id = new Guid("d8d21810-de6e-47cc-b42f-440f4bbbd24f"),
+                        AssetCode = "KB000018",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6186),
+                        InstallDate = new DateOnly(2024, 7, 22),
+                        Location = (byte)0,
+                        Name = "Intelligent Cotton Shoes",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)3,
+                        Version = new Guid("a2b491cd-b12c-40f8-b44a-979db4a5dd6c")
+                    },
+                    new
+                    {
+                        Id = new Guid("d9d2b322-06da-44ce-b1a6-c72ecc694cdb"),
+                        AssetCode = "KB000019",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6238),
+                        InstallDate = new DateOnly(2025, 2, 27),
+                        Location = (byte)1,
+                        Name = "Awesome Steel Bacon",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)4,
+                        Version = new Guid("45007e01-c69a-4f29-860d-f713dd715df0")
+                    },
+                    new
+                    {
+                        Id = new Guid("15f1db7f-6fca-4fa6-8793-dad5aa68706c"),
+                        AssetCode = "KB000020",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6257),
+                        InstallDate = new DateOnly(2024, 9, 23),
+                        Location = (byte)2,
+                        Name = "Licensed Cotton Bacon",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)5,
+                        Version = new Guid("8e18d17f-6af2-4380-8c23-f0b9b6d8af87")
+                    },
+                    new
+                    {
+                        Id = new Guid("fb88b0a3-3060-46e0-ac56-5a47c8c7ffe8"),
+                        AssetCode = "KB000021",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6275),
+                        InstallDate = new DateOnly(2025, 6, 2),
+                        Location = (byte)2,
+                        Name = "Rustic Cotton Car",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)5,
+                        Version = new Guid("565bf1fc-5858-4af3-b4da-4dec06cf8930")
+                    },
+                    new
+                    {
+                        Id = new Guid("8f7f7c1f-60bb-48b1-8919-0cc16cf32a0b"),
+                        AssetCode = "KB000022",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6292),
+                        InstallDate = new DateOnly(2024, 8, 11),
+                        Location = (byte)0,
+                        Name = "Small Concrete Towels",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)0,
+                        Version = new Guid("3b8a9183-2738-4ae9-a039-33e9970286b5")
+                    },
+                    new
+                    {
+                        Id = new Guid("ef4eb56f-eed7-4b45-87af-d684bc4d4550"),
+                        AssetCode = "KB000023",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6312),
+                        InstallDate = new DateOnly(2025, 5, 3),
+                        Location = (byte)0,
+                        Name = "Handcrafted Granite Pizza",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)3,
+                        Version = new Guid("37f407bd-4375-49bb-a339-15218a17f5ea")
+                    },
+                    new
+                    {
+                        Id = new Guid("59f24fe2-941c-4151-8584-cf663c62b086"),
+                        AssetCode = "KB000024",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6330),
+                        InstallDate = new DateOnly(2025, 1, 21),
+                        Location = (byte)1,
+                        Name = "Awesome Soft Sausages",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("63d0fcb1-0a57-4e9a-95c3-13eed0939325")
+                    },
+                    new
+                    {
+                        Id = new Guid("615b3ddb-30b4-4390-9059-8ac0c378a566"),
+                        AssetCode = "KB000025",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6347),
+                        InstallDate = new DateOnly(2024, 11, 5),
+                        Location = (byte)2,
+                        Name = "Incredible Granite Sausages",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)1,
+                        Version = new Guid("bd215f45-29d6-4b59-8629-ae6dbd06182a")
+                    },
+                    new
+                    {
+                        Id = new Guid("0801be8a-99df-4ad0-9ce4-e6a787519c11"),
+                        AssetCode = "KB000026",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6395),
+                        InstallDate = new DateOnly(2025, 2, 10),
+                        Location = (byte)2,
+                        Name = "Licensed Wooden Bacon",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)1,
+                        Version = new Guid("eaf58cd2-2ce4-4731-b468-f6b87e38ee05")
+                    },
+                    new
+                    {
+                        Id = new Guid("70257548-0784-4ccb-81df-826d98753dfa"),
+                        AssetCode = "KB000027",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6417),
+                        InstallDate = new DateOnly(2024, 9, 17),
+                        Location = (byte)1,
+                        Name = "Small Granite Table",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)4,
+                        Version = new Guid("bdfaa2b1-c413-45e6-a687-ae69e964a994")
+                    },
+                    new
+                    {
+                        Id = new Guid("de8f6bf8-2674-4f28-aa57-bb8fbfb629da"),
+                        AssetCode = "KB000028",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6436),
+                        InstallDate = new DateOnly(2025, 1, 25),
+                        Location = (byte)1,
+                        Name = "Practical Rubber Ball",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)0,
+                        Version = new Guid("6d3ee82a-b72b-4081-b5a1-cb4bbf889ec4")
+                    },
+                    new
+                    {
+                        Id = new Guid("70506de2-e08f-4fc4-8afb-2fd2f2793430"),
+                        AssetCode = "KB000029",
+                        CategoryId = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6454),
+                        InstallDate = new DateOnly(2025, 6, 20),
+                        Location = (byte)0,
+                        Name = "Small Metal Fish",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)4,
+                        Version = new Guid("9d5ec683-a4e3-43be-aa2e-c6fff3b70b76")
+                    },
+                    new
+                    {
+                        Id = new Guid("63c36d61-93ee-406c-8c25-66054f1a4d71"),
+                        AssetCode = "HP000000",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6474),
+                        InstallDate = new DateOnly(2025, 3, 8),
+                        Location = (byte)2,
+                        Name = "Gorgeous Granite Towels",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)5,
+                        Version = new Guid("7baed9a6-cbdb-4055-99ea-298bf35943a9")
+                    },
+                    new
+                    {
+                        Id = new Guid("b9507a8e-db23-46ba-b53b-3a3e1c2a2396"),
+                        AssetCode = "HP000001",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6494),
+                        InstallDate = new DateOnly(2025, 1, 26),
+                        Location = (byte)0,
+                        Name = "Licensed Soft Towels",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)0,
+                        Version = new Guid("d626ac3a-924f-459e-ba2f-95ca2faac05b")
+                    },
+                    new
+                    {
+                        Id = new Guid("022b3a95-6cd1-447b-a650-670e8d08d6be"),
+                        AssetCode = "HP000002",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6511),
+                        InstallDate = new DateOnly(2025, 6, 16),
+                        Location = (byte)2,
+                        Name = "Ergonomic Concrete Sausages",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)1,
+                        Version = new Guid("79266e36-aa4e-44ef-90b6-2502d896d7b1")
+                    },
+                    new
+                    {
+                        Id = new Guid("a90c35f9-c0e0-4128-96e5-5205c9d37fcc"),
+                        AssetCode = "HP000003",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6528),
+                        InstallDate = new DateOnly(2025, 3, 28),
+                        Location = (byte)2,
+                        Name = "Intelligent Frozen Chips",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)5,
+                        Version = new Guid("ad60dbe8-4c9b-4b8c-b3ea-a98822bc95de")
+                    },
+                    new
+                    {
+                        Id = new Guid("7da79589-474e-4339-87ba-1f12aa270b07"),
+                        AssetCode = "HP000004",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6599),
+                        InstallDate = new DateOnly(2024, 8, 18),
+                        Location = (byte)1,
+                        Name = "Rustic Wooden Bacon",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)4,
+                        Version = new Guid("8dfede6e-927d-45c5-bf77-fc4eb88ad981")
+                    },
+                    new
+                    {
+                        Id = new Guid("ccb7b765-35b2-4c46-9826-e76cb829cbe7"),
+                        AssetCode = "HP000005",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6620),
+                        InstallDate = new DateOnly(2025, 5, 27),
+                        Location = (byte)2,
+                        Name = "Gorgeous Steel Ball",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)4,
+                        Version = new Guid("6abe59b8-4e77-4a2c-9193-40effe4bf4e3")
+                    },
+                    new
+                    {
+                        Id = new Guid("2ae811c3-d8c6-4fc1-8fc9-80ffef2603a5"),
+                        AssetCode = "HP000006",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6640),
+                        InstallDate = new DateOnly(2025, 1, 11),
+                        Location = (byte)1,
+                        Name = "Gorgeous Granite Table",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("d5b11c1a-3cd8-41ec-ad32-e955d0cd5571")
+                    },
+                    new
+                    {
+                        Id = new Guid("93631555-2138-4cc7-9b0e-c686c53453e3"),
+                        AssetCode = "HP000007",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6658),
+                        InstallDate = new DateOnly(2025, 2, 2),
+                        Location = (byte)2,
+                        Name = "Incredible Steel Gloves",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)0,
+                        Version = new Guid("ed6d8bd3-19fc-4e00-9231-debda7f1c3df")
+                    },
+                    new
+                    {
+                        Id = new Guid("65d76fca-2616-4639-9f65-149adb459b73"),
+                        AssetCode = "HP000008",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6675),
+                        InstallDate = new DateOnly(2024, 9, 15),
+                        Location = (byte)2,
+                        Name = "Practical Fresh Soap",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)0,
+                        Version = new Guid("22beec34-e4af-44b1-9d1d-50f9a07496b4")
+                    },
+                    new
+                    {
+                        Id = new Guid("7a220d90-7850-48f3-8e02-48560d841fa9"),
+                        AssetCode = "HP000009",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6696),
+                        InstallDate = new DateOnly(2024, 8, 5),
+                        Location = (byte)2,
+                        Name = "Refined Frozen Ball",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)0,
+                        Version = new Guid("abc3c27e-7740-42af-9041-4dbebcff23e5")
+                    },
+                    new
+                    {
+                        Id = new Guid("1dd80fba-a6ce-4fc5-ba07-64d642fb2861"),
+                        AssetCode = "HP000010",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6714),
+                        InstallDate = new DateOnly(2025, 1, 17),
+                        Location = (byte)1,
+                        Name = "Refined Concrete Chair",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)5,
+                        Version = new Guid("a1e85e35-3a52-44ee-ba2d-d5683c60069a")
+                    },
+                    new
+                    {
+                        Id = new Guid("d0431482-5939-4e0a-9e9c-98b2991d92fb"),
+                        AssetCode = "HP000011",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6765),
+                        InstallDate = new DateOnly(2025, 2, 7),
+                        Location = (byte)1,
+                        Name = "Practical Soft Soap",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)3,
+                        Version = new Guid("a07c8fbd-9625-4169-9bcb-fd2f6ea0b1fa")
+                    },
+                    new
+                    {
+                        Id = new Guid("1e5e9c7f-82a8-4a4b-b645-6795c1369e3d"),
+                        AssetCode = "HP000012",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6785),
+                        InstallDate = new DateOnly(2024, 12, 26),
+                        Location = (byte)0,
+                        Name = "Rustic Cotton Gloves",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)1,
+                        Version = new Guid("4f806e96-d495-42e1-87dd-e3e0f8708c75")
+                    },
+                    new
+                    {
+                        Id = new Guid("3850ea67-407b-4328-8af6-79e82d053eb6"),
+                        AssetCode = "HP000013",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6805),
+                        InstallDate = new DateOnly(2025, 3, 22),
+                        Location = (byte)2,
+                        Name = "Rustic Metal Table",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)0,
+                        Version = new Guid("a0288d4e-093d-4e5e-ad0c-042d259a24c0")
+                    },
+                    new
+                    {
+                        Id = new Guid("5e726dff-cd3b-4d27-8469-a3c01e6ed43e"),
+                        AssetCode = "HP000014",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6824),
+                        InstallDate = new DateOnly(2025, 6, 11),
+                        Location = (byte)2,
+                        Name = "Rustic Metal Shoes",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)1,
+                        Version = new Guid("1bd04452-b72d-4390-99d2-f573b00fc172")
+                    },
+                    new
+                    {
+                        Id = new Guid("599df96f-12c1-4c64-a963-21011b9363da"),
+                        AssetCode = "HP000015",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6842),
+                        InstallDate = new DateOnly(2024, 8, 31),
+                        Location = (byte)0,
+                        Name = "Unbranded Concrete Mouse",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)5,
+                        Version = new Guid("bdbc31a2-a432-4fd0-b4f3-4dc45a632f7c")
+                    },
+                    new
+                    {
+                        Id = new Guid("819a793e-7dec-4cec-a171-f608fa3f8ed3"),
+                        AssetCode = "HP000016",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6859),
+                        InstallDate = new DateOnly(2025, 3, 2),
+                        Location = (byte)1,
+                        Name = "Generic Rubber Ball",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)3,
+                        Version = new Guid("00408e1f-15d1-4cd3-839a-40cf7d02cbcb")
+                    },
+                    new
+                    {
+                        Id = new Guid("60864e04-d67f-4a1f-8900-5e374f85c18c"),
+                        AssetCode = "HP000017",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6878),
+                        InstallDate = new DateOnly(2024, 12, 7),
+                        Location = (byte)2,
+                        Name = "Handcrafted Frozen Tuna",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)1,
+                        Version = new Guid("7a18ce22-7fd0-4ac3-86cf-ee6cea1fd54e")
+                    },
+                    new
+                    {
+                        Id = new Guid("931cfd41-6f65-4d3d-9390-689db7251e17"),
+                        AssetCode = "HP000018",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6895),
+                        InstallDate = new DateOnly(2024, 9, 10),
+                        Location = (byte)0,
+                        Name = "Awesome Granite Pants",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)5,
+                        Version = new Guid("5bec7efa-05d7-4db7-90d2-8a878f472efd")
+                    },
+                    new
+                    {
+                        Id = new Guid("2fec555f-d0a0-49b5-aeeb-280410457909"),
+                        AssetCode = "HP000019",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(6947),
+                        InstallDate = new DateOnly(2025, 5, 12),
+                        Location = (byte)1,
+                        Name = "Tasty Wooden Gloves",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)1,
+                        Version = new Guid("04574e6f-7ba3-496c-beba-8b4878935e18")
+                    },
+                    new
+                    {
+                        Id = new Guid("9dac5a63-8152-4ce7-9105-f735afec2e9a"),
+                        AssetCode = "HP000020",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7083),
+                        InstallDate = new DateOnly(2025, 5, 10),
+                        Location = (byte)0,
+                        Name = "Awesome Concrete Cheese",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)5,
+                        Version = new Guid("13da739d-5938-4095-bdab-f71621327b76")
+                    },
+                    new
+                    {
+                        Id = new Guid("7f83960e-bb62-46d5-b72f-d78102109cd8"),
+                        AssetCode = "HP000021",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7108),
+                        InstallDate = new DateOnly(2024, 11, 12),
+                        Location = (byte)0,
+                        Name = "Awesome Steel Towels",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)0,
+                        Version = new Guid("f5ff71c9-99df-44e2-b527-e6f3bf963fb7")
+                    },
+                    new
+                    {
+                        Id = new Guid("47b32a0e-d70c-4b28-9fbc-346f36ded7fc"),
+                        AssetCode = "HP000022",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7127),
+                        InstallDate = new DateOnly(2025, 2, 1),
+                        Location = (byte)2,
+                        Name = "Intelligent Concrete Sausages",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)1,
+                        Version = new Guid("afbf0fc2-a7ac-4524-bbd0-f136fcdf8547")
+                    },
+                    new
+                    {
+                        Id = new Guid("faa4e5e1-0b2b-4219-832f-bb0763d2bdf0"),
+                        AssetCode = "HP000023",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7145),
+                        InstallDate = new DateOnly(2025, 1, 20),
+                        Location = (byte)0,
+                        Name = "Refined Fresh Mouse",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)3,
+                        Version = new Guid("aa6201cf-d897-4291-9ebf-66d1f0317ebd")
+                    },
+                    new
+                    {
+                        Id = new Guid("a7a513c4-274c-4ded-987e-4e1c3b4e100b"),
+                        AssetCode = "HP000024",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7163),
+                        InstallDate = new DateOnly(2024, 11, 3),
+                        Location = (byte)1,
+                        Name = "Gorgeous Wooden Table",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)1,
+                        Version = new Guid("fd2ae64a-3ec2-451a-8b4b-c51b1a8bf96b")
+                    },
+                    new
+                    {
+                        Id = new Guid("a7d53c7f-9094-4f56-b8f2-782f25847186"),
+                        AssetCode = "HP000025",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7183),
+                        InstallDate = new DateOnly(2025, 5, 31),
+                        Location = (byte)0,
+                        Name = "Rustic Rubber Soap",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("d44066e7-2f84-4b22-be1f-ad92e7d8fbf4")
+                    },
+                    new
+                    {
+                        Id = new Guid("5b5147a3-c377-4c5e-a095-0611ede4accb"),
+                        AssetCode = "HP000026",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7245),
+                        InstallDate = new DateOnly(2025, 2, 9),
+                        Location = (byte)0,
+                        Name = "Refined Metal Car",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)3,
+                        Version = new Guid("8dfaf429-c402-4d3c-872c-6979809094ef")
+                    },
+                    new
+                    {
+                        Id = new Guid("0caf9879-e618-4553-ac59-41e45a41fc70"),
+                        AssetCode = "HP000027",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7266),
+                        InstallDate = new DateOnly(2025, 3, 2),
+                        Location = (byte)2,
+                        Name = "Awesome Wooden Tuna",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)5,
+                        Version = new Guid("2cab9404-b127-455b-9e98-23838238e804")
+                    },
+                    new
+                    {
+                        Id = new Guid("1c8f5bd8-3f31-4e78-bc52-e174042dfd1a"),
+                        AssetCode = "HP000028",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7285),
+                        InstallDate = new DateOnly(2024, 7, 16),
+                        Location = (byte)1,
+                        Name = "Handmade Frozen Towels",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)1,
+                        Version = new Guid("028b86d9-56af-49e1-82c1-43d80ae528e2")
+                    },
+                    new
+                    {
+                        Id = new Guid("3acbcc05-2291-4d22-9f81-02204d88d2df"),
+                        AssetCode = "HP000029",
+                        CategoryId = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7304),
+                        InstallDate = new DateOnly(2025, 2, 16),
+                        Location = (byte)1,
+                        Name = "Practical Soft Fish",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)0,
+                        Version = new Guid("30bc52b7-dc3a-4390-be56-e77c4bd5af1d")
+                    },
+                    new
+                    {
+                        Id = new Guid("7b7c330b-5826-41da-a6d0-b9ee3b0057dc"),
+                        AssetCode = "MC000000",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7329),
+                        InstallDate = new DateOnly(2024, 11, 12),
+                        Location = (byte)0,
+                        Name = "Refined Granite Soap",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("60672150-c599-4ea7-8c88-8e9485756441")
+                    },
+                    new
+                    {
+                        Id = new Guid("77ad5bb4-58be-49e9-8e44-cd05bf991455"),
+                        AssetCode = "MC000001",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7347),
+                        InstallDate = new DateOnly(2024, 8, 2),
+                        Location = (byte)1,
+                        Name = "Awesome Frozen Keyboard",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)0,
+                        Version = new Guid("2d84e770-dc9e-4459-a7ea-15162d693851")
+                    },
+                    new
+                    {
+                        Id = new Guid("f704f9d5-a9b7-4a1e-9ad1-13c82273a162"),
+                        AssetCode = "MC000002",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7365),
+                        InstallDate = new DateOnly(2024, 10, 16),
+                        Location = (byte)0,
+                        Name = "Sleek Granite Sausages",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)0,
+                        Version = new Guid("d4743122-c4e2-476f-a6d9-2020ea34b4d6")
+                    },
+                    new
+                    {
+                        Id = new Guid("412fe128-d327-424d-9de0-f86294dcbadf"),
+                        AssetCode = "MC000003",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7475),
+                        InstallDate = new DateOnly(2024, 7, 29),
+                        Location = (byte)0,
+                        Name = "Awesome Soft Keyboard",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)1,
+                        Version = new Guid("1ca02ec2-293d-4f85-8b43-6c778cb00fc0")
+                    },
+                    new
+                    {
+                        Id = new Guid("7bef865a-7378-495a-9fe6-2c00ab9fecd6"),
+                        AssetCode = "MC000004",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7496),
+                        InstallDate = new DateOnly(2024, 8, 6),
+                        Location = (byte)2,
+                        Name = "Practical Granite Chicken",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)4,
+                        Version = new Guid("ac1ef204-9fbf-40fc-8ca6-d8a189ca2cf4")
+                    },
+                    new
+                    {
+                        Id = new Guid("745b16da-8b9d-448a-974e-637cb4329332"),
+                        AssetCode = "MC000005",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7516),
+                        InstallDate = new DateOnly(2024, 12, 14),
+                        Location = (byte)2,
+                        Name = "Practical Frozen Table",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)5,
+                        Version = new Guid("91e7570a-2ab0-44d6-8011-0d56366333dd")
+                    },
+                    new
+                    {
+                        Id = new Guid("b62fb8a6-709e-4627-82cd-29fb16fd6d6d"),
+                        AssetCode = "MC000006",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7534),
+                        InstallDate = new DateOnly(2025, 4, 12),
+                        Location = (byte)0,
+                        Name = "Rustic Concrete Car",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)3,
+                        Version = new Guid("fd4d888f-63d3-4339-a613-957deb89683a")
+                    },
+                    new
+                    {
+                        Id = new Guid("f1e889ec-288a-496e-9ce4-0935c847a83f"),
+                        AssetCode = "MC000007",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7553),
+                        InstallDate = new DateOnly(2024, 9, 26),
+                        Location = (byte)1,
+                        Name = "Licensed Steel Salad",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)4,
+                        Version = new Guid("8a890a5b-f948-4915-8086-8255fa70502b")
+                    },
+                    new
+                    {
+                        Id = new Guid("1af3fde1-12c4-477b-9cef-c8d9f36600bb"),
+                        AssetCode = "MC000008",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7571),
+                        InstallDate = new DateOnly(2025, 3, 22),
+                        Location = (byte)2,
+                        Name = "Incredible Granite Bacon",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)1,
+                        Version = new Guid("c8698698-2706-42e5-abf3-045f84ec7ab6")
+                    },
+                    new
+                    {
+                        Id = new Guid("801be5e6-84f1-4e6b-ba6b-577a5003f76d"),
+                        AssetCode = "MC000009",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7588),
+                        InstallDate = new DateOnly(2024, 12, 23),
+                        Location = (byte)0,
+                        Name = "Licensed Frozen Sausages",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)4,
+                        Version = new Guid("eb9c01a9-3660-44c7-8d62-7ca49dd7d3d9")
+                    },
+                    new
+                    {
+                        Id = new Guid("bb3abce4-c239-4e6d-bdd5-c8f9eb545f5a"),
+                        AssetCode = "MC000010",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7606),
+                        InstallDate = new DateOnly(2024, 9, 30),
+                        Location = (byte)2,
+                        Name = "Ergonomic Plastic Salad",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)4,
+                        Version = new Guid("dbb745d1-d629-4e82-8749-00056b6c2035")
+                    },
+                    new
+                    {
+                        Id = new Guid("ada8fa45-7570-4d35-8f7f-6533215903d6"),
+                        AssetCode = "MC000011",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7708),
+                        InstallDate = new DateOnly(2024, 11, 25),
+                        Location = (byte)2,
+                        Name = "Intelligent Wooden Towels",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("6d162adf-384d-4945-b355-eac35cd6749b")
+                    },
+                    new
+                    {
+                        Id = new Guid("989ae6c6-decb-45f1-98ff-ac1995c18f50"),
+                        AssetCode = "MC000012",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7729),
+                        InstallDate = new DateOnly(2024, 11, 4),
+                        Location = (byte)0,
+                        Name = "Rustic Rubber Salad",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)4,
+                        Version = new Guid("5a740e3e-ac08-4bf8-ba89-560e6b2e2e92")
+                    },
+                    new
+                    {
+                        Id = new Guid("a4097557-eef6-4378-a338-4da908511615"),
+                        AssetCode = "MC000013",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7747),
+                        InstallDate = new DateOnly(2024, 7, 16),
+                        Location = (byte)0,
+                        Name = "Tasty Plastic Bike",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)3,
+                        Version = new Guid("2f29f70d-466b-4cd2-8218-ad97cb86258a")
+                    },
+                    new
+                    {
+                        Id = new Guid("aea3fbe1-66df-4c48-8a2b-d609380fe6f8"),
+                        AssetCode = "MC000014",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7766),
+                        InstallDate = new DateOnly(2025, 4, 5),
+                        Location = (byte)1,
+                        Name = "Incredible Cotton Keyboard",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)1,
+                        Version = new Guid("185045a9-93ea-4bcc-9c01-94cf1f65a716")
+                    },
+                    new
+                    {
+                        Id = new Guid("6e91d3fe-5da5-439d-876d-e715f2523106"),
+                        AssetCode = "MC000015",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7785),
+                        InstallDate = new DateOnly(2024, 9, 21),
+                        Location = (byte)2,
+                        Name = "Gorgeous Metal Ball",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)3,
+                        Version = new Guid("9d503f7c-d909-4213-b51e-386915510257")
+                    },
+                    new
+                    {
+                        Id = new Guid("8cb6cc1f-9085-42ee-b924-d516b3145797"),
+                        AssetCode = "MC000016",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7802),
+                        InstallDate = new DateOnly(2024, 9, 8),
+                        Location = (byte)1,
+                        Name = "Handmade Wooden Sausages",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)1,
+                        Version = new Guid("029d2024-ec9e-4bf1-b929-b1bc7eed80f5")
+                    },
+                    new
+                    {
+                        Id = new Guid("b322b600-f321-4af1-b7c9-1b8c235cfaf8"),
+                        AssetCode = "MC000017",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7855),
+                        InstallDate = new DateOnly(2024, 7, 31),
+                        Location = (byte)0,
+                        Name = "Practical Soft Sausages",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)3,
+                        Version = new Guid("30526103-7ea9-4f4d-a140-8382271d07e4")
+                    },
+                    new
+                    {
+                        Id = new Guid("162d4c65-7b55-4d34-affd-6fd9a6c90b2f"),
+                        AssetCode = "MC000018",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7874),
+                        InstallDate = new DateOnly(2025, 5, 29),
+                        Location = (byte)2,
+                        Name = "Rustic Wooden Car",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("55edc822-dbf7-4259-9bb9-e226b0b97d59")
+                    },
+                    new
+                    {
+                        Id = new Guid("d614cda0-bcde-4296-a259-47e0d91be6d3"),
+                        AssetCode = "MC000019",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7894),
+                        InstallDate = new DateOnly(2025, 5, 19),
+                        Location = (byte)0,
+                        Name = "Awesome Rubber Table",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)1,
+                        Version = new Guid("7cc5813c-bba4-4ac9-8e21-bf939c7456e2")
+                    },
+                    new
+                    {
+                        Id = new Guid("946c52bf-b7dd-4502-be11-6e16685cf799"),
+                        AssetCode = "MC000020",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7913),
+                        InstallDate = new DateOnly(2024, 10, 10),
+                        Location = (byte)0,
+                        Name = "Sleek Frozen Keyboard",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)0,
+                        Version = new Guid("4fd5a68c-f61a-42b1-91b0-869bb467a375")
+                    },
+                    new
+                    {
+                        Id = new Guid("e41aa749-212e-470e-b13d-5de95ee39daa"),
+                        AssetCode = "MC000021",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7931),
+                        InstallDate = new DateOnly(2025, 5, 13),
+                        Location = (byte)0,
+                        Name = "Sleek Metal Soap",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)4,
+                        Version = new Guid("60380b7b-89a9-4924-b519-f9fb20c536d8")
+                    },
+                    new
+                    {
+                        Id = new Guid("c9577a2c-3a30-4b1f-ae5f-a628b0bc45b2"),
+                        AssetCode = "MC000022",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(7983),
+                        InstallDate = new DateOnly(2025, 4, 5),
+                        Location = (byte)0,
+                        Name = "Incredible Wooden Chair",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("cbf837ed-f34f-4b82-8635-8316a1d28142")
+                    },
+                    new
+                    {
+                        Id = new Guid("0eb228e9-3634-49f3-8183-e8451267f76c"),
+                        AssetCode = "MC000023",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8004),
+                        InstallDate = new DateOnly(2024, 7, 27),
+                        Location = (byte)1,
+                        Name = "Licensed Granite Tuna",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)0,
+                        Version = new Guid("8f9e302c-0566-4ebe-bbe1-9331373cb5ef")
+                    },
+                    new
+                    {
+                        Id = new Guid("97cc8124-4f21-48f5-9643-ebbbe92e694a"),
+                        AssetCode = "MC000024",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8022),
+                        InstallDate = new DateOnly(2024, 9, 24),
+                        Location = (byte)0,
+                        Name = "Licensed Frozen Mouse",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("f6ea632c-713e-48aa-83a2-72d39d5cc283")
+                    },
+                    new
+                    {
+                        Id = new Guid("10eaf653-957e-4780-be3f-c61465afcd1f"),
+                        AssetCode = "MC000025",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8040),
+                        InstallDate = new DateOnly(2025, 4, 28),
+                        Location = (byte)1,
+                        Name = "Sleek Plastic Shoes",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)1,
+                        Version = new Guid("fcfe9d50-3e7a-42e7-b4c3-d18fa82ae796")
+                    },
+                    new
+                    {
+                        Id = new Guid("20bf1a93-6bf3-4b1e-bc3b-a4a03dc4189b"),
+                        AssetCode = "MC000026",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8056),
+                        InstallDate = new DateOnly(2025, 1, 6),
+                        Location = (byte)2,
+                        Name = "Intelligent Rubber Tuna",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)3,
+                        Version = new Guid("e7e6cc8f-fdba-4777-9c32-92ca17b8cafc")
+                    },
+                    new
+                    {
+                        Id = new Guid("9df5cd52-c95c-4513-86f1-b1300c2928a6"),
+                        AssetCode = "MC000027",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8076),
+                        InstallDate = new DateOnly(2024, 10, 19),
+                        Location = (byte)0,
+                        Name = "Practical Frozen Pants",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)5,
+                        Version = new Guid("7edbfd13-2ad7-474c-b29b-48066b04e34e")
+                    },
+                    new
+                    {
+                        Id = new Guid("3d571cca-ff47-4f3f-8a9e-6e66e8c61dfc"),
+                        AssetCode = "MC000028",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8095),
+                        InstallDate = new DateOnly(2025, 7, 6),
+                        Location = (byte)0,
+                        Name = "Rustic Steel Pants",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)5,
+                        Version = new Guid("8897442f-88a6-45d7-933e-c82f4567a63b")
+                    },
+                    new
+                    {
+                        Id = new Guid("5a6731a6-a178-4255-a940-6b7483aa8ae6"),
+                        AssetCode = "MC000029",
+                        CategoryId = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8142),
+                        InstallDate = new DateOnly(2025, 4, 5),
+                        Location = (byte)2,
+                        Name = "Refined Rubber Pizza",
+                        Specification = "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+                        State = (byte)5,
+                        Version = new Guid("92059e23-becf-4d95-bd8d-95d2b2c79228")
+                    },
+                    new
+                    {
+                        Id = new Guid("968963b3-1f5c-47c7-aff0-9f873c586de0"),
+                        AssetCode = "WC000000",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8163),
+                        InstallDate = new DateOnly(2025, 1, 1),
+                        Location = (byte)0,
+                        Name = "Intelligent Soft Shirt",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)0,
+                        Version = new Guid("98ebb737-5f51-48d0-b4dd-13e08e8925fa")
+                    },
+                    new
+                    {
+                        Id = new Guid("c8a14e23-88b1-4f8d-9ef4-45415621b0dd"),
+                        AssetCode = "WC000001",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8185),
+                        InstallDate = new DateOnly(2024, 11, 6),
+                        Location = (byte)2,
+                        Name = "Gorgeous Granite Computer",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)0,
+                        Version = new Guid("bf9128d9-9c36-419b-a576-cf72e3e021f1")
+                    },
+                    new
+                    {
+                        Id = new Guid("03ae4ee2-15bd-46be-944a-e8d26c276e2e"),
+                        AssetCode = "WC000002",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8203),
+                        InstallDate = new DateOnly(2024, 11, 27),
+                        Location = (byte)1,
+                        Name = "Licensed Steel Cheese",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)5,
+                        Version = new Guid("09e777a2-487f-44d5-a137-f3f4e1533ad5")
+                    },
+                    new
+                    {
+                        Id = new Guid("cbfcd82b-1b4f-407b-99cb-3f0f5c553176"),
+                        AssetCode = "WC000003",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8221),
+                        InstallDate = new DateOnly(2025, 2, 9),
+                        Location = (byte)1,
+                        Name = "Intelligent Concrete Cheese",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)3,
+                        Version = new Guid("f543bb68-2c2c-4d9c-a57d-17daaf03b23b")
+                    },
+                    new
+                    {
+                        Id = new Guid("c2ec249d-6094-4905-8682-36fed0a9de62"),
+                        AssetCode = "WC000004",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8239),
+                        InstallDate = new DateOnly(2024, 11, 16),
+                        Location = (byte)1,
+                        Name = "Practical Concrete Tuna",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)3,
+                        Version = new Guid("6193e1b5-8c85-44cf-92c5-ad1367dead1b")
+                    },
+                    new
+                    {
+                        Id = new Guid("79c40122-ff75-479d-be56-8cc842fd7076"),
+                        AssetCode = "WC000005",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8259),
+                        InstallDate = new DateOnly(2024, 12, 2),
+                        Location = (byte)0,
+                        Name = "Unbranded Metal Chips",
+                        Specification = "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+                        State = (byte)3,
+                        Version = new Guid("55b4d935-3084-47b4-9f71-323724a3030e")
+                    },
+                    new
+                    {
+                        Id = new Guid("79660936-aca0-4ba4-a3c0-cf294c270da5"),
+                        AssetCode = "WC000006",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8308),
+                        InstallDate = new DateOnly(2025, 3, 15),
+                        Location = (byte)0,
+                        Name = "Rustic Cotton Bacon",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)3,
+                        Version = new Guid("ee334cfd-bdf7-4942-9ebf-129d5ee015bc")
+                    },
+                    new
+                    {
+                        Id = new Guid("70d6c151-2e59-49ae-9382-5307dc671fc1"),
+                        AssetCode = "WC000007",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8329),
+                        InstallDate = new DateOnly(2024, 9, 27),
+                        Location = (byte)1,
+                        Name = "Incredible Soft Shoes",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)0,
+                        Version = new Guid("fa587709-fad2-4670-995c-3155f4fe1e03")
+                    },
+                    new
+                    {
+                        Id = new Guid("66704f4d-c8c7-4e72-bd59-b3f2fa54c4d9"),
+                        AssetCode = "WC000008",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8348),
+                        InstallDate = new DateOnly(2024, 7, 9),
+                        Location = (byte)2,
+                        Name = "Gorgeous Soft Table",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)5,
+                        Version = new Guid("a54a65ce-4047-4ecf-8eef-ca69f4bc999a")
+                    },
+                    new
+                    {
+                        Id = new Guid("030c51e3-3058-41e8-8213-44ad258026ca"),
+                        AssetCode = "WC000009",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8367),
+                        InstallDate = new DateOnly(2024, 9, 29),
+                        Location = (byte)2,
+                        Name = "Handcrafted Frozen Shirt",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)3,
+                        Version = new Guid("ee5b1cdd-e22e-4c9d-88ea-91bbd47089ac")
+                    },
+                    new
+                    {
+                        Id = new Guid("6f0e8f63-2ad0-4afe-8cde-0aa330a459be"),
+                        AssetCode = "WC000010",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8385),
+                        InstallDate = new DateOnly(2024, 8, 24),
+                        Location = (byte)2,
+                        Name = "Sleek Fresh Bike",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)5,
+                        Version = new Guid("a74e050a-bf0d-4de2-9167-b50b661412c7")
+                    },
+                    new
+                    {
+                        Id = new Guid("8ef03366-1fe9-4729-8e75-04d9cbe5cb5f"),
+                        AssetCode = "WC000011",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8401),
+                        InstallDate = new DateOnly(2024, 8, 19),
+                        Location = (byte)1,
+                        Name = "Small Wooden Pizza",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)4,
+                        Version = new Guid("f780d7ba-e290-4e6e-9efc-9fb2b797ef8d")
+                    },
+                    new
+                    {
+                        Id = new Guid("1d5c1e6e-f337-4fab-a19e-e0c5617ff4bf"),
+                        AssetCode = "WC000012",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8419),
+                        InstallDate = new DateOnly(2025, 1, 29),
+                        Location = (byte)1,
+                        Name = "Gorgeous Granite Bacon",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)3,
+                        Version = new Guid("0599284d-543a-4df6-8370-32abdab77b6b")
+                    },
+                    new
+                    {
+                        Id = new Guid("bf18dd56-b427-45e6-b661-0f13e9f4da61"),
+                        AssetCode = "WC000013",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8439),
+                        InstallDate = new DateOnly(2024, 9, 20),
+                        Location = (byte)2,
+                        Name = "Licensed Steel Shirt",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)3,
+                        Version = new Guid("e42471de-dd8c-48fa-8a99-bebbabbd27b9")
+                    },
+                    new
+                    {
+                        Id = new Guid("9f746d51-fe0b-41b4-8855-f16a158c6d8c"),
+                        AssetCode = "WC000014",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8518),
+                        InstallDate = new DateOnly(2025, 4, 19),
+                        Location = (byte)2,
+                        Name = "Tasty Concrete Soap",
+                        Specification = "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+                        State = (byte)1,
+                        Version = new Guid("966505d3-70e8-4d7e-8f71-dda50c794890")
+                    },
+                    new
+                    {
+                        Id = new Guid("91a99995-75ae-4217-a797-1c929b3f945f"),
+                        AssetCode = "WC000015",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8537),
+                        InstallDate = new DateOnly(2024, 8, 21),
+                        Location = (byte)2,
+                        Name = "Intelligent Frozen Shirt",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)1,
+                        Version = new Guid("79f18a5b-9a1b-4ce2-9fe3-50c2b861a5d5")
+                    },
+                    new
+                    {
+                        Id = new Guid("7a138c02-eb59-4244-a243-720b3eed4dff"),
+                        AssetCode = "WC000016",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8555),
+                        InstallDate = new DateOnly(2025, 5, 2),
+                        Location = (byte)0,
+                        Name = "Ergonomic Plastic Pants",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)1,
+                        Version = new Guid("557145ea-efdd-4cf4-aa49-cb2d9c3e75fd")
+                    },
+                    new
+                    {
+                        Id = new Guid("414c602b-e552-45f7-97ff-899c335e2c03"),
+                        AssetCode = "WC000017",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8574),
+                        InstallDate = new DateOnly(2025, 6, 25),
+                        Location = (byte)0,
+                        Name = "Unbranded Concrete Salad",
+                        Specification = "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+                        State = (byte)0,
+                        Version = new Guid("abd1e158-6996-4681-bc30-d3c0ec5bf6a0")
+                    },
+                    new
+                    {
+                        Id = new Guid("6e99ee6b-66d7-4064-af8a-983a8d34a6a4"),
+                        AssetCode = "WC000018",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8591),
+                        InstallDate = new DateOnly(2024, 9, 1),
+                        Location = (byte)2,
+                        Name = "Handcrafted Concrete Towels",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)5,
+                        Version = new Guid("f3a2c2b4-f565-43ed-912e-757e4a92d36c")
+                    },
+                    new
+                    {
+                        Id = new Guid("d5af9023-3a64-4696-9b6f-40e3eab94c5a"),
+                        AssetCode = "WC000019",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8608),
+                        InstallDate = new DateOnly(2025, 1, 13),
+                        Location = (byte)1,
+                        Name = "Intelligent Plastic Chair",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)4,
+                        Version = new Guid("07a42224-0a8f-49f1-89de-4ee2249c562c")
+                    },
+                    new
+                    {
+                        Id = new Guid("558ee108-5fe7-4374-834f-8c0fe6cd38a0"),
+                        AssetCode = "WC000020",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8626),
+                        InstallDate = new DateOnly(2025, 2, 15),
+                        Location = (byte)2,
+                        Name = "Licensed Rubber Sausages",
+                        Specification = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+                        State = (byte)4,
+                        Version = new Guid("92befb31-170a-4d19-a5f7-05dbfdc95b47")
+                    },
+                    new
+                    {
+                        Id = new Guid("3e3ca879-8ceb-481f-a81e-464683792eb2"),
+                        AssetCode = "WC000021",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8669),
+                        InstallDate = new DateOnly(2025, 6, 12),
+                        Location = (byte)2,
+                        Name = "Sleek Granite Bike",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)5,
+                        Version = new Guid("2712a322-673d-4a00-8a7f-c82bd74d8e85")
+                    },
+                    new
+                    {
+                        Id = new Guid("555c03ec-2c2c-44d4-bbdb-8882f140d861"),
+                        AssetCode = "WC000022",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8689),
+                        InstallDate = new DateOnly(2024, 7, 23),
+                        Location = (byte)0,
+                        Name = "Unbranded Fresh Table",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)0,
+                        Version = new Guid("333b8d5f-e77a-4461-827c-fd34a4221373")
+                    },
+                    new
+                    {
+                        Id = new Guid("f3cb100a-854f-4d69-b009-b828c3029836"),
+                        AssetCode = "WC000023",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8707),
+                        InstallDate = new DateOnly(2025, 2, 14),
+                        Location = (byte)0,
+                        Name = "Tasty Concrete Towels",
+                        Specification = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+                        State = (byte)3,
+                        Version = new Guid("ee4b7c2b-7af2-4e91-ac02-efb9266d68c0")
+                    },
+                    new
+                    {
+                        Id = new Guid("4cbbd9e4-f172-47f4-a604-16d34160bddb"),
+                        AssetCode = "WC000024",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8724),
+                        InstallDate = new DateOnly(2024, 9, 28),
+                        Location = (byte)1,
+                        Name = "Gorgeous Frozen Fish",
+                        Specification = "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+                        State = (byte)3,
+                        Version = new Guid("1906c336-f3ae-4969-9ee0-aa5793398851")
+                    },
+                    new
+                    {
+                        Id = new Guid("57ac4318-fa86-4bf5-b7d8-ae9b5b015363"),
+                        AssetCode = "WC000025",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8745),
+                        InstallDate = new DateOnly(2025, 3, 13),
+                        Location = (byte)2,
+                        Name = "Practical Rubber Shirt",
+                        Specification = "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                        State = (byte)5,
+                        Version = new Guid("c5fe24bc-b697-49b5-b3be-ec2ec82d67ee")
+                    },
+                    new
+                    {
+                        Id = new Guid("eec4fe6f-52bf-43bc-9ebc-ed54518e3641"),
+                        AssetCode = "WC000026",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8762),
+                        InstallDate = new DateOnly(2025, 6, 11),
+                        Location = (byte)2,
+                        Name = "Unbranded Steel Chair",
+                        Specification = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+                        State = (byte)5,
+                        Version = new Guid("de6a641c-7675-4c57-9691-61a3d152b2a7")
+                    },
+                    new
+                    {
+                        Id = new Guid("aed03a82-8f76-40eb-a3c6-f85b5285feec"),
+                        AssetCode = "WC000027",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8779),
+                        InstallDate = new DateOnly(2024, 8, 5),
+                        Location = (byte)2,
+                        Name = "Fantastic Granite Sausages",
+                        Specification = "The Football Is Good For Training And Recreational Purposes",
+                        State = (byte)3,
+                        Version = new Guid("51b6642d-aa59-4036-8dbf-d8d0ee4c6a70")
+                    },
+                    new
+                    {
+                        Id = new Guid("f0959423-ae55-4c64-83a8-441e260c855c"),
+                        AssetCode = "WC000028",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8841),
+                        InstallDate = new DateOnly(2024, 7, 24),
+                        Location = (byte)0,
+                        Name = "Rustic Granite Tuna",
+                        Specification = "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+                        State = (byte)5,
+                        Version = new Guid("f3cf405b-1889-41a8-adac-f7ccdbe2ac3d")
+                    },
+                    new
+                    {
+                        Id = new Guid("142b58d3-44fe-48f0-92a6-154aeebaa06e"),
+                        AssetCode = "WC000029",
+                        CategoryId = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 327, DateTimeKind.Utc).AddTicks(8864),
+                        InstallDate = new DateOnly(2025, 2, 27),
+                        Location = (byte)0,
+                        Name = "Licensed Soft Keyboard",
+                        Specification = "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                        State = (byte)4,
+                        Version = new Guid("2dd5e1cb-531a-46c4-becb-0b308b2e0c9f")
+                    });
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.AssetAggregate.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(7512));
+                b.Property<DateTime>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(7512));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Prefix")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nchar(2)")
-                        .IsFixedLength();
+                b.Property<string>("Prefix")
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .HasColumnType("nchar(2)")
+                    .IsFixedLength();
 
-                    b.Property<DateTime?>("UpdateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(7879));
+                b.Property<DateTime?>("UpdateDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(7879));
 
-                    b.Property<Guid>("Version")
-                        .IsConcurrencyToken()
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("Version")
+                    .IsConcurrencyToken()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                b.HasIndex("Name")
+                    .IsUnique();
 
-                    b.HasIndex("Prefix")
-                        .IsUnique();
+                b.HasIndex("Prefix")
+                    .IsUnique();
 
-                    b.ToTable("Categories");
+                b.ToTable("Categories");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9377),
-                            Name = "Personal Computer",
-                            Prefix = "PC",
-                            Version = new Guid("5168321b-2103-49ed-8ff2-30136f829117")
-                        },
-                        new
-                        {
-                            Id = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9397),
-                            Name = "Laptop",
-                            Prefix = "LT",
-                            Version = new Guid("b3474e13-7575-4ba2-aeb0-c45383bf843b")
-                        },
-                        new
-                        {
-                            Id = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9401),
-                            Name = "Printer",
-                            Prefix = "PR",
-                            Version = new Guid("aa63458f-dc2d-45bf-b718-f0449462cc58")
-                        },
-                        new
-                        {
-                            Id = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9414),
-                            Name = "Bluetooth Mouse",
-                            Prefix = "BM",
-                            Version = new Guid("0933a3b6-bf02-4381-985b-bbc145fe1aab")
-                        },
-                        new
-                        {
-                            Id = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9418),
-                            Name = "Bluetooth Speaker",
-                            Prefix = "BS",
-                            Version = new Guid("7bec5c1c-0de8-42df-bef2-a8cbff96b058")
-                        },
-                        new
-                        {
-                            Id = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9423),
-                            Name = "Monitor",
-                            Prefix = "MN",
-                            Version = new Guid("7089459c-dd81-4ece-928e-2166e23f0bdc")
-                        },
-                        new
-                        {
-                            Id = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9427),
-                            Name = "Keyboard",
-                            Prefix = "KB",
-                            Version = new Guid("37ddc8d1-403a-4f01-a96a-a28170ac1520")
-                        },
-                        new
-                        {
-                            Id = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9433),
-                            Name = "Headphone",
-                            Prefix = "HP",
-                            Version = new Guid("a5cb4fdb-280b-413c-8e49-7e5462e32a56")
-                        },
-                        new
-                        {
-                            Id = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9437),
-                            Name = "Microphone",
-                            Prefix = "MC",
-                            Version = new Guid("b9326ec9-b406-414a-ad5d-e9bae71e6378")
-                        },
-                        new
-                        {
-                            Id = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9441),
-                            Name = "Webcam",
-                            Prefix = "WC",
-                            Version = new Guid("0615b286-18df-49d4-84ef-78a7dad9de77")
-                        });
-                });
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("039c5946-0dc0-4584-9494-8e00213cbff8"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9377),
+                        Name = "Personal Computer",
+                        Prefix = "PC",
+                        Version = new Guid("5168321b-2103-49ed-8ff2-30136f829117")
+                    },
+                    new
+                    {
+                        Id = new Guid("266bd6bc-9231-44a9-b5c2-af567ac3df10"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9397),
+                        Name = "Laptop",
+                        Prefix = "LT",
+                        Version = new Guid("b3474e13-7575-4ba2-aeb0-c45383bf843b")
+                    },
+                    new
+                    {
+                        Id = new Guid("5047d5be-aeee-4072-ae47-b860ce5e0ae5"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9401),
+                        Name = "Printer",
+                        Prefix = "PR",
+                        Version = new Guid("aa63458f-dc2d-45bf-b718-f0449462cc58")
+                    },
+                    new
+                    {
+                        Id = new Guid("c0fadf90-721e-4b55-ac30-3567b63c8b8e"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9414),
+                        Name = "Bluetooth Mouse",
+                        Prefix = "BM",
+                        Version = new Guid("0933a3b6-bf02-4381-985b-bbc145fe1aab")
+                    },
+                    new
+                    {
+                        Id = new Guid("d1b6e7dd-e852-4c62-bee1-92c107d78bd6"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9418),
+                        Name = "Bluetooth Speaker",
+                        Prefix = "BS",
+                        Version = new Guid("7bec5c1c-0de8-42df-bef2-a8cbff96b058")
+                    },
+                    new
+                    {
+                        Id = new Guid("6a5adb7b-94ee-498d-a20f-ec6e3d446df2"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9423),
+                        Name = "Monitor",
+                        Prefix = "MN",
+                        Version = new Guid("7089459c-dd81-4ece-928e-2166e23f0bdc")
+                    },
+                    new
+                    {
+                        Id = new Guid("c568c761-8916-4355-9991-247051cf7ea1"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9427),
+                        Name = "Keyboard",
+                        Prefix = "KB",
+                        Version = new Guid("37ddc8d1-403a-4f01-a96a-a28170ac1520")
+                    },
+                    new
+                    {
+                        Id = new Guid("ef849fb7-10da-42aa-9c57-b07f8f33ee14"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9433),
+                        Name = "Headphone",
+                        Prefix = "HP",
+                        Version = new Guid("a5cb4fdb-280b-413c-8e49-7e5462e32a56")
+                    },
+                    new
+                    {
+                        Id = new Guid("a0c9e8a8-4321-4f74-9c9d-a6a881309dcd"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9437),
+                        Name = "Microphone",
+                        Prefix = "MC",
+                        Version = new Guid("b9326ec9-b406-414a-ad5d-e9bae71e6378")
+                    },
+                    new
+                    {
+                        Id = new Guid("7e9e0aa3-f1d1-46e8-8cf3-27fbeb85ed9c"),
+                        CreatedDate = new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(9441),
+                        Name = "Webcam",
+                        Prefix = "WC",
+                        Version = new Guid("0615b286-18df-49d4-84ef-78a7dad9de77")
+                    });
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.AssignmentAggregate.Assignment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AssetId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid?>("AssetId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateOnly>("AssignedDate")
-                        .HasColumnType("date");
+                b.Property<DateOnly>("AssignedDate")
+                    .HasColumnType("date");
 
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("CreatedBy")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(2627));
+                b.Property<DateTime>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(2627));
 
-                    b.Property<string>("Note")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                b.Property<string>("Note")
+                    .HasMaxLength(1000)
+                    .HasColumnType("nvarchar(1000)");
 
-                    b.Property<Guid>("StaffId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("StaffId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte>("State")
-                        .HasColumnType("tinyint");
+                b.Property<byte>("State")
+                    .HasColumnType("tinyint");
 
-                    b.Property<DateTime?>("UpdateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(4112));
+                b.Property<DateTime?>("UpdateDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 328, DateTimeKind.Utc).AddTicks(4112));
 
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("UpdatedBy")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Version")
-                        .IsConcurrencyToken()
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("Version")
+                    .IsConcurrencyToken()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("AssetId");
+                b.HasIndex("AssetId");
 
-                    b.HasIndex("UpdatedBy");
+                b.HasIndex("UpdatedBy");
 
-                    b.ToTable("Assignments");
-                });
+                b.ToTable("Assignments");
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.IdentityAggregate.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                b.Property<int>("AccessFailedCount")
+                    .HasColumnType("int");
 
-                    b.Property<byte>("AccountStatus")
-                        .HasColumnType("tinyint");
+                b.Property<byte>("AccountStatus")
+                    .HasColumnType("tinyint");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                b.Property<string>("Email")
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar(256)");
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                b.Property<bool>("EmailConfirmed")
+                    .HasColumnType("bit");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                b.Property<bool>("LockoutEnabled")
+                    .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                b.Property<DateTimeOffset?>("LockoutEnd")
+                    .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                b.Property<string>("NormalizedEmail")
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                b.Property<string>("NormalizedUserName")
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("PasswordHash")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("PhoneNumber")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                b.Property<bool>("PhoneNumberConfirmed")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("SecurityStamp")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("StaffId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid?>("StaffId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                b.Property<bool>("TwoFactorEnabled")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                b.Property<string>("UserName")
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar(256)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
+                b.HasIndex("NormalizedEmail")
+                    .HasDatabaseName("EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                b.HasIndex("NormalizedUserName")
+                    .IsUnique()
+                    .HasDatabaseName("UserNameIndex")
+                    .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("StaffId");
+                b.HasIndex("StaffId");
 
-                    b.HasIndex("UserName")
-                        .IsUnique()
-                        .HasFilter("[UserName] IS NOT NULL");
+                b.HasIndex("UserName")
+                    .IsUnique()
+                    .HasFilter("[UserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
-                });
+                b.ToTable("AspNetUsers", (string)null);
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.IdentityAggregate.Staff", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 330, DateTimeKind.Utc).AddTicks(1330));
+                b.Property<DateTime>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 330, DateTimeKind.Utc).AddTicks(1330));
 
-                    b.Property<DateOnly>("Dob")
-                        .HasColumnType("date");
+                b.Property<DateOnly>("Dob")
+                    .HasColumnType("date");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                b.Property<string>("FirstName")
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .HasColumnType("nvarchar(20)");
 
-                    b.Property<byte>("Gender")
-                        .HasColumnType("tinyint");
+                b.Property<byte>("Gender")
+                    .HasColumnType("tinyint");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsDeleted")
+                    .HasColumnType("bit");
 
-                    b.Property<DateOnly>("JoinedDate")
-                        .HasColumnType("date");
+                b.Property<DateOnly>("JoinedDate")
+                    .HasColumnType("date");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                b.Property<string>("LastName")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnType("nvarchar(50)");
 
-                    b.Property<byte>("Location")
-                        .HasColumnType("tinyint");
+                b.Property<byte>("Location")
+                    .HasColumnType("tinyint");
 
-                    b.Property<byte>("RoleType")
-                        .HasColumnType("tinyint");
+                b.Property<byte>("RoleType")
+                    .HasColumnType("tinyint");
 
-                    b.Property<string>("StaffCode")
-                        .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("nchar(6)")
-                        .IsFixedLength();
+                b.Property<string>("StaffCode")
+                    .IsRequired()
+                    .HasMaxLength(6)
+                    .HasColumnType("nchar(6)")
+                    .IsFixedLength();
 
-                    b.Property<DateTime?>("UpdateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 330, DateTimeKind.Utc).AddTicks(2320));
+                b.Property<DateTime?>("UpdateDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 330, DateTimeKind.Utc).AddTicks(2320));
 
-                    b.Property<Guid>("Version")
-                        .IsConcurrencyToken()
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("Version")
+                    .IsConcurrencyToken()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("StaffCode")
-                        .IsUnique();
+                b.HasIndex("StaffCode")
+                    .IsUnique();
 
-                    b.ToTable("Staffs");
-                });
+                b.ToTable("Staffs");
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.ReturningRequestAggregate.ReturningRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AcceptBy")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid?>("AcceptBy")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AssignmentId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("AssignmentId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("CreatedBy")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 329, DateTimeKind.Utc).AddTicks(5631));
+                b.Property<DateTime>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 329, DateTimeKind.Utc).AddTicks(5631));
 
-                    b.Property<DateOnly?>("ReturnedDate")
-                        .HasColumnType("date");
+                b.Property<DateOnly?>("ReturnedDate")
+                    .HasColumnType("date");
 
-                    b.Property<byte>("State")
-                        .HasColumnType("tinyint");
+                b.Property<byte>("State")
+                    .HasColumnType("tinyint");
 
-                    b.Property<DateTime?>("UpdateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 329, DateTimeKind.Utc).AddTicks(6867));
+                b.Property<DateTime?>("UpdateDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime2")
+                    .HasDefaultValue(new DateTime(2024, 7, 7, 10, 23, 21, 329, DateTimeKind.Utc).AddTicks(6867));
 
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("UpdatedBy")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Version")
-                        .IsConcurrencyToken()
-                        .HasColumnType("uniqueidentifier");
+                b.Property<Guid>("Version")
+                    .IsConcurrencyToken()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("AcceptBy");
+                b.HasIndex("AcceptBy");
 
-                    b.HasIndex("AssignmentId");
+                b.HasIndex("AssignmentId");
 
-                    b.ToTable("ReturningRequests");
-                });
+                b.ToTable("ReturningRequests");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                b.Property<string>("Name")
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                b.Property<string>("NormalizedName")
+                    .HasMaxLength(256)
+                    .HasColumnType("nvarchar(256)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                b.HasIndex("NormalizedName")
+                    .IsUnique()
+                    .HasDatabaseName("RoleNameIndex")
+                    .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles", (string)null);
-                });
+                b.ToTable("AspNetRoles", (string)null);
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimType")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("RoleId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
+                b.ToTable("AspNetRoleClaims", (string)null);
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimType")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("UserId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
+                b.ToTable("AspNetUserClaims", (string)null);
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("LoginProvider")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("ProviderKey")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ProviderDisplayName")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("UserId")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+                b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasIndex("UserId");
+                b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
+                b.ToTable("AspNetUserLogins", (string)null);
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("UserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("RoleId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId", "RoleId");
+                b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
+                b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
+                b.ToTable("AspNetUserRoles", (string)null);
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+            {
+                b.Property<string>("UserId")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("LoginProvider")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                b.Property<string>("Name")
+                    .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Value")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
+                b.ToTable("AspNetUserTokens", (string)null);
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.AssetAggregate.Asset", b =>
-                {
-                    b.HasOne("ASM.Application.Domain.AssetAggregate.Category", "Category")
-                        .WithMany("Assets")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("ASM.Application.Domain.AssetAggregate.Category", "Category")
+                    .WithMany("Assets")
+                    .HasForeignKey("CategoryId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Category");
-                });
+                b.Navigation("Category");
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.AssignmentAggregate.Assignment", b =>
-                {
-                    b.HasOne("ASM.Application.Domain.AssetAggregate.Asset", "Asset")
-                        .WithMany("Assignments")
-                        .HasForeignKey("AssetId")
-                        .OnDelete(DeleteBehavior.SetNull);
+            {
+                b.HasOne("ASM.Application.Domain.AssetAggregate.Asset", "Asset")
+                    .WithMany("Assignments")
+                    .HasForeignKey("AssetId")
+                    .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("ASM.Application.Domain.IdentityAggregate.Staff", "Staff")
-                        .WithMany("Assignments")
-                        .HasForeignKey("UpdatedBy")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                b.HasOne("ASM.Application.Domain.IdentityAggregate.Staff", "Staff")
+                    .WithMany("Assignments")
+                    .HasForeignKey("UpdatedBy")
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .IsRequired();
 
-                    b.Navigation("Asset");
+                b.Navigation("Asset");
 
-                    b.Navigation("Staff");
-                });
+                b.Navigation("Staff");
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.IdentityAggregate.ApplicationUser", b =>
-                {
-                    b.HasOne("ASM.Application.Domain.IdentityAggregate.Staff", "Staff")
-                        .WithMany("Users")
-                        .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade);
+            {
+                b.HasOne("ASM.Application.Domain.IdentityAggregate.Staff", "Staff")
+                    .WithMany("Users")
+                    .HasForeignKey("StaffId")
+                    .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Navigation("Staff");
-                });
+                b.Navigation("Staff");
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.ReturningRequestAggregate.ReturningRequest", b =>
-                {
-                    b.HasOne("ASM.Application.Domain.IdentityAggregate.Staff", "Staff")
-                        .WithMany("ReturningRequests")
-                        .HasForeignKey("AcceptBy")
-                        .OnDelete(DeleteBehavior.Cascade);
+            {
+                b.HasOne("ASM.Application.Domain.IdentityAggregate.Staff", "Staff")
+                    .WithMany("ReturningRequests")
+                    .HasForeignKey("AcceptBy")
+                    .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ASM.Application.Domain.AssignmentAggregate.Assignment", "Assignment")
-                        .WithMany()
-                        .HasForeignKey("AssignmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("ASM.Application.Domain.AssignmentAggregate.Assignment", "Assignment")
+                    .WithMany()
+                    .HasForeignKey("AssignmentId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.Navigation("Assignment");
+                b.Navigation("Assignment");
 
-                    b.Navigation("Staff");
-                });
+                b.Navigation("Staff");
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            {
+                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("ASM.Application.Domain.IdentityAggregate.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            {
+                b.HasOne("ASM.Application.Domain.IdentityAggregate.ApplicationUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("ASM.Application.Domain.IdentityAggregate.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            {
+                b.HasOne("ASM.Application.Domain.IdentityAggregate.ApplicationUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            {
+                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("ASM.Application.Domain.IdentityAggregate.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("ASM.Application.Domain.IdentityAggregate.ApplicationUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("ASM.Application.Domain.IdentityAggregate.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            {
+                b.HasOne("ASM.Application.Domain.IdentityAggregate.ApplicationUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.AssetAggregate.Asset", b =>
-                {
-                    b.Navigation("Assignments");
-                });
+            {
+                b.Navigation("Assignments");
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.AssetAggregate.Category", b =>
-                {
-                    b.Navigation("Assets");
-                });
+            {
+                b.Navigation("Assets");
+            });
 
             modelBuilder.Entity("ASM.Application.Domain.IdentityAggregate.Staff", b =>
-                {
-                    b.Navigation("Assignments");
+            {
+                b.Navigation("Assignments");
 
-                    b.Navigation("ReturningRequests");
+                b.Navigation("ReturningRequests");
 
-                    b.Navigation("Users");
-                });
+                b.Navigation("Users");
+            });
 #pragma warning restore 612, 618
         }
     }

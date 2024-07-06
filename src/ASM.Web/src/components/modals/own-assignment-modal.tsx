@@ -53,7 +53,10 @@ export default function OwnAssignmentModal({
               )
               .with("state", () =>
                 match(value)
-                  .with(State.IsRequested, () => "Is requested")
+                  .with(
+                    State.RequestForReturning,
+                    () => "Request for returning"
+                  )
                   .with(
                     State.WaitingForAcceptance,
                     () => "Waiting for acceptance"

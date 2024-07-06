@@ -34,7 +34,7 @@ export type AssignmentFilter = FilterParams & {
 export enum State {
   WaitingForAcceptance = "WaitingForAcceptance",
   Accepted = "Accepted",
-  IsRequested = "IsRequested",
+  RequestForReturning = "RequestForReturning",
 }
 
 export type UpdateAssignmentRequest = CreateAssignmentRequest & {

@@ -8,6 +8,7 @@ import { OwnAssignmentRowAction } from "@components/tables/own-assignment/row-ac
 import useAcceptAssignment from "@features/assignments/useAcceptAssignment"
 import useDeleteAssignment from "@features/assignments/useDeleteAssignment"
 import useListOwnAssignments from "@features/assignments/useListOwnAssignments"
+import useRequestForReturningAssignment from "@features/assignments/useRequestForReturningAssignment"
 import { Action } from "@libs/constants/action"
 import { DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
@@ -37,6 +38,11 @@ export default function Home() {
     error: acceptAssignmentError,
     isSuccess: acceptAssignmentSuccess,
   } = useAcceptAssignment()
+  const {
+    mutate: requestForReturningAssignment,
+    error: requestForReturningAssignmentError,
+    isSuccess: requestForReturningAssignmentSuccess,
+  } = useRequestForReturningAssignment()
   const {
     mutate: deleteAssignment,
     error: deleteAssignmentError,
@@ -97,23 +103,39 @@ export default function Home() {
         deleteAssignment(id)
       })
       .otherwise(() => {
-        // TODO: Implement request assignment
+        requestForReturningAssignment(id)
       })
 
     setOpenDisableConfirmMod(false)
   }
 
   useEffect(() => {
-    if (acceptAssignmentSuccess || deleteAssignmentSuccess) {
+    if (
+      acceptAssignmentSuccess ||
+      deleteAssignmentSuccess ||
+      requestForReturningAssignmentSuccess
+    ) {
       refetch()
     }
-  }, [acceptAssignmentSuccess, deleteAssignmentSuccess])
+  }, [
+    acceptAssignmentSuccess,
+    deleteAssignmentSuccess,
+    requestForReturningAssignmentSuccess,
+  ])
 
   useEffect(() => {
-    if (acceptAssignmentError || deleteAssignmentError) {
+    if (
+      acceptAssignmentError ||
+      deleteAssignmentError ||
+      requestForReturningAssignmentError
+    ) {
       setOpenErrorModal(true)
     }
-  }, [acceptAssignmentError, deleteAssignmentError])
+  }, [
+    acceptAssignmentError,
+    deleteAssignmentError,
+    requestForReturningAssignmentError,
+  ])
 
   return (
     <>

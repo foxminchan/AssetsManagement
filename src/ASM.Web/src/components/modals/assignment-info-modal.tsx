@@ -48,7 +48,10 @@ export default function AssignmentInfoModal({
               )
               .with("state", () =>
                 match(value)
-                  .with(State.IsRequested, () => "Is Requested")
+                  .with(
+                    State.RequestForReturning,
+                    () => "Request for returning"
+                  )
                   .with(
                     State.WaitingForAcceptance,
                     () => "Waiting For Acceptance"

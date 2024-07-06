@@ -16,7 +16,6 @@ public sealed class ReturningRequest : TrackableEntityBase, IAggregateRoot
     public ReturningRequest(Guid assignmentId)
     {
         State = State.WaitingForReturning;
-        ReturnedDate = null;
         AssignmentId = Guard.Against.Null(assignmentId);
     }
 

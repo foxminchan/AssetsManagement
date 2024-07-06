@@ -31,7 +31,7 @@ public static class ListAssignmentsBuilder
 
             new()
             {
-                State = State.IsRequested,
+                State = State.RequestForReturning,
                 AssignedDate = DateOnly.FromDateTime(DateTime.Now.AddDays(2)),
                 Note = "Note 3",
                 StaffId = Guid.NewGuid(),

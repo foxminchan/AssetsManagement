@@ -15,7 +15,7 @@ public sealed class AssignmentFilterSpec : Specification<Assignment>
         string? search,
         Guid? assetId)
     {
-        if (state.HasValue) Query.Where(x => x.State == state);
+        if (state.HasValue) Query.Where(x => x.State == state && x.State != State.Returned);
 
         if (assignedDate.HasValue) Query.Where(x => x.AssignedDate == assignedDate);
 
@@ -36,7 +36,10 @@ public sealed class AssignmentFilterSpec : Specification<Assignment>
         Guid staffId,
         string? orderBy,
         bool isDescending) =>
-        Query.Where(x => x.StaffId == staffId && x.AssignedDate <= DateOnly.FromDateTime(DateTime.Today))
+        Query.Where(x =>
+                x.StaffId == staffId && 
+                x.AssignedDate <= DateOnly.FromDateTime(DateTime.Today) &&
+                x.State != State.Returned)
             .ApplyOrdering(orderBy, isDescending);
 
     public AssignmentFilterSpec(
@@ -45,5 +48,6 @@ public sealed class AssignmentFilterSpec : Specification<Assignment>
         => Query.Where(x =>
             x.StaffId == staffId &&
             x.Id == assignmentId &&
+            x.State != State.Returned &&
             x.AssignedDate <= DateOnly.FromDateTime(DateTime.Today));
 }

@@ -14,7 +14,7 @@ export default function OwnAssignmentColumns() {
         accessorKey: "assetCode",
         header: "Asset Code",
         enableSorting: true,
-        size: 80,
+        maxSize: 120,
       },
       {
         id: "AssetName",
@@ -22,26 +22,23 @@ export default function OwnAssignmentColumns() {
         header: "Asset Name",
         enableSorting: true,
         minSize: 80,
-        Cell: ({ cell }) => {
-          const cellValue = cell.getValue() as string
-          return cellValue.length > 15
-            ? `${cellValue.substring(0, 15)}...`
-            : cellValue
-        },
+        maxSize: 170,
       },
       {
         id: "Category",
         accessorKey: "category",
         header: "Category",
         enableSorting: true,
-        size: 130,
+        minSize: 80,
+        maxSize: 130,
       },
       {
         id: "AssignedDate",
         accessorKey: "assignedDate",
         header: "Assigned Date",
         enableSorting: true,
-        size: 100,
+        minSize: 100,
+        maxSize: 150,
         Cell: ({ cell }) => {
           return format(cell.getValue() as Date, "dd/MM/yyyy")
         },
@@ -51,11 +48,12 @@ export default function OwnAssignmentColumns() {
         accessorKey: "state",
         header: "State",
         enableSorting: true,
-        maxSize: 152,
+        minSize: 80,
+        maxSize: 120,
         Cell: ({ cell }) => {
           const cellValue = cell.getValue() as string
           const result = match(cellValue)
-            .with(State.IsRequested, () => "Is requested")
+            .with(State.RequestForReturning, () => "Request for returning")
             .with(State.WaitingForAcceptance, () => "Waiting for acceptance")
             .otherwise(() => State.Accepted)
           return result
