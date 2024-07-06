@@ -34,4 +34,10 @@ public sealed class ReturningRequest : TrackableEntityBase, IAggregateRoot
         AcceptBy = Guard.Against.Null(acceptBy);
         RegisterDomainEvent(new ReturningRequestCompletedEvent(AssignmentId));
     }
+
+    public void CancelledReturnedAssignment()
+    {
+        var returningRequestCancelledEvent = new ReturningRequestCancelledEvent(AssignmentId);
+        RegisterDomainEvent(returningRequestCancelledEvent);
+    }
 }
