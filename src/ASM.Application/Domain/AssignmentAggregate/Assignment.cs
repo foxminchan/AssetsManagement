@@ -5,6 +5,7 @@ using ASM.Application.Domain.AssetAggregate;
 using ASM.Application.Domain.AssignmentAggregate.Enums;
 using ASM.Application.Domain.AssignmentAggregate.Events;
 using ASM.Application.Domain.IdentityAggregate;
+using ASM.Application.Domain.ReturningRequestAggregate;
 
 namespace ASM.Application.Domain.AssignmentAggregate;
 
@@ -32,6 +33,7 @@ public sealed class Assignment : TrackableEntityBase, IAggregateRoot
     public Asset? Asset { get; set; }
     public Guid StaffId { get; set; }
     public Staff? Staff { get; set; }
+    public ICollection<ReturningRequest>? ReturningRequests = [];
 
     public void UpdateState(State state) => State = Guard.Against.EnumOutOfRange(state);
 

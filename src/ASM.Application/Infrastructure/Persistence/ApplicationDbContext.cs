@@ -4,6 +4,7 @@ using ASM.Application.Common.SeedWorks;
 using ASM.Application.Domain.AssetAggregate;
 using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.IdentityAggregate;
+using ASM.Application.Domain.ReturningRequestAggregate;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,7 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Asset> Assets => Set<Asset>();
     public DbSet<Assignment> Assignments => Set<Assignment>();
+    public DbSet<ReturningRequest> ReturningRequests => Set<ReturningRequest>();
 
     public IEnumerable<EventBase> GetDomainEvents()
     {

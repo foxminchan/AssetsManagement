@@ -3,6 +3,7 @@ using ASM.Application.Common.SeedWorks;
 using ASM.Application.Domain.AssignmentAggregate;
 using ASM.Application.Domain.IdentityAggregate.Enums;
 using ASM.Application.Domain.IdentityAggregate.Events;
+using ASM.Application.Domain.ReturningRequestAggregate;
 using ASM.Application.Domain.Shared;
 
 namespace ASM.Application.Domain.IdentityAggregate;
@@ -38,6 +39,7 @@ public sealed class Staff : EntityBase, ISoftDelete, IAggregateRoot
     public bool IsDeleted { get; set; }
     public ICollection<ApplicationUser>? Users { get; set; } = [];
     public ICollection<Assignment>? Assignments { get; set; } = [];
+    public ICollection<ReturningRequest>? ReturningRequests { get; set; } = [];
 
     public string FullName => $"{FirstName} {LastName}";
     public string? UserName => Users?.First().UserName;
