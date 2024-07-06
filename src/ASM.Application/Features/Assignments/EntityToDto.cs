@@ -22,7 +22,9 @@ public static class EntityToDto
     public static List<AssignmentDto> ToAssignmentDtos(this IEnumerable<Assignment> assignments, int pageNumber, int pageSize, int total,
         bool isDescending) =>
         assignments.Select((assignment, index)
-            => assignment.ToAssignmentDto(isDescending ? (total - index - (pageNumber - 1) * pageSize) : (index + 1 + (pageNumber - 1) * pageSize))).ToList();
+            => assignment.ToAssignmentDto(isDescending 
+                ? (total - index - (pageNumber - 1) * pageSize) 
+                : (index + 1 + (pageNumber - 1) * pageSize))).ToList();
 
     public static List<AssignmentDto> ToAssignmentDtos(this IEnumerable<Assignment> assignments) =>
         assignments.Select((assignment, index) => assignment.ToAssignmentDto(index + 1)).ToList();
