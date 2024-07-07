@@ -4,25 +4,27 @@ namespace ASM.Application.Domain.IdentityAggregate.Specifications;
 
 public static class StaffSpecExpression
 {
-    public static ISpecificationBuilder<Staff> ApplyOrdering(this ISpecificationBuilder<Staff> builder,
+    public static IOrderedSpecificationBuilder<Staff> ApplyPrimaryOrdering(this ISpecificationBuilder<Staff> builder,
+        Guid? featuredStaffId) => builder.OrderBy(x => x.Id == featuredStaffId ? 0 : 1);
+    public static ISpecificationBuilder<Staff> ApplySecondaryOrdering(this IOrderedSpecificationBuilder<Staff> builder,
         string? orderBy, bool isDescending) =>
         orderBy switch
         {
             nameof(Staff.StaffCode) => isDescending
-                ? builder.OrderByDescending(x => x.StaffCode)
-                : builder.OrderBy(x => x.StaffCode),
+                ? builder.ThenByDescending(x => x.StaffCode)
+                : builder.ThenBy(x => x.StaffCode),
             nameof(Staff.FullName) => isDescending
-                ? builder.OrderByDescending(x => x.FirstName + " " + x.LastName)
-                : builder.OrderBy(x => x.FirstName + " " + x.LastName),
+                ? builder.ThenByDescending(x => x.FirstName + " " + x.LastName)
+                : builder.ThenBy(x => x.FirstName + " " + x.LastName),
             nameof(Staff.JoinedDate) => isDescending
-                ? builder.OrderByDescending(x => x.JoinedDate)
-                : builder.OrderBy(x => x.JoinedDate),
+                ? builder.ThenByDescending(x => x.JoinedDate)
+                : builder.ThenBy(x => x.JoinedDate),
             nameof(Staff.UserName) => isDescending
-                ? builder.OrderByDescending(x => x.Users!.First().UserName)
-                : builder.OrderBy(x => x.Users!.First().UserName),
+                ? builder.ThenByDescending(x => x.Users!.First().UserName)
+                : builder.ThenBy(x => x.Users!.First().UserName),
             _ => isDescending
-                ? builder.OrderByDescending(x => x.RoleType)
-                : builder.OrderBy(x => x.RoleType)
+                ? builder.ThenByDescending(x => x.RoleType)
+                : builder.ThenBy(x => x.RoleType)
         };
 
     public static ISpecificationBuilder<Staff> ApplyPaging(this ISpecificationBuilder<Staff> builder,

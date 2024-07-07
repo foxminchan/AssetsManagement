@@ -50,14 +50,12 @@ public sealed class Asset : EntityBase, IAggregateRoot
         return assetCode;
     }
 
-  
     public void UpdateState(State state) => State = Guard.Against.EnumOutOfRange(state);
     public void Update(string? name, string? specification, DateOnly installedDate, State state)
     {
         Name = Guard.Against.NullOrEmpty(name);
         Specification = specification;
-        InstallDate = Guard.Against.NullOrOutOfRange(installedDate, nameof(installedDate),
-            DateOnly.FromDateTime(DateTime.Now), DateOnly.MaxValue);
+        InstallDate = installedDate;
         State = state;
     }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { AssetState } from "@features/assets/asset.type"
-import useListAsset from "@features/assets/useListAsset"
+import useListAsset from "@features/assets/useListAssets"
 import { createAssignmentSchema } from "@features/assignments/assignment.schema"
 import {
   CreateAssignmentRequest,
@@ -13,7 +13,7 @@ import useListUsers from "@features/users/useListUsers"
 import { RoleType } from "@features/users/user.type"
 import { selectedRowAsset, submitAsset } from "@libs/jotai/assetAtom"
 import {
-  assignmentAtoms,
+  featuredAssignmentAtom,
   selectedRowUser,
   submitUser,
 } from "@libs/jotai/assignmentAtom"
@@ -41,12 +41,12 @@ import { Link, useNavigate, useParams, useSearch } from "@tanstack/react-router"
 import { zodValidator } from "@tanstack/zod-form-adapter"
 import { format } from "date-fns"
 import { useAtom, useSetAtom } from "jotai"
+import { match } from "ts-pattern"
 import { z } from "zod"
 
 import AssetDialog from "../dialogs/asset/asset-dialog"
 import UserDialog from "../dialogs/user/user-dialog"
 import SearchInput from "../fields/search-dialog"
-import { match } from "ts-pattern"
 
 const types = ["All", RoleType.Admin, RoleType.Staff]
 
@@ -57,15 +57,17 @@ const initialAssetChoose = {
 
 type AssignmentProps = {
   initialData?:
-  | CreateAssignmentRequest
-  | ViewUpdateAssignmentRequest
-  | UpdateAssignmentRequest
+    | CreateAssignmentRequest
+    | ViewUpdateAssignmentRequest
+    | UpdateAssignmentRequest
   isEditing?: boolean
 }
 
 export default function AssignmentForm({
   initialData,
 }: Readonly<AssignmentProps>) {
+  const navigate = useNavigate()
+  const setFeaturedAssignmentId = useSetAtom(featuredAssignmentAtom)
   const userParams = useSearch({
     strict: false,
   })
@@ -86,8 +88,6 @@ export default function AssignmentForm({
   const [assetSubmit, setAssetSubmit] = useAtom(submitAsset)
   const [userSubmit, setUserSubmit] = useAtom(submitUser)
 
-  const navigate = useNavigate({ from: "/assignment/new" })
-
   const assetParams = useSearch({
     strict: false,
   })
@@ -98,14 +98,13 @@ export default function AssignmentForm({
     search: (assetParams as { search?: string }).search ?? undefined,
     state: [AssetState.Available],
   }
-  const { data: assetData, isLoading: listAssetLoading, refetch } =
+  const { data: assetData, isLoading: listAssetLoading } =
     useListAsset(queryAssetParameters)
   const [assetChoose, setAssetChoose] = useAtom(selectedRowAsset)
   const [isAssetDialogOpen, setIsAssetDialogOpen] = useState(false)
   const isEditing = !!initialData
   const today = new Date(Date.now())
   const defaultValues = initialData
-  const setAssignmentId = useSetAtom(assignmentAtoms)
   const params = isEditing
     ? useParams({ from: "/_authenticated/assignment/$id" })
     : null
@@ -132,10 +131,10 @@ export default function AssignmentForm({
       value,
     }: {
       value:
-      | CreateAssignmentRequest
-      | ViewUpdateAssignmentRequest
-      | UpdateAssignmentRequest
-      | z.infer<typeof createAssignmentSchema>
+        | CreateAssignmentRequest
+        | ViewUpdateAssignmentRequest
+        | UpdateAssignmentRequest
+        | z.infer<typeof createAssignmentSchema>
     }) => {
       const formattedValue = {
         ...value,
@@ -144,15 +143,13 @@ export default function AssignmentForm({
       let userIdUpdate = ""
       let assetIdUpdate = ""
       if (params) {
-        const { assetName, userName } = formattedValue as unknown as ViewUpdateAssignmentRequest;
+        const { assetName, userName } =
+          formattedValue as unknown as ViewUpdateAssignmentRequest
 
-        assetIdUpdate = assetSubmit?.name !== ""
-          ? assetSubmit?.id ?? ""
-          : assetName;
+        assetIdUpdate =
+          assetSubmit?.name !== "" ? assetSubmit?.id ?? "" : assetName
 
-        userIdUpdate = userSubmit?.name !== ""
-          ? userSubmit?.id ?? ""
-          : userName;
+        userIdUpdate = userSubmit?.name !== "" ? userSubmit?.id ?? "" : userName
       }
 
       if (!isEditing) {
@@ -179,45 +176,41 @@ export default function AssignmentForm({
   })
 
   const clearData = () => {
-    setUserSubmit(initialAssetChoose);
-    setAssetSubmit(initialAssetChoose);
-  };
-  
+    setUserSubmit(initialAssetChoose)
+    setAssetSubmit(initialAssetChoose)
+  }
+
   useEffect(() => {
     if (createAssignmentSuccess) {
-      setAssignmentId(createdAssignmentId)
-      navigate({
-        to: "/assignment",
-      })
-      refetch()
       setAssetSubmit(initialAssetChoose)
+      setFeaturedAssignmentId(createdAssignmentId)
+      navigate({ from: "/assignment/new", to: "/assignment" })
     }
   }, [createAssignmentSuccess])
 
   useEffect(() => {
     if (updateAssignmentSuccess) {
-      params && setAssignmentId(params.id)
+      params && setFeaturedAssignmentId(params.id)
       navigate({ from: "/assignment/$id", to: "/assignment" })
       setAssetSubmit(initialAssetChoose)
-      refetch()
     }
   }, [updateAssignmentSuccess])
 
   const onSubmitValue = (type: string, name: string | undefined) => {
     match({ type, name })
       .with({ type: "Asset", name: name }, () => {
-        setAssetSubmit(assetChoose);
-        setAssetChoose(initialAssetChoose);
-        setFieldValue("assetId", name!);
+        setAssetSubmit(assetChoose)
+        setAssetChoose(initialAssetChoose)
+        setFieldValue("assetId", name!)
       })
       .with({ name: name }, () => {
-        setUserSubmit(userChoose);
-        setUserChooser(initialAssetChoose);
-        setFieldValue("userId", name!);
+        setUserSubmit(userChoose)
+        setUserChooser(initialAssetChoose)
+        setFieldValue("userId", name!)
       })
-    setIsAssetDialogOpen(false);
-    setIsUserDialogOpen(false);
-  };
+    setIsAssetDialogOpen(false)
+    setIsUserDialogOpen(false)
+  }
 
   const getUserValue = (state: { value: any; meta?: FieldMeta }) => {
     if (params && userSubmit?.name !== "") {
@@ -465,7 +458,10 @@ export default function AssignmentForm({
             <UserDialog
               data={[...(userData?.users || [])]}
               isLoading={listLoading}
-              isChoose={userData?.users.find(x => x.userName === initialData?.userId)?.id as string}
+              isChoose={
+                userData?.users.find((x) => x.userName === initialData?.userId)
+                  ?.id as string
+              }
             />
           </DialogContent>
           <DialogActions className="border-t bg-gray-100 p-4">

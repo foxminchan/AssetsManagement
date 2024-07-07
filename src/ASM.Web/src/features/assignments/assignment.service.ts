@@ -26,7 +26,7 @@ class AssignmentService extends HttpService {
     return this.get(`/assignments?${buildQueryString(options)}`)
   }
 
-  getUser(id: string): Promise<Assignment | null> {
+  getAssignment(id: string): Promise<Assignment | null> {
     if (id) return this.get(`/assignments/${id}`)
     else return null as never
   }

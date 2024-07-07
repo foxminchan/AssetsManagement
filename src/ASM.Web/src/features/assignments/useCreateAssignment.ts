@@ -8,6 +8,11 @@ export default function useCreateAssignment() {
   return useMutation<string, AppAxiosError, CreateAssignmentRequest>({
     mutationFn: (data: CreateAssignmentRequest) =>
       assignmentService.createAssignment(data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["assets"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["assignment"] })
+      queryClient.invalidateQueries({ queryKey: ["assignments"] })
+      queryClient.invalidateQueries({ queryKey: ["own-assignment"] })
+      queryClient.invalidateQueries({ queryKey: ["own-assignments"] })
+    },
   })
 }

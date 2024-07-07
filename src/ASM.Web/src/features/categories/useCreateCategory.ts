@@ -9,7 +9,10 @@ export default function useCreateCategory() {
     mutationFn: (data: CreateCategoryRequest) =>
       categoryService.createCategory(data),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["categories"] })
+      queryClient.invalidateQueries({ queryKey: ["assets-by-category"] })
       queryClient.invalidateQueries({ queryKey: ["export-assets-by-category"] })
+      queryClient.invalidateQueries({ queryKey: ["own-assignments"] })
     },
   })
 }

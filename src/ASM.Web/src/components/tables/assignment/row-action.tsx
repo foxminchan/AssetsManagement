@@ -23,7 +23,7 @@ export const AssignmentRowAction: FC<AssignmentRowActionProps> = ({
   id: setId,
 }) => {
   const assignmentData = data as Assignment
-  const navigate = useNavigate({ from: "/assignment/$id" })
+  const navigate = useNavigate({ from: "/assignment" })
   return (
     <>
       <IconButton

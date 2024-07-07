@@ -11,5 +11,5 @@ const initialUserChoose: AssetChoose = {
 }
 
 export const selectedRowAsset = atom<AssetChoose | null>(initialUserChoose)
-export const assetAtom = atom("")
+export const featuredAssetAtom = atom("")
 export const submitAsset = atom<AssetChoose | null>(initialUserChoose)

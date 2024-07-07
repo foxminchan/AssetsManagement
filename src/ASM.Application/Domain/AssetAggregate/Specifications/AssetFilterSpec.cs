@@ -14,19 +14,23 @@ public sealed class AssetFilterSpec : Specification<Asset>
         int pageSize,
         string? orderBy,
         bool isDescending,
-        string? search)
+        string? search,
+        Guid? featuredAssetId)
     {
         Query.Where(x => x.Location == location);
 
-        if (categories?.Length != 0) Query.Where(x => categories!.Contains(x.Category!.Name));
+        if (categories?.Length != 0)
+            Query.Where(x => categories!.Contains(x.Category!.Name) || x.Id == featuredAssetId);
 
-        if (state!.Length != 0) Query.Where(x => state.Contains(x.State));
+        if (state!.Length != 0)
+            Query.Where(x => state.Contains(x.State) || x.Id == featuredAssetId);
 
         if (!string.IsNullOrEmpty(search))
-            Query.Where(x => x.AssetCode!.Contains(search) || x.Name!.Contains(search));
+            Query.Where(x => x.AssetCode!.Contains(search) || x.Name!.Contains(search) || x.Id == featuredAssetId);
 
         Query
-            .ApplyOrdering(orderBy, isDescending)
+            .ApplyPrimaryOrdering(featuredAssetId)
+            .ApplySecondaryOrdering(orderBy, isDescending)
             .ApplyPaging(pageIndex, pageSize);
     }
 

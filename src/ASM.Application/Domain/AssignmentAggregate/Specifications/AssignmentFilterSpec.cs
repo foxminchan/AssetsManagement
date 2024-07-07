@@ -13,22 +13,28 @@ public sealed class AssignmentFilterSpec : Specification<Assignment>
         string? orderBy,
         bool isDescending,
         string? search,
-        Guid? assetId)
+        Guid? assetId,
+        Guid? featuredAssignmentId)
     {
-        if (state.HasValue) Query.Where(x => x.State == state && x.State != State.Returned);
+        if (state.HasValue)
+            Query.Where(x => (x.State == state && x.State != State.Returned) || x.Id == featuredAssignmentId);
 
-        if (assignedDate.HasValue) Query.Where(x => x.AssignedDate == assignedDate);
+        if (assignedDate.HasValue)
+            Query.Where(x => x.AssignedDate == assignedDate || x.Id == featuredAssignmentId);
 
-        if (assetId.HasValue) Query.Where(x => x.AssetId == assetId);
+        if (assetId.HasValue)
+            Query.Where(x => x.AssetId == assetId || x.Id == featuredAssignmentId);
 
         if (!string.IsNullOrWhiteSpace(search))
             Query.Where(x =>
                 x.Asset!.AssetCode!.Contains(search) ||
                 x.Asset.Name!.Contains(search) ||
-                x.Staff!.Users!.First().UserName!.Contains(search));
+                x.Staff!.Users!.First().UserName!.Contains(search) ||
+                x.Id == featuredAssignmentId);
 
         Query
-            .ApplyOrdering(orderBy, isDescending)
+            .ApplyPrimaryOrdering(featuredAssignmentId)
+            .ApplySecondaryOrdering(orderBy, isDescending)
             .ApplyPaging(pageIndex, pageSize);
     }
 
@@ -37,10 +43,11 @@ public sealed class AssignmentFilterSpec : Specification<Assignment>
         string? orderBy,
         bool isDescending) =>
         Query.Where(x =>
-                x.StaffId == staffId && 
+                x.StaffId == staffId &&
                 x.AssignedDate <= DateOnly.FromDateTime(DateTime.Today) &&
                 x.State != State.Returned)
-            .ApplyOrdering(orderBy, isDescending);
+            .ApplyPrimaryOrdering(null)
+            .ApplySecondaryOrdering(orderBy, isDescending);
 
     public AssignmentFilterSpec(
         Guid staffId,

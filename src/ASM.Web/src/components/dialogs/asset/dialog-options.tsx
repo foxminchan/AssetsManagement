@@ -18,7 +18,7 @@ export default function AssetDialogOptions({
   isLoading,
 }: Readonly<AssetTableProps>) {
   const [selectedRowId, setSelectedRowId] = useState(String)
-  
+
   const handleSelectRow = (id: string) => {
     setSelectedRowId(id)
   }

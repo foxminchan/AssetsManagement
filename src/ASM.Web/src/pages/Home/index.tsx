@@ -33,21 +33,14 @@ export default function Home() {
   const [selectedAssignmentId, setSelectedAssignmentId] = useState<string>("")
   const [action, setAction] = useState<string>("")
   const [openDisableConfirmMod, setOpenDisableConfirmMod] = useState(false)
-  const {
-    mutate: acceptAssignment,
-    error: acceptAssignmentError,
-    isSuccess: acceptAssignmentSuccess,
-  } = useAcceptAssignment()
+  const { mutate: acceptAssignment, error: acceptAssignmentError } =
+    useAcceptAssignment()
   const {
     mutate: requestForReturningAssignment,
     error: requestForReturningAssignmentError,
-    isSuccess: requestForReturningAssignmentSuccess,
   } = useRequestForReturningAssignment()
-  const {
-    mutate: deleteAssignment,
-    error: deleteAssignmentError,
-    isSuccess: deleteAssignmentSuccess,
-  } = useDeleteAssignment()
+  const { mutate: deleteAssignment, error: deleteAssignmentError } =
+    useDeleteAssignment()
   const params = useSearch({
     strict: false,
   })
@@ -68,11 +61,8 @@ export default function Home() {
     pageIndex: 1,
     pageSize: DEFAULT_PAGE_SIZE,
   })
-  const {
-    data,
-    isLoading: listLoading,
-    refetch,
-  } = useListOwnAssignments(queryParameters)
+  const { data, isLoading: listLoading } =
+    useListOwnAssignments(queryParameters)
 
   useEffect(() => {
     // Update sorting and pagination based on query parameters
@@ -108,20 +98,6 @@ export default function Home() {
 
     setOpenDisableConfirmMod(false)
   }
-
-  useEffect(() => {
-    if (
-      acceptAssignmentSuccess ||
-      deleteAssignmentSuccess ||
-      requestForReturningAssignmentSuccess
-    ) {
-      refetch()
-    }
-  }, [
-    acceptAssignmentSuccess,
-    deleteAssignmentSuccess,
-    requestForReturningAssignmentSuccess,
-  ])
 
   useEffect(() => {
     if (

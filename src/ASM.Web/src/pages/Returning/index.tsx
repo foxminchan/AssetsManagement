@@ -27,9 +27,12 @@ const states = ["All", ReturningRequestState.Completed, "Waiting for returning"]
 const transformState = (value: string | string[]): string | undefined => {
   return match(value)
     .with(ReturningRequestState.Completed, (v) => v)
-    .with("Waiting for returning", () => ReturningRequestState.WaitingForReturning)
-    .otherwise(() => undefined);
-};
+    .with(
+      "Waiting for returning",
+      () => ReturningRequestState.WaitingForReturning
+    )
+    .otherwise(() => undefined)
+}
 
 export default function ReturningRequests() {
   const router = useRouter()
@@ -81,8 +84,11 @@ export default function ReturningRequests() {
   const [selectedDate, setSelectedDate] = useState<Date>()
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
 
-  const { data, isLoading: listLoading, refetch } =
-    useListReturningRequests(queryParameters)
+  const {
+    data,
+    isLoading: listLoading,
+    refetch,
+  } = useListReturningRequests(queryParameters)
 
   if (
     data &&
@@ -128,7 +134,7 @@ export default function ReturningRequests() {
   }, [params])
 
   useEffect(() => {
-    ; (async () =>
+    ;(async () =>
       await router.navigate({
         search: {
           ...queryParameters,

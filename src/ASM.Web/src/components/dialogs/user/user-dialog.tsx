@@ -8,13 +8,13 @@ import DialogOptions from "./dialog-options"
 type UserTableProps = {
   data: User[]
   isLoading: boolean
-  isChoose?: string 
+  isChoose?: string
 }
 
 export default function UserDialog({
   data,
   isLoading,
-  isChoose
+  isChoose,
 }: Readonly<UserTableProps>) {
   const router = useRouter()
   const params = useSearch({ strict: false })
@@ -27,7 +27,7 @@ export default function UserDialog({
     sorting,
     setSorting,
     isLoading,
-    isChoose
+    isChoose,
   })
 
   useEffect(() => {

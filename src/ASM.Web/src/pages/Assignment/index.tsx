@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react"
-import useRequestForReturningAssignment from "@features/assignments/useRequestForReturningAssignment"
 import DataGrid from "@components/data/data-grid"
 import FilterDate from "@components/fields/date-input"
 import FilterInput from "@components/fields/filter-input"
@@ -10,15 +9,15 @@ import AssignmentColumns from "@components/tables/assignment/columns"
 import { AssignmentRowAction } from "@components/tables/assignment/row-action"
 import { State } from "@features/assignments/assignment.type"
 import useDeleteAssignment from "@features/assignments/useDeleteAssignment"
-import useGetAssignment from "@features/assignments/useGetAssignment"
 import useListAssignments from "@features/assignments/useListAssignments"
+import useRequestForReturningAssignment from "@features/assignments/useRequestForReturningAssignment"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
-import { assignmentAtoms } from "@libs/jotai/assignmentAtom"
+import { featuredAssignmentAtom } from "@libs/jotai/assignmentAtom"
 import { Button } from "@mui/material"
 import { useNavigate, useRouter, useSearch } from "@tanstack/react-router"
 import { format } from "date-fns"
-import { useAtomValue } from "jotai"
+import { useAtom } from "jotai"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
 
 const breadcrumbItems = [
@@ -32,13 +31,10 @@ const states = ["All", State.Accepted, State.WaitingForAcceptance]
 
 export default function Assignments() {
   const navigate = useNavigate({ from: "/assignment" })
+  const [featuredAssignmentId, setFeaturedAssignmentId] = useAtom(
+    featuredAssignmentAtom
+  )
   const router = useRouter()
-  const assignmentId = useAtomValue(assignmentAtoms)
-  const {
-    data: assignment,
-    isLoading: assignmentLoading,
-    refetch: getAssignmentRefetch,
-  } = useGetAssignment(assignmentId)
   const context = useContext(BreadcrumbsContext)
   const [open, setOpen] = useState(false)
   const [selectedAssignmentId, setSelectedAssignmentId] = useState<string>("")
@@ -58,6 +54,8 @@ export default function Assignments() {
         : (params as { state?: State }).state,
     assignedDate: (params as { assignedDate?: Date }).assignedDate ?? undefined,
     search: (params as { search?: string }).search ?? undefined,
+    featuredAssignmentId:
+      featuredAssignmentId.length > 0 ? featuredAssignmentId : undefined,
   }
 
   const [sorting, setSorting] = useState<MRT_SortingState>([
@@ -75,12 +73,7 @@ export default function Assignments() {
   const [openDisableConfirmMod, setOpenDisableConfirmMod] = useState(false)
   const [openReturnConfirmMod, setOpenReturnConfirmMod] = useState(false)
 
-  const {
-    data,
-    isLoading: listLoading,
-    refetch,
-  } = useListAssignments(queryParameters)
-  const [isNewlyCreated, setIsNewlyCreated] = useState(!!assignmentId)
+  const { data, isLoading: listLoading } = useListAssignments(queryParameters)
 
   if (
     data &&
@@ -102,6 +95,7 @@ export default function Assignments() {
   }
 
   const searchOnClick = () => {
+    setFeaturedAssignmentId("")
     resetPagination()
   }
 
@@ -120,24 +114,6 @@ export default function Assignments() {
     setOpenReturnConfirmMod(false)
   }
 
-  const getDisplayedAssignments = () => {
-    if (assignment && queryParameters.pageIndex === 1) {
-      getAssignmentRefetch()
-      refetch()
-      const assignments = data?.assignments || []
-      const filteredAssignments = assignments.filter(
-        (x) => x.id !== assignment.id
-      )
-      return [assignment, ...filteredAssignments]
-    }
-    if (isNewlyCreated) {
-      setIsNewlyCreated(false)
-      setSorting([
-        { id: queryParameters.orderBy, desc: queryParameters.isDescending },
-      ])
-    }
-    return [...(data?.assignments || [])]
-  }
   useEffect(() => {
     sorting[0] = {
       id: queryParameters.orderBy,
@@ -151,7 +127,7 @@ export default function Assignments() {
   }, [params])
 
   useEffect(() => {
-    ;(async () => {
+    ;(async () =>
       await router.navigate({
         search: {
           ...queryParameters,
@@ -165,15 +141,7 @@ export default function Assignments() {
             : undefined,
           search: keyword !== "" ? keyword : undefined,
         },
-      })
-
-      if (isNewlyCreated) {
-        setIsNewlyCreated(false)
-        setSorting([
-          { id: queryParameters.orderBy, desc: queryParameters.isDescending },
-        ])
-      }
-    })()
+      }))()
   }, [pagination, sorting])
 
   useEffect(() => {
@@ -193,14 +161,13 @@ export default function Assignments() {
   }, [])
 
   useEffect(() => {
-    if (deleteAssignmentSuccess || returnAssignmentSuccess) {
-      refetch()
+    if (
+      (deleteAssignmentSuccess || returnAssignmentSuccess) &&
+      selectedAssignmentId == featuredAssignmentId
+    ) {
+      setFeaturedAssignmentId("")
     }
   }, [deleteAssignmentSuccess, returnAssignmentSuccess])
-
-  useEffect(() => {
-    refetch()
-  }, [assignmentId])
 
   return (
     <>
@@ -215,7 +182,10 @@ export default function Assignments() {
                 label="State"
                 multiple={false}
                 selected={selectedState}
-                setSelected={setSelectedState}
+                setSelected={(value) => {
+                  setFeaturedAssignmentId("")
+                  setSelectedState(value as string)
+                }}
               />
             ),
           },
@@ -260,8 +230,8 @@ export default function Assignments() {
         tableProps={{
           tableOptionsProps: {
             columns: AssignmentColumns(),
-            data: getDisplayedAssignments(),
-            isLoading: listLoading || assignmentLoading,
+            data: [...(data?.assignments || [])],
+            isLoading: listLoading,
             pageCount: data?.pagedInfo.totalPages ?? 0,
             setOpen: setOpen,
             setSelectedEntityId: setSelectedAssignmentId,

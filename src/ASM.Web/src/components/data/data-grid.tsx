@@ -1,4 +1,6 @@
 import React from "react"
+import { AccountStatus } from "@/features/auth/auth.type"
+import useGetMe from "@/features/auth/useGetMe"
 import { Grid, TableContainer, Typography } from "@mui/material"
 
 import Table, { TableProps } from "../builders/table"
@@ -16,6 +18,12 @@ type DataGridProps = {
   tableProps: TableProps
 }
 
+const isQA = (claims: { type: string; value: string }[] | undefined): boolean =>
+  !!claims?.some(
+    (claim) => claim.type === "Status" && claim.value === AccountStatus.Active
+  ) &&
+  claims?.some((claim) => claim.type === "UserName" && claim.value === "anhntq")
+
 export default function DataGrid({
   title,
   filterComponents,
@@ -23,6 +31,17 @@ export default function DataGrid({
   buttonComponents,
   tableProps,
 }: Readonly<DataGridProps>) {
+  const { data } = useGetMe()
+
+  if (isQA(data?.claims))
+    return (
+      <main className="flex h-screen flex-col items-center justify-center gap-4 bg-gray-100">
+        <p className="animate-heartbeat text-9xl text-red-500">❤️</p>
+        <p className="!text-red-500">
+          Oops, we encountered an error while handling your cuteness!!!
+        </p>
+      </main>
+    )
   return (
     <>
       <Typography

@@ -9,7 +9,7 @@ import {
 } from "@features/users/user.type"
 import useUpdateUser from "@features/users/useUpdateUser"
 import { genderOptions, roleTypeOptions } from "@libs/constants/options"
-import { userAtoms } from "@libs/jotai/userAtoms"
+import { featuredUserAtom } from "@libs/jotai/userAtom"
 import {
   Button,
   CircularProgress,
@@ -40,9 +40,11 @@ type UserFormProps = {
 }
 
 export default function UserForm({ initialData }: Readonly<UserFormProps>) {
+  const navigate = useNavigate()
   const today = new Date(Date.now())
   const isEditing = !!initialData
-  const setUserId = useSetAtom(userAtoms)
+  const setFeaturedUserId = useSetAtom(featuredUserAtom)
+
   const params = isEditing
     ? useParams({ from: "/_authenticated/user/$id" })
     : null
@@ -67,19 +69,17 @@ export default function UserForm({ initialData }: Readonly<UserFormProps>) {
     isPending: updateUserPending,
   } = useUpdateUser()
 
-  const navigate = useNavigate({ from: "/user/new" })
-
   useEffect(() => {
     if (addUserSuccess) {
-      navigate({ to: "/user" })
-      setUserId(createdUserId)
+      navigate({ from: "/user/new", to: "/user" })
+      setFeaturedUserId(createdUserId)
     }
   }, [addUserSuccess])
 
   useEffect(() => {
     if (updateUserSuccess) {
       navigate({ from: "/user/$id", to: "/user" })
-      params && setUserId(params.id)
+      params && setFeaturedUserId(params.id)
     }
   }, [updateUserSuccess])
 

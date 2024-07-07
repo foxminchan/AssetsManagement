@@ -67,7 +67,7 @@ public sealed class ListAssignmentsHandlerTest
                 repo.ListAsync(It.IsAny<StaffFilterSpec>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(staffList);
 
-        var request = new ListAssignmentsQuery(state, assignedDate, pageIndex, pageSize, orderBy, isDescending, search, null);
+        var request = new ListAssignmentsQuery(state, assignedDate, pageIndex, pageSize, orderBy, isDescending, search, null, null);
 
         // Act
         var result = await _handler.Handle(request, CancellationToken.None);
@@ -105,7 +105,7 @@ public sealed class ListAssignmentsHandlerTest
             .ReturnsAsync([]);
 
         var request = new ListAssignmentsQuery(
-            null, null, 1, 10, null, false, null, null);
+            null, null, 1, 10, null, false, null, null, null);
 
         // Act
         var result = await _handler.Handle(request, CancellationToken.None);

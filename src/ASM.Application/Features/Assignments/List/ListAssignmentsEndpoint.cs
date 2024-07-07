@@ -19,7 +19,8 @@ public sealed record ListAssignmentsRequest(
     string? OrderBy,
     bool IsDescending,
     string? Search,
-    Guid? AssetId);
+    Guid? AssetId,
+    Guid? FeaturedAssignmentId);
 
 public sealed record ListAssignmentsResponse(
     PagedInfo PagedInfo,
@@ -38,8 +39,9 @@ public sealed class ListAssignmentsEndpoint
                     State? state = null,
                     DateOnly? assignedDate = null,
                     string? search = null,
-                    Guid? assetId = null) =>
-                await HandleAsync(new(state, assignedDate, pageIndex, pageSize, orderBy, isDescending, search, assetId),
+                    Guid? assetId = null,
+                    Guid? featuredAssignmentId = null) =>
+                await HandleAsync(new(state, assignedDate, pageIndex, pageSize, orderBy, isDescending, search, assetId, featuredAssignmentId),
                     sender))
             .Produces<Ok<ListAssignmentsResponse>>()
             .WithTags(nameof(Assignment))
@@ -57,7 +59,8 @@ public sealed class ListAssignmentsEndpoint
             request.OrderBy,
             request.IsDescending,
             request.Search,
-            request.AssetId);
+            request.AssetId,
+            request.FeaturedAssignmentId);
 
         var result = await sender.Send(query, cancellationToken);
 

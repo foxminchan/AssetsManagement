@@ -10,7 +10,7 @@ public class UpdateAssignmentHandlerTest
 {
     private readonly Mock<IRepository<Assignment>> _repositoryMock;
     private readonly UpdateAssignmentHandler _handler;
-    
+
     public UpdateAssignmentHandlerTest()
     {
         _repositoryMock = new();

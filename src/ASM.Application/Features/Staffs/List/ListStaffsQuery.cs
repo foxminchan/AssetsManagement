@@ -15,7 +15,8 @@ public sealed record ListStaffsQuery(
     int PageSize,
     string? OrderBy,
     bool IsDescending,
-    string? Search) : IQuery<PagedResult<IEnumerable<Staff>>>;
+    string? Search,
+    Guid? FeaturedStaffId) : IQuery<PagedResult<IEnumerable<Staff>>>;
 
 public sealed class ListStaffHandler(
     IReadRepository<Staff> repository,
@@ -37,7 +38,8 @@ public sealed class ListStaffHandler(
             request.PageSize,
             request.OrderBy,
             request.IsDescending,
-            request.Search);
+            request.Search,
+            request.FeaturedStaffId);
 
         var staffs = await repository.ListAsync(spec, cancellationToken);
 

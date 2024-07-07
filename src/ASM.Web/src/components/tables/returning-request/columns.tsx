@@ -48,7 +48,7 @@ export default function ReturningRequestColumns() {
       },
       {
         id: "AcceptBy",
-        accessorKey: "acceptBy",
+        accessorKey: "acceptedBy",
         header: "Accepted by",
         enableSorting: true,
         minSize: 120,

@@ -13,7 +13,7 @@ type UserRowActionProps = {
 }
 
 export const UserRowAction: FC<UserRowActionProps> = ({ data, setOpen }) => {
-  const navigate = useNavigate({ from: "/user/$id" })
+  const navigate = useNavigate({ from: "/user" })
 
   const userData = data as User
   return (

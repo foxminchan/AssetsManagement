@@ -13,7 +13,7 @@ type AssetRowActionProps = {
 }
 
 export const AssetRowAction: FC<AssetRowActionProps> = ({ data, setOpen }) => {
-  const navigate = useNavigate({ from: "/asset/$id" })
+  const navigate = useNavigate({ from: "/asset" })
   const assetData = data as Asset
 
   return (

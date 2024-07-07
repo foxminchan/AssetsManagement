@@ -4,25 +4,27 @@ namespace ASM.Application.Domain.AssetAggregate.Specifications;
 
 public static class AssetSpecExpression
 {
-    public static ISpecificationBuilder<Asset> ApplyOrdering(this ISpecificationBuilder<Asset> builder,
+    public static IOrderedSpecificationBuilder<Asset> ApplyPrimaryOrdering(this ISpecificationBuilder<Asset> builder,
+        Guid? featureAssetId) => builder.OrderBy(x => x.Id == featureAssetId ? 0 : 1);
+    public static ISpecificationBuilder<Asset> ApplySecondaryOrdering(this IOrderedSpecificationBuilder<Asset> builder,
         string? orderBy, bool isDescending) =>
         orderBy switch
         {
             nameof(Asset.AssetCode) => isDescending
-                ? builder.OrderByDescending(x => x.AssetCode)
-                : builder.OrderBy(x => x.AssetCode),
+                ? builder.ThenByDescending(x => x.AssetCode)
+                : builder.ThenBy(x => x.AssetCode),
             nameof(Asset.Name) => isDescending
-                ? builder.OrderByDescending(x => x.Name)
-                : builder.OrderBy(x => x.Name),
+                ? builder.ThenByDescending(x => x.Name)
+                : builder.ThenBy(x => x.Name),
             nameof(Asset.Category) => isDescending
-                ? builder.OrderByDescending(x => x.Category!.Name)
-                : builder.OrderBy(x => x.Category!.Name),
+                ? builder.ThenByDescending(x => x.Category!.Name)
+                : builder.ThenBy(x => x.Category!.Name),
             nameof(Asset.State) => isDescending
-                ? builder.OrderByDescending(x => x.State)
-                : builder.OrderBy(x => x.State),
+                ? builder.ThenByDescending(x => x.State)
+                : builder.ThenBy(x => x.State),
             _ => isDescending
-                ? builder.OrderByDescending(x => x.AssetCode)
-                : builder.OrderBy(x => x.AssetCode)
+                ? builder.ThenByDescending(x => x.AssetCode)
+                : builder.ThenBy(x => x.AssetCode)
         };
 
     public static ISpecificationBuilder<Asset> ApplyPaging(this ISpecificationBuilder<Asset> builder,

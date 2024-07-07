@@ -1,5 +1,4 @@
 import axiosConfig from "@libs/configs/api.config"
-import { redirect } from "@tanstack/react-router"
 import axios, {
   AxiosInstance,
   AxiosRequestConfig,
@@ -44,13 +43,9 @@ export default class HttpService {
           localStorage.getItem(".AspNetCore.Identity.Token")
         ) {
           localStorage.removeItem(".AspNetCore.Identity.Token")
-          throw redirect({
-            to: "/",
-          })
+          window.location.href = "/"
         } else if (error.response?.status === HttpStatusCode.Forbidden) {
-          throw redirect({
-            to: "/forbidden",
-          })
+          window.location.href = "/forbidden"
         }
         console.error(`${error.response?.data.detail}`)
         return Promise.reject(error)

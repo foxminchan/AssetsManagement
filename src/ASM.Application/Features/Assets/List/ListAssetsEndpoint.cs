@@ -18,7 +18,8 @@ public sealed record ListAssetRequest(
     int PageSize,
     string? OrderBy,
     bool IsDescending,
-    string? Search);
+    string? Search,
+    Guid? FeaturedAssetId);
 
 public sealed record ListAssetResponse(
     PagedInfo PagedInfo,
@@ -35,8 +36,9 @@ public sealed class ListAssetsEndpoint : IEndpoint<Ok<ListAssetResponse>, ListAs
                     int pageSize = 20,
                     string? orderBy = nameof(Asset.AssetCode),
                     bool isDescending = false,
-                    string? search = null) =>
-                await HandleAsync(new(categories, state, pageIndex, pageSize, orderBy, isDescending, search), sender))
+                    string? search = null,
+                    Guid? featuredAssetId = null) =>
+                await HandleAsync(new(categories, state, pageIndex, pageSize, orderBy, isDescending, search, featuredAssetId), sender))
             .Produces<Ok<ListAssetResponse>>()
             .WithTags(nameof(Asset))
             .WithName("List Assets")
@@ -52,7 +54,8 @@ public sealed class ListAssetsEndpoint : IEndpoint<Ok<ListAssetResponse>, ListAs
             request.PageSize,
             request.OrderBy,
             request.IsDescending,
-            request.Search);
+            request.Search,
+            request.FeaturedAssetId);
 
         var result = await sender.Send(query, cancellationToken);
 

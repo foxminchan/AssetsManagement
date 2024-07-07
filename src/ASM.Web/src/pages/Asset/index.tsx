@@ -9,17 +9,16 @@ import AssetColumns from "@components/tables/asset/columns"
 import { AssetRowAction } from "@components/tables/asset/row-action"
 import { AssetState } from "@features/assets/asset.type"
 import useDeleteAsset from "@features/assets/useDeleteAsset"
-import useGetAsset from "@features/assets/useGetAsset"
 import useListAssets from "@features/assets/useListAssets"
 import { Category } from "@features/categories/categories.type"
 import useListCategories from "@features/categories/useListCategories"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
-import { assetAtom } from "@libs/jotai/assetAtom"
+import { featuredAssetAtom } from "@libs/jotai/assetAtom"
 import { Typography } from "@mui/material"
 import Button from "@mui/material/Button"
 import { Link, useNavigate, useRouter, useSearch } from "@tanstack/react-router"
-import { useAtom, useSetAtom } from "jotai"
+import { useAtom } from "jotai"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
 
 const breadcrumbItems = [
@@ -38,7 +37,8 @@ const states = [
 ]
 
 export default function Assets() {
-  const navigate = useNavigate({ from: "/user" })
+  const navigate = useNavigate({ from: "/asset" })
+  const [featuredAssetId, setFeaturedAssetId] = useAtom(featuredAssetAtom)
   const router = useRouter()
   const context = useContext(BreadcrumbsContext)
   const [open, setOpen] = useState(false)
@@ -69,6 +69,7 @@ export default function Assets() {
         ? undefined
         : (params as { categories?: string[] }).categories,
     search: (params as { search?: string }).search ?? undefined,
+    featuredAssetId: featuredAssetId.length > 0 ? featuredAssetId : undefined,
   }
 
   const [sorting, setSorting] = useState<MRT_SortingState>([
@@ -89,11 +90,7 @@ export default function Assets() {
   )
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
 
-  const {
-    data,
-    isLoading: listLoading,
-    refetch,
-  } = useListAssets(queryParameters)
+  const { data, isLoading: listLoading } = useListAssets(queryParameters)
 
   if (
     data &&
@@ -107,10 +104,6 @@ export default function Assets() {
     })
   }
 
-  const [assetId, setAssetId] = useAtom(assetAtom)
-  const { data: newAsset, isLoading: newAssetIsLoading } = useGetAsset(assetId)
-  const setNewAssetId = useSetAtom(assetAtom)
-
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
   const [deleteErrorModalOpen, setDeleteErrorModalOpen] =
     useState<boolean>(false)
@@ -123,7 +116,7 @@ export default function Assets() {
   }
 
   const searchOnClick = () => {
-    setNewAssetId("")
+    setFeaturedAssetId("")
     resetPagination()
   }
 
@@ -191,9 +184,8 @@ export default function Assets() {
   } = useDeleteAsset()
 
   useEffect(() => {
-    if (isDeleteAssetSuccess) {
-      refetch()
-      if (selectedAssetId == assetId) setAssetId("")
+    if (isDeleteAssetSuccess && selectedAssetId == featuredAssetId) {
+      setFeaturedAssetId("")
     } else if (isDeleteAssetError) setDeleteErrorModalOpen(true)
     setDeleteModalOpen(false)
   }, [isDeleteAssetSuccess, isDeleteAssetError])
@@ -212,7 +204,7 @@ export default function Assets() {
                 multiple={true}
                 selected={selectedState}
                 setSelected={(value) => {
-                  setNewAssetId("")
+                  setFeaturedAssetId("")
                   setSelectedState(value as string[])
                 }}
               />
@@ -227,7 +219,7 @@ export default function Assets() {
                 multiple={true}
                 selected={selectedCategories}
                 setSelected={(value) => {
-                  setNewAssetId("")
+                  setFeaturedAssetId("")
                   setSelectedCategories(value as string[])
                 }}
               />
@@ -264,14 +256,8 @@ export default function Assets() {
         tableProps={{
           tableOptionsProps: {
             columns: AssetColumns(),
-            data:
-              newAsset && queryParameters.pageIndex === 1
-                ? [
-                    newAsset,
-                    ...(data?.assets.filter((x) => x.id !== newAsset.id) || []),
-                  ]
-                : [...(data?.assets || [])],
-            isLoading: listLoading || newAssetIsLoading,
+            data: [...(data?.assets || [])],
+            isLoading: listLoading,
             pageCount: data?.pagedInfo.totalPages ?? 0,
             setOpen: setOpen,
             setSelectedEntityId: setSelectedAssetId,

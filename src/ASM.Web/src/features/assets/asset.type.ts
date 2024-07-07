@@ -24,6 +24,7 @@ export type ListAssets = {
 export type AssetFilter = FilterParams & {
   state?: AssetState[]
   categories?: string[]
+  featuredAssetId?: string
 }
 
 // Additional types

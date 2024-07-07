@@ -16,7 +16,8 @@ public sealed record ListAssetsQuery(
     int PageSize,
     string? OrderBy,
     bool IsDescending,
-    string? Search) : IQuery<PagedResult<IEnumerable<Asset>>>;
+    string? Search,
+    Guid? FeaturedAssetId) : IQuery<PagedResult<IEnumerable<Asset>>>;
 
 public sealed class ListAssetsHandler(
     IReadRepository<Asset> repository,
@@ -39,7 +40,8 @@ public sealed class ListAssetsHandler(
             request.PageSize,
             request.OrderBy,
             request.IsDescending,
-            request.Search);
+            request.Search,
+            request.FeaturedAssetId);
 
         var assets = await repository.ListAsync(spec, cancellationToken);
 

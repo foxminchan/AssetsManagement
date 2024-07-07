@@ -25,6 +25,7 @@ export type ListUsers = {
 
 export type UserFilter = FilterParams & {
   roleType?: RoleType
+  featuredStaffId?: string
 }
 export type UpdateUserRequest = CreateUserRequest & {
   id: string

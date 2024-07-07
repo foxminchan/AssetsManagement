@@ -27,6 +27,7 @@ export type ListAssignments = {
 
 export type AssignmentFilter = FilterParams & {
   state?: State
+  featuredAssignmentId?: string
 }
 
 // Additional types

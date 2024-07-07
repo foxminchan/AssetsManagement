@@ -13,17 +13,23 @@ public sealed class StaffFilterSpec : Specification<Staff>
         int pageSize,
         string? orderBy,
         bool isDescending,
-        string? search)
+        string? search,
+        Guid? featuredStaffId)
     {
         Query.Where(x => !x.IsDeleted && x.Location == location);
 
-        if (roleType.HasValue) Query.Where(x => x.RoleType == roleType);
+        if (roleType.HasValue)
+            Query.Where(x => x.RoleType == roleType || x.Id == featuredStaffId);
 
         if (!string.IsNullOrWhiteSpace(search))
-            Query.Where(x => x.StaffCode!.Contains(search) || (x.FirstName + " " + x.LastName).Contains(search));
+            Query.Where(x =>
+                x.StaffCode!.Contains(search) ||
+                (x.FirstName + " " + x.LastName).Contains(search) ||
+                x.Id == featuredStaffId);
 
         Query
-            .ApplyOrdering(orderBy, isDescending)
+            .ApplyPrimaryOrdering(featuredStaffId)
+            .ApplySecondaryOrdering(orderBy, isDescending)
             .ApplyPaging(pageIndex, pageSize);
     }
 

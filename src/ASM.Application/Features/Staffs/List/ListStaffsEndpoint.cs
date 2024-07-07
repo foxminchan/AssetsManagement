@@ -17,7 +17,8 @@ public sealed record ListStaffRequest(
     int PageSize,
     string? OrderBy,
     bool IsDescending,
-    string? Search);
+    string? Search,
+    Guid? FeaturedStaffId);
 
 public sealed record ListStaffResponse(
     PagedInfo PagedInfo,
@@ -33,8 +34,9 @@ public sealed class ListStaffsEndpoint : IEndpoint<Ok<ListStaffResponse>, ListSt
                     string? orderBy = nameof(Staff.StaffCode),
                     bool isDescending = false,
                     RoleType? roleType = null,
-                    string? search = null) =>
-                await HandleAsync(new(roleType, pageIndex, pageSize, orderBy, isDescending, search), sender))
+                    string? search = null,
+                    Guid? featuredStaffId = null) =>
+                await HandleAsync(new(roleType, pageIndex, pageSize, orderBy, isDescending, search, featuredStaffId), sender))
             .Produces<Ok<ListStaffResponse>>()
             .WithTags(nameof(Staff))
             .WithName("List Staffs")
@@ -49,7 +51,8 @@ public sealed class ListStaffsEndpoint : IEndpoint<Ok<ListStaffResponse>, ListSt
             request.PageSize,
             request.OrderBy,
             request.IsDescending,
-            request.Search);
+            request.Search,
+            request.FeaturedStaffId);
 
         var result = await sender.Send(query, cancellationToken);
 

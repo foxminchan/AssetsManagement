@@ -10,7 +10,9 @@ export default function useUpdateUser() {
     mutationFn: (data: UpdateUserRequest) => {
       return userService.updateUser(data)
     },
-    onSettled: async () =>
-      queryClient.invalidateQueries({ queryKey: ["user"] }),
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] })
+      queryClient.invalidateQueries({ queryKey: ["users"] })
+    },
   })
 }

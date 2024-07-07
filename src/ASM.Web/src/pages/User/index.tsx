@@ -9,15 +9,14 @@ import UserColumns from "@components/tables/user/columns"
 import { UserRowAction } from "@components/tables/user/row-action"
 import useListAssignments from "@features/assignments/useListAssignments"
 import useDeleteUser from "@features/users/useDeleteUser"
-import useGetUser from "@features/users/useGetUser"
 import useListUsers from "@features/users/useListUsers"
 import { RoleType } from "@features/users/user.type"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
-import { userAtoms } from "@libs/jotai/userAtoms"
+import { featuredUserAtom } from "@libs/jotai/userAtom"
 import { Button } from "@mui/material"
 import { useNavigate, useRouter, useSearch } from "@tanstack/react-router"
-import { useAtomValue } from "jotai"
+import { useAtom } from "jotai"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
 
 const breadcrumbItems = [
@@ -31,6 +30,7 @@ const states = ["All", RoleType.Admin, RoleType.Staff]
 
 export default function Users() {
   const navigate = useNavigate({ from: "/user" })
+  const [featuredUserId, setFeaturedUserId] = useAtom(featuredUserAtom)
   const router = useRouter()
   const context = useContext(BreadcrumbsContext)
   const [open, setOpen] = useState(false)
@@ -59,8 +59,9 @@ export default function Users() {
   }
 
   useEffect(() => {
-    if (isDeleteUserSuccess) refetch()
-    else if (isDeleteUserError) setDeleteModalOpen(false)
+    if (isDeleteUserSuccess && selectedUserId == featuredUserId) {
+      setFeaturedUserId("")
+    } else if (isDeleteUserError) setDeleteModalOpen(false)
   }, [isDeleteUserSuccess, isDeleteUserError])
 
   const queryParameters = {
@@ -74,6 +75,7 @@ export default function Users() {
         ? undefined
         : (params as { roleType?: RoleType }).roleType,
     search: (params as { search?: string }).search ?? undefined,
+    featuredStaffId: featuredUserId.length > 0 ? featuredUserId : undefined,
   }
 
   const [sorting, setSorting] = useState<MRT_SortingState>([
@@ -88,11 +90,7 @@ export default function Users() {
   )
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
 
-  const {
-    data,
-    isLoading: listLoading,
-    refetch,
-  } = useListUsers(queryParameters)
+  const { data, isLoading: listLoading } = useListUsers(queryParameters)
 
   const { data: assignmentData } = useListAssignments()
   if (
@@ -109,8 +107,6 @@ export default function Users() {
 
   const handleDisableUser = (id: string) =>
     Promise.resolve(deleteUser(id)).then(() => (window.location.href = "/user"))
-  const userId = useAtomValue(userAtoms)
-  const { data: user, isLoading: userLoading } = useGetUser(userId)
 
   const resetPagination = () => {
     setPagination({
@@ -120,6 +116,7 @@ export default function Users() {
   }
 
   const searchOnClick = () => {
+    setFeaturedUserId("")
     resetPagination()
   }
 
@@ -176,7 +173,10 @@ export default function Users() {
                 label="Type"
                 multiple={false}
                 selected={selectedType}
-                setSelected={setSelectedType}
+                setSelected={(value) => {
+                  setFeaturedUserId("")
+                  setSelectedType(value as string)
+                }}
               />
             ),
           },
@@ -210,11 +210,8 @@ export default function Users() {
         tableProps={{
           tableOptionsProps: {
             columns: UserColumns(),
-            data:
-              user && queryParameters.pageIndex === 1
-                ? [user, ...(data?.users.filter((x) => x.id !== user.id) || [])]
-                : [...(data?.users || [])],
-            isLoading: listLoading || userLoading,
+            data: [...(data?.users || [])],
+            isLoading: listLoading,
             pageCount: data?.pagedInfo.totalPages ?? 0,
             setOpen: setOpen,
             setSelectedEntityId: setSelectedUserId,

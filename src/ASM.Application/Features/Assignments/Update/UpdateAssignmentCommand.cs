@@ -12,7 +12,7 @@ public sealed record UpdateAssignmentCommand(
     DateOnly AssignedDate,
     string Note) : ICommand<Result>;
 
-public sealed class UpdateAssignmentHandler(IRepository<Assignment> repository) 
+public sealed class UpdateAssignmentHandler(IRepository<Assignment> repository)
     : ICommandHandler<UpdateAssignmentCommand, Result>
 {
     public async Task<Result> Handle(UpdateAssignmentCommand request, CancellationToken cancellationToken)
@@ -20,7 +20,7 @@ public sealed class UpdateAssignmentHandler(IRepository<Assignment> repository)
         var assignment = await repository.GetByIdAsync(request.Id, cancellationToken);
 
         Guard.Against.NotFound(request.Id, assignment);
-       
+
         if (assignment.AssetId != request.AssetId)
         {
             assignment.UpdateAssetState(request.AssetId, assignment.AssetId);

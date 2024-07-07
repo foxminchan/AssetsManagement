@@ -64,7 +64,7 @@ public class ListAssetsHandlerTests
 
         SetUpHttpContext();
 
-        var query = new ListAssetsQuery(null, state, pageIndex, pageSize, orderBy, isDescending, search);
+        var query = new ListAssetsQuery(null, state, pageIndex, pageSize, orderBy, isDescending, search, null);
 
         _repositoryMock.Setup(r => r.ListAsync(It.IsAny<AssetFilterSpec>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(assets);
@@ -105,7 +105,7 @@ public class ListAssetsHandlerTests
     public async Task GivenQueryRequest_ShouldThrowNullOrEmptyException_WhenLocationClaimIsMissing()
     {
         // Arrange
-        var query = new ListAssetsQuery(null, null, 1, 10, null, false, null);
+        var query = new ListAssetsQuery(null, null, 1, 10, null, false, null, null);
 
         _httpContextAccessorMock.Setup(x => x.HttpContext).Returns(new DefaultHttpContext());
 
@@ -131,7 +131,7 @@ public class ListAssetsHandlerTests
 
         _httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContext);
 
-        var query = new ListAssetsQuery(null, null, 1, 10, null, false, null);
+        var query = new ListAssetsQuery(null, null, 1, 10, null, false, null, null);
 
         // Act
         Func<Task> act = async () => await _handler.Handle(query, CancellationToken.None);

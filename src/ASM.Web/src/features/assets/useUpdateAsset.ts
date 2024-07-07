@@ -10,7 +10,11 @@ export default function useUpdateUser() {
     mutationFn: (data: UpdateAssetRequest) => {
       return userService.updateAsset(data)
     },
-    onSettled: async () =>
-      queryClient.invalidateQueries({ queryKey: ["asset"] }),
+    onSuccess: async () => {
+      queryClient.invalidateQueries({ queryKey: ["assets"] })
+      queryClient.invalidateQueries({ queryKey: ["categories"] })
+      queryClient.invalidateQueries({ queryKey: ["assets-by-category"] })
+      queryClient.invalidateQueries({ queryKey: ["export-assets-by-category"] })
+    },
   })
 }

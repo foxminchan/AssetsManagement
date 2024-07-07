@@ -18,7 +18,7 @@ import {
   createAssetStateOptions,
   updateAssetStateOptions,
 } from "@libs/constants/options"
-import { assetAtom } from "@libs/jotai/assetAtom"
+import { featuredAssetAtom } from "@libs/jotai/assetAtom"
 import CheckRoundedIcon from "@mui/icons-material/CheckRounded"
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded"
 import {
@@ -52,10 +52,10 @@ type AssetFormProps = {
 }
 
 export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
-  const navigate = useNavigate({ from: "/asset/new" })
+  const navigate = useNavigate()
   const today = new Date(Date.now())
   const isUpdating = !!initialData
-  const setNewAssetId = useSetAtom(assetAtom)
+  const setFeaturedAssetId = useSetAtom(featuredAssetAtom)
 
   const compare = (value1: any, value2: any) => {
     if (
@@ -125,12 +125,6 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
 
   useEffect(() => {
     if (createCategoryIsSuccess) {
-      listCategories?.categories.push({
-        id: createdCategoryId,
-        name: getCategoryFieldValue("name"),
-        prefix: getCategoryFieldValue("prefix"),
-      })
-
       setCategoryFieldValue("name", "")
       setCategoryFieldValue("prefix", "")
       setAssetFieldValue("categoryId", createdCategoryId, { touch: true })
@@ -138,7 +132,6 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
     }
 
     if (createCategoryError) {
-      console.log(createCategoryError)
       if (getErrorMessage(createCategoryError, "Name") !== undefined) {
         setShowCategoryNameError(true)
       }
@@ -177,7 +170,6 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
     Field: CategoryField,
     Subscribe: CategorySubscribe,
     handleSubmit: handleCategorySubmit,
-    getFieldValue: getCategoryFieldValue,
     setFieldValue: setCategoryFieldValue,
   } = useForm({
     defaultValues: {
@@ -199,8 +191,8 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
 
   useEffect(() => {
     if (createAssetIsSuccess) {
-      navigate({ to: "/asset" })
-      setNewAssetId(createdAssetId)
+      navigate({ from: "/asset/new", to: "/asset" })
+      setFeaturedAssetId(createdAssetId)
     }
   }, [createAssetIsSuccess])
 
@@ -213,7 +205,7 @@ export default function AssetForm({ initialData }: Readonly<AssetFormProps>) {
   useEffect(() => {
     if (updateAssetIsSuccess) {
       navigate({ from: "/asset/$id", to: "/asset" })
-      params && setNewAssetId(params.id)
+      params && setFeaturedAssetId(params.id)
     }
   }, [updateAssetIsSuccess])
 

@@ -49,12 +49,12 @@ public class ListStaffHandlerTests
     }
 
     [Theory]
-    [InlineData(RoleType.Admin, 1, 20, nameof(Staff.StaffCode), false, null)]
-    [InlineData(RoleType.Admin, 1, 20, nameof(Staff.StaffCode), true, null)]
-    [InlineData(RoleType.Admin, 1, 20, nameof(Staff.StaffCode), false, "Nhan")]
-    [InlineData(null, 1, 20, nameof(Staff.FullName), true, null)]
+    [InlineData(RoleType.Admin, 1, 20, nameof(Staff.StaffCode), false, null, null)]
+    [InlineData(RoleType.Admin, 1, 20, nameof(Staff.StaffCode), true, null, null)]
+    [InlineData(RoleType.Admin, 1, 20, nameof(Staff.StaffCode), false, "Nhan", null)]
+    [InlineData(null, 1, 20, nameof(Staff.FullName), true, null, null)]
     public async Task GivenQueryRequest_ShouldReturnPagedResult_WhenStaffsExist(
-        RoleType? roleType, int pageIndex, int pageSize, string orderBy, bool isDescending, string? search)
+        RoleType? roleType, int pageIndex, int pageSize, string orderBy, bool isDescending, string? search, Guid? featuredStaffId)
     {
         // Arrange
         var staffs = ListStaffsBuilder.WithDefaultValues();
@@ -62,7 +62,7 @@ public class ListStaffHandlerTests
 
         SetUpHttpContext();
 
-        var query = new ListStaffsQuery(roleType, pageIndex, pageSize, orderBy, isDescending, search);
+        var query = new ListStaffsQuery(roleType, pageIndex, pageSize, orderBy, isDescending, search, featuredStaffId);
 
         _repositoryMock.Setup(r => r.ListAsync(It.IsAny<StaffFilterSpec>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(staffs);
@@ -103,7 +103,7 @@ public class ListStaffHandlerTests
     public async Task GivenQueryRequest_ShouldThrowNullOrEmptyException_WhenLocationClaimIsMissing()
     {
         // Arrange
-        var query = new ListStaffsQuery(null, 1, 10, null, false, null);
+        var query = new ListStaffsQuery(null, 1, 10, null, false, null, null);
 
         _httpContextAccessorMock.Setup(x => x.HttpContext).Returns(new DefaultHttpContext());
 
@@ -129,7 +129,7 @@ public class ListStaffHandlerTests
 
         _httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContext);
 
-        var query = new ListStaffsQuery(null, 1, 10, null, false, null);
+        var query = new ListStaffsQuery(null, 1, 10, null, false, null, null);
 
         // Act
         Func<Task> act = async () => await _handler.Handle(query, CancellationToken.None);
