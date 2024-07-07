@@ -23,7 +23,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.Configure<JsonOptions>(
-    options => options.SerializerOptions.Converters.Add(new DateOnlyJsonConverter()));
+    options =>
+    {
+        options.SerializerOptions.Converters.Add(new DateOnlyJsonConverter());
+        options.SerializerOptions.Converters.Add(new StringTrimmerJsonConverter());
+    });
 
 builder.Services.AddExceptionHandler<ExceptionHandler>();
 builder.Services.AddProblemDetails();
