@@ -1,15 +1,15 @@
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import Columns from "@components/tables/user-content/columns"
 import { User } from "@features/users/user.type"
 import { MRT_SortingState, useMaterialReactTable } from "material-react-table"
-
-import { CellAction } from "@/components/tables/user-content/row-action"
+import { CellAction } from "@components/tables/user-content/row-action"
 
 type UserTableProps = {
   data: User[]
   sorting: MRT_SortingState
   setSorting: Dispatch<SetStateAction<MRT_SortingState>>
   isLoading: boolean
+  isChoose?: string 
 }
 
 export default function DialogOptions({
@@ -17,11 +17,17 @@ export default function DialogOptions({
   sorting,
   setSorting,
   isLoading,
+  isChoose
 }: Readonly<UserTableProps>) {
   const [selectedRowId, setSelectedRowId] = useState(String)
   const handleSelectRow = (id: string) => {
     setSelectedRowId(id)
   }
+
+  useEffect(() => {
+    setSelectedRowId(isChoose as string);
+  }, [isChoose]);
+
   return useMaterialReactTable({
     renderRowActions: ({ row }) => [
       <CellAction

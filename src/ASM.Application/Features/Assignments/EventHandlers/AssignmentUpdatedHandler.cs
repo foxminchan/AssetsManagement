@@ -17,7 +17,7 @@ public class AssignmentUpdatedHandler(IRepository<Asset> repository)
         if (newAsset is not null && oldAsset is not null)
         {
             oldAsset.UpdateState(State.Available);
-            newAsset.UpdateState(State.Available);
+            newAsset.UpdateState(State.Assigned);
 
             await repository.SaveChangesAsync(cancellationToken);
         }

@@ -46,6 +46,7 @@ import { z } from "zod"
 import AssetDialog from "../dialogs/asset/asset-dialog"
 import UserDialog from "../dialogs/user/user-dialog"
 import SearchInput from "../fields/search-dialog"
+import { match } from "ts-pattern"
 
 const types = ["All", RoleType.Admin, RoleType.Staff]
 
@@ -56,9 +57,9 @@ const initialAssetChoose = {
 
 type AssignmentProps = {
   initialData?:
-    | CreateAssignmentRequest
-    | ViewUpdateAssignmentRequest
-    | UpdateAssignmentRequest
+  | CreateAssignmentRequest
+  | ViewUpdateAssignmentRequest
+  | UpdateAssignmentRequest
   isEditing?: boolean
 }
 
@@ -69,7 +70,7 @@ export default function AssignmentForm({
     strict: false,
   })
   const queryUserParameters = {
-    orderBy: (userParams as { orderBy?: string }).orderBy ?? "staffCode",
+    orderBy: (userParams as { orderBy?: string }).orderBy ?? "StaffCode",
     isDescending:
       (userParams as { isDescending?: boolean }).isDescending ?? false,
     RoleType:
@@ -97,7 +98,7 @@ export default function AssignmentForm({
     search: (assetParams as { search?: string }).search ?? undefined,
     state: [AssetState.Available],
   }
-  const { data: assetData, isLoading: listAssetLoading } =
+  const { data: assetData, isLoading: listAssetLoading, refetch } =
     useListAsset(queryAssetParameters)
   const [assetChoose, setAssetChoose] = useAtom(selectedRowAsset)
   const [isAssetDialogOpen, setIsAssetDialogOpen] = useState(false)
@@ -131,10 +132,10 @@ export default function AssignmentForm({
       value,
     }: {
       value:
-        | CreateAssignmentRequest
-        | ViewUpdateAssignmentRequest
-        | UpdateAssignmentRequest
-        | z.infer<typeof createAssignmentSchema>
+      | CreateAssignmentRequest
+      | ViewUpdateAssignmentRequest
+      | UpdateAssignmentRequest
+      | z.infer<typeof createAssignmentSchema>
     }) => {
       const formattedValue = {
         ...value,
@@ -143,21 +144,15 @@ export default function AssignmentForm({
       let userIdUpdate = ""
       let assetIdUpdate = ""
       if (params) {
-        if (assetSubmit?.name !== "") {
-          assetIdUpdate = assetSubmit?.id ?? ""
-        } else {
-          assetIdUpdate = (
-            formattedValue as unknown as ViewUpdateAssignmentRequest
-          ).assetName
-        }
+        const { assetName, userName } = formattedValue as unknown as ViewUpdateAssignmentRequest;
 
-        if (userSubmit?.name !== "") {
-          userIdUpdate = userSubmit?.id ?? ""
-        } else {
-          userIdUpdate = (
-            formattedValue as unknown as ViewUpdateAssignmentRequest
-          ).userName
-        }
+        assetIdUpdate = assetSubmit?.name !== ""
+          ? assetSubmit?.id ?? ""
+          : assetName;
+
+        userIdUpdate = userSubmit?.name !== ""
+          ? userSubmit?.id ?? ""
+          : userName;
       }
 
       if (!isEditing) {
@@ -183,12 +178,19 @@ export default function AssignmentForm({
     },
   })
 
+  const clearData = () => {
+    setUserSubmit(initialAssetChoose);
+    setAssetSubmit(initialAssetChoose);
+  };
+  
   useEffect(() => {
     if (createAssignmentSuccess) {
       setAssignmentId(createdAssignmentId)
       navigate({
         to: "/assignment",
       })
+      refetch()
+      setAssetSubmit(initialAssetChoose)
     }
   }, [createAssignmentSuccess])
 
@@ -196,42 +198,43 @@ export default function AssignmentForm({
     if (updateAssignmentSuccess) {
       params && setAssignmentId(params.id)
       navigate({ from: "/assignment/$id", to: "/assignment" })
+      setAssetSubmit(initialAssetChoose)
+      refetch()
     }
   }, [updateAssignmentSuccess])
 
   const onSubmitValue = (type: string, name: string | undefined) => {
-    if (type === "Asset" && name !== undefined) {
-      setAssetSubmit(assetChoose)
-      setAssetChoose(initialAssetChoose)
-      setFieldValue("assetId", name)
-    } else if (name !== undefined) {
-      setUserSubmit(userChoose)
-      setUserChooser(initialAssetChoose)
-      setFieldValue("userId", name)
-    }
-    setIsAssetDialogOpen(false)
-    setIsUserDialogOpen(false)
-  }
+    match({ type, name })
+      .with({ type: "Asset", name: name }, () => {
+        setAssetSubmit(assetChoose);
+        setAssetChoose(initialAssetChoose);
+        setFieldValue("assetId", name!);
+      })
+      .with({ name: name }, () => {
+        setUserSubmit(userChoose);
+        setUserChooser(initialAssetChoose);
+        setFieldValue("userId", name!);
+      })
+    setIsAssetDialogOpen(false);
+    setIsUserDialogOpen(false);
+  };
 
   const getUserValue = (state: { value: any; meta?: FieldMeta }) => {
-    if (params && userSubmit?.name !== "") {
-      return userSubmit?.name
-    } else if (params && userSubmit?.name === "") {
-      return state.value
-    } else {
-      return state.value
+    if (params) {
+      return match( userSubmit?.name )
+        .with("", () => userSubmit!.name)
+        .otherwise(() => state.value);
+    }
+  };
+
+  const getAssetValue = (state: { value: any; meta?: FieldMeta }) => {
+    if (params) {
+      return match( assetSubmit?.name )
+        .with("", () => assetSubmit!.name)
+        .otherwise(() => state.value);
     }
   }
 
-  const getAssetValue = (state: { value: any; meta?: FieldMeta }) => {
-    if (params && assetSubmit?.name !== "") {
-      return assetSubmit?.name
-    } else if (params && assetSubmit?.name === "") {
-      return state.value
-    } else {
-      return state.value
-    }
-  }
   return (
     <form
       onSubmit={(e) => {
@@ -405,6 +408,7 @@ export default function AssignmentForm({
             id="btn-edit-userc-close"
             variant="outlined"
             className="!border-black-400 !text-gray-400"
+            onClick={clearData}
           >
             Close
           </Button>
@@ -458,6 +462,7 @@ export default function AssignmentForm({
             <UserDialog
               data={[...(userData?.users || [])]}
               isLoading={listLoading}
+              isChoose={userData?.users.find(x => x.userName === initialData?.userId)?.id as string}
             />
           </DialogContent>
           <DialogActions className="border-t bg-gray-100 p-4">
