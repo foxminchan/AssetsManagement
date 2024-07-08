@@ -2,7 +2,6 @@
 using ASM.Application.Domain.AssetAggregate;
 using ASM.Application.Domain.AssetAggregate.Enums;
 using ASM.Application.Domain.AssignmentAggregate.Events;
-using ASM.Application.Infrastructure.Persistence;
 using MediatR;
 
 namespace ASM.Application.Features.Assignments.EventHandlers;

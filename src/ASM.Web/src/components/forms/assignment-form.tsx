@@ -220,18 +220,21 @@ export default function AssignmentForm({
   };
 
   const getUserValue = (state: { value: any; meta?: FieldMeta }) => {
-    if (params) {
-      return match( userSubmit?.name )
-        .with("", () => userSubmit!.name)
-        .otherwise(() => state.value);
+    if (params && userSubmit?.name !== "") {
+      return userSubmit?.name
+    } else if (params && userSubmit?.name === "") {
+      return state.value
+    } else {
+      return state.value
     }
-  };
-
+  }
   const getAssetValue = (state: { value: any; meta?: FieldMeta }) => {
-    if (params) {
-      return match( assetSubmit?.name )
-        .with("", () => assetSubmit!.name)
-        .otherwise(() => state.value);
+    if (params && assetSubmit?.name !== "") {
+      return assetSubmit?.name
+    } else if (params && assetSubmit?.name === "") {
+      return state.value
+    } else {
+      return state.value
     }
   }
 

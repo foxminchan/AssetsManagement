@@ -16,6 +16,10 @@ class ReturningRequestService extends HttpService {
   ): Promise<ListReturningRequests> {
     return this.get(`/returning-requests?${buildQueryString(options)}`)
   }
+
+  completeRequest(id: string): Promise<void> {
+    return this.patch(`/returning-requests/${id}/complete`, {})
+  }
 }
 
 export default new ReturningRequestService()

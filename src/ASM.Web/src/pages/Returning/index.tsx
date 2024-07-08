@@ -7,12 +7,14 @@ import ConfirmModal from "@components/modals/confirm-modal"
 import ReturningRequestColumns from "@components/tables/returning-request/columns"
 import { ReturningRequestRowAction } from "@components/tables/returning-request/row-action"
 import { ReturningRequestState } from "@features/returning-requests/returning-request.type"
+import useCompleteRequest from "@features/returning-requests/useCompleteRequest"
 import useListReturningRequests from "@features/returning-requests/useListReturningRequests"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
 import { BreadcrumbsContext } from "@libs/contexts/BreadcrumbsContext"
 import { useRouter, useSearch } from "@tanstack/react-router"
 import { format } from "date-fns"
 import { MRT_PaginationState, MRT_SortingState } from "material-react-table"
+import { match } from "ts-pattern"
 
 const breadcrumbItems = [
   {
@@ -23,25 +25,34 @@ const breadcrumbItems = [
 const states = ["All", ReturningRequestState.Completed, "Waiting for returning"]
 
 const transformState = (value: string | string[]): string | undefined => {
-  switch (value) {
-    case ReturningRequestState.Completed:
-      return value
-    case "Waiting for returning":
-      return ReturningRequestState.WaitingForReturning
-    default:
-      return undefined
-  }
-}
+  return match(value)
+    .with(ReturningRequestState.Completed, (v) => v)
+    .with("Waiting for returning", () => ReturningRequestState.WaitingForReturning)
+    .otherwise(() => undefined);
+};
 
 export default function ReturningRequests() {
   const router = useRouter()
   const context = useContext(BreadcrumbsContext)
   const [selectedReturningRequestId, setSelectedReturningRequestId] =
     useState<string>("")
-  console.log(selectedReturningRequestId) // Dummy log to bypass pipeline warning :D, remove when use selectedReturningRequestId
+
+  const { mutate: completeReturn, isSuccess: completeReturnSuccess } =
+    useCompleteRequest()
   const params = useSearch({
     strict: false,
   })
+
+  const handleCompleteReturnAction = () => {
+    completeReturn(selectedReturningRequestId)
+    setCompleteRequestModalOpen(false)
+  }
+
+  useEffect(() => {
+    if (completeReturnSuccess) {
+      refetch()
+    }
+  }, [completeReturnSuccess])
 
   const queryParameters = {
     pageIndex:
@@ -70,7 +81,7 @@ export default function ReturningRequests() {
   const [selectedDate, setSelectedDate] = useState<Date>()
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
 
-  const { data, isLoading: listLoading } =
+  const { data, isLoading: listLoading, refetch } =
     useListReturningRequests(queryParameters)
 
   if (
@@ -117,7 +128,7 @@ export default function ReturningRequests() {
   }, [params])
 
   useEffect(() => {
-    ;(async () =>
+    ; (async () =>
       await router.navigate({
         search: {
           ...queryParameters,
@@ -216,7 +227,7 @@ export default function ReturningRequests() {
         title="Are you sure?"
         buttonOkLabel="Yes"
         buttonCloseLabel="No"
-        onOk={() => setCompleteRequestModalOpen(false)}
+        onOk={() => handleCompleteReturnAction()}
         onClose={() => setCompleteRequestModalOpen(false)}
       />
       <ConfirmModal
