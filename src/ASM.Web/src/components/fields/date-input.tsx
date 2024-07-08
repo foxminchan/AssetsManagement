@@ -33,7 +33,7 @@ export default function FilterDate({ label, setSelected }: Readonly<Props>) {
           },
         }}
         sx={{
-          width: "200px",
+          width: "180px",
         }}
       />
     </FormControl>

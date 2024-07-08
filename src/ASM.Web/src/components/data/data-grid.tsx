@@ -38,7 +38,7 @@ export default function DataGrid({
         {filterComponents && (
           <Grid item xs className="!flex !justify-start">
             {filterComponents.map((filterComponent) => (
-              <Grid key={filterComponent.id} item xs={4} className="!me-2">
+              <Grid key={filterComponent.id} item xs={5} className="!me-2">
                 {filterComponent.component}
               </Grid>
             ))}

@@ -22,7 +22,8 @@ public static class ListStaffsBuilder
                 Gender = Gender.Male,
                 Location = Location.HoChiMinh,
                 RoleType = RoleType.Admin,
-                StaffCode = "SD2002"
+                StaffCode = "SD2002",
+                Users = [new() { UserName = "nhannx" }],
             },
             new()
             {
@@ -34,7 +35,8 @@ public static class ListStaffsBuilder
                 Gender = Gender.Male,
                 Location = Location.DaNang,
                 RoleType = RoleType.Admin,
-                StaffCode = "SD2001"
+                StaffCode = "SD2001",
+                Users = [new() { UserName = "dientk" }]
             },
             new()
             {
@@ -46,7 +48,8 @@ public static class ListStaffsBuilder
                 Gender = Gender.Male,
                 Location = Location.HoChiMinh,
                 RoleType = RoleType.Admin,
-                StaffCode = "SD2000"
+                StaffCode = "SD2000",
+                Users = [new() { UserName = "manvm" }]
             },
             new()
             {
@@ -58,7 +61,8 @@ public static class ListStaffsBuilder
                 Gender = Gender.Male,
                 Location = Location.HaNoi,
                 RoleType = RoleType.Admin,
-                StaffCode = "SD1890"
+                StaffCode = "SD1890",
+                Users = [new() { UserName = "khoitm" }]
             },
             new()
             {
@@ -70,7 +74,8 @@ public static class ListStaffsBuilder
                 Gender = Gender.Male,
                 Location = Location.HoChiMinh,
                 RoleType = RoleType.Admin,
-                StaffCode = "SD1800"
+                StaffCode = "SD1800",
+                Users = [new() { UserName = "minhpl" }]
             }
         ];
 

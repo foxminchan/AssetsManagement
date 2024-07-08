@@ -84,7 +84,7 @@ export default function Users() {
     pageSize: DEFAULT_PAGE_SIZE,
   })
   const [selectedType, setSelectedType] = useState<string | string[]>(
-    queryParameters.roleType ?? ""
+    queryParameters.roleType ?? "All"
   )
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
 
@@ -133,7 +133,7 @@ export default function Users() {
     pagination.pageIndex = queryParameters.pageIndex - 1
 
     if (queryParameters.roleType === undefined && selectedType !== "") {
-      setSelectedType("")
+      setSelectedType("All")
       setKeyword("")
     }
   }, [params])

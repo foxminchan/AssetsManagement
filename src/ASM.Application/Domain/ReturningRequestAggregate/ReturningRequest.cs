@@ -21,6 +21,14 @@ public sealed class ReturningRequest : TrackableEntityBase, IAggregateRoot
         AssignmentId = Guard.Against.Null(assignmentId);
     }
 
+    public ReturningRequest(State state, DateOnly? returnedDate, Staff? staff, Guid? acceptBy)
+    {
+        State = state;
+        ReturnedDate = returnedDate;
+        Staff = staff;
+        AcceptBy = acceptBy;
+    }
+
     public State State { get; private set; }
     public DateOnly? ReturnedDate { get; private set; }
     public Guid AssignmentId { get; private set; }

@@ -24,6 +24,9 @@ import { Route as IndexImport } from "./routes/index"
 const AuthenticatedUserIndexLazyImport = createFileRoute(
   "/_authenticated/user/"
 )()
+const AuthenticatedReturningIndexLazyImport = createFileRoute(
+  "/_authenticated/returning/"
+)()
 const AuthenticatedReportIndexLazyImport = createFileRoute(
   "/_authenticated/report/"
 )()
@@ -69,6 +72,14 @@ const AuthenticatedUserIndexLazyRoute = AuthenticatedUserIndexLazyImport.update(
 ).lazy(() =>
   import("./routes/_authenticated/user/index.lazy").then((d) => d.Route)
 )
+
+const AuthenticatedReturningIndexLazyRoute =
+  AuthenticatedReturningIndexLazyImport.update({
+    path: "/returning/",
+    getParentRoute: () => AuthenticatedRoute,
+  } as any).lazy(() =>
+    import("./routes/_authenticated/returning/index.lazy").then((d) => d.Route)
+  )
 
 const AuthenticatedReportIndexLazyRoute =
   AuthenticatedReportIndexLazyImport.update({
@@ -226,6 +237,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthenticatedReportIndexLazyImport
       parentRoute: typeof AuthenticatedImport
     }
+    "/_authenticated/returning/": {
+      id: "/_authenticated/returning/"
+      path: "/returning"
+      fullPath: "/returning"
+      preLoaderRoute: typeof AuthenticatedReturningIndexLazyImport
+      parentRoute: typeof AuthenticatedImport
+    }
     "/_authenticated/user/": {
       id: "/_authenticated/user/"
       path: "/user"
@@ -270,6 +288,7 @@ export const routeTree = rootRoute.addChildren({
     AuthenticatedForbiddenIndexLazyRoute,
     AuthenticatedHomeIndexLazyRoute,
     AuthenticatedReportIndexLazyRoute,
+    AuthenticatedReturningIndexLazyRoute,
     AuthenticatedUserIndexLazyRoute,
     AuthenticatedAssetNewIndexLazyRoute,
     AuthenticatedAssignmentNewIndexLazyRoute,
@@ -303,6 +322,7 @@ export const routeTree = rootRoute.addChildren({
         "/_authenticated/forbidden/",
         "/_authenticated/home/",
         "/_authenticated/report/",
+        "/_authenticated/returning/",
         "/_authenticated/user/",
         "/_authenticated/asset/new/",
         "/_authenticated/assignment/new/",
@@ -339,6 +359,10 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_authenticated/report/": {
       "filePath": "_authenticated/report/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/returning/": {
+      "filePath": "_authenticated/returning/index.lazy.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/user/": {

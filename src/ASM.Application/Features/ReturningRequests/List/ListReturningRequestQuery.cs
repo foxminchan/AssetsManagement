@@ -49,6 +49,8 @@ public sealed class ListReturningRequestHandler(
             returningRequest.RequestedBy = acceptedBy?.UserName;
         }
 
+        returningRequests = OrderByNotMappedProperties(returningRequests, request.OrderBy, request.IsDescending);
+
         var totalRecords = await returningRequestRepository.CountAsync(spec, cancellationToken);
 
         var totalPages = (int)Math.Ceiling(totalRecords / (double)request.PageSize);
@@ -57,4 +59,19 @@ public sealed class ListReturningRequestHandler(
 
         return new(pagedInfo, returningRequests);
     }
+
+    private static List<ReturningRequest> OrderByNotMappedProperties(
+        List<ReturningRequest> returningRequests,
+        string? orderBy,
+        bool isDescending) =>
+        orderBy switch
+        {
+            nameof(ReturningRequest.RequestedBy) => isDescending
+                ? [.. returningRequests.OrderByDescending(x => x.RequestedBy)]
+                : [.. returningRequests.OrderBy(x => x.RequestedBy)],
+            nameof(ReturningRequest.AcceptBy) => isDescending
+                ? [.. returningRequests.OrderByDescending(x => x.AcceptedBy)]
+                : [.. returningRequests.OrderBy(x => x.AcceptedBy)],
+            _ => returningRequests
+        };
 }

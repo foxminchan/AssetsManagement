@@ -15,15 +15,9 @@ public static class ReturningRequestSpecExpression
             nameof(ReturningRequest.Assignment.Asset.Name) => isDescending
                 ? builder.OrderByDescending(x => x.Assignment!.Asset!.Name)
                 : builder.OrderBy(x => x.Assignment!.Asset!.Name),
-            nameof(ReturningRequest.RequestedBy) => isDescending
-                ? builder.OrderByDescending(x => x.RequestedBy)
-                : builder.OrderBy(x => x.RequestedBy),
             nameof(ReturningRequest.Assignment.AssignedDate) => isDescending
                 ? builder.OrderByDescending(x => x.Assignment!.AssignedDate)
                 : builder.OrderBy(x => x.Assignment!.AssignedDate),
-            nameof(ReturningRequest.AcceptBy) => isDescending
-                ? builder.OrderByDescending(x => x.AcceptBy)
-                : builder.OrderBy(x => x.AcceptBy),
             nameof(ReturningRequest.ReturnedDate) => isDescending
                 ? builder.OrderByDescending(x => x.ReturnedDate)
                 : builder.OrderBy(x => x.ReturnedDate),

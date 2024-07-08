@@ -1,9 +1,10 @@
 import { useMemo } from "react"
+import { ReturningRequestState } from "@features/returning-requests/returning-request.type"
 import { MRT_ColumnDef } from "material-react-table"
 
 import { BaseEntity } from "@/types/data"
 
-export default function AssignmentColumns() {
+export default function ReturningRequestColumns() {
   return useMemo<MRT_ColumnDef<BaseEntity>[]>(
     () => [
       {
@@ -30,17 +31,9 @@ export default function AssignmentColumns() {
         maxSize: 200,
       },
       {
-        id: "AssignedTo",
-        accessorKey: "assignedTo",
-        header: "Assigned To",
-        enableSorting: true,
-        minSize: 120,
-        maxSize: 150,
-      },
-      {
-        id: "AssignedBy",
-        accessorKey: "assignedBy",
-        header: "Assigned By",
+        id: "RequestedBy",
+        accessorKey: "requestedBy",
+        header: "Requested by",
         enableSorting: true,
         minSize: 120,
         maxSize: 150,
@@ -50,15 +43,40 @@ export default function AssignmentColumns() {
         accessorKey: "assignedDate",
         header: "Assigned Date",
         enableSorting: true,
-        minSize: 150,
-        maxSize: 200,
+        minSize: 120,
+        maxSize: 150,
+      },
+      {
+        id: "AcceptBy",
+        accessorKey: "acceptBy",
+        header: "Accepted by",
+        enableSorting: true,
+        minSize: 120,
+        maxSize: 150,
+      },
+      {
+        id: "ReturnedDate",
+        accessorKey: "returnedDate",
+        header: "Returned Date",
+        enableSorting: true,
+        minSize: 120,
+        maxSize: 150,
       },
       {
         id: "State",
         accessorKey: "state",
         header: "State",
         enableSorting: true,
-        maxSize: 120,
+        minSize: 120,
+        Cell: ({ renderedCellValue }) => {
+          if (
+            renderedCellValue?.valueOf() ===
+            ReturningRequestState.WaitingForReturning
+          ) {
+            return "Waiting for returning"
+          }
+          return renderedCellValue
+        },
       },
     ],
     []
