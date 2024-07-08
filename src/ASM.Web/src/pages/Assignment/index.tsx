@@ -137,6 +137,7 @@ export default function Assignments() {
     pagination.pageIndex = queryParameters.pageIndex - 1
     if (queryParameters.state === undefined && selectedState !== "All") {
       setSelectedState("All")
+      setKeyword("")
     }
   }, [params])
 
