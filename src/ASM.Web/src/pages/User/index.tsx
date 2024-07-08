@@ -134,6 +134,7 @@ export default function Users() {
 
     if (queryParameters.roleType === undefined && selectedType !== "") {
       setSelectedType("")
+      setKeyword("")
     }
   }, [params])
 
