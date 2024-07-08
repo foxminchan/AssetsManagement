@@ -84,7 +84,7 @@ export default function Report() {
               disabled={reportLoading}
               onClick={() => saveAs(Report || new Blob(), "Report.xlsx")}
             >
-              {reportLoading ? "Exporting..." : "Export Report"}
+              {reportLoading ? "Exporting..." : "Export"}
             </Button>
           ),
         },
