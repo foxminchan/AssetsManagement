@@ -143,6 +143,7 @@ export default function Assets() {
         AssetState.NotAvailable,
       ])
       setSelectedCategories(["All"])
+      setKeyword("")
     }
   }, [params])
 
