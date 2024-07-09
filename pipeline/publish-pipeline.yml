@@ -62,7 +62,7 @@ stages:
               targetdir: "$(Build.SourcesDirectory)/TestResults"
               reporttypes: "HtmlInline_AzurePipelines;Cobertura;Badges"
 
-          - task: PublishCodeCoverageResults@1
+          - task: PublishCodeCoverageResults@2
             displayName: "Publish Code Coverage"
             inputs:
               codeCoverageTool: "Cobertura"
