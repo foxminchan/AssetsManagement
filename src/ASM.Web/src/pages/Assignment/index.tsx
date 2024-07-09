@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react"
+import useRequestForReturningAssignment from "@features/assignments/useRequestForReturningAssignment"
 import DataGrid from "@components/data/data-grid"
 import FilterDate from "@components/fields/date-input"
 import FilterInput from "@components/fields/filter-input"
@@ -72,6 +73,7 @@ export default function Assignments() {
   const [selectedDate, setSelectedDate] = useState<Date>()
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
   const [openDisableConfirmMod, setOpenDisableConfirmMod] = useState(false)
+  const [openReturnConfirmMod, setOpenReturnConfirmMod] = useState(false)
 
   const {
     data,
@@ -105,10 +107,17 @@ export default function Assignments() {
 
   const { mutate: deleteAssignment, isSuccess: deleteAssignmentSuccess } =
     useDeleteAssignment()
+  const { mutate: returnAssignment, isSuccess: returnAssignmentSuccess } =
+    useRequestForReturningAssignment()
 
   const handleAssignmentAction = (id: string) => {
     deleteAssignment(id)
     setOpenDisableConfirmMod(false)
+  }
+
+  const handleReturningAssignmentAction = (id: string) => {
+    returnAssignment(id)
+    setOpenReturnConfirmMod(false)
   }
 
   const getDisplayedAssignments = () => {
@@ -184,10 +193,10 @@ export default function Assignments() {
   }, [])
 
   useEffect(() => {
-    if (deleteAssignmentSuccess) {
+    if (deleteAssignmentSuccess || returnAssignmentSuccess) {
       refetch()
     }
-  }, [deleteAssignmentSuccess])
+  }, [deleteAssignmentSuccess, returnAssignmentSuccess])
 
   useEffect(() => {
     refetch()
@@ -264,7 +273,8 @@ export default function Assignments() {
               <AssignmentRowAction
                 key={assignment.id}
                 data={assignment}
-                openModal={setOpenDisableConfirmMod}
+                setOpenDisableConfirmMod={setOpenDisableConfirmMod}
+                setOpenReturnConfirmMod={setOpenReturnConfirmMod}
                 id={setSelectedAssignmentId}
               />
             ),
@@ -287,6 +297,15 @@ export default function Assignments() {
         buttonCloseLabel="Cancel"
         onOk={() => handleAssignmentAction(selectedAssignmentId)}
         onClose={() => setOpenDisableConfirmMod(false)}
+      />
+      <ConfirmModal
+        open={openReturnConfirmMod}
+        message="Do you want to create returning request for this asset?"
+        title="Are you sure?"
+        buttonOkLabel="Yes"
+        buttonCloseLabel="No"
+        onOk={() => handleReturningAssignmentAction(selectedAssignmentId)}
+        onClose={() => setOpenReturnConfirmMod(false)}
       />
     </>
   )

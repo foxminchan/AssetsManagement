@@ -11,13 +11,15 @@ import { BaseEntity } from "@/types/data"
 
 type AssignmentRowActionProps = {
   data: BaseEntity
-  openModal: Dispatch<SetStateAction<boolean>>
+  setOpenDisableConfirmMod: Dispatch<SetStateAction<boolean>>
+  setOpenReturnConfirmMod: Dispatch<SetStateAction<boolean>>
   id: Dispatch<SetStateAction<string>>
 }
 
 export const AssignmentRowAction: FC<AssignmentRowActionProps> = ({
   data,
-  openModal: setOpenDisableConfirmMod,
+  setOpenDisableConfirmMod,
+  setOpenReturnConfirmMod,
   id: setId,
 }) => {
   const assignmentData = data as Assignment
@@ -51,11 +53,16 @@ export const AssignmentRowAction: FC<AssignmentRowActionProps> = ({
         <HighlightOffIcon />
       </IconButton>
       <IconButton
-        aria-label="delete"
+        aria-label="return"
         size="small"
         color="error"
-        id="btn-delete"
-        disabled={assignmentData.state === State.WaitingForAcceptance}
+        id="btn-return"
+        disabled={assignmentData.state !== State.Accepted}
+        onClick={(event) => {
+          event.stopPropagation()
+          setOpenReturnConfirmMod(true)
+          setId(assignmentData.id)
+        }}
       >
         <RestartAltIcon />
       </IconButton>
