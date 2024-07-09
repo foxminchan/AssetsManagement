@@ -21,9 +21,9 @@ public class UpdateAssignmentHandlerTest
     public async Task GivenInValidData_ShouldThrowNotFound_IfUserNotExist()
     {
         // Arrange
-        var assignemtId = Guid.NewGuid();
+        var assignmentId = Guid.NewGuid();
         var query = new UpdateAssignmentCommand(
-                 assignemtId,
+                 assignmentId,
                  Guid.NewGuid(),
                  Guid.NewGuid(),
                  DateOnly.FromDateTime(DateTime.Now),
@@ -37,7 +37,7 @@ public class UpdateAssignmentHandlerTest
 
         // Assert
         await act.Should().ThrowAsync<NotFoundException>();
-        _repositoryMock.Verify(r => r.GetByIdAsync(assignemtId, It.IsAny<CancellationToken>()),
+        _repositoryMock.Verify(r => r.GetByIdAsync(assignmentId, It.IsAny<CancellationToken>()),
             Times.Once);
     }
 }

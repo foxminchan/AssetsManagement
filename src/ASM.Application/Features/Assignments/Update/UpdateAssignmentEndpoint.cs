@@ -20,17 +20,19 @@ public sealed record UpdateAssignmentRequest(
 public sealed class UpdateAssignmentEndpoint : IEndpoint<Ok, UpdateAssignmentRequest>
 {
     public void MapEndpoint(IEndpointRouteBuilder app) =>
-        app.MapPut("/assignments", 
-               async (UpdateAssignmentRequest request, ISender sender) => await HandleAsync(request, sender))
-              .Produces<Ok>()
-              .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
-              .WithTags(nameof(Assignment))
-              .WithName("Update Assignment")
-              .RequireAuthorization(AuthRole.Admin);
+        app.MapPut("/assignments",
+                async (UpdateAssignmentRequest request, ISender sender) => await HandleAsync(request, sender))
+            .Produces<Ok>()
+            .Produces<BadRequest<IEnumerable<ValidationError>>>(StatusCodes.Status400BadRequest)
+            .WithTags(nameof(Assignment))
+            .WithName("Update Assignment")
+            .RequireAuthorization(AuthRole.Admin);
 
-    public async Task<Ok> HandleAsync(UpdateAssignmentRequest request, ISender sender, CancellationToken cancellationToken = default)
+    public async Task<Ok> HandleAsync(UpdateAssignmentRequest request, ISender sender,
+        CancellationToken cancellationToken = default)
     {
-        UpdateAssignmentCommand command = new(request.Id, request.AssetId, request.UserId, request.AssignedDate, request.Note);
+        UpdateAssignmentCommand command = new(request.Id, request.AssetId, request.UserId, request.AssignedDate,
+            request.Note);
         await sender.Send(command, cancellationToken);
         return TypedResults.Ok();
     }

@@ -2,7 +2,6 @@
 using Ardalis.Result;
 using ASM.Application.Common.Interfaces;
 using ASM.Application.Domain.AssignmentAggregate;
-using ASM.Application.Infrastructure.Persistence;
 
 namespace ASM.Application.Features.Assignments.Update;
 
