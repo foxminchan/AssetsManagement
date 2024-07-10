@@ -25,8 +25,6 @@ public sealed class CategoryConfiguration : BaseConfiguration<Category>
         builder.HasIndex(e => e.Prefix)
             .IsUnique();
 
-        builder.HasData(GetSampleData());
-
         builder.HasMany(x => x.Assets)
             .WithOne(x => x.Category)
             .HasForeignKey(x => x.CategoryId)

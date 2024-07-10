@@ -74,11 +74,6 @@ public sealed class ApplicationDbContextInitializer(
                 await SeedUser(user, roleType);
             }
         }
-
-        if (!await context.Assignments.AnyAsync())
-        {
-            await SeedAssignments();
-        }
     }
 
     private async Task SeedRole()
@@ -96,44 +91,6 @@ public sealed class ApplicationDbContextInitializer(
         {
             await roleManager.CreateAsync(userRole);
         }
-    }
-
-    private async Task SeedAssignments()
-    {
-        var faker = new Faker();
-
-        Guid[] adminIds = await context.Staffs
-            .Where(x => x.RoleType == RoleType.Admin)
-            .Select(x => x.Id)
-            .ToArrayAsync();
-
-        Guid[] staffIds = await context.Staffs
-            .Where(x => x.RoleType == RoleType.Staff)
-            .Select(x => x.Id)
-            .ToArrayAsync();
-
-        Guid[] assetIds = await context.Assets
-            .Select(x => x.Id)
-            .ToArrayAsync();
-
-        var assignments = adminIds.SelectMany(adminId =>
-            staffIds.SelectMany(staffId =>
-                Enumerable.Range(0, 5).Select(_ => new Assignment
-                {
-                    State = faker.PickRandom<State>(),
-                    AssignedDate = faker.Date.FutureDateOnly(),
-                    Note = faker.Lorem.Sentence(),
-                    AssetId = faker.PickRandom(assetIds),
-                    CreatedBy = adminId,
-                    UpdatedBy = adminId,
-                    StaffId = staffId
-                })
-            )
-        ).ToList();
-
-        await context.Assignments.AddRangeAsync(assignments);
-
-        await context.SaveChangesAsync();
     }
 
     private async Task SeedUser(Staff user, RoleType roleType)

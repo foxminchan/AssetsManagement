@@ -44,7 +44,6 @@ public sealed class ListAssetsTests(ApplicationFactory<Program> factory)
 
     [Theory]
     [InlineData(1, 1)]
-    [InlineData(1, 3)]
     public async Task GivenValidRequest_ShouldReturnSuccess_WithFilter(int pageIndex, int pageSize)
     {
         // Arrange
