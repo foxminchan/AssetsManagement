@@ -20,6 +20,10 @@ class ReturningRequestService extends HttpService {
   completeRequest(id: string): Promise<void> {
     return this.patch(`/returning-requests/${id}/complete`, {})
   }
+
+  cancelRequest(id: string): Promise<void> {
+    return this.patch(`/returning-requests/${id}/cancel`, {})
+  }
 }
 
 export default new ReturningRequestService()

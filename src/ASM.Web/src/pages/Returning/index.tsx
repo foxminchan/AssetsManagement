@@ -7,6 +7,7 @@ import ConfirmModal from "@components/modals/confirm-modal"
 import ReturningRequestColumns from "@components/tables/returning-request/columns"
 import { ReturningRequestRowAction } from "@components/tables/returning-request/row-action"
 import { ReturningRequestState } from "@features/returning-requests/returning-request.type"
+import useCancelRequest from "@features/returning-requests/useCancelRequest"
 import useCompleteRequest from "@features/returning-requests/useCompleteRequest"
 import useListReturningRequests from "@features/returning-requests/useListReturningRequests"
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@libs/constants/default"
@@ -42,6 +43,8 @@ export default function ReturningRequests() {
 
   const { mutate: completeReturn, isSuccess: completeReturnSuccess } =
     useCompleteRequest()
+  const { mutate: cancelReturn, isSuccess: cancelReturnSuccess } =
+    useCancelRequest()
   const params = useSearch({
     strict: false,
   })
@@ -51,11 +54,22 @@ export default function ReturningRequests() {
     setCompleteRequestModalOpen(false)
   }
 
+  const handleCancelReturnAction = () => {
+    cancelReturn(selectedReturningRequestId)
+    setCancelRequestModalOpen(false)
+  }
+
   useEffect(() => {
     if (completeReturnSuccess) {
       refetch()
     }
   }, [completeReturnSuccess])
+
+  useEffect(() => {
+    if (cancelReturnSuccess) {
+      refetch()
+    }
+  }, [cancelReturnSuccess])
 
   const queryParameters = {
     pageIndex:
@@ -242,7 +256,7 @@ export default function ReturningRequests() {
         title="Are you sure?"
         buttonOkLabel="Yes"
         buttonCloseLabel="No"
-        onOk={() => setCancelRequestModalOpen(false)}
+        onOk={() => handleCancelReturnAction()}
         onClose={() => setCancelRequestModalOpen(false)}
       />
     </>
