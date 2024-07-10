@@ -5,6 +5,7 @@ import FilterInput from "@components/fields/filter-input"
 import SearchInput from "@components/fields/search-input"
 import AssignmentInfoModal from "@components/modals/assignment-info-modal"
 import ConfirmModal from "@components/modals/confirm-modal"
+import MessageModal from "@components/modals/message-modal"
 import AssignmentColumns from "@components/tables/assignment/columns"
 import { AssignmentRowAction } from "@components/tables/assignment/row-action"
 import { State } from "@features/assignments/assignment.type"
@@ -31,12 +32,13 @@ const states = ["All", State.Accepted, State.WaitingForAcceptance]
 
 export default function Assignments() {
   const navigate = useNavigate({ from: "/assignment" })
+  const router = useRouter()
   const [featuredAssignmentId, setFeaturedAssignmentId] = useAtom(
     featuredAssignmentAtom
   )
-  const router = useRouter()
   const context = useContext(BreadcrumbsContext)
   const [open, setOpen] = useState(false)
+  const [notFoundMessage, setNotFoundMessage] = useState(false)
   const [selectedAssignmentId, setSelectedAssignmentId] = useState<string>("")
   const params = useSearch({
     strict: false,
@@ -54,8 +56,6 @@ export default function Assignments() {
         : (params as { state?: State }).state,
     assignedDate: (params as { assignedDate?: Date }).assignedDate ?? undefined,
     search: (params as { search?: string }).search ?? undefined,
-    featuredAssignmentId:
-      featuredAssignmentId.length > 0 ? featuredAssignmentId : undefined,
   }
 
   const [sorting, setSorting] = useState<MRT_SortingState>([
@@ -99,8 +99,11 @@ export default function Assignments() {
     resetPagination()
   }
 
-  const { mutate: deleteAssignment, isSuccess: deleteAssignmentSuccess } =
-    useDeleteAssignment()
+  const {
+    mutate: deleteAssignment,
+    isSuccess: deleteAssignmentSuccess,
+    isError: deleteAssignmentFail,
+  } = useDeleteAssignment()
   const { mutate: returnAssignment, isSuccess: returnAssignmentSuccess } =
     useRequestForReturningAssignment()
 
@@ -127,7 +130,13 @@ export default function Assignments() {
   }, [params])
 
   useEffect(() => {
-    ;(async () =>
+    if (deleteAssignmentFail) {
+      setNotFoundMessage(true)
+    }
+  }, [deleteAssignmentFail])
+
+  useEffect(() => {
+    ;(async () => {
       await router.navigate({
         search: {
           ...queryParameters,
@@ -141,7 +150,8 @@ export default function Assignments() {
             : undefined,
           search: keyword !== "" ? keyword : undefined,
         },
-      }))()
+      })
+    })()
   }, [pagination, sorting])
 
   useEffect(() => {
@@ -261,9 +271,9 @@ export default function Assignments() {
       )}
       <ConfirmModal
         open={openDisableConfirmMod}
-        message="Do you want to disable this user?"
+        message="Do you want to delete this assignment?"
         title="Are you sure?"
-        buttonOkLabel="Disable"
+        buttonOkLabel="Delete"
         buttonCloseLabel="Cancel"
         onOk={() => handleAssignmentAction(selectedAssignmentId)}
         onClose={() => setOpenDisableConfirmMod(false)}
@@ -276,6 +286,12 @@ export default function Assignments() {
         buttonCloseLabel="No"
         onOk={() => handleReturningAssignmentAction(selectedAssignmentId)}
         onClose={() => setOpenReturnConfirmMod(false)}
+      />
+      <MessageModal
+        title="Error"
+        message="That assignment has been removed by another admin"
+        open={notFoundMessage}
+        onClose={() => setNotFoundMessage(false)}
       />
     </>
   )

@@ -13,9 +13,9 @@ export default function Columns() {
         size: 100,
       },
       {
-        id: "fullName",
-        accessorKey: "fullName",
-        header: "Full Name",
+        id: "userName",
+        accessorKey: "userName",
+        header: "User Name",
         enableSorting: true,
         size: 120,
       },

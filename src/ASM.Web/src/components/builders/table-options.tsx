@@ -80,7 +80,12 @@ export default function TableOptions({
             )
           }
         }
-        if (item?.type === "previous" || item?.type === "next") {
+        if (
+          item?.type === "previous" ||
+          item?.type === "next" ||
+          item.type === "start-ellipsis" ||
+          item.type === "end-ellipsis"
+        ) {
           return (
             <PaginationItem
               {...item}

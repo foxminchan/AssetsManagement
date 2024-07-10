@@ -37,6 +37,9 @@ export default function Users() {
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
   const [undeletedUserWarningModalOpen, setUndeletedUserWarningModalOpen] =
     useState<boolean>(false)
+
+  const [deleteUserWarningMessage, SetDeleteUserWarningMessage] =
+    useState(false)
   const [selectedUserId, setSelectedUserId] = useState<string>("")
   const params = useSearch({
     strict: false,
@@ -59,10 +62,17 @@ export default function Users() {
   }
 
   useEffect(() => {
-    if (isDeleteUserSuccess && selectedUserId == featuredUserId) {
-      setFeaturedUserId("")
-    } else if (isDeleteUserError) setDeleteModalOpen(false)
-  }, [isDeleteUserSuccess, isDeleteUserError])
+    if (isDeleteUserSuccess) {
+      refetch()
+      setDeleteModalOpen(false)
+    }
+  }, [isDeleteUserSuccess])
+
+  useEffect(() => {
+    if (isDeleteUserError) {
+      SetDeleteUserWarningMessage(true)
+    }
+  }, [isDeleteUserError])
 
   const queryParameters = {
     pageIndex:
@@ -90,7 +100,11 @@ export default function Users() {
   )
   const [keyword, setKeyword] = useState<string>(queryParameters.search ?? "")
 
-  const { data, isLoading: listLoading } = useListUsers(queryParameters)
+  const {
+    data,
+    isLoading: listLoading,
+    refetch,
+  } = useListUsers(queryParameters)
 
   const { data: assignmentData } = useListAssignments()
   if (
@@ -244,6 +258,12 @@ export default function Users() {
         title="Can not disable user"
         open={undeletedUserWarningModalOpen}
         onClose={() => setUndeletedUserWarningModalOpen(false)}
+      />
+      <MessageModal
+        message="User has been deleted by another admin"
+        title="Already Deleted User"
+        open={deleteUserWarningMessage}
+        onClose={() => SetDeleteUserWarningMessage(false)}
       />
       {selectedUserId && (
         <UserInfoModal

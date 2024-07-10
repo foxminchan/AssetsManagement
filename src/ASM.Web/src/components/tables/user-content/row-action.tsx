@@ -27,7 +27,7 @@ export const CellAction: FC<CellActionProps> = ({
     const checked = event.target.checked
     if (checked) {
       onSelectRow(data.id)
-      handleSelectRow(data.id, data.fullName)
+      handleSelectRow(data.id, data.userName)
     }
   }
 

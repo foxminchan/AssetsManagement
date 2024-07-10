@@ -1,9 +1,13 @@
 import { useMemo } from "react"
+import { format } from "date-fns"
 import { MRT_ColumnDef } from "material-react-table"
 
 import { BaseEntity } from "@/types/data"
 
 export default function AssignmentColumns() {
+  const formatState = (state: string) => {
+    return state.replace(/([A-Z])/g, " $1").trim()
+  }
   return useMemo<MRT_ColumnDef<BaseEntity>[]>(
     () => [
       {
@@ -50,15 +54,21 @@ export default function AssignmentColumns() {
         accessorKey: "assignedDate",
         header: "Assigned Date",
         enableSorting: true,
-        minSize: 150,
-        maxSize: 200,
+        minSize: 120,
+        maxSize: 150,
+        Cell: ({ cell }) => {
+          return format(cell.getValue() as Date, "dd/MM/yyyy")
+        },
       },
       {
         id: "State",
         accessorKey: "state",
         header: "State",
         enableSorting: true,
-        maxSize: 120,
+        maxSize: 170,
+        Cell: ({ cell }) => {
+          return formatState(cell.getValue() as string)
+        },
       },
     ],
     []

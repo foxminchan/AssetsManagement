@@ -16,8 +16,10 @@ public sealed class AssignmentFilterSpec : Specification<Assignment>
         Guid? assetId,
         Guid? featuredAssignmentId)
     {
-        if (state.HasValue)
-            Query.Where(x => (x.State == state && x.State != State.Returned) || x.Id == featuredAssignmentId);
+
+        Query.Where(x => x.State != State.Returned);
+
+        if (state.HasValue) Query.Where(x => x.State == state);
 
         if (assignedDate.HasValue)
             Query.Where(x => x.AssignedDate == assignedDate || x.Id == featuredAssignmentId);
