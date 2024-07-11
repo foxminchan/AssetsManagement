@@ -11,22 +11,22 @@ namespace ASM.UnitTests.UseCases.Users;
 
 public sealed class UpdatePasswordHandlerTests
 {
-    private readonly UpdatePasswordHandler handler;
-    private readonly Mock<UserManager<ApplicationUser>> userManager;
-    private readonly Mock<IRepository<Staff>> repository;
+    private readonly UpdatePasswordHandler _handler;
+    private readonly Mock<UserManager<ApplicationUser>> _userManager;
 
     public UpdatePasswordHandlerTests()
     {
         var store = new Mock<IUserStore<ApplicationUser>>();
-        userManager = new Mock<UserManager<ApplicationUser>>(store.Object, null, null, null, null, null, null, null, null);
-        repository = new Mock<IRepository<Staff>>();
-        handler = new(userManager.Object, repository.Object);
+        _userManager = new(store.Object, null, null, null, null, null, null, null, null);
+        Mock<IRepository<Staff>> repository = new();
+        _handler = new(_userManager.Object, repository.Object);
     }
 
-    private static string TestPassword = "TestPassword";
-    private static string NewTestPassword = "NewTestPassword";
+    private const string TestPassword = "TestPassword";
+    private const string NewTestPassword = "NewTestPassword";
 
-    private static ApplicationUser SetupUserManagerWithTestUser(Mock<UserManager<ApplicationUser>> userManager, AccountStatus accountStatus)
+    private static ApplicationUser SetupUserManagerWithTestUser(Mock<UserManager<ApplicationUser>> userManager,
+        AccountStatus accountStatus)
     {
         ApplicationUser testUser = new() { UserName = "test", AccountStatus = accountStatus, StaffId = Guid.Empty };
         userManager.Setup(um => um.CreateAsync(testUser, TestPassword));
@@ -41,16 +41,16 @@ public sealed class UpdatePasswordHandlerTests
     public async Task GivenValidRequest_ShouldUpdatePassword_IfUserExists()
     {
         // Arrange
-        SetupUserManagerWithTestUser(userManager, AccountStatus.FirstTime);
+        SetupUserManagerWithTestUser(_userManager, AccountStatus.FirstTime);
 
         var command = new UpdatePasswordCommand(Guid.NewGuid(), TestPassword, NewTestPassword);
 
         // Act
-        var result = await handler.Handle(command, CancellationToken.None);
+        var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         result.Should().BeEquivalentTo(Result.Success());
-        userManager.Verify(um =>
+        _userManager.Verify(um =>
             um.ChangePasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>()), Times.Once());
     }
 
@@ -58,18 +58,18 @@ public sealed class UpdatePasswordHandlerTests
     public async Task GivenValidRequest_ShouldThrowNotFoundException_IfUserNotExist()
     {
         // Arrange
-        userManager.Setup(um => um.FindByIdAsync(It.IsAny<string>()))
-                .ReturnsAsync((ApplicationUser?)null);
+        _userManager.Setup(um => um.FindByIdAsync(It.IsAny<string>()))
+            .ReturnsAsync((ApplicationUser?)null);
 
         var command = new UpdatePasswordCommand(Guid.NewGuid(), TestPassword, NewTestPassword);
 
         // Act
-        Func<Task> act = async () => await handler.Handle(command, CancellationToken.None);
+        Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         await act.Should().ThrowAsync<NotFoundException>();
-        userManager.Verify(um => um.FindByIdAsync(It.IsAny<string>()), Times.Once());
-        userManager.Verify(um =>
+        _userManager.Verify(um => um.FindByIdAsync(It.IsAny<string>()), Times.Once());
+        _userManager.Verify(um =>
             um.ChangePasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never());
     }
 
@@ -77,12 +77,12 @@ public sealed class UpdatePasswordHandlerTests
     public async Task GivenValidRequest_ShouldUpdateAccountStatusToActive_IfFirstTime()
     {
         // Arrange
-        ApplicationUser testUser = SetupUserManagerWithTestUser(userManager, AccountStatus.FirstTime);
+        ApplicationUser testUser = SetupUserManagerWithTestUser(_userManager, AccountStatus.FirstTime);
 
         var command = new UpdatePasswordCommand(Guid.NewGuid(), TestPassword, NewTestPassword);
 
         // Act
-        await handler.Handle(command, CancellationToken.None);
+        await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         testUser.AccountStatus.Should().Be(AccountStatus.Active);
