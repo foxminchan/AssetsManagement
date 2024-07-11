@@ -56,6 +56,8 @@ export default function Assignments() {
         : (params as { state?: State }).state,
     assignedDate: (params as { assignedDate?: Date }).assignedDate ?? undefined,
     search: (params as { search?: string }).search ?? undefined,
+    featuredAssignmentId:
+      featuredAssignmentId.length > 0 ? featuredAssignmentId : undefined,
   }
 
   const [sorting, setSorting] = useState<MRT_SortingState>([

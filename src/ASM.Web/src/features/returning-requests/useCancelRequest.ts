@@ -8,9 +8,10 @@ export default function useCancelRequest() {
     mutationFn: (data: string) => {
       return returningRequestsService.cancelRequest(data)
     },
-    onSettled: async () =>
-      queryClient.invalidateQueries({
-        queryKey: ["returning-requests", "own"],
-      }),
+    onSettled: async () => {
+      queryClient.invalidateQueries({ queryKey: ["assignments"] })
+      queryClient.invalidateQueries({ queryKey: ["own-assignments"] })
+      queryClient.invalidateQueries({ queryKey: ["returning-requests"] })
+    },
   })
 }

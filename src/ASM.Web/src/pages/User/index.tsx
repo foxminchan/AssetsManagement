@@ -143,7 +143,11 @@ export default function Users() {
     }
     pagination.pageIndex = queryParameters.pageIndex - 1
 
-    if (queryParameters.roleType === undefined && selectedType !== "") {
+    if (
+      queryParameters.roleType === undefined &&
+      selectedType !== "" &&
+      queryParameters.search === null
+    ) {
       setSelectedType("All")
       setKeyword("")
     }

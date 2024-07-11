@@ -4,6 +4,7 @@ import FilterDate from "@components/fields/date-input"
 import FilterInput from "@components/fields/filter-input"
 import SearchInput from "@components/fields/search-input"
 import ConfirmModal from "@components/modals/confirm-modal"
+import MessageModal from "@components/modals/message-modal"
 import ReturningRequestColumns from "@components/tables/returning-request/columns"
 import { ReturningRequestRowAction } from "@components/tables/returning-request/row-action"
 import { ReturningRequestState } from "@features/returning-requests/returning-request.type"
@@ -24,7 +25,6 @@ const breadcrumbItems = [
   },
 ]
 const states = ["All", ReturningRequestState.Completed, "Waiting for returning"]
-
 const transformState = (value: string | string[]): string | undefined => {
   return match(value)
     .with(ReturningRequestState.Completed, (v) => v)
@@ -36,18 +36,31 @@ const transformState = (value: string | string[]): string | undefined => {
 }
 
 export default function ReturningRequests() {
+  const [notFoundMessage, setNotFoundMessage] = useState(false)
   const router = useRouter()
   const context = useContext(BreadcrumbsContext)
   const [selectedReturningRequestId, setSelectedReturningRequestId] =
     useState<string>("")
 
-  const { mutate: completeReturn, isSuccess: completeReturnSuccess } =
-    useCompleteRequest()
-  const { mutate: cancelReturn, isSuccess: cancelReturnSuccess } =
-    useCancelRequest()
+  const {
+    mutate: completeReturn,
+    isSuccess: completeReturnSuccess,
+    isError: completeReturnError,
+  } = useCompleteRequest()
+  const {
+    mutate: cancelReturn,
+    isSuccess: cancelReturnSuccess,
+    isError: cancelReturnError,
+  } = useCancelRequest()
   const params = useSearch({
     strict: false,
   })
+
+  useEffect(() => {
+    if (completeReturnError || cancelReturnError) {
+      setNotFoundMessage(true)
+    }
+  }, [completeReturnError, cancelReturnError])
 
   const handleCompleteReturnAction = () => {
     completeReturn(selectedReturningRequestId)
@@ -141,7 +154,10 @@ export default function ReturningRequests() {
     }
     pagination.pageIndex = queryParameters.pageIndex - 1
 
-    if (queryParameters.state === undefined) {
+    if (
+      queryParameters.state === undefined &&
+      queryParameters.search === null
+    ) {
       setSelectedState("All")
       setKeyword("")
     }
@@ -258,6 +274,12 @@ export default function ReturningRequests() {
         buttonCloseLabel="No"
         onOk={() => handleCancelReturnAction()}
         onClose={() => setCancelRequestModalOpen(false)}
+      />
+      <MessageModal
+        title="Error"
+        message="That assignment has been removed by another admin"
+        open={notFoundMessage}
+        onClose={() => setNotFoundMessage(false)}
       />
     </>
   )

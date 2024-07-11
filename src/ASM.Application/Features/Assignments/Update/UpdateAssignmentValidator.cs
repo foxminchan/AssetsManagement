@@ -20,8 +20,6 @@ public sealed class UpdateAssignmentValidator : AbstractValidator<UpdateAssignme
 
         RuleFor(x => x.AssignedDate)
             .NotEmpty()
-            .WithMessage("Assign Date is required")
-            .Must(date => date >= DateOnly.FromDateTime(DateTime.Today))
-            .WithMessage("Assign Date must not be in the past");
+            .WithMessage("Assign Date is required");
     }
 }

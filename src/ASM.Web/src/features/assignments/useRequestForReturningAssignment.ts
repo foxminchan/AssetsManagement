@@ -13,6 +13,7 @@ export default function useRequestForReturningAssignment() {
       queryClient.invalidateQueries({ queryKey: ["assignments"] })
       queryClient.invalidateQueries({ queryKey: ["own-assignment"] })
       queryClient.invalidateQueries({ queryKey: ["own-assignments"] })
+      queryClient.invalidateQueries({ queryKey: ["returning-requests"] })
     },
   })
 }
