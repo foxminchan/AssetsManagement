@@ -54,16 +54,3 @@ export type CreateAssetRequest = {
   state: AssetState
   categoryId: string
 }
-// export type Asset = {
-//   id: string
-//   name: string
-//   assetCode: string
-//   specification: string
-//   category: string
-//   installDate: string
-//   state: string
-//   location: string
-//   categoryId: string
-// }
-
-//export type AssetFilter = FilterParams
